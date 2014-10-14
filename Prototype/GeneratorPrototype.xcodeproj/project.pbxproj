@@ -1,0 +1,435 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A3802FC019EA40D400DC178D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3802FBF19EA40D400DC178D /* main.m */; };
+		A3802FC319EA40D400DC178D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3802FC219EA40D400DC178D /* AppDelegate.m */; };
+		A3802FC619EA40D400DC178D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3802FC519EA40D400DC178D /* ViewController.m */; };
+		A3802FC919EA40D400DC178D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3802FC719EA40D400DC178D /* Main.storyboard */; };
+		A3802FCB19EA40D400DC178D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3802FCA19EA40D400DC178D /* Images.xcassets */; };
+		A3802FCE19EA40D400DC178D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3802FCC19EA40D400DC178D /* LaunchScreen.xib */; };
+		A3802FDA19EA40D400DC178D /* GeneratorPrototypeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A3802FD919EA40D400DC178D /* GeneratorPrototypeTests.m */; };
+		A3802FE619EB313600DC178D /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = A3802FE519EB313600DC178D /* Model.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A3802FD419EA40D400DC178D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3802FB219EA40D400DC178D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3802FB919EA40D400DC178D;
+			remoteInfo = GeneratorPrototype;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A3802FBA19EA40D400DC178D /* GeneratorPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeneratorPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3802FBE19EA40D400DC178D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3802FBF19EA40D400DC178D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A3802FC119EA40D400DC178D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A3802FC219EA40D400DC178D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A3802FC419EA40D400DC178D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A3802FC519EA40D400DC178D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A3802FC819EA40D400DC178D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A3802FCA19EA40D400DC178D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A3802FCD19EA40D400DC178D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		A3802FD319EA40D400DC178D /* GeneratorPrototypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeneratorPrototypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3802FD819EA40D400DC178D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3802FD919EA40D400DC178D /* GeneratorPrototypeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratorPrototypeTests.m; sourceTree = "<group>"; };
+		A3802FE519EB313600DC178D /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Model.m; path = ../Model.m; sourceTree = "<group>"; };
+		A3802FE719EB314400DC178D /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Model.h; path = ../Model.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A3802FB719EA40D400DC178D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3802FD019EA40D400DC178D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A3802FB119EA40D400DC178D = {
+			isa = PBXGroup;
+			children = (
+				A3802FBC19EA40D400DC178D /* GeneratorPrototype */,
+				A3802FD619EA40D400DC178D /* GeneratorPrototypeTests */,
+				A3802FBB19EA40D400DC178D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A3802FBB19EA40D400DC178D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3802FBA19EA40D400DC178D /* GeneratorPrototype.app */,
+				A3802FD319EA40D400DC178D /* GeneratorPrototypeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A3802FBC19EA40D400DC178D /* GeneratorPrototype */ = {
+			isa = PBXGroup;
+			children = (
+				A3802FE519EB313600DC178D /* Model.m */,
+				A3802FE719EB314400DC178D /* Model.h */,
+				A3802FC119EA40D400DC178D /* AppDelegate.h */,
+				A3802FC219EA40D400DC178D /* AppDelegate.m */,
+				A3802FC419EA40D400DC178D /* ViewController.h */,
+				A3802FC519EA40D400DC178D /* ViewController.m */,
+				A3802FC719EA40D400DC178D /* Main.storyboard */,
+				A3802FCA19EA40D400DC178D /* Images.xcassets */,
+				A3802FCC19EA40D400DC178D /* LaunchScreen.xib */,
+				A3802FBD19EA40D400DC178D /* Supporting Files */,
+			);
+			path = GeneratorPrototype;
+			sourceTree = "<group>";
+		};
+		A3802FBD19EA40D400DC178D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A3802FBE19EA40D400DC178D /* Info.plist */,
+				A3802FBF19EA40D400DC178D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A3802FD619EA40D400DC178D /* GeneratorPrototypeTests */ = {
+			isa = PBXGroup;
+			children = (
+				A3802FD919EA40D400DC178D /* GeneratorPrototypeTests.m */,
+				A3802FD719EA40D400DC178D /* Supporting Files */,
+			);
+			path = GeneratorPrototypeTests;
+			sourceTree = "<group>";
+		};
+		A3802FD719EA40D400DC178D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A3802FD819EA40D400DC178D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A3802FB919EA40D400DC178D /* GeneratorPrototype */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3802FDD19EA40D400DC178D /* Build configuration list for PBXNativeTarget "GeneratorPrototype" */;
+			buildPhases = (
+				A3802FB619EA40D400DC178D /* Sources */,
+				A3802FB719EA40D400DC178D /* Frameworks */,
+				A3802FB819EA40D400DC178D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GeneratorPrototype;
+			productName = GeneratorPrototype;
+			productReference = A3802FBA19EA40D400DC178D /* GeneratorPrototype.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A3802FD219EA40D400DC178D /* GeneratorPrototypeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3802FE019EA40D400DC178D /* Build configuration list for PBXNativeTarget "GeneratorPrototypeTests" */;
+			buildPhases = (
+				A3802FCF19EA40D400DC178D /* Sources */,
+				A3802FD019EA40D400DC178D /* Frameworks */,
+				A3802FD119EA40D400DC178D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A3802FD519EA40D400DC178D /* PBXTargetDependency */,
+			);
+			name = GeneratorPrototypeTests;
+			productName = GeneratorPrototypeTests;
+			productReference = A3802FD319EA40D400DC178D /* GeneratorPrototypeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A3802FB219EA40D400DC178D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Yaxi Gao";
+				TargetAttributes = {
+					A3802FB919EA40D400DC178D = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					A3802FD219EA40D400DC178D = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = A3802FB919EA40D400DC178D;
+					};
+				};
+			};
+			buildConfigurationList = A3802FB519EA40D400DC178D /* Build configuration list for PBXProject "GeneratorPrototype" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A3802FB119EA40D400DC178D;
+			productRefGroup = A3802FBB19EA40D400DC178D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3802FB919EA40D400DC178D /* GeneratorPrototype */,
+				A3802FD219EA40D400DC178D /* GeneratorPrototypeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A3802FB819EA40D400DC178D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3802FC919EA40D400DC178D /* Main.storyboard in Resources */,
+				A3802FCE19EA40D400DC178D /* LaunchScreen.xib in Resources */,
+				A3802FCB19EA40D400DC178D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3802FD119EA40D400DC178D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A3802FB619EA40D400DC178D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3802FC619EA40D400DC178D /* ViewController.m in Sources */,
+				A3802FC319EA40D400DC178D /* AppDelegate.m in Sources */,
+				A3802FC019EA40D400DC178D /* main.m in Sources */,
+				A3802FE619EB313600DC178D /* Model.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3802FCF19EA40D400DC178D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3802FDA19EA40D400DC178D /* GeneratorPrototypeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A3802FD519EA40D400DC178D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3802FB919EA40D400DC178D /* GeneratorPrototype */;
+			targetProxy = A3802FD419EA40D400DC178D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A3802FC719EA40D400DC178D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3802FC819EA40D400DC178D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A3802FCC19EA40D400DC178D /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3802FCD19EA40D400DC178D /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A3802FDB19EA40D400DC178D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		A3802FDC19EA40D400DC178D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A3802FDE19EA40D400DC178D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GeneratorPrototype/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A3802FDF19EA40D400DC178D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GeneratorPrototype/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A3802FE119EA40D400DC178D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GeneratorPrototypeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeneratorPrototype.app/GeneratorPrototype";
+			};
+			name = Debug;
+		};
+		A3802FE219EA40D400DC178D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GeneratorPrototypeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeneratorPrototype.app/GeneratorPrototype";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A3802FB519EA40D400DC178D /* Build configuration list for PBXProject "GeneratorPrototype" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3802FDB19EA40D400DC178D /* Debug */,
+				A3802FDC19EA40D400DC178D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3802FDD19EA40D400DC178D /* Build configuration list for PBXNativeTarget "GeneratorPrototype" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3802FDE19EA40D400DC178D /* Debug */,
+				A3802FDF19EA40D400DC178D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A3802FE019EA40D400DC178D /* Build configuration list for PBXNativeTarget "GeneratorPrototypeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3802FE119EA40D400DC178D /* Debug */,
+				A3802FE219EA40D400DC178D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A3802FB219EA40D400DC178D /* Project object */;
+}
