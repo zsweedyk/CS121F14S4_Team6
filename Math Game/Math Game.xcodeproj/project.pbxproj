@@ -101,11 +101,11 @@
 			children = (
 				F6251E5519F196F0009D5BBA /* AppDelegate.h */,
 				F6251E5619F196F0009D5BBA /* AppDelegate.m */,
-				F6251E5819F196F0009D5BBA /* ViewController.h */,
 				F6251E7719F19953009D5BBA /* SheepController.h */,
 				F6251E7819F19953009D5BBA /* SheepController.m */,
 				F6251E7A19F19974009D5BBA /* SheepModel.h */,
 				F6251E7B19F19974009D5BBA /* SheepModel.m */,
+				F6251E5819F196F0009D5BBA /* ViewController.h */,
 				F6251E5919F196F0009D5BBA /* ViewController.m */,
 				F6251E7E19F19A19009D5BBA /* SheepView.h */,
 				F6251E7F19F19A19009D5BBA /* SheepView.m */,
@@ -450,6 +450,7 @@
 				F6251E7319F196F0009D5BBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F6251E7419F196F0009D5BBA /* Build configuration list for PBXNativeTarget "Math GameTests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +459,7 @@
 				F6251E7619F196F0009D5BBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
