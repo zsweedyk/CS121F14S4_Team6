@@ -15,7 +15,8 @@
     int _currentScore;
     DataView* _dataView;
     DataModel* _dataModel;
-};
+}
+
 @end
 
 @implementation ViewController
