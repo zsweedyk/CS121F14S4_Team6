@@ -13,11 +13,13 @@
 
 int _currentScore = 0;
 
+// Changes the score appropriately when a sheep is selected
 - (void)applySheepToScore: (int)newScore
 {
     _currentScore = newScore;
 }
 
+// Retrieves the score in the DataModel
 - (int)getScore
 {
     return _currentScore;

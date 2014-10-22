@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class DataView;
+@protocol gameOverDelegate
+
+- (void)showGameResults:(DataView *)controller;
+
+@end
+
 @interface DataView : UIView
 {
     int _initialTime;
@@ -15,6 +22,8 @@
     UILabel* _currentScore;
     NSTimer* _gameTimer;
 }
+
+@property(nonatomic, weak) id<gameOverDelegate> customDelegate;
 
 - (id)initWithFrame:(CGRect)frame andScore:(int)currentScore;
 - (void)updateScore: (int)newScore;
