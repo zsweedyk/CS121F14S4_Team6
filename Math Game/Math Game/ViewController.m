@@ -7,15 +7,31 @@
 //
 
 #import "ViewController.h"
+#import "DataView.h"
+#import "DataModel.h"
 
 @interface ViewController ()
-
+{
+    int _currentScore;
+    DataView* _dataView;
+    DataModel* _dataModel;
+};
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    CGRect frame = self.view.frame;
+    
+    // Create DataModel
+    _dataModel = [DataModel alloc];
+    _currentScore = [_dataModel getScore];
+    
+    // Create DataView
+    _dataView = [[DataView alloc] initWithFrame:frame andScore:_currentScore];
+    [self.view addSubview:_dataView];
 }
 
 - (void)didReceiveMemoryWarning {

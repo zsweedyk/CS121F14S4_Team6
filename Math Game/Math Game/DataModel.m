@@ -7,7 +7,20 @@
 //
 
 #import "DataModel.h"
+#import "DataView.h"
 
-@implementation NSObject (DataModel)
+@implementation DataModel :NSObject
+
+int _currentScore = 0;
+
+- (void)applySheepToScore: (int)newScore
+{
+    _currentScore = newScore;
+}
+
+- (int)getScore
+{
+    return _currentScore;
+}
 
 @end
