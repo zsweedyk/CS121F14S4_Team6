@@ -23,6 +23,9 @@
     
     CGRect dragonFrame = [self makeDragonFrame];
     dragonView = [[DragonView alloc] initWithFrame:dragonFrame];
+    //dragonView.backgroundColor = [UIColor blueColor];
+    
+    [self.view addSubview:(dragonView)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,7 +34,25 @@
 }
 
 - (CGRect)makeDragonFrame {
-    return CGRectMake(50, 50, 200, 600);
+    CGRect screen = self.view.frame;
+    
+    CGFloat screenWidth = screen.size.width;
+    CGFloat screenHeight = screen.size.width;
+    
+    CGSize dragonSize = [UIImage imageNamed:@"dragon"].size;
+    CGSize backgroundSize = [UIImage imageNamed:@"mathGameBG"].size;
+    CGFloat dragonBGWidthRatio = dragonSize.width/backgroundSize.width;
+    CGFloat dragonBGHeightRatio = dragonSize.height/backgroundSize.height;
+    
+    CGFloat dragonWidth = dragonBGWidthRatio * screenWidth;
+    CGFloat dragonHeight = dragonBGHeightRatio * screenHeight;
+    
+    CGFloat x = screenWidth - dragonWidth;
+    CGFloat y = screenHeight/2.0 - 330;
+    
+    NSLog(@"x is %f, y is %f, width is %f, height is %f", x,y,dragonWidth,dragonHeight);
+    
+    return CGRectMake(x, y, dragonWidth, dragonHeight);
 }
 
 @end

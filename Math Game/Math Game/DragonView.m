@@ -22,10 +22,10 @@
     self = [super initWithFrame:frame];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
     imageView.image = [UIImage imageNamed:@"dragon"];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     [self addSubview:imageView];
     
-    NSLog(@"Got here");
     return self;
 }
 
