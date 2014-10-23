@@ -12,6 +12,7 @@
 #import "DataView.h"
 #import "DataModel.h"
 #import "SheepView.h"
+#import "SheepModel.h"
 
 @interface ViewController ()
 {
@@ -21,6 +22,7 @@
     DataView* _dataView;
     DataModel* _dataModel;
     SheepView* _sheepView;
+    SheepModel* _sheepModel;
 }
 @end
 
@@ -51,19 +53,24 @@
     _dataView.customDelegate = self;
     [self.view addSubview:_dataView];
     
+    // Initialize SheepModel----------------------------------------------------
+    _sheepModel = [[SheepModel alloc]init];
+    
     // Initialize SheepView-----------------------------------------------------
     CGRect sheepFrame = [self makeSheepFrame];
     _sheepView = [[SheepView alloc] initWithFrame:sheepFrame];
-   // _sheepView.backgroundColor = [UIColor redColor];
+    
+    [_sheepView moveSheepFrom: CGPointMake(800,400) to:CGPointMake(0,0)];
+   // [_sheepView displayOperator:[_sheepModel getOperator]];
+   // [_sheepView displayValue:[_sheepModel getValue]];
+    
+    [_sheepView displayOperator:'x'];
+    [_sheepView displayValue:@"89"];
     
     [self.view addSubview:_sheepView];
     [self.view bringSubviewToFront:_sheepView];
     
-    [_sheepView moveSheepFrom: CGPointMake(800,500) to:CGPointMake(0.0,0.0)];
-    //[_sheepView displayOperator:@"+"];
-    //[_sheepView displayValue:50];
-    
-    
+
     
     
     // Create Quit button
@@ -128,7 +135,7 @@
 }
 
 - (CGRect)makeSheepFrame {
-    NSLog(@"in here");
+    
     CGRect screen = self.view.frame;
     
     CGSize backgroundSize = [UIImage imageNamed:@"mathGameBG"].size;

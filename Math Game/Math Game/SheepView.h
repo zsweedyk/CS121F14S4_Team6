@@ -7,19 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-//@import SpriteKit;
 
 @interface SheepView: UIView
 
-- (void) drawText:(NSString*) text
-             inImage:(UIImage*)  image
-             atPoint:(CGPoint)   point;
+- (UIImage*) getImageWithString:(NSString*)text for:(char)input;
 
 - (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end;
 
-- (void) displayValue:(double)value;
+- (void) displayValue:(NSString*)value;
 
-- (void) displayOperator:(NSString*)string;
+- (void) displayOperator:(char)oper;
 
 - (void) onTimer;
 
