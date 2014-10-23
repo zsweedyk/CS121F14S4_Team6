@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "DataView.h"
-#import "DataModel.h"
+#import "Generator.h"
 
 @interface ViewController ()
 {
@@ -23,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
     
     CGRect frame = self.view.frame;
     
