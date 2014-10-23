@@ -45,12 +45,16 @@
         _operator = 'A';
         _value= [NSString stringWithFormat:@" "];
     } else {
+        _operator = _generator.generateOperator;
+        
         if (chanceIndicator % 2 == 0) {
             int value = [_generator generateIntegerfrom:-100 to:100];
+            if ((_operator == '/') && (value == 0)) {++value;}
             _value = [NSString stringWithFormat:@"%d", value];
         } else {
             NSMutableArray* fraction = _generator.generateFraction;
             int numerator = (int)[[fraction objectAtIndex:0] integerValue];
+            if ((_operator == '/') && (numerator == 0)) {++numerator;}
             int denomenator = (int)[[fraction objectAtIndex:1] integerValue];
             float result = (float)numerator / (float)denomenator;
             if (numerator == 0) {
@@ -60,7 +64,7 @@
             }
             
         }
-        _operator = _generator.generateOperator;
+        
     }
     
 }
