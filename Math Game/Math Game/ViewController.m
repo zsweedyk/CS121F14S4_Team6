@@ -18,7 +18,7 @@
 {
     DragonView *_dragonView;
     SheepController *_sheepController;
-    int _currentScore;
+    double _currentScore;
     DataView* _dataView;
     DataModel* _dataModel;
     SheepView* _sheepView;
@@ -34,6 +34,7 @@
     
     // Initialize SheepController ----------------------------------------------
     _sheepController = [[SheepController alloc] init];
+//  [_sheepController generateSheep];
     
     // Initialize DragonView ---------------------------------------------------
     CGRect dragonFrame = [self makeDragonFrame];
@@ -81,16 +82,17 @@
     [quitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [quitButton addTarget:self action:@selector(quitGame) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:quitButton];
+    
 }
 
 // When a sheep is selected, two functions must be called:
-
+// DataModel's applySheepChar:andValue: & getScore and DataView's updateScore
 
 // Delegate Function: Shows result when game is over
 - (void)showGameResults:(DataView *)controller
 {
     NSString* alertTitle = @"Time's up!";
-    NSString* gameResult = [NSString stringWithFormat:@"Your score was %d", _currentScore];
+    NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];
     
     UIAlertView *finishedGameResult = [[UIAlertView alloc]
                                        initWithTitle: alertTitle
@@ -104,15 +106,34 @@
 // Quits the game when 'Quit' button is clicked
 - (void)quitGame
 {
-    NSLog(@"Quit the game!");
+    NSString* alertTitle = @"You quit the game!";
+    NSString* gameResult = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
+    
+    UIAlertView *finishedGameResult = [[UIAlertView alloc]
+                                       initWithTitle: alertTitle
+                                       message: gameResult
+                                       delegate: self
+                                       cancelButtonTitle: @"OK"
+                                       otherButtonTitles: nil];
+    [finishedGameResult show];
 }
+
+//- (void)onSheepSelection:(id)sheep
+//{
+//    NSString value = [sheep getValue];
+//    char operator = [sheep getOperator];
+//    [_dataModel applySheepToScore:value, operator];
+//    
+//    [_dataView updateScore:[_dataModel getScore]];
+//}
     
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (CGRect)makeDragonFrame {
+- (CGRect)makeDragonFrame
+{
     CGRect screen = self.view.frame;
     
     CGFloat screenWidth = screen.size.width;

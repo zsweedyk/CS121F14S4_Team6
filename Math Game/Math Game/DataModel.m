@@ -11,16 +11,40 @@
 
 @implementation DataModel :NSObject
 
-int _currentScore = 0;
+double _currentScore = 0;
 
 // Changes the score appropriately when a sheep is selected
-- (void)applySheepToScore: (int)newScore
+- (void)applySheepChar:(char)operator andValue:(NSString*)givenValue
 {
-    _currentScore = newScore;
+    double desiredValue = [givenValue doubleValue];
+    
+    // Parse the NSString
+    NSRange textRange = [givenValue rangeOfString:@"("];
+    if (textRange.location != NSNotFound)
+    {
+        NSCharacterSet *delimiters = [NSCharacterSet characterSetWithCharactersInString:@"()"];
+        NSArray *splitString = [givenValue componentsSeparatedByCharactersInSet:delimiters];
+        desiredValue = [[splitString objectAtIndex:1] doubleValue];
+    }
+    
+    // Apply the operator
+    if (operator == '+') {
+        _currentScore = _currentScore + desiredValue;
+    } else if (operator == '-') {
+        _currentScore = _currentScore - desiredValue;
+    } else if (operator == '/') {
+        _currentScore = _currentScore / desiredValue;
+    } else if (operator == 'x') {
+        _currentScore = _currentScore * desiredValue;
+    } else {
+        _currentScore = abs(_currentScore);
+    }
+    
+    NSLog(@"The current value is %.3f", _currentScore);
 }
 
 // Retrieves the score in the DataModel
-- (int)getScore
+- (double)getScore
 {
     return _currentScore;
 }

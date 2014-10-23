@@ -10,10 +10,10 @@
 
 @interface DataModel : NSObject
 {
-    int _currentScore;
+    double _currentScore;
 }
 
-- (void)applySheepToScore: (int)newScore;
-- (int)getScore;
+- (void)applySheepChar:(char)operator andValue:(NSString*)givenValue;
+- (double)getScore;
 
 @end
