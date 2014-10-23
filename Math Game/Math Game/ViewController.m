@@ -16,7 +16,7 @@
 {
     DragonView *_dragonView;
     SheepController *_sheepController;
-    int _currentScore;
+    double _currentScore;
     DataView* _dataView;
     DataModel* _dataModel;
 }
@@ -59,16 +59,23 @@
     [quitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [quitButton addTarget:self action:@selector(quitGame) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:quitButton];
+    
+    [_dataModel applySheepChar:'+' andValue:@"50"];
+    [_dataModel applySheepChar:'-' andValue:@"70"];
+    [_dataModel applySheepChar:'A' andValue:@" "];
+    _currentScore = [_dataModel getScore];
+    NSLog(@"Current score is %.3f", _currentScore);
+    [_dataView updateScore:_currentScore];
 }
 
 // When a sheep is selected, two functions must be called:
-
+// DataModel's applySheepChar:andValue: & getScore and DataView's updateScore
 
 // Delegate Function: Shows result when game is over
 - (void)showGameResults:(DataView *)controller
 {
     NSString* alertTitle = @"Time's up!";
-    NSString* gameResult = [NSString stringWithFormat:@"Your score was %d", _currentScore];
+    NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];
     
     UIAlertView *finishedGameResult = [[UIAlertView alloc]
                                        initWithTitle: alertTitle
