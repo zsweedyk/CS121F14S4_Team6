@@ -78,7 +78,7 @@
     
     
     // Create Quit button
-    CGFloat quitX = CGRectGetWidth(frame) * .88;
+    CGFloat quitX = CGRectGetWidth(frame) * .75;
     CGFloat quitY = CGRectGetHeight(frame) * .04;
     CGRect quitDisplay = CGRectMake(quitX, quitY, 100, 50);
     UIButton* quitButton = [[UIButton alloc] initWithFrame:quitDisplay];
@@ -106,21 +106,25 @@
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
     [finishedGameResult show];
+    
+    [_sheepController endGame];
 }
 
 // Quits the game when 'Quit' button is clicked
 - (void)quitGame
 {
     NSString* alertTitle = @"You quit the game!";
-    NSString* gameResult = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
+    NSString* subtitle = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
     
-    UIAlertView *finishedGameResult = [[UIAlertView alloc]
+    UIAlertView *quitGameAlert = [[UIAlertView alloc]
                                        initWithTitle: alertTitle
-                                       message: gameResult
+                                       message: subtitle
                                        delegate: self
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
-    [finishedGameResult show];
+    [quitGameAlert show];
+    
+    [_sheepController endGame];
 }
 
 //- (void)onSheepSelection:(id)sheep

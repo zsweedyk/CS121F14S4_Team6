@@ -14,6 +14,7 @@
 
 - (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame;
 - (void)setSheepOnScreen:(bool)boolean;
+- (void)endGame;
 
 @property bool sheepOnScreen;
 @property UIView* viewController;
