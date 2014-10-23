@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (Generator)
+@interface Generator : NSObject
+
+- (int) generateIntegerfrom:(int)lower to:(int)upper;
+- (NSMutableArray*) generateFraction;
+- (char) generateOperator;
 
 @end
