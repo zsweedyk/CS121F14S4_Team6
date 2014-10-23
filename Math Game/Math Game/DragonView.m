@@ -20,7 +20,9 @@
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+    
+    CGRect innerFrame = CGRectMake(0,0, frame.size.width, frame.size.height);
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:innerFrame];
     imageView.image = [UIImage imageNamed:@"dragon"];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     

@@ -25,7 +25,7 @@
     dragonView = [[DragonView alloc] initWithFrame:dragonFrame];
     //dragonView.backgroundColor = [UIColor blueColor];
     
-    [self.view addSubview:(dragonView)];
+    [self.view addSubview:dragonView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,7 +47,7 @@
     CGFloat dragonWidth = dragonBGWidthRatio * screenWidth;
     CGFloat dragonHeight = dragonBGHeightRatio * screenHeight;
     
-    CGFloat x = screenWidth - dragonWidth;
+    CGFloat x = screenWidth - dragonWidth + 10;
     CGFloat y = screenHeight/2.0 - 330;
     
     NSLog(@"x is %f, y is %f, width is %f, height is %f", x,y,dragonWidth,dragonHeight);
