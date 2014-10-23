@@ -37,7 +37,7 @@
         NSLog(@"enter while loop generate sheep");
         SheepModel* newSheepModel = [[SheepModel alloc] init];
         SheepView* newSheepView = [[SheepView alloc] initWithFrame:sheepFrame];
-    newSheepView.customSheepViewDelegate = self;
+        newSheepView.customSheepViewDelegate = self;
     
         [newSheepModel makeSheep];
         [newSheepView moveSheepFrom:CGPointMake(800.0, 500.0) to:CGPointMake(0.0, 0.0)];

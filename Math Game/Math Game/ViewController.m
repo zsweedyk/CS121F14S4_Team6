@@ -77,7 +77,7 @@
     
     
     // Create Quit button
-    CGFloat quitX = CGRectGetWidth(frame) * .88;
+    CGFloat quitX = CGRectGetWidth(frame) * .75;
     CGFloat quitY = CGRectGetHeight(frame) * .04;
     CGRect quitDisplay = CGRectMake(quitX, quitY, 100, 50);
     UIButton* quitButton = [[UIButton alloc] initWithFrame:quitDisplay];
