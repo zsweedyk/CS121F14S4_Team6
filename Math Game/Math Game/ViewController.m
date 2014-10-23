@@ -39,6 +39,32 @@
     // Initialize DataView -----------------------------------------------------
 }
 
+// When a sheep is selected, two functions must be called:
+// DataModel's applySheep and DataView's updateScore
+
+
+// Delegate Function: Shows result when game is over
+- (void)showGameResults:(DataView *)controller
+{
+    //Show UIAlert with _currentScore
+    NSString* alertTitle = @"Time's up!";
+    NSString* gameResult = [NSString stringWithFormat:@"Your score was %d", _currentScore];
+    
+    UIAlertView *finishedGameResult = [[UIAlertView alloc]
+                                       initWithTitle: alertTitle
+                                       message: gameResult
+                                       delegate: self
+                                       cancelButtonTitle: @"OK"
+                                       otherButtonTitles: nil];
+    [finishedGameResult show];
+}
+
+// Quits the game when 'Quit' button is clicked
+- (void)quitGame
+{
+    NSLog(@"Quit the game!");
+}
+    
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

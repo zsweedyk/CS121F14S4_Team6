@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataView.h"
+#import "DataModel.h"
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UIViewController <gameOverDelegate>
 
 @end
 

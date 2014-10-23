@@ -7,6 +7,7 @@
 //
 
 #import "DataModel.h"
+#import "DataView.h"
 
 @implementation DataModel
 
