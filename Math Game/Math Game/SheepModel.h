@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (SheepModel)
+@interface SheepModel : NSObject
+
+-(NSString*) getValue;
+-(char) getOperator;
+-(void) makeSheep;
 
 @end
