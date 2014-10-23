@@ -37,6 +37,7 @@
     return _operator;
 }
 
+// Makes sheep with operator and value
 -(void) makeSheep
 {
     int chanceIndicator = arc4random_uniform(10);
