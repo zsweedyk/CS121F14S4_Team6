@@ -61,12 +61,6 @@
     [quitButton addTarget:self action:@selector(quitGame) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:quitButton];
     
-    [_dataModel applySheepChar:'+' andValue:@"50"];
-    [_dataModel applySheepChar:'-' andValue:@"70"];
-    [_dataModel applySheepChar:'A' andValue:@" "];
-    _currentScore = [_dataModel getScore];
-    NSLog(@"Current score is %.3f", _currentScore);
-    [_dataView updateScore:_currentScore];
 }
 
 // When a sheep is selected, two functions must be called:
