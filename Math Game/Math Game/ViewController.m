@@ -105,6 +105,8 @@
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
     [finishedGameResult show];
+    
+    [_sheepController endGame];
 }
 
 // Quits the game when 'Quit' button is clicked
@@ -120,6 +122,8 @@
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
     [quitGameAlert show];
+    
+    [_sheepController endGame];
 }
 
 //- (void)onSheepSelection:(id)sheep

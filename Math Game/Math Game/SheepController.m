@@ -10,16 +10,21 @@
 #import "SheepModel.h"
 #import "SheepView.h"
 
-@interface UIViewController () {
-//
-//    @public UIView* _viewController;
-//    @public CGRect _sheepFrame;
+@interface SheepController () {
+    @public UIView* _viewController;
+    @public CGRect _sheepFrame;
+    BOOL _gameOver;
 }
 
 @end
 
 @implementation SheepController : UIViewController
 
+- (id)init
+{
+    _gameOver = false;
+    return self;
+}
 
 - (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame{
     
@@ -28,7 +33,7 @@
     _viewController = view;
     _sheepFrame = sheepFrame;
 
-//    while (!(_sheepOnScreen)) {
+    if(!_gameOver){
         NSLog(@"enter while loop generate sheep");
         SheepModel* newSheepModel = [[SheepModel alloc] init];
         SheepView* newSheepView = [[SheepView alloc] initWithFrame:sheepFrame];
@@ -42,13 +47,19 @@
         [view addSubview:newSheepView];
         //        _sheepOnScreen = true;
     
-    
-//    }
+    }
 }
 
 - (void)generateNewSheep {
-    NSLog(@"enter generateNewSheep");
-    [self generateSheep:_viewController withSheepFrame:_sheepFrame];
+    if(!_gameOver){
+        NSLog(@"enter generateNewSheep");
+        [self generateSheep:_viewController withSheepFrame:_sheepFrame];
+    }
+}
+
+- (void)endGame
+{
+    _gameOver = true;
 }
 
 //- (void)noSheepOnScreen:(SheepView *)controller trueOrFalse:(bool)boolean {
