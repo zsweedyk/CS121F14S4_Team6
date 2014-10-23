@@ -10,8 +10,5 @@
 
 @interface DataModel : NSObject
 
--(NSString*) getValue;
--(char) getOperator;
--(void) makeSheep;
 
 @end
