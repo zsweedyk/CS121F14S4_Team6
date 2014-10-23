@@ -8,6 +8,6 @@
 
 #import "SheepController.h"
 
-@implementation UIViewController (SheepController)
+@implementation SheepController
 
 @end

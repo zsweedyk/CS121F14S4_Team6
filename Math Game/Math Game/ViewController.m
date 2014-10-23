@@ -7,11 +7,15 @@
 //
 
 #import "ViewController.h"
+#import "SheepController.h"
 #import "DragonView.h"
+#import "DataModel.h"
 
 @interface ViewController ()
 {
     DragonView *dragonView;
+    SheepController *sheepController;
+    DataModel *dataModel;
 }
 
 @end
@@ -21,10 +25,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Initialize SheepController ----------------------------------------------
+    sheepController = [[SheepController alloc] init];
+    
+    // Initialize DragonView ---------------------------------------------------
     CGRect dragonFrame = [self makeDragonFrame];
     dragonView = [[DragonView alloc] initWithFrame:dragonFrame];
     
     [self.view addSubview:dragonView];
+    
+    // Initialize DataModel ----------------------------------------------------
+    
+    // Initialize DataView -----------------------------------------------------
 }
 
 - (void)didReceiveMemoryWarning {

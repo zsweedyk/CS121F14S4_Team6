@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (SheepController)
+@interface SheepController : UIViewController
 
 @end

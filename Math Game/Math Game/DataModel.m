@@ -8,6 +8,6 @@
 
 #import "DataModel.h"
 
-@implementation NSObject (DataModel)
+@implementation DataModel
 
 @end
