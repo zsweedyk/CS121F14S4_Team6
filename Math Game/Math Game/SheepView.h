@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (SheepView)
+@class SheepView;
+@protocol sheepViewDelegate
+
+- (void)noSheepOnScreen:(SheepView *)controller trueOrFalse:(bool)boolean;
+
+@end
+
+
+@interface SheepView : UIView
 
 @end

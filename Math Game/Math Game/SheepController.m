@@ -7,7 +7,34 @@
 //
 
 #import "SheepController.h"
+#import "SheepModel.h"
+#import "SheepView.h"
+
+@interface UIViewController () {
+
+    int _numSheepOnScreen;
+}
+
+@end
 
 @implementation UIViewController (SheepController)
+
+
+- (void)generateSheep {
+    
+    double value;
+    NSString* operator;
+    
+    while (_numSheepOnScreen < 4) {
+        SheepModel* newSheepModel = [SheepModel alloc];
+        newSheepModel.makeSheep;
+        value = newSheepModel.getValue;
+        operator = newSheepModel.getOperator;
+        
+        SheepView* newSheepView = [SheepView alloc];
+        newSheepView.displayValue(value);
+        newSheepView.displayOperator(operator);
+    }
+}
 
 @end

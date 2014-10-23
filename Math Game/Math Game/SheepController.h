@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SheepView.h"
 
-@interface UIViewController (SheepController)
+
+@interface SheepController : UIViewController <sheepViewDelegate>
 
 @end

@@ -8,6 +8,6 @@
 
 #import "SheepView.h"
 
-@implementation UIView (SheepView)
+@implementation SheepView : UIView
 
 @end

@@ -8,6 +8,6 @@
 
 #import "SheepModel.h"
 
-@implementation NSObject (SheepModel)
+@implementation SheepModel : NSObject
 
 @end
