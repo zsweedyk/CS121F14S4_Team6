@@ -116,4 +116,19 @@
     
 }
 
+- (BOOL) checkIfHighlighted
+{
+    BOOL isHighlighted;
+    if ([_sheep isHighlighted] == YES){
+        NSLog(@"is Highlighted");
+        isHighlighted = YES;
+    }
+    
+    else {
+        isHighlighted = NO;
+
+    }
+        return isHighlighted;
+}
+
 @end

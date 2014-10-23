@@ -65,7 +65,8 @@
     // Initialize SheepView-----------------------------------------------------
     //CGRect sheepFrame = [self makeSheepFrame];
     _sheepView = [[SheepView alloc] initWithFrame:sheepFrame];
-    
+    [_sheepView checkIfHighlighted];
+
 //    [_sheepView moveSheepFrom: CGPointMake(800,400) to:CGPointMake(0,0)];
 //    [_sheepView displayOperator:[_sheepModel getOperator]];
 //    [_sheepView displayValue:[_sheepModel getValue]];
