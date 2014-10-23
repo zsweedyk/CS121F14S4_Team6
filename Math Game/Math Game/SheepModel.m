@@ -9,6 +9,7 @@
 #import "SheepModel.h"
 #import "Generator.h"
 
+@implementation SheepModel : NSObject
 @interface SheepModel () {
     char _operator;
     NSString *_value;
@@ -65,6 +66,5 @@
     
 }
 
-@implementation SheepModel : NSObject
 
 @end

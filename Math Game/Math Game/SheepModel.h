@@ -10,4 +10,8 @@
 
 @interface SheepModel : NSObject
 
+-(NSString*) getValue;
+-(char) getOperator;
+-(void) makeSheep;
+
 @end
