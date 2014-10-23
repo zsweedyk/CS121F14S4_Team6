@@ -28,23 +28,11 @@
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,100,60)];
-    UIImage *sheepImage1 = [UIImage imageNamed:@"Sheep"];
-    _sheep.image = sheepImage1;
+    //_sheepModel = [[SheepModel alloc]init];
     
-    [self addSubview:_sheep];
-    return self;
-}
-
-
--(UIImageView*) myLoadImage:(NSString*)named at:(CGPoint)location
-{
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:named]];
-    CGRect frame = imgView.frame;
-    frame.origin.x = location.x;
-    frame.origin.y = location.y;
-    return imgView;
-}
+    CGRect innerFrame = CGRectMake(0,0, frame.size.width, frame.size.height);
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:innerFrame];
 
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     _sheep = [[UIImageView alloc]init];
@@ -83,7 +71,7 @@
     NSDictionary *att = @{NSFontAttributeName:myText.font};
     [myText.text drawInRect:myText.frame withAttributes:att];
     
-    _sheep = (UIImageView*)UIGraphicsGetImageFromCurrentImageContext();
+    _sheep.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return _sheep.image;
@@ -91,8 +79,8 @@
 
 - (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end
 {
-    sheepWidth = 100;
-    sheepHeight = 60;
+    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
+    _sheep.image = [UIImage imageNamed:@"Sheep"];
     
     _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
     _sheep.image = [UIImage imageNamed:@"Sheep"];
@@ -105,28 +93,25 @@
 
 - (void) displayValue:(NSString*)value
 {
-    //sheepImage = [sheep image];
-//    NSString* stringValue;
-//    NSNumber* numberValue = [NSNumber numberWithDouble:value];
-//    stringValue = [numberValue stringValue];
-    
-    [self drawText:value inImage:(UIImage*)_sheep atPoint:CGPointMake(_sheep.center.x,_sheep.center.y)];
+    [self getImageWithString:value for:'V'];
 }
 
-
-- (void) displayOperator:(char)operator
+- (void) displayOperator:(char)oper
 {
-    NSString* stringOperator = [NSString stringWithFormat:@"%c" , operator];
-    [self drawText:stringOperator inImage:(UIImage*)_sheep atPoint: CGPointMake(_sheep.center.x-20, _sheep.center.y)];
-}
+    NSString* stringOperator = [NSString stringWithFormat:@"%c" , oper];
+    [self getImageWithString:stringOperator for:'O'];
 
 }
 
 - (void) onTimer {
+
     _sheep.center = CGPointMake(_sheep.center.x+pos.x,_sheep.center.y+pos.y);
-    if (_sheep.center.x < -50)
-//        _sheep.center = CGPointMake(_sheep.center.x+860, _sheep.center.y);
-        [self.customNumDelegate noSheepOnScreen:self trueOrFalse:true];
+    if (_sheep.center.x == -50) {
+        [self removeFromSuperview];
+        [self.customSheepViewDelegate generateNewSheep];
+        //_sheep.center = CGPointMake(_sheep.center.x+860, _sheep.center.y);
+        NSLog(@"calling delegate");
+    }
     [self addSubview:_sheep];
     
 }

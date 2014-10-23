@@ -11,7 +11,9 @@
 #import "SheepView.h"
 
 @interface UIViewController () {
-    
+//
+//    @public UIView* _viewController;
+//    @public CGRect _sheepFrame;
 }
 
 @end
@@ -19,37 +21,43 @@
 @implementation SheepController : UIViewController
 
 
-- (void)generateSheep:(UIView*)view {
+- (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame{
     
-    NSString* value;
-    char operator;
+    NSLog(@"enter generateSheep");
     
-    //while (!(_sheepOnScreen)) {
-        SheepModel* newSheepModel = [SheepModel alloc];
+    _viewController = view;
+    _sheepFrame = sheepFrame;
+
+//    while (!(_sheepOnScreen)) {
+        NSLog(@"enter while loop generate sheep");
+        SheepModel* newSheepModel = [[SheepModel alloc] init];
+        SheepView* newSheepView = [[SheepView alloc] initWithFrame:sheepFrame];
+    newSheepView.customSheepViewDelegate = self;
+    
         [newSheepModel makeSheep];
-        value = [newSheepModel getValue];
-        operator = [newSheepModel getOperator];
-        
-        SheepView* newSheepView = [[SheepView alloc] initWithFrame:view.frame];
-//        [newSheepView displayValue:value];
-//        [newSheepView displayOperator:operator];
-    
-    
         [newSheepView moveSheepFrom:CGPointMake(800.0, 500.0) to:CGPointMake(0.0, 0.0)];
+        [newSheepView displayOperator:[newSheepModel getOperator]];
+        [newSheepView displayValue:[newSheepModel getValue]];
     
         [view addSubview:newSheepView];
+        //        _sheepOnScreen = true;
     
     
-    
-    //}
+//    }
 }
 
-- (void)noSheepOnScreen:(SheepView *)controller trueOrFalse:(bool)boolean {
-    _sheepOnScreen = boolean;
+- (void)generateNewSheep {
+    NSLog(@"enter generateNewSheep");
+    [self generateSheep:_viewController withSheepFrame:_sheepFrame];
 }
 
-- (void)setSheepOnScreen:(bool)boolean {
-    _sheepOnScreen = boolean;
-}
+//- (void)noSheepOnScreen:(SheepView *)controller trueOrFalse:(bool)boolean {
+//    _sheepOnScreen = boolean;
+//}
+
+//
+//- (void)setSheepOnScreen:(bool)boolean {
+//    _sheepOnScreen = boolean;
+//}
 
 @end

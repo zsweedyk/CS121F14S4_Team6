@@ -16,9 +16,9 @@
 
 @interface ViewController ()
 {
-    DragonView* _dragonView;
-    SheepController* _sheepController;
-    int _currentScore;
+    DragonView *_dragonView;
+    SheepController *_sheepController;
+    double _currentScore;
     DataView* _dataView;
     DataModel* _dataModel;
     SheepView* _sheepView;
@@ -34,8 +34,9 @@
     
     // Initialize SheepController ----------------------------------------------
     _sheepController = [[SheepController alloc] init];
-    [_sheepController setSheepOnScreen:false];
-    [_sheepController generateSheep:self.view];
+//    [_sheepController setSheepOnScreen:false];
+    CGRect sheepFrame = [self makeSheepFrame];
+    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame];
     //[self.view addSubview:_sheepController.view];
     
     
@@ -62,15 +63,15 @@
     [_sheepModel makeSheep];
     
     // Initialize SheepView-----------------------------------------------------
-    CGRect sheepFrame = [self makeSheepFrame];
+    //CGRect sheepFrame = [self makeSheepFrame];
     _sheepView = [[SheepView alloc] initWithFrame:sheepFrame];
     
-    [_sheepView moveSheepFrom: CGPointMake(800,400) to:CGPointMake(0,0)];
-    [_sheepView displayOperator:[_sheepModel getOperator]];
-    [_sheepView displayValue:[_sheepModel getValue]];
-    
-    [self.view addSubview:_sheepView];
-    [self.view bringSubviewToFront:_sheepView];
+//    [_sheepView moveSheepFrom: CGPointMake(800,400) to:CGPointMake(0,0)];
+//    [_sheepView displayOperator:[_sheepModel getOperator]];
+//    [_sheepView displayValue:[_sheepModel getValue]];
+//    
+//    [self.view addSubview:_sheepView];
+//    [self.view bringSubviewToFront:_sheepView];
     
 
     

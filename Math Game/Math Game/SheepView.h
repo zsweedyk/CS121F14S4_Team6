@@ -11,26 +11,23 @@
 @class SheepView;
 @protocol sheepViewDelegate
 
-- (void)noSheepOnScreen:(SheepView *)controller trueOrFalse:(bool)boolean;
+- (void)generateNewSheep;
 
 @end
 
 @interface SheepView: UIView
 
-@property(nonatomic, weak) id<sheepViewDelegate> customNumDelegate;
-
-- (void) drawText:(NSString*) text
-             inImage:(UIImage*)  image
-             atPoint:(CGPoint)   point;
+- (UIImage*) getImageWithString:(NSString*)text for:(char)input;
 
 - (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end;
 
 - (void) displayValue:(NSString*)value;
 
-- (void) displayOperator:(char)string;
+- (void) displayOperator:(char)oper;
 
 - (void) onTimer;
 
 @property UIImageView* sheep;
+@property(nonatomic, weak) id<sheepViewDelegate> customSheepViewDelegate;
 
 @end
