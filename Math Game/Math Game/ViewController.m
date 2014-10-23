@@ -55,17 +55,15 @@
     
     // Initialize SheepModel----------------------------------------------------
     _sheepModel = [[SheepModel alloc]init];
+    [_sheepModel makeSheep];
     
     // Initialize SheepView-----------------------------------------------------
     CGRect sheepFrame = [self makeSheepFrame];
     _sheepView = [[SheepView alloc] initWithFrame:sheepFrame];
     
     [_sheepView moveSheepFrom: CGPointMake(800,400) to:CGPointMake(0,0)];
-   // [_sheepView displayOperator:[_sheepModel getOperator]];
-   // [_sheepView displayValue:[_sheepModel getValue]];
-    
-    [_sheepView displayOperator:'x'];
-    [_sheepView displayValue:@"89"];
+    [_sheepView displayOperator:[_sheepModel getOperator]];
+    [_sheepView displayValue:[_sheepModel getValue]];
     
     [self.view addSubview:_sheepView];
     [self.view bringSubviewToFront:_sheepView];
