@@ -30,6 +30,7 @@
     
     // Initialize SheepController ----------------------------------------------
     _sheepController = [[SheepController alloc] init];
+//  [_sheepController generateSheep];
     
     // Initialize DragonView ---------------------------------------------------
     CGRect dragonFrame = [self makeDragonFrame];
@@ -89,15 +90,34 @@
 // Quits the game when 'Quit' button is clicked
 - (void)quitGame
 {
-    NSLog(@"Quit the game!");
+    NSString* alertTitle = @"You quit the game!";
+    NSString* gameResult = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
+    
+    UIAlertView *finishedGameResult = [[UIAlertView alloc]
+                                       initWithTitle: alertTitle
+                                       message: gameResult
+                                       delegate: self
+                                       cancelButtonTitle: @"OK"
+                                       otherButtonTitles: nil];
+    [finishedGameResult show];
 }
+
+//- (void)onSheepSelection:(id)sheep
+//{
+//    NSString value = [sheep getValue];
+//    char operator = [sheep getOperator];
+//    [_dataModel applySheepToScore:value, operator];
+//    
+//    [_dataView updateScore:[_dataModel getScore]];
+//}
     
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (CGRect)makeDragonFrame {
+- (CGRect)makeDragonFrame
+{
     CGRect screen = self.view.frame;
     
     CGFloat screenWidth = screen.size.width;
