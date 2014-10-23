@@ -19,10 +19,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    Generator *_Generator = [[Generator alloc] init];
-    NSLog(@"%d",[_Generator generateIntegerfrom:-100 to:100]);
-    NSLog(@"%c", _Generator.generateOperator);
-    
 }
 
 - (void)didReceiveMemoryWarning {
