@@ -111,15 +111,15 @@
 - (void)quitGame
 {
     NSString* alertTitle = @"You quit the game!";
-    NSString* gameResult = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
+    NSString* subtitle = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
     
-    UIAlertView *finishedGameResult = [[UIAlertView alloc]
+    UIAlertView *quitGameAlert = [[UIAlertView alloc]
                                        initWithTitle: alertTitle
-                                       message: gameResult
+                                       message: subtitle
                                        delegate: self
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
-    [finishedGameResult show];
+    [quitGameAlert show];
 }
 
 //- (void)onSheepSelection:(id)sheep
