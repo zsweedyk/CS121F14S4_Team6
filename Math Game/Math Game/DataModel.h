@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (DataModel)
+@interface DataModel : NSObject
+{
+    int _currentScore;
+}
+
+- (void)applySheepToScore: (int)newScore;
+- (int)getScore;
 
 @end
