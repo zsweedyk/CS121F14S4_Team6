@@ -11,6 +11,8 @@
 #import "DragonView.h"
 #import "DataView.h"
 #import "DataModel.h"
+#import "SheepView.h"
+#import "SheepModel.h"
 
 @interface ViewController ()
 {
@@ -19,6 +21,8 @@
     int _currentScore;
     DataView* _dataView;
     DataModel* _dataModel;
+    SheepView* _sheepView;
+    SheepModel* _sheepModel;
 }
 @end
 
@@ -53,6 +57,24 @@
     _dataView.customDelegate = self;
     [self.view addSubview:_dataView];
     
+    // Initialize SheepModel----------------------------------------------------
+    _sheepModel = [[SheepModel alloc]init];
+    [_sheepModel makeSheep];
+    
+    // Initialize SheepView-----------------------------------------------------
+    CGRect sheepFrame = [self makeSheepFrame];
+    _sheepView = [[SheepView alloc] initWithFrame:sheepFrame];
+    
+    [_sheepView moveSheepFrom: CGPointMake(800,400) to:CGPointMake(0,0)];
+    [_sheepView displayOperator:[_sheepModel getOperator]];
+    [_sheepView displayValue:[_sheepModel getValue]];
+    
+    [self.view addSubview:_sheepView];
+    [self.view bringSubviewToFront:_sheepView];
+    
+
+    
+    
     // Create Quit button
     CGFloat quitX = CGRectGetWidth(frame) * .88;
     CGFloat quitY = CGRectGetHeight(frame) * .04;
@@ -63,16 +85,17 @@
     [quitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [quitButton addTarget:self action:@selector(quitGame) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:quitButton];
+    
 }
 
 // When a sheep is selected, two functions must be called:
-
+// DataModel's applySheepChar:andValue: & getScore and DataView's updateScore
 
 // Delegate Function: Shows result when game is over
 - (void)showGameResults:(DataView *)controller
 {
     NSString* alertTitle = @"Time's up!";
-    NSString* gameResult = [NSString stringWithFormat:@"Your score was %d", _currentScore];
+    NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];
     
     UIAlertView *finishedGameResult = [[UIAlertView alloc]
                                        initWithTitle: alertTitle
@@ -86,15 +109,34 @@
 // Quits the game when 'Quit' button is clicked
 - (void)quitGame
 {
-    NSLog(@"Quit the game!");
+    NSString* alertTitle = @"You quit the game!";
+    NSString* gameResult = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
+    
+    UIAlertView *finishedGameResult = [[UIAlertView alloc]
+                                       initWithTitle: alertTitle
+                                       message: gameResult
+                                       delegate: self
+                                       cancelButtonTitle: @"OK"
+                                       otherButtonTitles: nil];
+    [finishedGameResult show];
 }
+
+//- (void)onSheepSelection:(id)sheep
+//{
+//    NSString value = [sheep getValue];
+//    char operator = [sheep getOperator];
+//    [_dataModel applySheepToScore:value, operator];
+//    
+//    [_dataView updateScore:[_dataModel getScore]];
+//}
     
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (CGRect)makeDragonFrame {
+- (CGRect)makeDragonFrame
+{
     CGRect screen = self.view.frame;
     
     CGFloat screenWidth = screen.size.width;
@@ -112,6 +154,16 @@
     CGFloat y = screenHeight/2.0 - 330;
     
     return CGRectMake(x, y, dragonWidth, dragonHeight);
+}
+
+- (CGRect)makeSheepFrame {
+    
+    CGRect screen = self.view.frame;
+    
+    CGSize backgroundSize = [UIImage imageNamed:@"mathGameBG"].size;
+    
+    
+    return CGRectMake(screen.origin.x, screen.origin.y, backgroundSize.width, backgroundSize.height);
 }
 
 @end

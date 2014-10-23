@@ -10,7 +10,7 @@
 
 @implementation DataView :UIView
 
-- (id)initWithFrame:(CGRect)frame andScore:(int)currentScore
+- (id)initWithFrame:(CGRect)frame andScore:(double)currentScore
 {
     self = [super initWithFrame:frame];
     
@@ -31,9 +31,9 @@
         // Set up UI for Score label
         CGFloat scoreX = CGRectGetWidth(frame) * .05;
         CGFloat scoreY = CGRectGetHeight(frame) * .04;
-        CGRect scoreDisplay = CGRectMake(scoreX, scoreY, 200, 50);
+        CGRect scoreDisplay = CGRectMake(scoreX, scoreY, 300, 50);
         _currentScore = [[UILabel alloc] initWithFrame:scoreDisplay];
-        _currentScore.text = [NSString stringWithFormat:@"Score: %d", currentScore];
+        _currentScore.text = [NSString stringWithFormat:@"Score: %.3f", currentScore];
         _currentScore.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:50];
         _currentScore.textColor = [UIColor whiteColor];
         
@@ -76,9 +76,9 @@
 }
 
 // Updates the visual when the score is changed
-- (void)updateScore: (int)newScore
+- (void)updateScore: (double)newScore
 {
-    _currentScore.text = [NSString stringWithFormat:@"Score: %d", newScore];
+    _currentScore.text = [NSString stringWithFormat:@"Score: %.3f", newScore];
 }
 
 @end
