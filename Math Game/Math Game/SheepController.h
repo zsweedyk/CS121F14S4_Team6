@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SheepView.h"
 
-@interface SheepController : UIViewController
+
+@interface SheepController : UIViewController <sheepViewDelegate>
+
+- (void)generateSheep:(UIView*)view;
+- (void)setSheepOnScreen:(bool)boolean;
+
+@property bool sheepOnScreen;
 
 @end

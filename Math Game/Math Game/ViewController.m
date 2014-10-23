@@ -14,8 +14,8 @@
 
 @interface ViewController ()
 {
-    DragonView *_dragonView;
-    SheepController *_sheepController;
+    DragonView* _dragonView;
+    SheepController* _sheepController;
     int _currentScore;
     DataView* _dataView;
     DataModel* _dataModel;
@@ -30,6 +30,10 @@
     
     // Initialize SheepController ----------------------------------------------
     _sheepController = [[SheepController alloc] init];
+    [_sheepController setSheepOnScreen:false];
+    [_sheepController generateSheep:self.view];
+    //[self.view addSubview:_sheepController.view];
+    
     
     // Initialize DragonView ---------------------------------------------------
     CGRect dragonFrame = [self makeDragonFrame];

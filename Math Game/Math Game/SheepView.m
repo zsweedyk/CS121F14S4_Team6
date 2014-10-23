@@ -12,8 +12,6 @@
 
 @interface SheepView (){
     
-    UIImageView* sheep;
-    
     UIImage* sheepImage;
     
     CGPoint pos;
@@ -26,6 +24,17 @@
 
 
 @implementation SheepView : UIView
+
+-(id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,100,60)];
+    UIImage *sheepImage1 = [UIImage imageNamed:@"Sheep"];
+    _sheep.image = sheepImage1;
+    
+    [self addSubview:_sheep];
+    return self;
+}
+
 
 -(UIImageView*) myLoadImage:(NSString*)named at:(CGPoint)location
 {
@@ -67,7 +76,7 @@
     NSDictionary *att = @{NSFontAttributeName:font};
     [text drawInRect:rect withAttributes:att];
     
-    sheep = (UIImageView*)UIGraphicsGetImageFromCurrentImageContext();
+    _sheep = (UIImageView*)UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 }
 
@@ -77,8 +86,8 @@
     sheepWidth = 100;
     sheepHeight = 60;
     
-    sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
-    sheep.image = [UIImage imageNamed:@"Sheep"];
+    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
+    _sheep.image = [UIImage imageNamed:@"Sheep"];
     
     pos = CGPointMake(-1.0,0.0);
     
@@ -86,27 +95,30 @@
 }
 
 
-- (void) displayValue:(double)value
+- (void) displayValue:(NSString*)value
 {
     //sheepImage = [sheep image];
-    NSString* stringValue;
-    NSNumber* numberValue = [NSNumber numberWithDouble:value];
-    stringValue = [numberValue stringValue];
+//    NSString* stringValue;
+//    NSNumber* numberValue = [NSNumber numberWithDouble:value];
+//    stringValue = [numberValue stringValue];
     
-    [self drawText:stringValue inImage:(UIImage*)sheep atPoint:CGPointMake(sheep.center.x,sheep.center.y)];
+    [self drawText:value inImage:(UIImage*)_sheep atPoint:CGPointMake(_sheep.center.x,_sheep.center.y)];
 }
 
 
-- (void) displayOperator:(NSString*)string
+- (void) displayOperator:(char)operator
 {
-    [self drawText:string inImage:(UIImage*)sheep atPoint: CGPointMake(sheep.center.x-20, sheep.center.y)];
+    NSString* stringOperator = [NSString stringWithFormat:@"%c" , operator];
+    [self drawText:stringOperator inImage:(UIImage*)_sheep atPoint: CGPointMake(_sheep.center.x-20, _sheep.center.y)];
 }
 
 
 - (void) onTimer {
-    sheep.center = CGPointMake(sheep.center.x+pos.x,sheep.center.y+pos.y);
-    if (sheep.center.x < -50)
-        sheep.center = CGPointMake(sheep.center.x+860, sheep.center.y);
+    _sheep.center = CGPointMake(_sheep.center.x+pos.x,_sheep.center.y+pos.y);
+    if (_sheep.center.x < -50)
+//        _sheep.center = CGPointMake(_sheep.center.x+860, _sheep.center.y);
+        [self.customNumDelegate noSheepOnScreen:self trueOrFalse:true];
+    [self addSubview:_sheep];
     
 }
 

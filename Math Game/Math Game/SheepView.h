@@ -9,7 +9,16 @@
 #import <UIKit/UIKit.h>
 //@import SpriteKit;
 
+@class SheepView;
+@protocol sheepViewDelegate
+
+- (void)noSheepOnScreen:(SheepView *)controller trueOrFalse:(bool)boolean;
+
+@end
+
 @interface SheepView: UIView
+
+@property(nonatomic, weak) id<sheepViewDelegate> customNumDelegate;
 
 - (void) drawText:(NSString*) text
              inImage:(UIImage*)  image
@@ -17,10 +26,12 @@
 
 - (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end;
 
-- (void) displayValue:(double)value;
+- (void) displayValue:(NSString*)value;
 
-- (void) displayOperator:(NSString*)string;
+- (void) displayOperator:(char)string;
 
 - (void) onTimer;
+
+@property UIImageView* sheep;
 
 @end
