@@ -20,6 +20,7 @@
 		F6251E8319F19A32009D5BBA /* Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251E8219F19A32009D5BBA /* Generator.m */; };
 		F6251E8619F19A8F009D5BBA /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251E8519F19A8F009D5BBA /* DataModel.m */; };
 		F6251E8919F19AC8009D5BBA /* DragonView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251E8819F19AC8009D5BBA /* DragonView.m */; };
+		FBC6451119F76E2400F40654 /* DataView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC6451019F76E2400F40654 /* DataView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		F6251E8519F19A8F009D5BBA /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
 		F6251E8719F19AC8009D5BBA /* DragonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonView.h; sourceTree = "<group>"; };
 		F6251E8819F19AC8009D5BBA /* DragonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragonView.m; sourceTree = "<group>"; };
+		FBC6450F19F76E2400F40654 /* DataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataView.h; sourceTree = "<group>"; };
+		FBC6451019F76E2400F40654 /* DataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				F6251E8219F19A32009D5BBA /* Generator.m */,
 				F6251E8419F19A8F009D5BBA /* DataModel.h */,
 				F6251E8519F19A8F009D5BBA /* DataModel.m */,
+				FBC6450F19F76E2400F40654 /* DataView.h */,
+				FBC6451019F76E2400F40654 /* DataView.m */,
 				F6251E5B19F196F0009D5BBA /* Main.storyboard */,
 				F6251E5E19F196F0009D5BBA /* Images.xcassets */,
 				F6251E6019F196F0009D5BBA /* LaunchScreen.xib */,
@@ -255,6 +260,7 @@
 				F6251E8019F19A19009D5BBA /* SheepView.m in Sources */,
 				F6251E5419F196F0009D5BBA /* main.m in Sources */,
 				F6251E8919F19AC8009D5BBA /* DragonView.m in Sources */,
+				FBC6451119F76E2400F40654 /* DataView.m in Sources */,
 				F6251E8619F19A8F009D5BBA /* DataModel.m in Sources */,
 				F6251E7C19F19974009D5BBA /* SheepModel.m in Sources */,
 				F6251E8319F19A32009D5BBA /* Generator.m in Sources */,

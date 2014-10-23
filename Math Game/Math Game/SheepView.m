@@ -7,6 +7,7 @@
 //
 
 #import "SheepView.h"
+@import SpriteKit;
 
 @implementation SheepView : UIView
 

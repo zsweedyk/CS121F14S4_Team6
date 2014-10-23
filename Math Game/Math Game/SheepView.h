@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+//@import SpriteKit;
 
 @class SheepView;
 @protocol sheepViewDelegate
