@@ -23,4 +23,6 @@
 
 - (void) onTimer;
 
+@property UIImageView* sheep;
+
 @end

@@ -7,12 +7,13 @@
 //
 
 #import "SheepView.h"
+#import "SheepModel.h"
 @import SpriteKit;
 
 
 @interface SheepView (){
     
-    UIImageView* sheep;
+    //UIImageView* sheep;
     
     UIImage* sheepImage;
     
@@ -26,6 +27,36 @@
 
 
 @implementation SheepView : UIView
+
+-(id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    CGRect innerFrame = CGRectMake(0,0, frame.size.width, frame.size.height);
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:innerFrame];
+
+    /*
+    sheepWidth = 100;
+    sheepHeight = 60;
+    
+    sheep = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, sheepWidth, sheepHeight)];
+    sheep.image = [UIImage imageNamed:@"Sheep"];
+    
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [self addSubview:imageView];
+    */
+    
+    UIImage *sheepImage1 = [UIImage imageNamed:@"Sheep"];
+    //sheepImage1.
+   // _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100, 60)];
+    _sheep = [[UIImageView alloc]init];
+    sheepImage = sheepImage1;
+    [self addSubview:imageView];
+    [self addSubview:_sheep];
+    //[self moveSheepFrom:CGPointMake(400,400) to:CGPointMake(0.0,0.0)];
+    
+    return self;
+}
 
 -(UIImageView*) myLoadImage:(NSString*)named at:(CGPoint)location
 {
@@ -46,7 +77,7 @@
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)];
     CGRect rect = CGRectMake(point.x, point.y, image.size.width, image.size.height);
-    [[UIColor whiteColor] set];
+    [[UIColor blackColor] set];
     NSDictionary *att = @{NSFontAttributeName:font};
     [text drawInRect:rect withAttributes:att];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -62,12 +93,12 @@
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)];
     CGRect rect = CGRectMake(point.x, point.y, image.size.width, image.size.height);
-    [[UIColor whiteColor] set];
+    [[UIColor blackColor] set];
     UIFont *font = [UIFont boldSystemFontOfSize:12];
     NSDictionary *att = @{NSFontAttributeName:font};
     [text drawInRect:rect withAttributes:att];
     
-    sheep = (UIImageView*)UIGraphicsGetImageFromCurrentImageContext();
+    _sheep = (UIImageView*)UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 }
 
@@ -77,8 +108,10 @@
     sheepWidth = 100;
     sheepHeight = 60;
     
-    sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
-    sheep.image = [UIImage imageNamed:@"Sheep"];
+    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
+    sheepImage = [UIImage imageNamed:@"Sheep"];
+    
+    _sheep.image = sheepImage;
     
     pos = CGPointMake(-1.0,0.0);
     
@@ -93,21 +126,21 @@
     NSNumber* numberValue = [NSNumber numberWithDouble:value];
     stringValue = [numberValue stringValue];
     
-    [self drawText:stringValue inImage:(UIImage*)sheep atPoint:CGPointMake(sheep.center.x,sheep.center.y)];
+    [self drawText:stringValue inImage:sheepImage atPoint:CGPointMake(_sheep.center.x,_sheep.center.y)];
 }
 
 
 - (void) displayOperator:(NSString*)string
 {
-    [self drawText:string inImage:(UIImage*)sheep atPoint: CGPointMake(sheep.center.x-20, sheep.center.y)];
+    [self drawText:string inImage:sheepImage atPoint: CGPointMake(_sheep.center.x-20, _sheep.center.y)];
 }
 
 
 - (void) onTimer {
-    sheep.center = CGPointMake(sheep.center.x+pos.x,sheep.center.y+pos.y);
-    if (sheep.center.x < -50)
-        sheep.center = CGPointMake(sheep.center.x+860, sheep.center.y);
-    
+    _sheep.center = CGPointMake(_sheep.center.x+pos.x,_sheep.center.y+pos.y);
+    if (_sheep.center.x < -50)
+        _sheep.center = CGPointMake(_sheep.center.x+860, _sheep.center.y);
+    [self addSubview:_sheep];
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "DragonView.h"
 #import "DataView.h"
 #import "DataModel.h"
+#import "SheepView.h"
 
 @interface ViewController ()
 {
@@ -19,6 +20,7 @@
     int _currentScore;
     DataView* _dataView;
     DataModel* _dataModel;
+    SheepView* _sheepView;
 }
 @end
 
@@ -48,6 +50,21 @@
     _dataView = [[DataView alloc] initWithFrame:frame andScore:_currentScore];
     _dataView.customDelegate = self;
     [self.view addSubview:_dataView];
+    
+    // Initialize SheepView-----------------------------------------------------
+    CGRect sheepFrame = [self makeSheepFrame];
+    _sheepView = [[SheepView alloc] initWithFrame:sheepFrame];
+   // _sheepView.backgroundColor = [UIColor redColor];
+    
+    [self.view addSubview:_sheepView];
+    [self.view bringSubviewToFront:_sheepView];
+    
+    [_sheepView moveSheepFrom: CGPointMake(800,500) to:CGPointMake(0.0,0.0)];
+    //[_sheepView displayOperator:@"+"];
+    //[_sheepView displayValue:50];
+    
+    
+    
     
     // Create Quit button
     CGFloat quitX = CGRectGetWidth(frame) * .88;
@@ -108,6 +125,16 @@
     CGFloat y = screenHeight/2.0 - 330;
     
     return CGRectMake(x, y, dragonWidth, dragonHeight);
+}
+
+- (CGRect)makeSheepFrame {
+    NSLog(@"in here");
+    CGRect screen = self.view.frame;
+    
+    CGSize backgroundSize = [UIImage imageNamed:@"mathGameBG"].size;
+    
+    
+    return CGRectMake(screen.origin.x, screen.origin.y, backgroundSize.width, backgroundSize.height);
 }
 
 @end
