@@ -48,4 +48,18 @@
     [self generateSheep:_viewController withSheepFrame:_sheepFrame onScreen:_timerOngoing];
 }
 
+- (void)endGame
+{
+    _gameOver = true;
+}
+
+//- (void)noSheepOnScreen:(SheepView *)controller trueOrFalse:(bool)boolean {
+//    _sheepOnScreen = boolean;
+//}
+
+//
+//- (void)setSheepOnScreen:(bool)boolean {
+//    _sheepOnScreen = boolean;
+//}
+
 @end

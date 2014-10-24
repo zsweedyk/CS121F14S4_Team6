@@ -13,9 +13,11 @@
 @interface SheepController : UIViewController <sheepViewDelegate>
 
 - (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame onScreen:(BOOL)timerRun;
+- (void)endGame;
 
 @property UIView* viewController;
 @property CGRect sheepFrame;
 @property BOOL timerOngoing;
+@property BOOL gameOver;
 
 @end
