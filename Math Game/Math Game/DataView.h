@@ -27,4 +27,5 @@
 
 - (id)initWithFrame:(CGRect)frame andScore:(double)currentScore;
 - (void)updateScore: (double)newScore;
+- (void)stopTimer;
 @end
