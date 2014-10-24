@@ -37,8 +37,8 @@
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     _sheep = [[UIImageView alloc]init];
 
-    sheepWidth = 100;
-    sheepHeight = 60;
+    sheepWidth = 150;
+    sheepHeight = 100;
     
 
     [self addSubview:imageView];
