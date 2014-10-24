@@ -101,6 +101,11 @@
 // Quits the game when 'Quit' button is clicked
 - (void)quitGame
 {
+    // Stop producing more sheep
+    CGRect sheepFrame = [self makeSheepFrame];
+    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame onScreen:NO];
+    
+    // Create a UIAlert to show score
     NSString* alertTitle = @"You quit the game!";
     NSString* gameResult = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
     
