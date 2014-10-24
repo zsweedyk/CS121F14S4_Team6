@@ -27,8 +27,6 @@
 
 - (void) onTimer;
 
-- (BOOL) checkIfHighlighted;
-
 @property UIImageView* sheep;
 @property(nonatomic, weak) id<sheepViewDelegate> customSheepViewDelegate;
 
