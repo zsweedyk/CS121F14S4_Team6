@@ -37,10 +37,14 @@
     sheepWidth = 160;
     sheepHeight = 100;
     
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    imageView.userInteractionEnabled = YES;
+    [imageView addGestureRecognizer:singleTap];
 
     [self addSubview:imageView];
     [self addSubview:_sheep];
-
+    
     return self;
 }
 
