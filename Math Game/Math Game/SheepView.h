@@ -11,6 +11,7 @@
 @class SheepView;
 @protocol sheepViewDelegate
 
+- (void) applySheep:(SheepView *)controller withOper:(char)oper andValue:(NSString *)value;
 - (void)generateNewSheepAt:(CGPoint)point;
 
 @end

@@ -20,6 +20,10 @@
 
 - (id) initWithFrame:(UIView*)view withSheepFrame:(CGRect)sheepFrame;
 - (void)generateSheepOnScreen:(BOOL)timerRun;
+
+@property(nonatomic, weak) id<sheepControllerDelegate> customSheepControllerDelegate;
+
+
 - (void)endGame;
 
 @property UIView* viewController;

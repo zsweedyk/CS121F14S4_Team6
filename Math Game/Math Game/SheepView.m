@@ -11,11 +11,12 @@
 
 @interface SheepView ()
 {
-    UIImage* sheepImage;
-    CGPoint pos;
-    CGPoint initialPos;
-    CGFloat sheepHeight;
-    CGFloat sheepWidth;
+    CGPoint _pos;
+    CGPoint _initialPos;
+    CGFloat _sheepHeight;
+    CGFloat _sheepWidth;
+    CGFloat _sheepXCoord;
+    CGFloat _sheepYCoord;
     BOOL _gameOngoing;
     char _currentOperator;
     NSString* _currentValue;
@@ -27,7 +28,8 @@
 
 @implementation SheepView : UIView
 
--(id)initWithFrame:(CGRect)frame{
+- (id)initWithFrame:(CGRect)frame
+{
     self = [super initWithFrame:frame];
     _gameOngoing = YES;
     
@@ -40,8 +42,7 @@
     _sheepWidth = 160;
     _sheepHeight = 100;
     
-   
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected:)];
     singleTap.numberOfTapsRequired = 1;
     imageView.userInteractionEnabled = YES;
     [imageView addGestureRecognizer:singleTap];
@@ -52,8 +53,7 @@
     return self;
 }
 
-
--(UIImage*) getImageWithString:(NSString*)text for:(char)input
+- (UIImage*) getImageWithString:(NSString*)text for:(char)input
 {
     CGPoint point;
     
@@ -86,9 +86,10 @@
 
 - (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end whileGame:(BOOL)gameOngoing
 {
-    initialPos = start;
+    _initialPos = start;
     _gameOngoing = gameOngoing;
-    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
+    
+    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, _sheepWidth, _sheepHeight)];
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     
     _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, _sheepWidth, _sheepHeight)];
@@ -114,13 +115,14 @@
     [self getImageWithString:stringOperator for:'O'];
 }
 
-- (void) onTimer {
-
-
-    _sheep.center = CGPointMake(_sheep.center.x+pos.x,_sheep.center.y+pos.y);
+- (void) onTimer
+{
+    _sheepXCoord = _sheep.center.x +_pos.x;
+    _sheepYCoord = _sheep.center.y + _pos.y;
+    _sheep.center = CGPointMake(_sheepXCoord, _sheepYCoord);
     if (_sheep.center.x == -50) {
         [self removeFromSuperview];
-        [self.customSheepViewDelegate generateNewSheepAt:initialPos];
+        [self.customSheepViewDelegate generateNewSheepAt:_initialPos];
     }
 
     [self addSubview:_sheep];

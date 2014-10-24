@@ -81,7 +81,14 @@
 - (void)generateNewSheepAt:(CGPoint)point {
     [_posArray addObject:[NSValue valueWithCGPoint:point]];
     [self generateSheepOnScreen:_timerOngoing];
+    
 }
+// Delegate method 
+- (void)applySheep:(SheepController *)controller withOper:(char)oper andValue:(NSString *)value
+{
+    [self.customSheepControllerDelegate applySheepToView:self withOper:oper andValue:value];
+}
+
 
 - (void) endGame
 {
