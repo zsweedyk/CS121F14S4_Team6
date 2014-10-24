@@ -33,6 +33,7 @@
     // Initialize SheepController ----------------------------------------------
     CGRect sheepFrame = [self makeSheepFrame];
     _sheepController = [[SheepController alloc] initWithFrame:self.view withSheepFrame:sheepFrame];
+    _sheepController.customSheepControllerDelegate = self;
     [_sheepController generateSheepOnScreen:YES];
     
     
@@ -72,6 +73,7 @@
 {
     [_dataModel applySheepChar:oper andValue:value];
     _currentScore = [_dataModel getScore];
+    NSLog(@"Current score is %f", _currentScore);
     [_dataView updateScore:_currentScore];
 }
 
