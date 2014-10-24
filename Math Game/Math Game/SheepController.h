@@ -12,11 +12,10 @@
 
 @interface SheepController : UIViewController <sheepViewDelegate>
 
-- (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame;
-- (void)setSheepOnScreen:(bool)boolean;
+- (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame onScreen:(BOOL)timerRun;
 
-@property bool sheepOnScreen;
 @property UIView* viewController;
 @property CGRect sheepFrame;
+@property BOOL timerOngoing;
 
 @end
