@@ -51,7 +51,7 @@
         if (chanceIndicator % 2 == 0) {
             int value = [_generator generateIntegerfrom:-100 to:100];
             if ((_operator == '/') && (value == 0)) {++value;}
-            _value = [NSString stringWithFormat:@"%d", value];
+            _value = [NSString stringWithFormat:@" %d", value];
         } else {
             NSMutableArray* fraction = _generator.generateFraction;
             int numerator = (int)[[fraction objectAtIndex:0] integerValue];
@@ -59,9 +59,9 @@
             int denomenator = (int)[[fraction objectAtIndex:1] integerValue];
             float result = (float)numerator / (float)denomenator;
             if (numerator == 0) {
-                _value = [NSString stringWithFormat:@"%d / %d (0)", numerator, denomenator];
+                _value = [NSString stringWithFormat:@"%d / %d \n (0)", numerator, denomenator];
             } else {
-                _value = [NSString stringWithFormat:@"%d / %d ( %.3f )", numerator, denomenator, result];
+                _value = [NSString stringWithFormat:@" %d / %d \n(%.2f)", numerator, denomenator, result];
             }
             
         }

@@ -59,18 +59,19 @@
     UIGraphicsBeginImageContext(_sheep.image.size);
     [_sheep.image drawInRect:CGRectMake(0,0,_sheep.image.size.width,_sheep.image.size.height)];
     UITextView *myText = [[UITextView alloc] init];
-    myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:50];
+    
+    myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:40];
     myText.textColor = [UIColor blackColor];
     myText.text = text;
     myText.backgroundColor = [UIColor clearColor];
     
-    if (input == 'V'){
-        point = CGPointMake(_sheep.image.size.width/2.15, _sheep.image.size.height/3);
+    if (input == 'O'){
+        point = CGPointMake(_sheep.image.size.width/4, _sheep.image.size.height/3.25);
     }
-    else if (input == 'O'){
-        point = CGPointMake(_sheep.image.size.width/4, _sheep.image.size.height/3.5);
+    else if (input == 'V'){
+        point = CGPointMake(_sheep.image.size.width/2.15, _sheep.image.size.height/3.5);
     }
-    
+
     myText.frame = CGRectMake(point.x, point.y, _sheep.image.size.width, _sheep.image.size.height);
     [[UIColor whiteColor] set];
     NSDictionary *att = @{NSFontAttributeName:myText.font};
@@ -121,7 +122,7 @@
         [self removeFromSuperview];
         [self.customSheepViewDelegate generateNewSheep];
     }
-    
+
     [self addSubview:_sheep];
 }
 
