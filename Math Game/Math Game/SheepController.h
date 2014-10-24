@@ -13,11 +13,13 @@
 @interface SheepController : UIViewController <sheepViewDelegate>
 
 - (id) initWithFrame:(UIView*)view withSheepFrame:(CGRect)sheepFrame;
-- (void)generateSheep;
-- (void)setSheepOnScreen:(bool)boolean;
+- (void)generateSheepOnScreen:(BOOL)timerRun;
+- (void)endGame;
 
 @property UIView* viewController;
 @property CGRect sheepFrame;
 @property NSMutableArray* posArray;
+@property BOOL timerOngoing;
+@property BOOL gameOver;
 
 @end

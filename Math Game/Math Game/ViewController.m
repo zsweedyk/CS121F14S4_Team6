@@ -35,8 +35,7 @@
     // Initialize SheepController ----------------------------------------------
     CGRect sheepFrame = [self makeSheepFrame];
     _sheepController = [[SheepController alloc] initWithFrame:self.view withSheepFrame:sheepFrame];
-    [_sheepController generateSheep];
-    //[self.view addSubview:_sheepController.view];
+    [_sheepController generateSheepOnScreen:YES];
     
     
     // Initialize DragonView ---------------------------------------------------
@@ -72,7 +71,7 @@
     [quitButton setTitle:@"Quit" forState:UIControlStateNormal];
     [quitButton.titleLabel setFont:[UIFont fontWithName:@"MarkerFelt-Thin" size:50]];
     [quitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [quitButton addTarget:self action:@selector(quitGame) forControlEvents:UIControlEventTouchUpInside];
+    [quitButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:quitButton];
     
 }
@@ -84,8 +83,7 @@
 - (void)showGameResults:(DataView *)controller
 {
     // Stop producing more sheep
-    CGRect sheepFrame = [self makeSheepFrame];
-    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame onScreen:NO];
+    [_sheepController generateSheepOnScreen:NO];
     
     // Create a UIAlert to show score
     NSString* alertTitle = @"Time's up!";
@@ -98,7 +96,6 @@
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
     [finishedGameResult show];
-    
     [_sheepController endGame];
 }
 
@@ -106,8 +103,8 @@
 - (void)quitGame
 {
     // Stop producing more sheep
-    CGRect sheepFrame = [self makeSheepFrame];
-    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame onScreen:NO];
+    NSLog(@"In quitGame");
+    [_sheepController generateSheepOnScreen:NO];
     
     // Create a UIAlert to show score
     NSString* alertTitle = @"You quit the game!";
@@ -120,7 +117,6 @@
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
     [quitGameAlert show];
-    
     [_sheepController endGame];
 }
     
