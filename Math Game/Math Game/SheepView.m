@@ -11,11 +11,15 @@
 
 @interface SheepView ()
 {
-    UIImage* sheepImage;
-    CGPoint pos;
-    CGFloat sheepHeight;
-    CGFloat sheepWidth;
+    CGPoint _pos;
+    CGFloat _sheepHeight;
+    CGFloat _sheepWidth;
+    CGFloat _sheepXCoord;
+    CGFloat _sheepYCoord;
     BOOL _gameOngoing;
+    char _currentOperator;
+    NSString* _currentValue;
+    
 }
 
 @end
@@ -23,21 +27,21 @@
 
 @implementation SheepView : UIView
 
--(id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     _gameOngoing = YES;
     
-    CGRect innerFrame = CGRectMake(0,0, frame.size.width, frame.size.height);
+    CGRect innerFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:innerFrame];
 
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     _sheep = [[UIImageView alloc]init];
 
-    sheepWidth = 100;
-    sheepHeight = 60;
+    _sheepWidth = 100;
+    _sheepHeight = 60;
     
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected:)];
     singleTap.numberOfTapsRequired = 1;
     imageView.userInteractionEnabled = YES;
     [imageView addGestureRecognizer:singleTap];
@@ -48,7 +52,7 @@
     return self;
 }
 
--(UIImage*) getImageWithString:(NSString*)text for:(char)input
+- (UIImage*) getImageWithString:(NSString*)text for:(char)input
 {
     CGPoint point;
     
@@ -82,35 +86,37 @@
 {
     _gameOngoing = gameOngoing;
     
-    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
+    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, _sheepWidth, _sheepHeight)];
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     
-    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
+    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, _sheepWidth, _sheepHeight)];
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     
-    pos = CGPointMake(-1.0,0.0);
+    _pos = CGPointMake(-1.0,0.0);
     
-    // Timer will not repeat if _gameOngoing is false.
-    // This halts the stream of sheep.
+    // Timer will not repeat if _gameOngoing is false. This halts the stream of sheep.
     [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:_gameOngoing];
     
 }
 
-
 - (void) displayValue:(NSString*)value
 {
+    _currentValue = value;
     [self getImageWithString:value for:'V'];
 }
 
 - (void) displayOperator:(char)oper
 {
+    _currentOperator = oper;
     NSString* stringOperator = [NSString stringWithFormat:@"%c" , oper];
     [self getImageWithString:stringOperator for:'O'];
-
 }
 
-- (void) onTimer {
-    _sheep.center = CGPointMake(_sheep.center.x+pos.x,_sheep.center.y+pos.y);
+- (void) onTimer
+{
+    _sheepXCoord = _sheep.center.x +_pos.x;
+    _sheepYCoord = _sheep.center.y + _pos.y;
+    _sheep.center = CGPointMake(_sheepXCoord, _sheepYCoord);
     if (_sheep.center.x == -50) {
         [self removeFromSuperview];
         [self.customSheepViewDelegate generateNewSheep];
@@ -119,8 +125,15 @@
     [self addSubview:_sheep];
 }
 
--(void)tapDetected{
-    NSLog(@"tapped sheep");
+- (void) tapDetected:(UIGestureRecognizer *)gestureRecognizer
+{
+    CGRect sensitiveSpot = CGRectMake(_sheepXCoord - (_sheepWidth/2), _sheepYCoord - (_sheepHeight/2), _sheepWidth, _sheepHeight);
+    CGPoint p = [gestureRecognizer locationInView:self];
+
+    if (CGRectContainsPoint(sensitiveSpot, p)) {
+        [self removeFromSuperview];
+        [self.customSheepViewDelegate applySheep:self withOper:_currentOperator andValue:_currentValue];
+    }
 }
 
 @end

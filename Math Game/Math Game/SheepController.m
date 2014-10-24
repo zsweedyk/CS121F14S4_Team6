@@ -16,13 +16,13 @@
 
 @implementation SheepController : UIViewController
 
-- (id)init
+- (id) init
 {
     _gameOver = false;
     return self;
 }
 
-- (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame onScreen:(BOOL)timerRun
+- (void) generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame onScreen:(BOOL)timerRun
 {
     _viewController = view;
     _sheepFrame = sheepFrame;
@@ -43,12 +43,18 @@
     }
 }
 
-- (void)generateNewSheep
+// Delegate method 
+- (void) applySheep:(SheepController *)controller withOper:(char)oper andValue:(NSString *)value
+{
+    [self.customSheepControllerDelegate applySheepToView:self withOper:oper andValue:value];
+}
+
+- (void) generateNewSheep
 {
     [self generateSheep:_viewController withSheepFrame:_sheepFrame onScreen:_timerOngoing];
 }
 
-- (void)endGame
+- (void) endGame
 {
     _gameOver = true;
 }

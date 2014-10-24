@@ -10,7 +10,8 @@
 
 @implementation DragonView
 
-- (id)initWithFrame:(CGRect)frame {
+- (id) initWithFrame:(CGRect)frame
+{
     self = [super initWithFrame:frame];
     
     CGRect innerFrame = CGRectMake(0,0, frame.size.width, frame.size.height);

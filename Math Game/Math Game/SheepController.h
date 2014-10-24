@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "SheepView.h"
 
+@class SheepController;
+@protocol sheepControllerDelegate
+
+- (void)applySheepToView:(SheepController *)controller withOper:(char)oper andValue:(NSString *)value;
+
+@end
 
 @interface SheepController : UIViewController <sheepViewDelegate>
+
+@property(nonatomic, weak) id<sheepControllerDelegate> customSheepControllerDelegate;
 
 - (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame onScreen:(BOOL)timerRun;
 - (void)endGame;

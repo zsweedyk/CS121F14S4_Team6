@@ -10,13 +10,13 @@
 
 @implementation Generator
 
-// randomly generate an integer between the given range
+// Randomly generate an integer between the given range
 - (int) generateIntegerfrom:(int)lower to:(int)upper
 {
     return (arc4random() % (upper-lower)) + lower;
 }
 
-// randomly generate a fraction
+// Randomly generate a fraction
 - (NSMutableArray*) generateFraction
 {
     NSMutableArray *values = [NSMutableArray array];
@@ -29,7 +29,7 @@
     return values;
 }
 
-// randomly generate one of the four operators
+// Randomly generate one of the four operators
 - (char) generateOperator
 {
     int value = arc4random_uniform(4);
@@ -44,7 +44,7 @@
             return '/';
             break;
         default:
-            return '*';
+            return 'x';
             break;
     }
 }
