@@ -9,16 +9,14 @@
 #import "SheepView.h"
 #import "SheepModel.h"
 
-@interface SheepView (){
-    
+@interface SheepView ()
+{
     UIImage* sheepImage;
-    
     CGPoint pos;
     CGPoint initialPos;
     CGFloat sheepHeight;
     CGFloat sheepWidth;
-    
-    //SheepModel* _sheepModel;
+    BOOL _gameOngoing;
 }
 
 @end
@@ -28,10 +26,9 @@
 
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    //_sheepModel = [[SheepModel alloc]init];
+    _gameOngoing = YES;
     
     CGRect innerFrame = CGRectMake(0,0, frame.size.width, frame.size.height);
-    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:innerFrame];
     imageView.userInteractionEnabled = YES;
 
@@ -90,7 +87,7 @@
     return _sheep.image;
 }
 
-- (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end
+- (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end whileGame:(BOOL)gameOngoing
 {
     initialPos = start;
     _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
@@ -101,7 +98,10 @@
     
     pos = CGPointMake(-1.0,0.0);
     
-    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    // Timer will not repeat if _gameOngoing is false.
+    // This halts the stream of sheep.
+    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:_gameOngoing];
+    
 }
 
 
@@ -139,6 +139,7 @@
 
     [self addSubview:_sheep];
     
+    [self addSubview:_sheep];
 }
 
 @end

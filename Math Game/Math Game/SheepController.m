@@ -21,6 +21,11 @@
 
 @implementation SheepController : UIViewController
 
+- (id)init
+{
+    _gameOver = false;
+    return self;
+}
 
 -(id) initWithFrame:(UIView*)view withSheepFrame:(CGRect)sheepFrame {
     

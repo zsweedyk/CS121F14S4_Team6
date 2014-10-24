@@ -18,11 +18,11 @@
 {
     DragonView *_dragonView;
     SheepController *_sheepController;
-    double _currentScore;
     DataView* _dataView;
     DataModel* _dataModel;
     SheepView* _sheepView;
     SheepModel* _sheepModel;
+    double _currentScore;
 }
 @end
 
@@ -57,26 +57,15 @@
     _dataView.customDelegate = self;
     [self.view addSubview:_dataView];
     
-    // Initialize SheepModel----------------------------------------------------
+    // Initialize SheepModel ---------------------------------------------------
     _sheepModel = [[SheepModel alloc]init];
     [_sheepModel makeSheep];
     
-    // Initialize SheepView-----------------------------------------------------
-    //CGRect sheepFrame = [self makeSheepFrame];
+    // Initialize SheepView ----------------------------------------------------
     _sheepView = [[SheepView alloc] initWithFrame:sheepFrame];
     
-//    [_sheepView moveSheepFrom: CGPointMake(800,400) to:CGPointMake(0,0)];
-//    [_sheepView displayOperator:[_sheepModel getOperator]];
-//    [_sheepView displayValue:[_sheepModel getValue]];
-//    
-//    [self.view addSubview:_sheepView];
-//    [self.view bringSubviewToFront:_sheepView];
-    
-
-    
-    
     // Create Quit button
-    CGFloat quitX = CGRectGetWidth(frame) * .88;
+    CGFloat quitX = CGRectGetWidth(frame) * .75;
     CGFloat quitY = CGRectGetHeight(frame) * .04;
     CGRect quitDisplay = CGRectMake(quitX, quitY, 100, 50);
     UIButton* quitButton = [[UIButton alloc] initWithFrame:quitDisplay];
@@ -94,6 +83,11 @@
 // Delegate Function: Shows result when game is over
 - (void)showGameResults:(DataView *)controller
 {
+    // Stop producing more sheep
+    CGRect sheepFrame = [self makeSheepFrame];
+    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame onScreen:NO];
+    
+    // Create a UIAlert to show score
     NSString* alertTitle = @"Time's up!";
     NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];
     
@@ -104,37 +98,38 @@
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
     [finishedGameResult show];
+    
+    [_sheepController endGame];
 }
 
 // Quits the game when 'Quit' button is clicked
 - (void)quitGame
 {
-    NSString* alertTitle = @"You quit the game!";
-    NSString* gameResult = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
+    // Stop producing more sheep
+    CGRect sheepFrame = [self makeSheepFrame];
+    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame onScreen:NO];
     
-    UIAlertView *finishedGameResult = [[UIAlertView alloc]
+    // Create a UIAlert to show score
+    NSString* alertTitle = @"You quit the game!";
+    NSString* subtitle = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
+    
+    UIAlertView *quitGameAlert = [[UIAlertView alloc]
                                        initWithTitle: alertTitle
-                                       message: gameResult
+                                       message: subtitle
                                        delegate: self
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
-    [finishedGameResult show];
+    [quitGameAlert show];
+    
+    [_sheepController endGame];
 }
-
-//- (void)onSheepSelection:(id)sheep
-//{
-//    NSString value = [sheep getValue];
-//    char operator = [sheep getOperator];
-//    [_dataModel applySheepToScore:value, operator];
-//    
-//    [_dataView updateScore:[_dataModel getScore]];
-//}
     
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+// Creates dimensions for dragon image
 - (CGRect)makeDragonFrame
 {
     CGRect screen = self.view.frame;
@@ -156,12 +151,10 @@
     return CGRectMake(x, y, dragonWidth, dragonHeight);
 }
 
+// Creates dimensions for sheep image
 - (CGRect)makeSheepFrame {
-    
     CGRect screen = self.view.frame;
-    
     CGSize backgroundSize = [UIImage imageNamed:@"mathGameBG"].size;
-    
     
     return CGRectMake(screen.origin.x, screen.origin.y, backgroundSize.width, backgroundSize.height);
 }

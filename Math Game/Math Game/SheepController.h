@@ -16,7 +16,6 @@
 - (void)generateSheep;
 - (void)setSheepOnScreen:(bool)boolean;
 
-@property bool sheepOnScreen;
 @property UIView* viewController;
 @property CGRect sheepFrame;
 @property NSMutableArray* posArray;
