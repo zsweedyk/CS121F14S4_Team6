@@ -83,7 +83,7 @@
     [self generateSheepOnScreen:_timerOngoing];
 }
 
-- (void)endGame
+- (void) endGame
 {
     _gameOver = true;
 }

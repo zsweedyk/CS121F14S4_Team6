@@ -25,7 +25,8 @@
 
 @property(nonatomic, weak) id<gameOverDelegate> customDelegate;
 
-- (id)initWithFrame:(CGRect)frame andScore:(double)currentScore;
-- (void)updateScore: (double)newScore;
-- (void)stopTimer;
+- (id) initWithFrame:(CGRect)frame andScore:(double)currentScore;
+- (void) updateScore: (double)newScore;
+- (void) stopTimer;
+
 @end

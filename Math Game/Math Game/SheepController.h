@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "SheepView.h"
 
+@class SheepController;
+@protocol sheepControllerDelegate
+
+- (void)applySheepToView:(SheepController *)controller withOper:(char)oper andValue:(NSString *)value;
+
+@end
 
 @interface SheepController : UIViewController <sheepViewDelegate>
 

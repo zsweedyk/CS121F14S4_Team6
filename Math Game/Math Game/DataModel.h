@@ -13,7 +13,7 @@
     double _currentScore;
 }
 
-- (void)applySheepChar:(char)operator andValue:(NSString*)givenValue;
-- (double)getScore;
+- (void) applySheepChar:(char)operator andValue:(NSString*)givenValue;
+- (double) getScore;
 
 @end

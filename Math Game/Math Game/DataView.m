@@ -10,7 +10,7 @@
 
 @implementation DataView :UIView
 
-- (id)initWithFrame:(CGRect)frame andScore:(double)currentScore
+- (id) initWithFrame:(CGRect)frame andScore:(double)currentScore
 {
     self = [super initWithFrame:frame];
     
@@ -24,17 +24,17 @@
         CGFloat headerY = CGRectGetHeight(frame) * .04;
         CGRect timerDisplay = CGRectMake(timerX, headerY, 100, 50);
         _currentTime = [[UILabel alloc] initWithFrame:timerDisplay];
-        _currentTime.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:50];
+        _currentTime.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:45];
         _currentTime.textColor = [UIColor whiteColor];
         [self changeTimerText];
         
         // Set up UI for Score label
-        CGFloat scoreX = CGRectGetWidth(frame) * .05;
+        CGFloat scoreX = CGRectGetWidth(frame) * .03;
         CGFloat scoreY = CGRectGetHeight(frame) * .04;
-        CGRect scoreDisplay = CGRectMake(scoreX, scoreY, 300, 50);
+        CGRect scoreDisplay = CGRectMake(scoreX, scoreY, 400, 50);
         _currentScore = [[UILabel alloc] initWithFrame:scoreDisplay];
         _currentScore.text = [NSString stringWithFormat:@"Score: %.3f", currentScore];
-        _currentScore.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:50];
+        _currentScore.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:40];
         _currentScore.textColor = [UIColor whiteColor];
         
         // Add label view
@@ -49,7 +49,7 @@
 }
 
 // Used to change the text of the timer to a MM:SS format
-- (void)changeTimerText
+- (void) changeTimerText
 {
     int minutes = _initialTime / 60;
     int seconds = _initialTime % 60;
@@ -58,13 +58,13 @@
 }
 
 // Creates an NSTimer
-- (void)initializeTimer
+- (void) initializeTimer
 {
     _gameTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDownTimer) userInfo:nil repeats:YES];
 }
 
 // Decrements the timer and calls on delegate function when timer reaches 0
-- (void)countDownTimer
+- (void) countDownTimer
 {
     if (_initialTime == 0) {
         [_gameTimer invalidate];
@@ -76,15 +76,15 @@
 }
 
 // Updates the visual when the score is changed
-- (void)updateScore: (double)newScore
+- (void) updateScore: (double)newScore
 {
     _currentScore.text = [NSString stringWithFormat:@"Score: %.3f", newScore];
 }
 
-- (void)stopTimer
+// Stop the timer
+- (void) stopTimer
 {
     [_gameTimer invalidate];
-    [self.customDelegate showGameResults:self];
 }
 
 @end

@@ -60,18 +60,23 @@
     CGRect quitDisplay = CGRectMake(quitX, quitY, 100, 50);
     UIButton* quitButton = [[UIButton alloc] initWithFrame:quitDisplay];
     [quitButton setTitle:@"Quit" forState:UIControlStateNormal];
-    [quitButton.titleLabel setFont:[UIFont fontWithName:@"MarkerFelt-Thin" size:50]];
+    [quitButton.titleLabel setFont:[UIFont fontWithName:@"MarkerFelt-Thin" size:40]];
     [quitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [quitButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:quitButton];
     
 }
 
-// When a sheep is selected, two functions must be called:
-// DataModel's applySheepChar:andValue: & getScore and DataView's updateScore
+// Delegate Function: A sheep has been clicked!
+- (void)applySheepToView:(SheepController *)controller withOper:(char)oper andValue:(NSString *)value
+{
+    [_dataModel applySheepChar:oper andValue:value];
+    _currentScore = [_dataModel getScore];
+    [_dataView updateScore:_currentScore];
+}
 
 // Delegate Function: Shows result when game is over
-- (void)showGameResults:(DataView *)controller
+- (void) showGameResults:(DataView *)controller
 {
     // Stop producing more sheep
     [_sheepController generateSheepOnScreen:NO];
@@ -91,7 +96,7 @@
 }
 
 // Quits the game when 'Quit' button is clicked
-- (void)quitGame
+- (void) quitGame
 {
     // Stop producing more sheep
     NSLog(@"In quitGame");
@@ -107,9 +112,9 @@
                                        delegate: self
                                        cancelButtonTitle: @"OK"
                                        otherButtonTitles: nil];
+    [_dataView stopTimer];
     [quitGameAlert show];
     [_sheepController endGame];
-    [_dataView stopTimer];
 }
     
 - (void)didReceiveMemoryWarning {

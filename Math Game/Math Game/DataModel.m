@@ -14,7 +14,7 @@
 double _currentScore = 0;
 
 // Changes the score appropriately when a sheep is selected
-- (void)applySheepChar:(char)operator andValue:(NSString*)givenValue
+- (void) applySheepChar:(char)operator andValue:(NSString*)givenValue
 {
     double desiredValue = [givenValue doubleValue];
     
@@ -40,11 +40,10 @@ double _currentScore = 0;
         _currentScore = abs(_currentScore);
     }
     
-    NSLog(@"The current value is %.3f", _currentScore);
 }
 
 // Retrieves the score in the DataModel
-- (double)getScore
+- (double) getScore
 {
     return _currentScore;
 }

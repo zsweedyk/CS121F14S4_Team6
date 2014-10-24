@@ -17,6 +17,9 @@
     CGFloat sheepHeight;
     CGFloat sheepWidth;
     BOOL _gameOngoing;
+    char _currentOperator;
+    NSString* _currentValue;
+    
 }
 
 @end
@@ -28,14 +31,14 @@
     self = [super initWithFrame:frame];
     _gameOngoing = YES;
     
-    CGRect innerFrame = CGRectMake(0,0, frame.size.width, frame.size.height);
+    CGRect innerFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:innerFrame];
 
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     _sheep = [[UIImageView alloc]init];
 
-    sheepWidth = 160;
-    sheepHeight = 100;
+    _sheepWidth = 160;
+    _sheepHeight = 100;
     
    
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
@@ -88,28 +91,27 @@
     _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     
-    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
+    _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, _sheepWidth, _sheepHeight)];
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     
-    pos = CGPointMake(-1.0,0.0);
+    _pos = CGPointMake(-1.0,0.0);
     
-    // Timer will not repeat if _gameOngoing is false.
-    // This halts the stream of sheep.
+    // Timer will not repeat if _gameOngoing is false. This halts the stream of sheep.
     [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:_gameOngoing];
     
 }
 
-
 - (void) displayValue:(NSString*)value
 {
+    _currentValue = value;
     [self getImageWithString:value for:'V'];
 }
 
 - (void) displayOperator:(char)oper
 {
+    _currentOperator = oper;
     NSString* stringOperator = [NSString stringWithFormat:@"%c" , oper];
     [self getImageWithString:stringOperator for:'O'];
-
 }
 
 - (void) onTimer {
@@ -124,8 +126,15 @@
     [self addSubview:_sheep];
 }
 
--(void)tapDetected{
-    NSLog(@"tapped sheep");
+- (void) tapDetected:(UIGestureRecognizer *)gestureRecognizer
+{
+    CGRect sensitiveSpot = CGRectMake(_sheepXCoord - (_sheepWidth/2), _sheepYCoord - (_sheepHeight/2), _sheepWidth, _sheepHeight);
+    CGPoint p = [gestureRecognizer locationInView:self];
+
+    if (CGRectContainsPoint(sensitiveSpot, p)) {
+        [self removeFromSuperview];
+        [self.customSheepViewDelegate applySheep:self withOper:_currentOperator andValue:_currentValue];
+    }
 }
 
 @end

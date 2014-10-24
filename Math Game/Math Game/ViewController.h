@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DataView.h"
 #import "DataModel.h"
+#import "SheepController.h"
 
-@interface ViewController : UIViewController <gameOverDelegate>
-
+@interface ViewController : UIViewController <sheepControllerDelegate, gameOverDelegate>
 
 @end
 
