@@ -33,18 +33,31 @@
     CGRect innerFrame = CGRectMake(0,0, frame.size.width, frame.size.height);
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:innerFrame];
+    imageView.userInteractionEnabled = YES;
 
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     _sheep = [[UIImageView alloc]init];
+    _sheep.userInteractionEnabled = YES;
 
     sheepWidth = 100;
     sheepHeight = 60;
     
-
+   
+//    UIButton* button = [[UIButton alloc] initWithFrame:innerFrame];
+//    button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button addTarget:self action:@selector(testMethod) forControlEvents:UIControlEventTouchUpInside];
+//    [button setTitle:@"Show View" forState:UIControlStateNormal];
+//    [button setBackgroundColor:[UIColor greenColor]];
+//    [self addSubview:button];
+    
     [self addSubview:imageView];
     [self addSubview:_sheep];
 
     return self;
+}
+
+-(void)testMethod {
+    NSLog(@"Button was clicked!");
 }
 
 -(UIImage*) getImageWithString:(NSString*)text for:(char)input
@@ -106,6 +119,7 @@
 
 - (void) onTimer {
 
+
     _sheep.center = CGPointMake(_sheep.center.x+pos.x,_sheep.center.y+pos.y);
     if (_sheep.center.x == -50) {
         [self removeFromSuperview];
@@ -113,6 +127,16 @@
         //_sheep.center = CGPointMake(_sheep.center.x+860, _sheep.center.y);
         NSLog(@"calling delegate");
     }
+    
+    
+//    UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+//    button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button addTarget:self action:@selector(testMethod) forControlEvents:UIControlEventTouchUpInside];
+//    [button setTitle:@"Show View" forState:UIControlStateNormal];
+//    [button setBackgroundColor:[UIColor greenColor]];
+//    _sheep.userInteractionEnabled = YES;
+//    [self addSubview:button];
+
     [self addSubview:_sheep];
     
 }
