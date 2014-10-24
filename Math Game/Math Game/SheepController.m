@@ -16,6 +16,11 @@
 
 @implementation SheepController : UIViewController
 
+- (id)init
+{
+    _gameOver = false;
+    return self;
+}
 
 - (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame onScreen:(BOOL)timerRun
 {
