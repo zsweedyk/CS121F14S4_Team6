@@ -33,10 +33,9 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     // Initialize SheepController ----------------------------------------------
-    _sheepController = [[SheepController alloc] init];
-//    [_sheepController setSheepOnScreen:false];
     CGRect sheepFrame = [self makeSheepFrame];
-    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame];
+    _sheepController = [[SheepController alloc] initWithFrame:self.view withSheepFrame:sheepFrame];
+    [_sheepController generateSheep];
     //[self.view addSubview:_sheepController.view];
     
     

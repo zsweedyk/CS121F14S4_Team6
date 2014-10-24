@@ -12,11 +12,13 @@
 
 @interface SheepController : UIViewController <sheepViewDelegate>
 
-- (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame;
+- (id) initWithFrame:(UIView*)view withSheepFrame:(CGRect)sheepFrame;
+- (void)generateSheep;
 - (void)setSheepOnScreen:(bool)boolean;
 
 @property bool sheepOnScreen;
 @property UIView* viewController;
 @property CGRect sheepFrame;
+@property NSMutableArray* posArray;
 
 @end

@@ -11,7 +11,7 @@
 @class SheepView;
 @protocol sheepViewDelegate
 
-- (void)generateNewSheep;
+- (void)generateNewSheepAt:(CGPoint)point;
 
 @end
 
@@ -26,6 +26,8 @@
 - (void) displayOperator:(char)oper;
 
 - (void) onTimer;
+
+- (id)initWithFrame:(CGRect)frame;
 
 @property UIImageView* sheep;
 @property(nonatomic, weak) id<sheepViewDelegate> customSheepViewDelegate;

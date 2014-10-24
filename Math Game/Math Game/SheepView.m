@@ -14,7 +14,7 @@
     UIImage* sheepImage;
     
     CGPoint pos;
-    
+    CGPoint initialPos;
     CGFloat sheepHeight;
     CGFloat sheepWidth;
     
@@ -26,7 +26,7 @@
 
 @implementation SheepView : UIView
 
--(id)initWithFrame:(CGRect)frame {
+-(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     //_sheepModel = [[SheepModel alloc]init];
     
@@ -79,6 +79,7 @@
 
 - (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end
 {
+    initialPos = start;
     _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     
@@ -108,7 +109,7 @@
     _sheep.center = CGPointMake(_sheep.center.x+pos.x,_sheep.center.y+pos.y);
     if (_sheep.center.x == -50) {
         [self removeFromSuperview];
-        [self.customSheepViewDelegate generateNewSheep];
+        [self.customSheepViewDelegate generateNewSheepAt:initialPos];
         //_sheep.center = CGPointMake(_sheep.center.x+860, _sheep.center.y);
         NSLog(@"calling delegate");
     }

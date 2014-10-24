@@ -14,6 +14,7 @@
 //
 //    @public UIView* _viewController;
 //    @public CGRect _sheepFrame;
+
 }
 
 @end
@@ -21,43 +22,52 @@
 @implementation SheepController : UIViewController
 
 
-- (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame{
-    
-    NSLog(@"enter generateSheep");
+-(id) initWithFrame:(UIView*)view withSheepFrame:(CGRect)sheepFrame {
     
     _viewController = view;
     _sheepFrame = sheepFrame;
+    
+//    NSMutableArray *yourCGPointsArray = [[NSMutableArray alloc] init];
+//    [yourCGPointsArray addObject:[NSValue valueWithCGPoint:CGPointMake(100, 100)]];
+//    
+//    //Now getting the cgpoint back
+//    CGPoint point = [[yourCGPointsArray objectAtIndex:0] CGPointValue];
+    
+     _posArray = [[NSMutableArray alloc] initWithCapacity:5];
+    [_posArray addObject:[NSValue valueWithCGPoint:CGPointMake(800.0, 200.0)]];
+    [_posArray addObject:[NSValue valueWithCGPoint:CGPointMake(800.0, 300.0)]];
+    [_posArray addObject:[NSValue valueWithCGPoint:CGPointMake(800.0, 400.0)]];
+    [_posArray addObject:[NSValue valueWithCGPoint:CGPointMake(800.0, 500.0)]];
+    [_posArray addObject:[NSValue valueWithCGPoint:CGPointMake(800.0, 600.0)]];
+    
+    while ([_posArray count] > 1) {
+        [self generateSheep];
+    }
+    
+    return self;
+}
 
-//    while (!(_sheepOnScreen)) {
-        NSLog(@"enter while loop generate sheep");
-        SheepModel* newSheepModel = [[SheepModel alloc] init];
-        SheepView* newSheepView = [[SheepView alloc] initWithFrame:sheepFrame];
+- (void)generateSheep {
+    
+
+    SheepModel* newSheepModel = [[SheepModel alloc] init];
+    CGPoint initialPos = [[_posArray objectAtIndex:0] CGPointValue];
+    [_posArray removeObjectAtIndex:0];
+    SheepView* newSheepView = [[SheepView alloc] initWithFrame:_sheepFrame];
     newSheepView.customSheepViewDelegate = self;
     
-        [newSheepModel makeSheep];
-        [newSheepView moveSheepFrom:CGPointMake(800.0, 500.0) to:CGPointMake(0.0, 0.0)];
-        [newSheepView displayOperator:[newSheepModel getOperator]];
-        [newSheepView displayValue:[newSheepModel getValue]];
+    [newSheepModel makeSheep];
+    [newSheepView moveSheepFrom:initialPos to:CGPointMake(0.0, 0.0)];
+    [newSheepView displayOperator:[newSheepModel getOperator]];
+    [newSheepView displayValue:[newSheepModel getValue]];
     
-        [view addSubview:newSheepView];
-        //        _sheepOnScreen = true;
-    
-    
-//    }
+    [_viewController addSubview:newSheepView];
+
 }
 
-- (void)generateNewSheep {
-    NSLog(@"enter generateNewSheep");
-    [self generateSheep:_viewController withSheepFrame:_sheepFrame];
+- (void)generateNewSheepAt:(CGPoint)point {
+    [_posArray addObject:[NSValue valueWithCGPoint:point]];
+    [self generateSheep];
 }
-
-//- (void)noSheepOnScreen:(SheepView *)controller trueOrFalse:(bool)boolean {
-//    _sheepOnScreen = boolean;
-//}
-
-//
-//- (void)setSheepOnScreen:(bool)boolean {
-//    _sheepOnScreen = boolean;
-//}
 
 @end
