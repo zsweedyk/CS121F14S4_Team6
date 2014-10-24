@@ -19,7 +19,7 @@
 
 - (UIImage*) getImageWithString:(NSString*)text for:(char)input;
 
-- (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end;
+- (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end whileGame:(BOOL)gameOngoing;
 
 - (void) displayValue:(NSString*)value;
 

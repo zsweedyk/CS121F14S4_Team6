@@ -18,11 +18,11 @@
 {
     DragonView *_dragonView;
     SheepController *_sheepController;
-    double _currentScore;
     DataView* _dataView;
     DataModel* _dataModel;
     SheepView* _sheepView;
     SheepModel* _sheepModel;
+    double _currentScore;
 }
 @end
 
@@ -34,11 +34,8 @@
     
     // Initialize SheepController ----------------------------------------------
     _sheepController = [[SheepController alloc] init];
-//    [_sheepController setSheepOnScreen:false];
     CGRect sheepFrame = [self makeSheepFrame];
-    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame];
-    //[self.view addSubview:_sheepController.view];
-    
+    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame onScreen:YES];
     
     // Initialize DragonView ---------------------------------------------------
     CGRect dragonFrame = [self makeDragonFrame];
@@ -58,12 +55,11 @@
     _dataView.customDelegate = self;
     [self.view addSubview:_dataView];
     
-    // Initialize SheepModel----------------------------------------------------
+    // Initialize SheepModel ---------------------------------------------------
     _sheepModel = [[SheepModel alloc]init];
     [_sheepModel makeSheep];
     
-    // Initialize SheepView-----------------------------------------------------
-    //CGRect sheepFrame = [self makeSheepFrame];
+    // Initialize SheepView ----------------------------------------------------
     _sheepView = [[SheepView alloc] initWithFrame:sheepFrame];
     [_sheepView checkIfHighlighted];
 
@@ -96,6 +92,11 @@
 // Delegate Function: Shows result when game is over
 - (void)showGameResults:(DataView *)controller
 {
+    // Stop producing more sheep
+    CGRect sheepFrame = [self makeSheepFrame];
+    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame onScreen:NO];
+    
+    // Create a UIAlert to show score
     NSString* alertTitle = @"Time's up!";
     NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];
     
@@ -113,6 +114,11 @@
 // Quits the game when 'Quit' button is clicked
 - (void)quitGame
 {
+    // Stop producing more sheep
+    CGRect sheepFrame = [self makeSheepFrame];
+    [_sheepController generateSheep:self.view withSheepFrame:sheepFrame onScreen:NO];
+    
+    // Create a UIAlert to show score
     NSString* alertTitle = @"You quit the game!";
     NSString* subtitle = [NSString stringWithFormat:@"(Not really, this is just a placeholder)"];
     
@@ -125,22 +131,15 @@
     [quitGameAlert show];
     
     [_sheepController endGame];
+    [_dataView stopTimer];
 }
-
-//- (void)onSheepSelection:(id)sheep
-//{
-//    NSString value = [sheep getValue];
-//    char operator = [sheep getOperator];
-//    [_dataModel applySheepToScore:value, operator];
-//    
-//    [_dataView updateScore:[_dataModel getScore]];
-//}
     
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+// Creates dimensions for dragon image
 - (CGRect)makeDragonFrame
 {
     CGRect screen = self.view.frame;
@@ -162,12 +161,10 @@
     return CGRectMake(x, y, dragonWidth, dragonHeight);
 }
 
+// Creates dimensions for sheep image
 - (CGRect)makeSheepFrame {
-    
     CGRect screen = self.view.frame;
-    
     CGSize backgroundSize = [UIImage imageNamed:@"mathGameBG"].size;
-    
     
     return CGRectMake(screen.origin.x, screen.origin.y, backgroundSize.width, backgroundSize.height);
 }

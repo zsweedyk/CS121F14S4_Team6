@@ -10,11 +10,7 @@
 #import "SheepModel.h"
 #import "SheepView.h"
 
-@interface SheepController () {
-    @public UIView* _viewController;
-    @public CGRect _sheepFrame;
-    BOOL _gameOver;
-}
+@interface UIViewController ()
 
 @end
 
@@ -26,35 +22,30 @@
     return self;
 }
 
-- (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame{
-    
-    NSLog(@"enter generateSheep");
-    
+- (void)generateSheep:(UIView*)view withSheepFrame:(CGRect)sheepFrame onScreen:(BOOL)timerRun
+{
     _viewController = view;
     _sheepFrame = sheepFrame;
+    _timerOngoing = timerRun;
 
-    if(!_gameOver){
-        NSLog(@"enter while loop generate sheep");
-        SheepModel* newSheepModel = [[SheepModel alloc] init];
-        SheepView* newSheepView = [[SheepView alloc] initWithFrame:sheepFrame];
-        newSheepView.customSheepViewDelegate = self;
+    SheepModel* newSheepModel = [[SheepModel alloc] init];
+    SheepView* newSheepView = [[SheepView alloc] initWithFrame:sheepFrame];
+    newSheepView.customSheepViewDelegate = self;
     
-        [newSheepModel makeSheep];
-        [newSheepView moveSheepFrom:CGPointMake(800.0, 500.0) to:CGPointMake(0.0, 0.0)];
-        [newSheepView displayOperator:[newSheepModel getOperator]];
-        [newSheepView displayValue:[newSheepModel getValue]];
+    [newSheepModel makeSheep];
+    [newSheepView moveSheepFrom:CGPointMake(800.0, 500.0) to:CGPointMake(0.0, 0.0) whileGame:_timerOngoing];
+    [newSheepView displayOperator:[newSheepModel getOperator]];
+    [newSheepView displayValue:[newSheepModel getValue]];
+    [view addSubview:newSheepView];
     
-        [view addSubview:newSheepView];
-        //        _sheepOnScreen = true;
-    
+    if (!timerRun) {
+        [newSheepView removeFromSuperview];
     }
 }
 
-- (void)generateNewSheep {
-    if(!_gameOver){
-        NSLog(@"enter generateNewSheep");
-        [self generateSheep:_viewController withSheepFrame:_sheepFrame];
-    }
+- (void)generateNewSheep
+{
+    [self generateSheep:_viewController withSheepFrame:_sheepFrame onScreen:_timerOngoing];
 }
 
 - (void)endGame
