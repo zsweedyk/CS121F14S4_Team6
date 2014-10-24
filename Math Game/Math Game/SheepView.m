@@ -38,8 +38,8 @@
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     _sheep = [[UIImageView alloc]init];
 
-    _sheepWidth = 100;
-    _sheepHeight = 60;
+    _sheepWidth = 160;
+    _sheepHeight = 100;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected:)];
     singleTap.numberOfTapsRequired = 1;
