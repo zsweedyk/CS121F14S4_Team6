@@ -124,6 +124,7 @@
     [quitGameAlert show];
     
     [_sheepController endGame];
+    [_dataView stopTimer];
 }
 
 //- (void)onSheepSelection:(id)sheep

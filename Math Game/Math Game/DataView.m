@@ -81,4 +81,10 @@
     _currentScore.text = [NSString stringWithFormat:@"Score: %.3f", newScore];
 }
 
+- (void)stopTimer
+{
+    [_gameTimer invalidate];
+    [self.customDelegate showGameResults:self];
+}
+
 @end
