@@ -115,7 +115,7 @@
         [self removeFromSuperview];
         [self.customSheepViewDelegate generateNewSheep];
     }
-    
+
     [self addSubview:_sheep];
 }
 

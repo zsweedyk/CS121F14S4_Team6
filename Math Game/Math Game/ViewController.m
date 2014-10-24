@@ -20,8 +20,6 @@
     SheepController *_sheepController;
     DataView* _dataView;
     DataModel* _dataModel;
-    SheepView* _sheepView;
-    SheepModel* _sheepModel;
     double _currentScore;
 }
 @end
@@ -54,13 +52,6 @@
     _dataView = [[DataView alloc] initWithFrame:frame andScore:_currentScore];
     _dataView.customDelegate = self;
     [self.view addSubview:_dataView];
-    
-    // Initialize SheepModel ---------------------------------------------------
-    _sheepModel = [[SheepModel alloc]init];
-    [_sheepModel makeSheep];
-    
-    // Initialize SheepView ----------------------------------------------------
-    _sheepView = [[SheepView alloc] initWithFrame:sheepFrame];
     
     // Create Quit button
     CGFloat quitX = CGRectGetWidth(frame) * .75;
@@ -144,8 +135,8 @@
     CGFloat dragonWidth = dragonBGWidthRatio * screenWidth;
     CGFloat dragonHeight = dragonBGHeightRatio * screenHeight;
     
-    CGFloat x = screenWidth - dragonWidth + 10;
-    CGFloat y = screenHeight/2.0 - 330;
+    CGFloat x = screenWidth - dragonWidth + 5;
+    CGFloat y = screenHeight/2.0 - 340;
     
     return CGRectMake(x, y, dragonWidth, dragonHeight);
 }
