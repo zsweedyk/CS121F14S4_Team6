@@ -9,16 +9,13 @@
 #import "SheepView.h"
 #import "SheepModel.h"
 
-@interface SheepView (){
-    
+@interface SheepView ()
+{
     UIImage* sheepImage;
-    
     CGPoint pos;
-    
     CGFloat sheepHeight;
     CGFloat sheepWidth;
-    
-    //SheepModel* _sheepModel;
+    BOOL _gameOngoing;
 }
 
 @end
@@ -26,12 +23,12 @@
 
 @implementation SheepView : UIView
 
--(id)initWithFrame:(CGRect)frame {
+-(id)initWithFrame:(CGRect)frame
+{
     self = [super initWithFrame:frame];
-    //_sheepModel = [[SheepModel alloc]init];
+    _gameOngoing = YES;
     
     CGRect innerFrame = CGRectMake(0,0, frame.size.width, frame.size.height);
-    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:innerFrame];
 
     _sheep.image = [UIImage imageNamed:@"Sheep"];
@@ -77,8 +74,10 @@
     return _sheep.image;
 }
 
-- (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end
+- (void) moveSheepFrom:(CGPoint)start to:(CGPoint)end whileGame:(BOOL)gameOngoing
 {
+    _gameOngoing = gameOngoing;
+    
     _sheep = [[UIImageView alloc] initWithFrame:CGRectMake(start.x, start.y, sheepWidth, sheepHeight)];
     _sheep.image = [UIImage imageNamed:@"Sheep"];
     
@@ -87,7 +86,10 @@
     
     pos = CGPointMake(-1.0,0.0);
     
-    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    // Timer will not repeat if _gameOngoing is false.
+    // This halts the stream of sheep.
+    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:_gameOngoing];
+    
 }
 
 
@@ -104,16 +106,13 @@
 }
 
 - (void) onTimer {
-
     _sheep.center = CGPointMake(_sheep.center.x+pos.x,_sheep.center.y+pos.y);
     if (_sheep.center.x == -50) {
         [self removeFromSuperview];
         [self.customSheepViewDelegate generateNewSheep];
-        //_sheep.center = CGPointMake(_sheep.center.x+860, _sheep.center.y);
-        NSLog(@"calling delegate");
     }
-    [self addSubview:_sheep];
     
+    [self addSubview:_sheep];
 }
 
 @end
