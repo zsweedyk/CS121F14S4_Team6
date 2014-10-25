@@ -100,6 +100,7 @@
     // Timer will not repeat if _gameOngoing is false. This halts the stream of sheep.
     [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:_gameOngoing];
     
+    
 }
 
 - (void) displayValue:(NSString*)value
