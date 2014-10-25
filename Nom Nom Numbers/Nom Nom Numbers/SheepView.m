@@ -18,21 +18,24 @@
     sheep.xScale = .5;
     sheep.yScale = .5;
     
+    //SK actions to move sheep left
     SKAction *moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:10.0];
     //SKAction *moveSheepLeft = [SKAction moveTo:CGPointMake(-200, 170) duration:10.0];
-    [sheep runAction:moveSheepLeft];
-    
+    SKAction *repeatMoveLeft = [SKAction repeatActionForever:moveSheepLeft];
 
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sheepTapped)];
-    //[sheep ]
+    //SK actions to wobble sheep
+    SKAction* wobbleForward = [SKAction rotateToAngle:M_PI/16.0 duration:.5];
+    SKAction* wobbleBackward = [SKAction rotateToAngle:-M_PI/16.0 duration:.5];
+    SKAction* sequence = [SKAction sequence:@[wobbleForward,wobbleBackward]];
+    SKAction *repeatWobble = [SKAction repeatActionForever:sequence];
+    
+    [sheep runAction:repeatWobble];
+    [sheep runAction:repeatMoveLeft];
+    
     
     return sheep;
 }
 
-- (UIGestureRecognizer*)getGesture {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sheepTapped)];
-    return tap;
-}
 
 
 - (void)sheepTapped {

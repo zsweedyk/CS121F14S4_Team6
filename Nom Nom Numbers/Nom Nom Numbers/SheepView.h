@@ -11,6 +11,5 @@
 @interface SheepView : SKLabelNode
 
 - (SKSpriteNode*)makeASheep;
-- (UIGestureRecognizer*)getGesture;
 
 @end

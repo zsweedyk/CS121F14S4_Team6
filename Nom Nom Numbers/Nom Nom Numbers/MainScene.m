@@ -52,20 +52,18 @@
 -(void) setupSheep {
     
 
-    
     SheepView* sheepview = [[SheepView alloc] init];
     
-    SKSpriteNode *sheep1 = [sheepview makeASheep];
-    sheep1.name = @"sheep1";
-    [sheep1 setPosition:CGPointMake(740, 170)];
-    [self addChild:sheep1];
-
-    
-    SKSpriteNode *sheep2 = [sheepview makeASheep];
-    sheep2.name = @"sheep2";
-    [sheep2 setPosition:CGPointMake(740, 370)];
-    [self addChild:sheep2];
-    
+    for (int i = 1; i < 6; i++) {
+        SKSpriteNode *newSheep = [sheepview makeASheep];
+        //Sheep all have different names right now to show that they can be distinguished when clicked
+        //Going to change them to all have the same name later on, and just use the userdata property
+        //of SKNodes to distinguish values, operators, etc
+        NSString* sheepName = [NSString stringWithFormat:@"sheep%d",i]; //@"sheep";
+        newSheep.name = sheepName;
+        [newSheep setPosition:CGPointMake(740, i*100 - 40)];
+        [self addChild:newSheep];
+    }
     
 }
 
@@ -75,8 +73,40 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    NSLog(@"%@",node.name);
+    NSLog(@"%@ tapped",node.name);
  
+}
+
+- (void)update:(NSTimeInterval)currentTime {
+    
+    //Ideally we only have one of these that recognize the name "sheep" instead of "sheep(int)"
+    //I only have the same code repeated so many times so that we can NSLog which sheep is clicked
+
+    [self enumerateChildNodesWithName:@"sheep1" usingBlock:^(SKNode *node, BOOL *stop) {
+        if (node.position.x < -150){
+            [node setPosition:CGPointMake(740, node.position.y)];
+        }
+    }];
+    [self enumerateChildNodesWithName:@"sheep2" usingBlock:^(SKNode *node, BOOL *stop) {
+        if (node.position.x < -150){
+            [node setPosition:CGPointMake(740, node.position.y)];
+        }
+    }];
+    [self enumerateChildNodesWithName:@"sheep3" usingBlock:^(SKNode *node, BOOL *stop) {
+        if (node.position.x < -150){
+            [node setPosition:CGPointMake(740, node.position.y)];
+        }
+    }];
+    [self enumerateChildNodesWithName:@"sheep4" usingBlock:^(SKNode *node, BOOL *stop) {
+        if (node.position.x < -150){
+            [node setPosition:CGPointMake(740, node.position.y)];
+        }
+    }];
+    [self enumerateChildNodesWithName:@"sheep5" usingBlock:^(SKNode *node, BOOL *stop) {
+        if (node.position.x < -150){
+            [node setPosition:CGPointMake(740, node.position.y)];
+        }
+    }];
 }
 
 
