@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import "MainScene.h"
 
 @implementation SKScene (Unarchive)
 
@@ -27,26 +28,28 @@
 
 @end
 
-@implementation GameViewController
+@implementation GameViewController {
+    
+    SKView* _skView;
+}
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
     
-    SKView* skView = (SKView *)self.view;
+    _skView = (SKView *)self.view;
     
-    if (!skView.scene) {
-        SKScene* scene = [MainScene sceneWithSize:skView.bounds.size];
+    if (!_skView.scene) {
+        SKScene* scene = [[MainScene alloc] initWithSize:_skView.bounds.size andSKView:_skView];
         scene.scaleMode = SKSceneScaleModeAspectFit;
         
-        [skView presentScene:scene];
+        [_skView presentScene:scene];
 
     }
     
-    
-    
-    
 }
+
+
 
 
 - (BOOL)shouldAutorotate

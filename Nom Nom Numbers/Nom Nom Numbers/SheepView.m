@@ -18,13 +18,26 @@
     sheep.xScale = .5;
     sheep.yScale = .5;
     
-    //SKAction *moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:10.0];
-    SKAction *moveSheepLeft = [SKAction moveTo:CGPointMake(-200, 170) duration:10.0];
+    SKAction *moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:10.0];
+    //SKAction *moveSheepLeft = [SKAction moveTo:CGPointMake(-200, 170) duration:10.0];
     [sheep runAction:moveSheepLeft];
+    
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sheepTapped)];
+    //[sheep ]
     
     return sheep;
 }
 
+- (UIGestureRecognizer*)getGesture {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sheepTapped)];
+    return tap;
+}
+
+
+- (void)sheepTapped {
+    NSLog(@"Sheep tapped");
+}
 
 
 @end

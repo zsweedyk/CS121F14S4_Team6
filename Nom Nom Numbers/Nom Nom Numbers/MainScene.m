@@ -9,9 +9,12 @@
 #import "MainScene.h"
 #import "SheepView.h"
 
-@implementation MainScene
+@implementation MainScene {
+    SKView* _skView;
+}
 
--(id)initWithSize:(CGSize)size {
+-(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
+    _skView = skView;
     if (self = [super initWithSize:size]) {
         [self setup];
     }
@@ -48,10 +51,37 @@
 
 -(void) setupSheep {
     
-    SheepView* sheepview = [[SheepView alloc] init];
-    SKSpriteNode *sheep = [sheepview makeASheep];
-    [self addChild:sheep];
+
     
+    SheepView* sheepview = [[SheepView alloc] init];
+    
+    SKSpriteNode *sheep1 = [sheepview makeASheep];
+    sheep1.name = @"sheep1";
+    [sheep1 setPosition:CGPointMake(740, 170)];
+    [self addChild:sheep1];
+
+    
+    SKSpriteNode *sheep2 = [sheepview makeASheep];
+    sheep2.name = @"sheep2";
+    [sheep2 setPosition:CGPointMake(740, 370)];
+    [self addChild:sheep2];
+    
+    
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    NSLog(@"%@",node.name);
+ 
+}
+
+
+- (void)sheepTapped {
+    NSLog(@"Sheep tapped");
 }
 
 @end
