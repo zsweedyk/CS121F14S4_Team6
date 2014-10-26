@@ -20,6 +20,7 @@ struct sheepObj {
     __unsafe_unretained SheepModel* model;
     __unsafe_unretained SKNode* spriteNode;
 };
+typedef struct sheepObj sheepObj;
 
 - (void)setupSheep:(SKScene*)mainScene {
     
@@ -36,9 +37,9 @@ struct sheepObj {
         NSString* value = [sheepModel getValue];
         char oper = [sheepModel getOperator];
         
-        SKNode *newSheep = [_sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
+        SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
         NSString* sheepName = @"sheep"; //[NSString stringWithFormat:@"sheep%d",i];
-        newSheep.name = sheepName;
+        newSheepNode.name = sheepName;
         
         NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
         NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
@@ -54,22 +55,12 @@ struct sheepObj {
         [_skScene addChild:newSheep];
     }
     
-}
+        [_skScene addChild:newSheepNode];
 
-- (struct sheepObj)findSheepObj:(SKNode *)node {
- 
-    NSValue *temp;
-    struct sheepObj sheepObject;
-    for (int i = 0; i < [_arrOfSheepModel count]; i++) {
-        temp = [_arrOfSheepModel objectAtIndex:i];
-        [temp getValue:&sheepObject];
-        if ([sheepObject.spriteNode isEqual: node]) {
-            return sheepObject;
-        }
     }
     
-    return sheepObject;
 }
+
 
 - (void)generateNewSheep:(SKNode*)node {
     
@@ -78,11 +69,17 @@ struct sheepObj {
         NSString* value = [newSheepModel getValue];
         char oper = [newSheepModel getOperator];
     
-        SKNode *newSheep = [_sheepSprite createSheepWithValue:value andOper:oper atPos:node.position];
-        newSheep.name = @"sheep";
+        SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:node.position];
+        newSheepNode.name = @"sheep";
+    
+        NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+        NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
+        [dictionary setValue:value forKey:@"Value"];
+        [dictionary setValue:operAsString forKey:@"Operator"];
+        [newSheepNode setUserData:dictionary];
 
         [node removeFromParent];
-        [_skScene addChild:newSheep];
-        [newSheep setPosition:CGPointMake(740, newSheep.position.y)];
+        [_skScene addChild:newSheepNode];
+        [newSheepNode setPosition:CGPointMake(740, newSheepNode.position.y)];
 }
 @end

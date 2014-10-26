@@ -7,7 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "SheepModel.h"
+//#import "SheepModel.h"
 
 @interface SheepSprite : SKLabelNode
 

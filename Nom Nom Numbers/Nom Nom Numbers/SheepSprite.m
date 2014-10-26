@@ -7,7 +7,7 @@
 //
 
 #import "SheepSprite.h"
-#import "SheepModel.h"
+//#import "SheepModel.h"
 
 @implementation SheepSprite {
     UIImage* _sheepImage;

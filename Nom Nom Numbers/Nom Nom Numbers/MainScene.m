@@ -18,11 +18,13 @@
     DataView* _dataView;
     DataModel* _dataModel;
     double _currentScore;
+    BOOL _gameEnded;
 }
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
     _skView = skView;
     _sheepController = [[SheepController alloc] init];
+    _gameEnded = false;
     if (self = [super initWithSize:size]) {
         [self setup];
     }
@@ -102,7 +104,11 @@
             if (node.position.x < -150){
                 [_sheepController generateNewSheep:node];
             }
+            if (_gameEnded) {
+                [node removeFromParent];
+            }
         }];
+
 }
 
 // Delegate Function: Shows result when game is over
@@ -123,6 +129,8 @@
 
 - (void) quitGame
 {
+    
+    _gameEnded = true;
     // Create a UIAlert to show score
     NSString* alertTitle = @"You quit the game!";
     NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];

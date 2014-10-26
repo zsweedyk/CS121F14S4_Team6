@@ -12,6 +12,7 @@
 
 @interface SheepController : UIViewController
 
+
 - (void)setupSheep:(SKScene*)mainScene;
 - (void)generateNewSheep:(SKNode*)node;
 
