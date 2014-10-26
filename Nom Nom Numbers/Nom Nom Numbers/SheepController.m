@@ -10,7 +10,7 @@
 #import "SheepSprite.h"
 #import "SheepModel.h"
 
-@implementation SheepController : UIViewController {
+@implementation SheepController {
     SKScene* _skScene;
     NSMutableArray* _arrOfSheepModel;
     SheepSprite* _sheepSprite;
