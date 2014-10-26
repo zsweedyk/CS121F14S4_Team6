@@ -53,23 +53,6 @@
     [self addChild:dragon];
 }
 
-//-(void) setupSheep {
-//    
-//
-//    SheepSprite* sheepSprite = [[SheepSprite alloc] init];
-//    
-//    for (int i = 1; i < 6; i++) {
-//        SKSpriteNode *newSheep = [sheepSprite displayASheep];
-//        //Sheep all have different names right now to show that they can be distinguished when clicked
-//        //Going to change them to all have the same name later on, and just use the userdata property
-//        //of SKNodes to distinguish values, operators, etc
-//        NSString* sheepName = [NSString stringWithFormat:@"sheep%d",i]; //@"sheep";
-//        newSheep.name = sheepName;
-//        [newSheep setPosition:CGPointMake(740, i*100 - 40)];
-//        [self addChild:newSheep];
-//    }
-//    
-//}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
@@ -88,18 +71,10 @@
         [self enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode *node, BOOL *stop) {
             if (node.position.x < -150){
                 [_sheepController generateNewSheep:node];
-                NSLog(@"inside here");
-                [node setPosition:CGPointMake(740, node.position.y)];
             }
         }];
     
-//        SKNode* node = [self childNodeWithName:@"sheep"];
-//    
-//    if (node.position.x < -150){
-//        [_sheepController generateNewSheep:node];
-//        NSLog(@"inside here");
-//        [node setPosition:CGPointMake(740, node.position.y)];
-//    }
+
 
 
 }

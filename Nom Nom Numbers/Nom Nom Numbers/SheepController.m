@@ -25,8 +25,8 @@ struct sheepObj {
 - (void)setupSheep:(SKScene*)mainScene {
     
     
-    SheepSprite* sheepSprite = [[SheepSprite alloc] init];
-    _sheepSprite = sheepSprite;
+    _sheepSprite = [[SheepSprite alloc] init];
+    //_sheepSprite = sheepSprite;
     _arrOfSheepModel = [[NSMutableArray alloc] initWithCapacity:5];
     _skScene = mainScene;
     
@@ -37,10 +37,7 @@ struct sheepObj {
         NSString* value = [sheepModel getValue];
         char oper = [sheepModel getOperator];
         
-        SKNode *newSheep = [sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
-        //Sheep all have different names right now to show that they can be distinguished when clicked
-        //Going to change them to all have the same name later on, and just use the userdata property
-        //of SKNodes to distinguish values, operators, etc
+        SKNode *newSheep = [_sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
         NSString* sheepName = @"sheep"; //[NSString stringWithFormat:@"sheep%d",i];
         newSheep.name = sheepName;
         
@@ -58,7 +55,6 @@ struct sheepObj {
  
     NSValue *temp;
     struct sheepObj sheepObject;
-    //NSLog(@"count: %d", [_arrOfSheepModel count]);
     for (int i = 0; i < [_arrOfSheepModel count]; i++) {
         temp = [_arrOfSheepModel objectAtIndex:i];
         [temp getValue:&sheepObject];
@@ -72,57 +68,16 @@ struct sheepObj {
 
 - (void)generateNewSheep:(SKNode*)node {
     
+        SheepModel* newSheepModel = [[SheepModel alloc] init];
+        [newSheepModel makeSheep];
+        NSString* value = [newSheepModel getValue];
+        char oper = [newSheepModel getOperator];
     
-        //[_skScene enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode *node, BOOL *stop)
-        //SKNode* node = [_skScene childNodeWithName:@"sheep"];
-    //{
-            //if (node.position.x < -150){
-                //int index = [self findSheepObjIndex:node];
-                //NSLog(@"index: %d", index);
-                //struct sheepObj sheepObject = [self findSheepObj:node];
-                SheepModel* newSheepModel = [[SheepModel alloc] init];
-                [newSheepModel makeSheep];
-                NSString* value = [newSheepModel getValue];
-                char oper = [newSheepModel getOperator];
-                node = [_sheepSprite displayASheepWithValue:value andOper:oper atPos:CGPointMake(740, node.position.y)];
-                node.name = @"sheep";
-                //sheepObject.spriteNode = node;
-                //sheepObject.model = newSheepModel;
+        SKNode *newSheep = [_sheepSprite createSheepWithValue:value andOper:oper atPos:node.position];
+        newSheep.name = @"sheep";
 
-                
-                //[node setPosition:CGPointMake(740, node.position.y)];
-                //[_skScene addChild:node];
-            //}
-      //  }];
-    
-    
-    //Ideally we only have one of these that recognize the name "sheep" instead of "sheep(int)"
-    //I only have the same code repeated so many times so that we can NSLog which sheep is clicked
-    
-//    [_skScene enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode *node, BOOL *stop) {
-//        if (node.position.x < -150){
-//            [node setPosition:CGPointMake(740, node.position.y)];
-//        }
-//    }];
-//    [_skScene enumerateChildNodesWithName:@"sheep2" usingBlock:^(SKNode *node, BOOL *stop) {
-//        if (node.position.x < -150){
-//            [node setPosition:CGPointMake(740, node.position.y)];
-//        }
-//    }];
-//    [_skScene enumerateChildNodesWithName:@"sheep3" usingBlock:^(SKNode *node, BOOL *stop) {
-//        if (node.position.x < -150){
-//            [node setPosition:CGPointMake(740, node.position.y)];
-//        }
-//    }];
-//    [_skScene enumerateChildNodesWithName:@"sheep4" usingBlock:^(SKNode *node, BOOL *stop) {
-//        if (node.position.x < -150){
-//            [node setPosition:CGPointMake(740, node.position.y)];
-//        }
-//    }];
-//    [_skScene enumerateChildNodesWithName:@"sheep5" usingBlock:^(SKNode *node, BOOL *stop) {
-//        if (node.position.x < -150){
-//            [node setPosition:CGPointMake(740, node.position.y)];
-//        }
-//    }];
+        [node removeFromParent];
+        [_skScene addChild:newSheep];
+        [newSheep setPosition:CGPointMake(740, newSheep.position.y)];
 }
 @end
