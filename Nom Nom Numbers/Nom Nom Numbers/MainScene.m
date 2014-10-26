@@ -84,6 +84,11 @@
 
     if ([node.name isEqual: @"sheep"]) {
         NSLog(@"Sheep tapped");
+        NSMutableDictionary* sheepData = node.userData;
+        char sheepOper = (char) [sheepData objectForKey:@"Operator"];
+        NSString* sheepValue = [sheepData objectForKey:@"Value"];
+        [_dataModel applySheepChar:sheepOper andValue:sheepValue];
+        NSLog(@"operator: %c, value: %@", sheepOper, sheepValue);
     } else if ([node.name isEqual:@"quitbutton"]) {
         NSLog(@"hurlo");
         [self quitGame];

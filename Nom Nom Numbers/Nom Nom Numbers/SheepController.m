@@ -40,6 +40,12 @@ struct sheepObj {
         NSString* sheepName = @"sheep"; //[NSString stringWithFormat:@"sheep%d",i];
         newSheep.name = sheepName;
         
+        NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
+        NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+        [dictionary setValue:value forKey:@"Value"];
+        [dictionary setValue:operAsString forKey:@"Operator"];
+        [newSheep setUserData:dictionary];
+        
         struct sheepObj sheepObject;
         sheepObject.model = sheepModel;
         sheepObject.spriteNode = newSheep;
