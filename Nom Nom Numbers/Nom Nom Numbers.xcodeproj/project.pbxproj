@@ -15,8 +15,11 @@
 		F6A02BA519FB1B3A001B1C68 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6A02BA419FB1B3A001B1C68 /* Images.xcassets */; };
 		F6A02BA819FB1B3A001B1C68 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6A02BA619FB1B3A001B1C68 /* LaunchScreen.xib */; };
 		F6A02BB419FB1B3A001B1C68 /* Nom_Nom_NumbersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BB319FB1B3A001B1C68 /* Nom_Nom_NumbersTests.m */; };
-		F6A02BC219FB1E8C001B1C68 /* SheepView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BC119FB1E8C001B1C68 /* SheepView.m */; };
+		F6A02BC219FB1E8C001B1C68 /* SheepSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BC119FB1E8C001B1C68 /* SheepSprite.m */; };
 		F6A02BC719FB4463001B1C68 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BC619FB4463001B1C68 /* MainScene.m */; };
+		F6A02BCD19FBF5AD001B1C68 /* Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BCC19FBF5AD001B1C68 /* Generator.m */; };
+		F6A02BD019FBF66F001B1C68 /* SheepModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BCF19FBF66F001B1C68 /* SheepModel.m */; };
+		F6A02BD319FC5405001B1C68 /* SheepController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BD219FC5405001B1C68 /* SheepController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,10 +47,16 @@
 		F6A02BAD19FB1B3A001B1C68 /* Nom Nom NumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nom Nom NumbersTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A02BB219FB1B3A001B1C68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6A02BB319FB1B3A001B1C68 /* Nom_Nom_NumbersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Nom_Nom_NumbersTests.m; sourceTree = "<group>"; };
-		F6A02BC019FB1E8C001B1C68 /* SheepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheepView.h; sourceTree = "<group>"; };
-		F6A02BC119FB1E8C001B1C68 /* SheepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepView.m; sourceTree = "<group>"; };
+		F6A02BC019FB1E8C001B1C68 /* SheepSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheepSprite.h; sourceTree = "<group>"; };
+		F6A02BC119FB1E8C001B1C68 /* SheepSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepSprite.m; sourceTree = "<group>"; };
 		F6A02BC519FB4463001B1C68 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
 		F6A02BC619FB4463001B1C68 /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScene.m; sourceTree = "<group>"; };
+		F6A02BCB19FBF5AD001B1C68 /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
+		F6A02BCC19FBF5AD001B1C68 /* Generator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Generator.m; sourceTree = "<group>"; };
+		F6A02BCE19FBF66F001B1C68 /* SheepModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheepModel.h; sourceTree = "<group>"; };
+		F6A02BCF19FBF66F001B1C68 /* SheepModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepModel.m; sourceTree = "<group>"; };
+		F6A02BD119FC5405001B1C68 /* SheepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheepController.h; sourceTree = "<group>"; };
+		F6A02BD219FC5405001B1C68 /* SheepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +98,12 @@
 		F6A02B9119FB1B3A001B1C68 /* Nom Nom Numbers */ = {
 			isa = PBXGroup;
 			children = (
-				F6A02BC019FB1E8C001B1C68 /* SheepView.h */,
-				F6A02BC119FB1E8C001B1C68 /* SheepView.m */,
+				F6A02BCB19FBF5AD001B1C68 /* Generator.h */,
+				F6A02BCC19FBF5AD001B1C68 /* Generator.m */,
+				F6A02BCE19FBF66F001B1C68 /* SheepModel.h */,
+				F6A02BCF19FBF66F001B1C68 /* SheepModel.m */,
+				F6A02BC019FB1E8C001B1C68 /* SheepSprite.h */,
+				F6A02BC119FB1E8C001B1C68 /* SheepSprite.m */,
 				F6A02B9619FB1B3A001B1C68 /* AppDelegate.h */,
 				F6A02B9719FB1B3A001B1C68 /* AppDelegate.m */,
 				F6A02B9C19FB1B3A001B1C68 /* GameScene.sks */,
@@ -98,6 +111,8 @@
 				F6A02B9F19FB1B3A001B1C68 /* GameViewController.m */,
 				F6A02BC519FB4463001B1C68 /* MainScene.h */,
 				F6A02BC619FB4463001B1C68 /* MainScene.m */,
+				F6A02BD119FC5405001B1C68 /* SheepController.h */,
+				F6A02BD219FC5405001B1C68 /* SheepController.m */,
 				F6A02BA119FB1B3A001B1C68 /* Main.storyboard */,
 				F6A02BA419FB1B3A001B1C68 /* Images.xcassets */,
 				F6A02BA619FB1B3A001B1C68 /* LaunchScreen.xib */,
@@ -233,10 +248,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6A02BD019FBF66F001B1C68 /* SheepModel.m in Sources */,
 				F6A02BA019FB1B3A001B1C68 /* GameViewController.m in Sources */,
 				F6A02B9819FB1B3A001B1C68 /* AppDelegate.m in Sources */,
-				F6A02BC219FB1E8C001B1C68 /* SheepView.m in Sources */,
+				F6A02BC219FB1E8C001B1C68 /* SheepSprite.m in Sources */,
+				F6A02BCD19FBF5AD001B1C68 /* Generator.m in Sources */,
 				F6A02BC719FB4463001B1C68 /* MainScene.m in Sources */,
+				F6A02BD319FC5405001B1C68 /* SheepController.m in Sources */,
 				F6A02B9519FB1B3A001B1C68 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

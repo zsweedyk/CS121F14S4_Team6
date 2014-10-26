@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "SheepView.h"
+#import "SheepSprite.h"
+#import "SheepController.h"
 
 @interface MainScene : SKScene
 
