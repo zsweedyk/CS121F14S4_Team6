@@ -20,11 +20,12 @@
     NSString* fontType = @"MarkerFelt-Thin";
     
     // Set up UI for Score Label
-    CGFloat scoreX = Ydimensions * .17;
+    CGFloat scoreX = Xdimensions * .02;
     _currentScore = [[SKLabelNode alloc] initWithFontNamed:fontType];
     _currentScore.fontSize = 45;
     _currentScore.fontColor = [UIColor whiteColor];
     _currentScore.position = CGPointMake(scoreX, headerY);
+    _currentScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     _currentScore.text = [NSString stringWithFormat:@"Score: %.3f", currentScore];
     
     // Set up UI for Timer Label
