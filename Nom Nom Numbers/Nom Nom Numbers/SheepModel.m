@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 CS 121 Team 6. All rights reserved.
 //
 
-
 #import "SheepModel.h"
 #import "Generator.h"
 

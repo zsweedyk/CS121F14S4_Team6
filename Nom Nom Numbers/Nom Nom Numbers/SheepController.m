@@ -19,7 +19,6 @@
 struct sheepObj {
     __unsafe_unretained SheepModel* model;
     __unsafe_unretained SKNode* spriteNode;
-    //__unsafe_unretained SheepSprite* sheepSprite;
 };
 
 - (void)setupSheep:(SKScene*)mainScene {
