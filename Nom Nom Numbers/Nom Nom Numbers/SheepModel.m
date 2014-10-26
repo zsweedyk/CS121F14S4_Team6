@@ -41,7 +41,7 @@
 // Makes sheep with operator and value
 -(void) makeSheep
 {
-    int chanceIndicator = arc4random_uniform(10);
+    int chanceIndicator = arc4random_uniform(50);
     
     if (chanceIndicator == 1) {
         _operator = 'A';

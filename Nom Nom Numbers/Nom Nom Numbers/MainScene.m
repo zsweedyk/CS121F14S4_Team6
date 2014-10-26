@@ -61,7 +61,12 @@
     SKNode *node = [self nodeAtPoint:location];
 
     if ([node.name isEqual: @"sheep"]) {
-        NSLog(@"Sheep tapped");
+        [_sheepController generateNewSheep:node];
+        NSMutableDictionary* sheepData = node.userData;
+        char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
+        NSString* sheepValue = [sheepData objectForKey:@"Value"];
+        NSLog(@"Sheep tapped with value: %@, operation: %c", sheepValue, sheepOper);
+        
     }
  
 }
