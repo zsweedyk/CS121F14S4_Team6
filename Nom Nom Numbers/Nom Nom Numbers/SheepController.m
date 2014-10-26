@@ -10,7 +10,7 @@
 #import "SheepSprite.h"
 #import "SheepModel.h"
 
-@implementation SheepController : UIViewController {
+@implementation SheepController {
     SKScene* _skScene;
     NSMutableArray* _arrOfSheepModel;
     SheepSprite* _sheepSprite;
@@ -19,7 +19,6 @@
 struct sheepObj {
     __unsafe_unretained SheepModel* model;
     __unsafe_unretained SKNode* spriteNode;
-    //__unsafe_unretained SheepSprite* sheepSprite;
 };
 
 - (void)setupSheep:(SKScene*)mainScene {

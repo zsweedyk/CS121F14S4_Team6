@@ -14,4 +14,5 @@
 
 - (void)setupSheep:(SKScene*)mainScene;
 - (void)generateNewSheep:(SKNode*)node;
+
 @end

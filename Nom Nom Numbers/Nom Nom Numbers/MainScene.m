@@ -9,11 +9,15 @@
 #import "MainScene.h"
 #import "SheepSprite.h"
 #import "SheepController.h"
+#import "DataView.h"
+#import "DataModel.h"
 
 @implementation MainScene {
     SKView* _skView;
     SheepController* _sheepController;
-
+    DataView* _dataView;
+    DataModel* _dataModel;
+    double _currentScore;
 }
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
@@ -24,17 +28,16 @@
     }
     
     return self;
-    
 }
 
 -(void) setup {
     [self setupBackground];
     [self setupDragon];
+    [self setupData];
     [_sheepController setupSheep:self];
 }
 
 -(void) setupBackground {
-    
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
@@ -44,7 +47,6 @@
 }
 
 -(void) setupDragon {
-    
     SKSpriteNode *dragon = [SKSpriteNode spriteNodeWithImageNamed:@"dragon"];
     dragon.position = CGPointMake(840, 170);
     dragon.anchorPoint = CGPointZero;
@@ -53,23 +55,26 @@
     [self addChild:dragon];
 }
 
-//-(void) setupSheep {
-//    
-//
-//    SheepSprite* sheepSprite = [[SheepSprite alloc] init];
-//    
-//    for (int i = 1; i < 6; i++) {
-//        SKSpriteNode *newSheep = [sheepSprite displayASheep];
-//        //Sheep all have different names right now to show that they can be distinguished when clicked
-//        //Going to change them to all have the same name later on, and just use the userdata property
-//        //of SKNodes to distinguish values, operators, etc
-//        NSString* sheepName = [NSString stringWithFormat:@"sheep%d",i]; //@"sheep";
-//        newSheep.name = sheepName;
-//        [newSheep setPosition:CGPointMake(740, i*100 - 40)];
-//        [self addChild:newSheep];
-//    }
-//    
-//}
+- (void) setupData {
+    // Create DataModel
+    _dataModel = [DataModel alloc];
+    _currentScore = [_dataModel getScore];
+    
+    // Create DataView
+    _dataView = [[DataView alloc] init];
+    [_dataView setupData:self withScore:_currentScore];
+    _dataView.customDelegate = self;
+    [self addChild:_dataView];
+    
+//    // Create Quit button
+    SKLabelNode* quitButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    quitButton.fontSize = 45;
+    quitButton.fontColor = [UIColor whiteColor];
+    quitButton.position = CGPointMake(self.size.width * 0.8, self.size.height * 0.93);
+    quitButton.text = @"Quit";
+    quitButton.name = @"quitbutton";
+    [self addChild:quitButton];
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
@@ -79,6 +84,9 @@
 
     if ([node.name isEqual: @"sheep"]) {
         NSLog(@"Sheep tapped");
+    } else if ([node.name isEqual:@"quitbutton"]) {
+        NSLog(@"hurlo");
+        [self quitGame];
     }
  
 }
@@ -92,16 +100,38 @@
                 [node setPosition:CGPointMake(740, node.position.y)];
             }
         }];
+}
+
+// Delegate Function: Shows result when game is over
+- (void) showGameResults:(DataView *)controller
+{
+    // Create a UIAlert to show score
+    NSString* alertTitle = @"Time's up!";
+    NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];
     
-//        SKNode* node = [self childNodeWithName:@"sheep"];
-//    
-//    if (node.position.x < -150){
-//        [_sheepController generateNewSheep:node];
-//        NSLog(@"inside here");
-//        [node setPosition:CGPointMake(740, node.position.y)];
-//    }
+    UIAlertView *finishedGameResult = [[UIAlertView alloc]
+                                       initWithTitle: alertTitle
+                                       message: gameResult
+                                       delegate: self
+                                       cancelButtonTitle: @"OK"
+                                       otherButtonTitles: nil];
+    [finishedGameResult show];
+}
 
-
+- (void) quitGame
+{
+    // Create a UIAlert to show score
+    NSString* alertTitle = @"You quit the game!";
+    NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];
+    
+    UIAlertView *quitGameAlert = [[UIAlertView alloc]
+                                  initWithTitle: alertTitle
+                                  message: gameResult
+                                  delegate: self
+                                  cancelButtonTitle: @"OK"
+                                  otherButtonTitles: nil];
+    [_dataView stopTimer];
+    [quitGameAlert show];
 }
 
 

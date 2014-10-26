@@ -9,8 +9,10 @@
 #import <SpriteKit/SpriteKit.h>
 #import "SheepSprite.h"
 #import "SheepController.h"
+#import "DataView.h"
+#import "DataModel.h"
 
-@interface MainScene : SKScene
+@interface MainScene : SKScene <gameOverDelegate>
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView;
 

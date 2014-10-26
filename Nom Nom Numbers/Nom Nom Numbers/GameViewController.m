@@ -50,8 +50,6 @@
 }
 
 
-
-
 - (BOOL)shouldAutorotate
 {
     return YES;
