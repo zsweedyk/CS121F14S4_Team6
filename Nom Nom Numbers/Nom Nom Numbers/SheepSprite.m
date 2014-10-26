@@ -29,14 +29,19 @@
     _sheepNode.xScale = .5;
     _sheepNode.yScale = .5;
     
+    double acrossScreenTime = (arc4random() % (120)) + 60;
+    acrossScreenTime /= 10.0;
+    
     //SK actions to move sheep left
-    SKAction *moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:10.0];
+    SKAction *moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:acrossScreenTime];
     //SKAction *moveSheepLeft = [SKAction moveTo:CGPointMake(-200, 170) duration:10.0];
     SKAction *repeatMoveLeft = [SKAction repeatActionForever:moveSheepLeft];
     
+    double wobbleTime = acrossScreenTime / 40.0;
+    
     //SK actions to wobble sheep
-    SKAction* wobbleForward = [SKAction rotateToAngle:M_PI/20.0 duration:.5];
-    SKAction* wobbleBackward = [SKAction rotateToAngle:-M_PI/20.0 duration:.5];
+    SKAction* wobbleForward = [SKAction rotateToAngle:M_PI/20.0 duration:wobbleTime];
+    SKAction* wobbleBackward = [SKAction rotateToAngle:-M_PI/20.0 duration:wobbleTime];
     SKAction* sequence = [SKAction sequence:@[wobbleForward,wobbleBackward]];
     SKAction *repeatWobble = [SKAction repeatActionForever:sequence];
     

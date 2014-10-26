@@ -18,11 +18,13 @@
     DataView* _dataView;
     DataModel* _dataModel;
     double _currentScore;
+    BOOL _gameEnded;
 }
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
     _skView = skView;
     _sheepController = [[SheepController alloc] init];
+    _gameEnded = false;
     if (self = [super initWithSize:size]) {
         [self setup];
     }
@@ -88,7 +90,13 @@
         char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
         NSString* sheepValue = [sheepData objectForKey:@"Value"];
         NSLog(@"Sheep tapped with value: %@, operation: %c", sheepValue, sheepOper);
+        [_dataModel applySheepChar:sheepOper andValue:sheepValue];
+        _currentScore = [_dataModel getScore];
+        [_dataView updateScore:_currentScore];
         
+    } else if ([node.name isEqual:@"quitbutton"]) {
+        NSLog(@"hurlo");
+        [self quitGame];
     }
  
 }
@@ -99,7 +107,11 @@
             if (node.position.x < -150){
                 [_sheepController generateNewSheep:node];
             }
+            if (_gameEnded) {
+                [node removeFromParent];
+            }
         }];
+
 }
 
 // Delegate Function: Shows result when game is over
@@ -120,6 +132,8 @@
 
 - (void) quitGame
 {
+    
+    _gameEnded = true;
     // Create a UIAlert to show score
     NSString* alertTitle = @"You quit the game!";
     NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];

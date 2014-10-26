@@ -15,6 +15,5 @@
 
 - (void)setupSheep:(SKScene*)mainScene;
 - (void)generateNewSheep:(SKNode*)node;
-//- (NSString*)getSheepValue:(SKNode *)node;
-//- (char)getSheepOper:(SKNode *)node;
+
 @end

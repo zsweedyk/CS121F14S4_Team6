@@ -49,49 +49,11 @@ typedef struct sheepObj sheepObj;
         [newSheepNode setUserData:dictionary];
     
         [_skScene addChild:newSheepNode];
-//        sheepObj sheepObject;
-//        sheepObject.model = sheepModel;
-//        sheepObject.spriteNode = newSheepNode;
-//        NSValue* boxedSheepObject = [NSValue value:&sheepObject withObjCType:@encode(sheepObj)];
-//        [_arrOfSheepModel addObject:boxedSheepObject];
-        //[_arrOfSheepModel addObject:sheepModel];
 
     }
     
 }
 
-- (SheepModel*)findSheepObj:(SKNode *)node {
- 
-    NSValue *temp;
-    sheepObj sheepObject;
-    //NSLog(@"sheep count %d", [_arrOfSheepModel count]);
-    for (int i = 0; i < [_arrOfSheepModel count]; i++) {
-        temp = [_arrOfSheepModel objectAtIndex:i];
-        [temp getValue:&sheepObject];
-        if ([sheepObject.spriteNode isEqual: node]) {
-            //NSLog(@"sheep found %@", [sheepObject.model getValue]);
-            return sheepObject.model;
-        }
-    }
-    
-    NSLog(@"sheep not found");
-    return sheepObject.model;
-}
-
-//- (NSString*)getSheepValue:(SKNode *)node {
-//    
-////    struct sheepObj sheepObject = [self findSheepObj:node];
-////    SheepModel* model = [self findSheepObj:node];
-////    return [model getValue];
-//    
-//}
-
-//- (char)getSheepOper:(SKNode *)node {
-//    
-//    struct sheepObj sheepObject = [self findSheepObj:node];
-//    
-//    return [sheepObject.model getOperator];
-//}
 
 - (void)generateNewSheep:(SKNode*)node {
     
