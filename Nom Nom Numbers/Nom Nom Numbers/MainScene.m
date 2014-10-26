@@ -117,6 +117,7 @@
 // Delegate Function: Shows result when game is over
 - (void) showGameResults:(DataView *)controller
 {
+    _gameEnded = true;
     // Create a UIAlert to show score
     NSString* alertTitle = @"Time's up!";
     NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];
