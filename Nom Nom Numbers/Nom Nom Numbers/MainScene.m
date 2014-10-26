@@ -96,8 +96,6 @@
         [self enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode *node, BOOL *stop) {
             if (node.position.x < -150){
                 [_sheepController generateNewSheep:node];
-                NSLog(@"inside here");
-                [node setPosition:CGPointMake(740, node.position.y)];
             }
         }];
 }

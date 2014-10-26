@@ -52,17 +52,8 @@
     _oper = oper;
     
     [self makeSheepImage];
-
-    //_sheepNode = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:_sheepImage]];
     [_sheepNode setTexture:[SKTexture textureWithImage:_sheepImage]];
-    _sheepNode.position = pos;
-    _sheepNode.anchorPoint = CGPointZero;
-    _sheepNode.xScale = .5;
-    _sheepNode.yScale = .5;
-    
 
-    
-    
     return _sheepNode;
 }
 - (void) getImageForText:(NSString *)text for:(char)input
