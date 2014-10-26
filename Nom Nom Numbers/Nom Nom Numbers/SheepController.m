@@ -41,19 +41,12 @@ typedef struct sheepObj sheepObj;
         NSString* sheepName = @"sheep"; //[NSString stringWithFormat:@"sheep%d",i];
         newSheepNode.name = sheepName;
         
-        NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
+
         NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+        NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
         [dictionary setValue:value forKey:@"Value"];
         [dictionary setValue:operAsString forKey:@"Operator"];
-        [newSheep setUserData:dictionary];
-        
-        struct sheepObj sheepObject;
-        sheepObject.model = sheepModel;
-        sheepObject.spriteNode = newSheep;
-        NSValue* boxedSheepObject = [NSValue valueWithBytes:&sheepObject objCType:@encode(struct sheepObj)];
-        [_arrOfSheepModel addObject:boxedSheepObject];
-        [_skScene addChild:newSheep];
-    }
+        [newSheepNode setUserData:dictionary];
     
         [_skScene addChild:newSheepNode];
 

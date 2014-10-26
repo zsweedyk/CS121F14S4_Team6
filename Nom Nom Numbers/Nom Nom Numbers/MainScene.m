@@ -85,12 +85,15 @@
     SKNode *node = [self nodeAtPoint:location];
 
     if ([node.name isEqual: @"sheep"]) {
-        NSLog(@"Sheep tapped");
+        [_sheepController generateNewSheep:node];
         NSMutableDictionary* sheepData = node.userData;
-        char sheepOper = (char) [sheepData objectForKey:@"Operator"];
+        char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
         NSString* sheepValue = [sheepData objectForKey:@"Value"];
+        NSLog(@"Sheep tapped with value: %@, operation: %c", sheepValue, sheepOper);
         [_dataModel applySheepChar:sheepOper andValue:sheepValue];
-        NSLog(@"operator: %c, value: %@", sheepOper, sheepValue);
+        _currentScore = [_dataModel getScore];
+        [_dataView updateScore:_currentScore];
+        
     } else if ([node.name isEqual:@"quitbutton"]) {
         NSLog(@"hurlo");
         [self quitGame];

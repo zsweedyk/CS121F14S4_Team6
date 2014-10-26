@@ -40,8 +40,8 @@
     double wobbleTime = acrossScreenTime / 40.0;
     
     //SK actions to wobble sheep
-    SKAction* wobbleForward = [SKAction rotateToAngle:M_PI/50.0 duration:wobbleTime];
-    SKAction* wobbleBackward = [SKAction rotateToAngle:-M_PI/50.0 duration:wobbleTime];
+    SKAction* wobbleForward = [SKAction rotateToAngle:M_PI/60.0 duration:wobbleTime];
+    SKAction* wobbleBackward = [SKAction rotateToAngle:-M_PI/60.0 duration:wobbleTime];
     SKAction* sequence = [SKAction sequence:@[wobbleForward,wobbleBackward]];
     SKAction *repeatWobble = [SKAction repeatActionForever:sequence];
     
