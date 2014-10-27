@@ -91,7 +91,6 @@
         NSMutableDictionary* sheepData = node.userData;
         char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
         NSString* sheepValue = [sheepData objectForKey:@"Value"];
-        NSLog(@"Sheep tapped with value: %@, operation: %c", sheepValue, sheepOper);
         [_dataModel applySheepChar:sheepOper andValue:sheepValue];
         _currentScore = [_dataModel getScore];
         [_dataView updateScore:_currentScore];
