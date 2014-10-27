@@ -73,6 +73,6 @@ typedef struct sheepObj sheepObj;
 
         [node removeFromParent];
         [_skScene addChild:newSheepNode];
-        [newSheepNode setPosition:CGPointMake(740, newSheepNode.position.y)];
+        [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
 }
 @end
