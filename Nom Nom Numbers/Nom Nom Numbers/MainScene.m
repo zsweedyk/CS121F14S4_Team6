@@ -133,7 +133,6 @@
 
 - (void) quitGame
 {
-    
     _gameEnded = true;
     // Create a UIAlert to show score
     NSString* alertTitle = @"You quit the game!";
@@ -145,6 +144,7 @@
                                   delegate: self
                                   cancelButtonTitle: @"OK"
                                   otherButtonTitles: nil];
+    
     [_dataView stopTimer];
     [quitGameAlert show];
 }

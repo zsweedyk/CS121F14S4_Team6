@@ -51,7 +51,7 @@
     int minutes = _initialTime / 60;
     int seconds = _initialTime % 60;
     
-    _currentTime.text = [NSString stringWithFormat:@"%d:%03d", minutes, seconds];
+    _currentTime.text = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
 }
 
 // Creates an NSTimer
