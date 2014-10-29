@@ -49,11 +49,13 @@
 }
 
 -(void) setupDragon {
-    SKSpriteNode *dragon = [SKSpriteNode spriteNodeWithImageNamed:@"dragon"];
-    dragon.position = CGPointMake(840, 170);
+    SKSpriteNode *dragon = [SKSpriteNode spriteNodeWithImageNamed:@"barnAndDragon"];
+    CGSize barnSize = [UIImage imageNamed:@"barnAndDragon"].size;
+    dragon.position = CGPointMake(self.size.width - barnSize.width*0.5, 0);
     dragon.anchorPoint = CGPointZero;
     dragon.xScale = .5;
     dragon.yScale = .5;
+    dragon.zPosition = 2;
     [self addChild:dragon];
 }
 
@@ -89,7 +91,6 @@
         NSMutableDictionary* sheepData = node.userData;
         char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
         NSString* sheepValue = [sheepData objectForKey:@"Value"];
-        NSLog(@"Sheep tapped with value: %@, operation: %c", sheepValue, sheepOper);
         [_dataModel applySheepChar:sheepOper andValue:sheepValue];
         _currentScore = [_dataModel getScore];
         [_dataView updateScore:_currentScore];
