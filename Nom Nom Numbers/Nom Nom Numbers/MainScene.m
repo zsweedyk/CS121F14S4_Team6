@@ -22,6 +22,7 @@
     DataModel* _dataModel;
     double _currentScore;
     BOOL _gameEnded;
+    GameOverButton* gameOverPopup;
 }
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView*)skView
@@ -31,7 +32,7 @@
     _gameEnded = false;
     
     if (self = [super initWithSize:size]) {
-        [self setupNewGame];
+        [self setup];
     }
     _sheepController = [[SheepController alloc] init];
     [_sheepController setupSheep:self];
@@ -39,11 +40,23 @@
     return self;
 }
 
--(void) setupNewGame {
-    _gameEnded = false;
+- (void) setup
+{
     [self setupBackground];
     [self setupDragon];
     [self setupData];
+
+}
+
+- (void) restart
+{
+    _gameEnded = false;
+    [_dataModel resetScore];
+    _currentScore = 0;
+    [_dataView updateScore:[_dataModel getScore]];
+    [_dataView resetTimer];
+    [gameOverPopup removeFromParent];
+    [_sheepController setupSheep:self];
 }
 
 - (void) setupBackground
@@ -118,7 +131,7 @@
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
         NSLog(@"RestartGameWHEE!");
-        [self setupNewGame];
+        [self restart];
     }
 }
 
@@ -144,7 +157,7 @@
     [_dataView stopTimer];
     
     // Create the Game Over popup
-    GameOverButton* gameOverPopup = [[GameOverButton alloc] init];
+    gameOverPopup = [[GameOverButton alloc] init];
     [gameOverPopup setupData:self withScore:_currentScore];
     [self addChild: gameOverPopup];
 }
