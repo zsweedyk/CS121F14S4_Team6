@@ -20,6 +20,9 @@
 		F6A02BCD19FBF5AD001B1C68 /* Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BCC19FBF5AD001B1C68 /* Generator.m */; };
 		F6A02BD019FBF66F001B1C68 /* SheepModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BCF19FBF66F001B1C68 /* SheepModel.m */; };
 		F6A02BD319FC5405001B1C68 /* SheepController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02BD219FC5405001B1C68 /* SheepController.m */; };
+		FBA3F4FA1A03F358009F60DB /* wooden.png in Resources */ = {isa = PBXBuildFile; fileRef = FBA3F4F91A03F358009F60DB /* wooden.png */; };
+		FBD0D86F1A031CD80016A3FA /* QuitGameButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD0D86E1A031CD80016A3FA /* QuitGameButton.m */; };
+		FBD0D8741A03536A0016A3FA /* GameOverButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD0D8731A03536A0016A3FA /* GameOverButton.m */; };
 		FBE8798C19FCA94E000F3BE9 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE8798B19FCA94E000F3BE9 /* DataModel.m */; };
 		FBE8799219FCAE0E000F3BE9 /* DataView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE8799119FCAE0E000F3BE9 /* DataView.m */; };
 /* End PBXBuildFile section */
@@ -59,6 +62,11 @@
 		F6A02BCF19FBF66F001B1C68 /* SheepModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepModel.m; sourceTree = "<group>"; };
 		F6A02BD119FC5405001B1C68 /* SheepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheepController.h; sourceTree = "<group>"; };
 		F6A02BD219FC5405001B1C68 /* SheepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepController.m; sourceTree = "<group>"; };
+		FBA3F4F91A03F358009F60DB /* wooden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wooden.png; sourceTree = "<group>"; };
+		FBD0D86D1A031CD80016A3FA /* QuitGameButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuitGameButton.h; sourceTree = "<group>"; };
+		FBD0D86E1A031CD80016A3FA /* QuitGameButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuitGameButton.m; sourceTree = "<group>"; };
+		FBD0D8721A03536A0016A3FA /* GameOverButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverButton.h; sourceTree = "<group>"; };
+		FBD0D8731A03536A0016A3FA /* GameOverButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverButton.m; sourceTree = "<group>"; };
 		FBE8798A19FCA94E000F3BE9 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
 		FBE8798B19FCA94E000F3BE9 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
 		FBE8799019FCAE0E000F3BE9 /* DataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataView.h; sourceTree = "<group>"; };
@@ -115,6 +123,10 @@
 				FBE8798B19FCA94E000F3BE9 /* DataModel.m */,
 				FBE8799019FCAE0E000F3BE9 /* DataView.h */,
 				FBE8799119FCAE0E000F3BE9 /* DataView.m */,
+				FBD0D8721A03536A0016A3FA /* GameOverButton.h */,
+				FBD0D8731A03536A0016A3FA /* GameOverButton.m */,
+				FBD0D86D1A031CD80016A3FA /* QuitGameButton.h */,
+				FBD0D86E1A031CD80016A3FA /* QuitGameButton.m */,
 				F6A02B9719FB1B3A001B1C68 /* AppDelegate.m */,
 				F6A02B9C19FB1B3A001B1C68 /* GameScene.sks */,
 				F6A02B9E19FB1B3A001B1C68 /* GameViewController.h */,
@@ -124,6 +136,7 @@
 				F6A02BD119FC5405001B1C68 /* SheepController.h */,
 				F6A02BD219FC5405001B1C68 /* SheepController.m */,
 				F6A02BA119FB1B3A001B1C68 /* Main.storyboard */,
+				FBA3F4F91A03F358009F60DB /* wooden.png */,
 				F6A02BA419FB1B3A001B1C68 /* Images.xcassets */,
 				F6A02BA619FB1B3A001B1C68 /* LaunchScreen.xib */,
 				F6A02B9219FB1B3A001B1C68 /* Supporting Files */,
@@ -240,6 +253,7 @@
 				F6A02BA819FB1B3A001B1C68 /* LaunchScreen.xib in Resources */,
 				F6A02BA519FB1B3A001B1C68 /* Images.xcassets in Resources */,
 				F6A02B9D19FB1B3A001B1C68 /* GameScene.sks in Resources */,
+				FBA3F4FA1A03F358009F60DB /* wooden.png in Resources */,
 				F6A02BA319FB1B3A001B1C68 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +276,8 @@
 				F6A02BA019FB1B3A001B1C68 /* GameViewController.m in Sources */,
 				FBE8798C19FCA94E000F3BE9 /* DataModel.m in Sources */,
 				F6A02B9819FB1B3A001B1C68 /* AppDelegate.m in Sources */,
+				FBD0D86F1A031CD80016A3FA /* QuitGameButton.m in Sources */,
+				FBD0D8741A03536A0016A3FA /* GameOverButton.m in Sources */,
 				F6A02BC219FB1E8C001B1C68 /* SheepSprite.m in Sources */,
 				F6A02BCD19FBF5AD001B1C68 /* Generator.m in Sources */,
 				FBE8799219FCAE0E000F3BE9 /* DataView.m in Sources */,

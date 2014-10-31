@@ -11,7 +11,7 @@
 
 @interface SheepSprite : SKLabelNode
 
-- (SKSpriteNode*)createSheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos;
-- (SKSpriteNode*)displayASheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos;
+- (SKSpriteNode*) createSheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos;
+- (SKSpriteNode*) displayASheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos;
 
 @end

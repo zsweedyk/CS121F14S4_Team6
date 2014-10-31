@@ -10,28 +10,27 @@
 #import "SheepSprite.h"
 #import "SheepModel.h"
 
-@implementation SheepController {
+@implementation SheepController
+{
     SKScene* _skScene;
     NSMutableArray* _arrOfSheepModel;
     SheepSprite* _sheepSprite;
 }
 
-struct sheepObj {
+struct sheepObj
+{
     __unsafe_unretained SheepModel* model;
     __unsafe_unretained SKNode* spriteNode;
 };
+
 typedef struct sheepObj sheepObj;
 
-- (void)setupSheep:(SKScene*)mainScene {
-    
-    
+- (void) setupSheep:(SKScene*)mainScene {
     _sheepSprite = [[SheepSprite alloc] init];
-    //_sheepSprite = sheepSprite;
     _arrOfSheepModel = [[NSMutableArray alloc] initWithCapacity:5];
     _skScene = mainScene;
     
     for (int i = 1; i < 6; i++) {
-        
         SheepModel* sheepModel = [[SheepModel alloc] init];
         [sheepModel makeSheep];
         NSString* value = [sheepModel getValue];
@@ -40,7 +39,6 @@ typedef struct sheepObj sheepObj;
         SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
         NSString* sheepName = @"sheep"; //[NSString stringWithFormat:@"sheep%d",i];
         newSheepNode.name = sheepName;
-        
 
         NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
         NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
@@ -49,14 +47,12 @@ typedef struct sheepObj sheepObj;
         [newSheepNode setUserData:dictionary];
     
         [_skScene addChild:newSheepNode];
-
     }
-    
 }
 
 
-- (void)generateNewSheep:(SKNode*)node {
-    
+- (void) generateNewSheep:(SKNode*)node
+{
         SheepModel* newSheepModel = [[SheepModel alloc] init];
         [newSheepModel makeSheep];
         NSString* value = [newSheepModel getValue];
