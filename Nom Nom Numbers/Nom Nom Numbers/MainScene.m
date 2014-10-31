@@ -118,6 +118,7 @@
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
         NSLog(@"RestartGameWHEE!");
+        [self setupNewGame];
     }
 }
 
@@ -142,33 +143,21 @@
     _gameEnded = true;
     [_dataView stopTimer];
     
-    UIAlertView *finishedGameResult = [[UIAlertView alloc]
-                                       initWithTitle: alertTitle
-                                       message: gameResult
-                                       delegate: self
-                                       cancelButtonTitle: @"OK"
-                                       otherButtonTitles: @"Start Over", nil];
-    [finishedGameResult show];
+    // Create the Game Over popup
+    GameOverButton* gameOverPopup = [[GameOverButton alloc] init];
+    [gameOverPopup setupData:self withScore:_currentScore];
+    [self addChild: gameOverPopup];
 }
 
 - (void) quitGame
 {
     _gameEnded = true;
-    // Create a UIAlert to show score
-    NSString* alertTitle = @"You quit the game!";
-    NSString* gameResult = [NSString stringWithFormat:@"Your score was %.3f", _currentScore];
-    
-    UIAlertView *quitGameAlert = [[UIAlertView alloc]
-                                  initWithTitle: alertTitle
-                                  message: gameResult
-                                  delegate: self
-                                  cancelButtonTitle: @"OK"
-                                  otherButtonTitles: @"Start Over", nil];
     [_dataView stopTimer];
-    [quitGameAlert show];
-    //[self startOver];
-    [self setupNewGame];
-
+    
+    // Create the Quit popup
+    QuitGameButton* quitPopup = [[QuitGameButton alloc] init];
+    [quitPopup setupData:self withScore:_currentScore];
+    [self addChild:quitPopup];
 }
 
 
