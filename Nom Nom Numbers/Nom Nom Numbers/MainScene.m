@@ -23,20 +23,22 @@
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
     _skView = skView;
-    _sheepController = [[SheepController alloc] init];
+
     _gameEnded = false;
     if (self = [super initWithSize:size]) {
-        [self setup];
+        [self setupNewGame];
     }
+    _sheepController = [[SheepController alloc] init];
+    [_sheepController setupSheep:self];
     
     return self;
 }
 
--(void) setup {
+-(void) setupNewGame {
+    _gameEnded = false;
     [self setupBackground];
     [self setupDragon];
     [self setupData];
-    [_sheepController setupSheep:self];
 }
 
 -(void) setupBackground {
@@ -96,9 +98,9 @@
         
     } else if ([node.name isEqual:@"quitbutton"]) {
         NSLog(@"hurlo");
+        //[_sheepController removeFromParentViewController];
         [self quitGame];
     }
- 
 }
 
 - (void)update:(NSTimeInterval)currentTime {
@@ -111,7 +113,6 @@
                 [node removeFromParent];
             }
         }];
-
 }
 
 // Delegate Function: Shows result when game is over
@@ -127,7 +128,7 @@
                                        message: gameResult
                                        delegate: self
                                        cancelButtonTitle: @"OK"
-                                       otherButtonTitles: nil];
+                                       otherButtonTitles: @"Start Over", nil];
     [finishedGameResult show];
 }
 
@@ -144,11 +145,13 @@
                                   message: gameResult
                                   delegate: self
                                   cancelButtonTitle: @"OK"
-                                  otherButtonTitles: nil];
+                                  otherButtonTitles: @"Start Over", nil];
     [_dataView stopTimer];
     [quitGameAlert show];
-}
+    //[self startOver];
+    [self setupNewGame];
 
+}
 
 
 @end
