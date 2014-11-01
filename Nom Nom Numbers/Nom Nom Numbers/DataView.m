@@ -15,7 +15,7 @@
     CGFloat Xdimensions = mainScene.size.width;
     CGFloat Ydimensions = mainScene.size.height;
     
-    _initialTime = 60;
+    _initialTime = 1;
     CGFloat headerY = Ydimensions * .93;
     NSString* fontType = @"MarkerFelt-Thin";
     

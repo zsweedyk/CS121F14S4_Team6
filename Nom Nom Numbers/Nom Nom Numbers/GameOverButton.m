@@ -15,10 +15,17 @@
     CGFloat sceneX = mainScene.size.width;
     CGFloat sceneY = mainScene.size.height;
     
-    // Create popup
+    // Create popup and shadow
     SKSpriteNode* gameOverPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
     gameOverPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
     gameOverPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
+    
+    SKSpriteNode* shadow = [[SKSpriteNode alloc] initWithImageNamed:@"popupShadow"];
+    shadow.size = CGSizeMake(gameOverPopup.size.width * 1.1, gameOverPopup.size.height * 1.1);
+    shadow.position = CGPointMake(gameOverPopup.position.x, gameOverPopup.position.y - 5);
+    shadow.alpha = 0.5;
+    
+    [self addChild:shadow];
     [self addChild:gameOverPopup];
     
     
@@ -53,9 +60,12 @@
     [gameOverPopup addChild:gameOverPopupQuestion];
 
     // Create restart button (play again) on popup
-    SKSpriteNode* restartButton = [[SKSpriteNode alloc] initWithImageNamed:@"wooden"];
+    SKSpriteNode* restartButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     restartButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     restartButton.position = CGPointMake(popupX * -0.3, popupY * -0.3);
+    
+    NSLog(@"%f, %f",restartButton.size.width, restartButton.size.height);
+    
     [gameOverPopup addChild:restartButton];
     
     // Create the label on the confirmation button
@@ -68,7 +78,7 @@
     [restartButton addChild:restartButtonLabel];
     
     // Create quit button (return to main screen) on popup
-    SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"wooden"];
+    SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"redButton"];
     quitButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     quitButton.position = CGPointMake(popupX * 0.3, popupY * -0.3);
     [gameOverPopup addChild:quitButton];

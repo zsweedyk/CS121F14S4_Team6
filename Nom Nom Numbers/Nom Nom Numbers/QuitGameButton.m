@@ -19,6 +19,13 @@
     SKSpriteNode* quitPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
     quitPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
     quitPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
+    
+    SKSpriteNode* shadow = [[SKSpriteNode alloc] initWithImageNamed:@"popupShadow"];
+    shadow.size = CGSizeMake(quitPopup.size.width * 1.1, quitPopup.size.height * 1.1);
+    shadow.position = CGPointMake(quitPopup.position.x, quitPopup.position.y - 5);
+    shadow.alpha = 0.5;
+    
+    [self addChild:shadow];
     [self addChild:quitPopup];
     
     // Create title label on the popup
@@ -40,7 +47,7 @@
     [quitPopup addChild:quitPopupText];
     
     // Create confirmation button (return to main screen) on popup
-    SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"wooden"];
+    SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     quitButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     quitButton.position = CGPointMake(0, popupY * -0.3);
     [quitPopup addChild:quitButton];
