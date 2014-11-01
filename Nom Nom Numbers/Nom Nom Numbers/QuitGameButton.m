@@ -16,7 +16,7 @@
     CGFloat sceneY = mainScene.size.height;
     
     // Create popup
-    SKSpriteNode* quitPopup = [[SKSpriteNode alloc] initWithImageNamed:@"wooden"];
+    SKSpriteNode* quitPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
     quitPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
     quitPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
     [self addChild:quitPopup];

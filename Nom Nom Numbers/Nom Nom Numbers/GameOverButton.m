@@ -16,7 +16,7 @@
     CGFloat sceneY = mainScene.size.height;
     
     // Create popup
-    SKSpriteNode* gameOverPopup = [[SKSpriteNode alloc] initWithImageNamed:@"wooden"];
+    SKSpriteNode* gameOverPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
     gameOverPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
     gameOverPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
     [self addChild:gameOverPopup];
