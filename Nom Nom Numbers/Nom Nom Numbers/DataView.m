@@ -65,6 +65,7 @@
 {
     if (_initialTime == 0) {
         [_gameTimer invalidate];
+        _initialTime = 0;
         [self.customDelegate showGameResults:self];
         
     } else {
@@ -88,6 +89,14 @@
 - (void) stopTimer
 {
     [_gameTimer invalidate];
+}
+
+- (void) resetTimer
+{
+    _initialTime = 60;
+    _currentTime.fontColor = [UIColor whiteColor];
+    [self initializeTimer];
+    [self changeTimerText];
 }
 
 @end
