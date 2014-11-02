@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A30FBB141A05DA5100D730B1 /* StartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A30FBB131A05DA5100D730B1 /* StartScene.m */; };
 		F6A02B9519FB1B3A001B1C68 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02B9419FB1B3A001B1C68 /* main.m */; };
 		F6A02B9819FB1B3A001B1C68 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02B9719FB1B3A001B1C68 /* AppDelegate.m */; };
 		F6A02B9D19FB1B3A001B1C68 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F6A02B9C19FB1B3A001B1C68 /* GameScene.sks */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A30FBB121A05DA5100D730B1 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartScene.h; path = ../StartScene.h; sourceTree = "<group>"; };
+		A30FBB131A05DA5100D730B1 /* StartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartScene.m; path = ../StartScene.m; sourceTree = "<group>"; };
 		F6A02B8F19FB1B3A001B1C68 /* Nom Nom Numbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nom Nom Numbers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A02B9319FB1B3A001B1C68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6A02B9419FB1B3A001B1C68 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 		F6A02B9119FB1B3A001B1C68 /* Nom Nom Numbers */ = {
 			isa = PBXGroup;
 			children = (
+				A30FBB121A05DA5100D730B1 /* StartScene.h */,
+				A30FBB131A05DA5100D730B1 /* StartScene.m */,
 				F6A02BCB19FBF5AD001B1C68 /* Generator.h */,
 				F6A02BCC19FBF5AD001B1C68 /* Generator.m */,
 				F6A02BCE19FBF66F001B1C68 /* SheepModel.h */,
@@ -284,6 +289,7 @@
 				F6A02BC719FB4463001B1C68 /* MainScene.m in Sources */,
 				F6A02BD319FC5405001B1C68 /* SheepController.m in Sources */,
 				F6A02B9519FB1B3A001B1C68 /* main.m in Sources */,
+				A30FBB141A05DA5100D730B1 /* StartScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

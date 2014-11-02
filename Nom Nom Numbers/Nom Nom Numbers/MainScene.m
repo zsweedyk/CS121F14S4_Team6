@@ -22,17 +22,20 @@
     DataModel* _dataModel;
     double _currentScore;
     BOOL _gameEnded;
+    GameOverButton* gameOverPopup;
 }
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView*)skView
 {
     _skView = skView;
-    _sheepController = [[SheepController alloc] init];
+
     _gameEnded = false;
     
     if (self = [super initWithSize:size]) {
         [self setup];
     }
+    _sheepController = [[SheepController alloc] init];
+    [_sheepController setupSheep:self];
     
     return self;
 }
@@ -42,6 +45,17 @@
     [self setupBackground];
     [self setupDragon];
     [self setupData];
+
+}
+
+- (void) restart
+{
+    _gameEnded = false;
+    [_dataModel resetScore];
+    _currentScore = 0;
+    [_dataView updateScore:[_dataModel getScore]];
+    [_dataView resetTimer];
+    [gameOverPopup removeFromParent];
     [_sheepController setupSheep:self];
 }
 
@@ -107,6 +121,8 @@
         [_dataView updateScore:_currentScore];
         
     } else if ([node.name isEqual:@"quitbutton"]) {
+        NSLog(@"hurlo");
+        //[_sheepController removeFromParentViewController];
         [self quitGame];
     
     } else if ([node.name isEqual:@"quitaction"]) {
@@ -115,8 +131,8 @@
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
         NSLog(@"RestartGameWHEE!");
+        [self restart];
     }
- 
 }
 
 - (void) update:(NSTimeInterval)currentTime
@@ -132,7 +148,6 @@
                 [node removeFromParent];
             }
         }];
-
 }
 
 // Delegate Function: Shows result when game is over
@@ -142,7 +157,7 @@
     [_dataView stopTimer];
     
     // Create the Game Over popup
-    GameOverButton* gameOverPopup = [[GameOverButton alloc] init];
+    gameOverPopup = [[GameOverButton alloc] init];
     [gameOverPopup setupData:self withScore:_currentScore];
     [self addChild: gameOverPopup];
 }
@@ -157,7 +172,6 @@
     [quitPopup setupData:self withScore:_currentScore];
     [self addChild:quitPopup];
 }
-
 
 
 @end

@@ -15,5 +15,6 @@
 
 - (void) applySheepChar:(char)operator andValue:(NSString *)givenValue;
 - (double) getScore;
+- (void) resetScore;
 
 @end
