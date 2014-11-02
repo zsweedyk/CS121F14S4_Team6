@@ -11,9 +11,11 @@
 #import "SheepController.h"
 #import "DataView.h"
 #import "DataModel.h"
+#import "QuitGameButton.h"
+#import "GameOverButton.h"
 
 @interface MainScene : SKScene <gameOverDelegate>
 
--(id)initWithSize:(CGSize)size andSKView:(SKView*)skView;
+- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView;
 
 @end

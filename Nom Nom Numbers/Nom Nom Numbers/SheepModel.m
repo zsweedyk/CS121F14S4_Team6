@@ -9,7 +9,8 @@
 #import "SheepModel.h"
 #import "Generator.h"
 
-@interface SheepModel () {
+@interface SheepModel ()
+{
     char _operator;
     NSString *_value;
     Generator *_generator;
@@ -18,7 +19,7 @@
 
 @implementation SheepModel
 
--(id)init
+- (id) init
 {
     if (self = [super init]) {
         _generator = [[Generator alloc]init];
@@ -27,24 +28,25 @@
     return self;
 }
 
--(NSString*) getValue
+- (NSString*) getValue
 {
     return _value;
 }
 
--(char) getOperator
+- (char) getOperator
 {
     return _operator;
 }
 
 // Makes sheep with operator and value
--(void) makeSheep
+- (void) makeSheep
 {
     int chanceIndicator = arc4random_uniform(50);
     
     if (chanceIndicator == 1) {
         _operator = 'A';
         _value= [NSString stringWithFormat:@" "];
+        
     } else {
         _operator = _generator.generateOperator;
         int value;
@@ -61,9 +63,14 @@
         } else {
             NSMutableArray* fraction = _generator.generateFraction;
             int numerator = (int)[[fraction objectAtIndex:0] integerValue];
-            if ((_operator == '/') && (numerator == 0)) {++numerator;}
+            
+            if ((_operator == '/') && (numerator == 0)) {
+                ++numerator;
+            }
+            
             int denomenator = (int)[[fraction objectAtIndex:1] integerValue];
             float result = (float)numerator / (float)denomenator;
+            
             if (numerator == 0) {
                 _value = [NSString stringWithFormat:@"%d / %d \n (0)", numerator, denomenator];
             } else {
@@ -71,9 +78,7 @@
             }
             
         }
-        
     }
-    
 }
 
 

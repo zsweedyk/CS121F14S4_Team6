@@ -47,4 +47,9 @@ double _currentScore = 0;
     return _currentScore;
 }
 
+- (void) resetScore
+{
+    _currentScore = 0;
+}
+
 @end
