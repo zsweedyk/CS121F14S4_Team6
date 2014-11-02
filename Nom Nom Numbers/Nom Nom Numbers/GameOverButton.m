@@ -55,7 +55,7 @@
     SKLabelNode* gameOverScore = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     gameOverScore.fontColor = [UIColor whiteColor];
     gameOverScore.fontSize = 33;
-    gameOverScore.position = CGPointMake(0, popupY * 0.2);
+    gameOverScore.position = CGPointMake(0, popupY * 0.02);
     gameOverScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     gameOverScore.text = [NSString stringWithFormat:@"%.3f", currentScore];
     [gameOverPopup addChild:gameOverScore];
