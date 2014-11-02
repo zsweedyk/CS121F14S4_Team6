@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "MainScene.h"
+#import "StartScene.h"
 
 @implementation SKScene (Unarchive)
 
@@ -40,10 +41,11 @@
     _skView = (SKView *)self.view;
     
     if (!_skView.scene) {
-        SKScene* scene = [[MainScene alloc] initWithSize:_skView.bounds.size andSKView:_skView];
-        scene.scaleMode = SKSceneScaleModeAspectFit;
         
-        [_skView presentScene:scene];
+        SKScene* StartPage = [[StartScene alloc] initWithSize:_skView.frame.size andSKView:_skView];
+        StartPage.scaleMode = SKSceneScaleModeAspectFit;
+        
+        [_skView presentScene:StartPage];
 
     }
     
