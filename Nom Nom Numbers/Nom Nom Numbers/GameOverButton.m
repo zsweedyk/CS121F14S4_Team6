@@ -15,7 +15,14 @@
     CGFloat sceneX = mainScene.size.width;
     CGFloat sceneY = mainScene.size.height;
     
-    // Create popup and shadow
+    // Create popup backlay
+    UIColor* transparentColor = [[UIColor alloc] initWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    SKSpriteNode* gameOverBacklay = [[SKSpriteNode alloc] initWithColor:transparentColor size:CGSizeMake(sceneX, sceneY)];
+    gameOverBacklay.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
+    gameOverBacklay.zPosition = 2;
+    [self addChild:gameOverBacklay];
+    
+    // Create popup
     SKSpriteNode* gameOverPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
     gameOverPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
     gameOverPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
@@ -26,6 +33,7 @@
     shadow.alpha = 0.5;
     
     [self addChild:shadow];
+    gameOverPopup.zPosition = 2;
     [self addChild:gameOverPopup];
     
     
@@ -71,10 +79,7 @@
     // Create restart button (play again) on popup
     SKSpriteNode* restartButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     restartButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
-    restartButton.position = CGPointMake(popupX * -0.3, popupY * -0.3);
-    
-    NSLog(@"%f, %f",restartButton.size.width, restartButton.size.height);
-    
+    restartButton.position = CGPointMake(popupX * -0.3, popupY * -0.35);
     [gameOverPopup addChild:restartButton];
     
     // Create the label on the confirmation button

@@ -33,6 +33,7 @@
     shadow.alpha = 0.5;
     
     [self addChild:shadow];
+    quitPopup.zPosition = 2;
     [self addChild:quitPopup];
     
     
