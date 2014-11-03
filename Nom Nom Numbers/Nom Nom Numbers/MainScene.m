@@ -13,6 +13,7 @@
 #import "DataModel.h"
 #import "QuitGameButton.h"
 #import "GameOverButton.h"
+#import "StartScene.h"
 
 @implementation MainScene
 {
@@ -127,7 +128,9 @@
     
     } else if ([node.name isEqual:@"quitaction"]) {
         // BACK TO MAIN SCREEN
-        NSLog(@"MainScreenGO!");
+        SKScene *startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:startScene transition:transition];
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
         NSLog(@"RestartGameWHEE!");
