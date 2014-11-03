@@ -64,7 +64,7 @@
     gameOverScore.fontSize = 33;
     gameOverScore.position = CGPointMake(0, popupY * 0.02);
     gameOverScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    gameOverScore.text = [NSString stringWithFormat:@"%.3f", currentScore];
+    gameOverScore.text = [NSString stringWithFormat:@"%.2f", currentScore];
     [gameOverPopup addChild:gameOverScore];
     
     // Create question content text on the popup

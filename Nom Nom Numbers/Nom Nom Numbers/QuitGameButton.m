@@ -64,7 +64,7 @@
     quitPopupScore.fontSize = 33;
     quitPopupScore.position = CGPointMake(0, popupY * -0.05);
     quitPopupScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    quitPopupScore.text = [NSString stringWithFormat:@"%.3f", currentScore];
+    quitPopupScore.text = [NSString stringWithFormat:@"%.2f", currentScore];
     [quitPopup addChild:quitPopupScore];
     
     // Create confirmation button (return to main screen) on popup
