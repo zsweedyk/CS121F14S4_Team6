@@ -37,24 +37,33 @@
     gameOverPopupTitle.fontColor = [UIColor whiteColor];
     gameOverPopupTitle.fontSize = 35;
     gameOverPopupTitle.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    gameOverPopupTitle.position = CGPointMake(0, popupY * 0.3);
+    gameOverPopupTitle.position = CGPointMake(0, popupY * 0.35);
     gameOverPopupTitle.text = @"Game Over!";
     [gameOverPopup addChild:gameOverPopupTitle];
     
     // Create score content text on the popup
     SKLabelNode* gameOverPopupScore = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     gameOverPopupScore.fontColor = [UIColor whiteColor];
-    gameOverPopupScore.fontSize = 30;
-    gameOverPopupScore.position = CGPointMake(0, popupY * 0.1);
+    gameOverPopupScore.fontSize = 28;
+    gameOverPopupScore.position = CGPointMake(0, popupY * 0.17);
     gameOverPopupScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    gameOverPopupScore.text = [NSString stringWithFormat:@"Your score was %.3f.", currentScore];
+    gameOverPopupScore.text = [NSString stringWithFormat:@"Your score was"];
     [gameOverPopup addChild:gameOverPopupScore];
+    
+    // Create score text on the popup
+    SKLabelNode* gameOverScore = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    gameOverScore.fontColor = [UIColor whiteColor];
+    gameOverScore.fontSize = 33;
+    gameOverScore.position = CGPointMake(0, popupY * 0.02);
+    gameOverScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    gameOverScore.text = [NSString stringWithFormat:@"%.3f", currentScore];
+    [gameOverPopup addChild:gameOverScore];
     
     // Create question content text on the popup
     SKLabelNode* gameOverPopupQuestion = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     gameOverPopupQuestion.fontColor = [UIColor whiteColor];
-    gameOverPopupQuestion.fontSize = 30;
-    gameOverPopupQuestion.position = CGPointMake(0, popupY * -0.06);
+    gameOverPopupQuestion.fontSize = 28;
+    gameOverPopupQuestion.position = CGPointMake(0, popupY * -0.13);
     gameOverPopupQuestion.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     gameOverPopupQuestion.text = [NSString stringWithFormat:@"Play again?"];
     [gameOverPopup addChild:gameOverPopupQuestion];
@@ -80,7 +89,7 @@
     // Create quit button (return to main screen) on popup
     SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"redButton"];
     quitButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
-    quitButton.position = CGPointMake(popupX * 0.3, popupY * -0.3);
+    quitButton.position = CGPointMake(popupX * 0.3, popupY * -0.35);
     [gameOverPopup addChild:quitButton];
     
     // Create the label on the confirmation button

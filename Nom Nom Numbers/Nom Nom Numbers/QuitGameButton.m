@@ -15,6 +15,13 @@
     CGFloat sceneX = mainScene.size.width;
     CGFloat sceneY = mainScene.size.height;
     
+    // Create popup backlay
+    UIColor* transparentColor = [[UIColor alloc] initWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    SKSpriteNode* gameOverBacklay = [[SKSpriteNode alloc] initWithColor:transparentColor size:CGSizeMake(sceneX, sceneY)];
+    gameOverBacklay.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
+    gameOverBacklay.zPosition = 2;
+    [self addChild:gameOverBacklay];
+    
     // Create popup
     SKSpriteNode* quitPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
     quitPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
@@ -28,28 +35,41 @@
     [self addChild:shadow];
     [self addChild:quitPopup];
     
-    // Create title label on the popup
+    
     CGFloat popupX = quitPopup.size.width;
     CGFloat popupY = quitPopup.size.height;
+    
+    // Create title label on the popup
     SKLabelNode* quitPopupTitle = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     quitPopupTitle.fontColor = [UIColor whiteColor];
     quitPopupTitle.fontSize = 35;
     quitPopupTitle.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    quitPopupTitle.position = CGPointMake(0, popupY * 0.3);
+    quitPopupTitle.position = CGPointMake(0, popupY * 0.35);
     quitPopupTitle.text = @"You quit the game!";
     [quitPopup addChild:quitPopupTitle];
     
     // Create content text on the popup
     SKLabelNode* quitPopupText = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     quitPopupText.fontColor = [UIColor whiteColor];
+    quitPopupText.fontSize = 28;
+    quitPopupText.position = CGPointMake(0, popupY * 0.15);
     quitPopupText.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    quitPopupText.text = [NSString stringWithFormat:@"Your score was %.3f", currentScore];
+    quitPopupText.text = [NSString stringWithFormat:@"Your score was"];
     [quitPopup addChild:quitPopupText];
+    
+    // Create score text on the popup
+    SKLabelNode* quitPopupScore = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    quitPopupScore.fontColor = [UIColor whiteColor];
+    quitPopupScore.fontSize = 33;
+    quitPopupScore.position = CGPointMake(0, popupY * -0.05);
+    quitPopupScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    quitPopupScore.text = [NSString stringWithFormat:@"%.3f", currentScore];
+    [quitPopup addChild:quitPopupScore];
     
     // Create confirmation button (return to main screen) on popup
     SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     quitButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
-    quitButton.position = CGPointMake(0, popupY * -0.3);
+    quitButton.position = CGPointMake(0, popupY * -0.35);
     [quitPopup addChild:quitButton];
     
     // Create the label on the confirmation button
