@@ -36,7 +36,7 @@
     [_sheepModel makeSheep];
     char operator = [_sheepModel getOperator];
     NSString* value = [_sheepModel getValue];
-    XCTAssertThrowsSpecific((operator == '/') && (value == [NSString stringWithFormat:@"0"]), NSException);
+    XCTAssertFalse((operator == '/') && (value == [NSString stringWithFormat:@"0"]));
     
     double desiredValue;
     NSRange textRange = [value rangeOfString:@"("];
@@ -47,7 +47,7 @@
         desiredValue = [[splitString objectAtIndex:1] doubleValue];
     }
     
-    XCTAssertThrowsSpecific((operator == '/') && (desiredValue == 0), NSException);
+    XCTAssertFalse((operator == '/') && (desiredValue == 0));
     
 }
 
