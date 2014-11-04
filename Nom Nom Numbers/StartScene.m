@@ -16,9 +16,9 @@
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
     
-    if (self = [super initWithSize:size]) {
-        
-    }
+    self = [super initWithSize:size];
+    _skView = [[SKView alloc] init];
+    
     _skView = skView;
     [self setup];
     

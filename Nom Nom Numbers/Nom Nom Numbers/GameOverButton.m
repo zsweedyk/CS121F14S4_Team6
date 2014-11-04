@@ -23,9 +23,16 @@
     [self addChild:gameOverBacklay];
     
     // Create popup
-    SKSpriteNode* gameOverPopup = [[SKSpriteNode alloc] initWithImageNamed:@"wooden"];
+    SKSpriteNode* gameOverPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
     gameOverPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
     gameOverPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
+    
+    SKSpriteNode* shadow = [[SKSpriteNode alloc] initWithImageNamed:@"popupShadow"];
+    shadow.size = CGSizeMake(gameOverPopup.size.width * 1.1, gameOverPopup.size.height * 1.1);
+    shadow.position = CGPointMake(gameOverPopup.position.x, gameOverPopup.position.y - 5);
+    shadow.alpha = 0.5;
+    
+    [self addChild:shadow];
     gameOverPopup.zPosition = 2;
     [self addChild:gameOverPopup];
     
@@ -57,7 +64,7 @@
     gameOverScore.fontSize = 33;
     gameOverScore.position = CGPointMake(0, popupY * 0.02);
     gameOverScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    gameOverScore.text = [NSString stringWithFormat:@"%.3f", currentScore];
+    gameOverScore.text = [NSString stringWithFormat:@"%.2f", currentScore];
     [gameOverPopup addChild:gameOverScore];
     
     // Create question content text on the popup
@@ -70,7 +77,7 @@
     [gameOverPopup addChild:gameOverPopupQuestion];
 
     // Create restart button (play again) on popup
-    SKSpriteNode* restartButton = [[SKSpriteNode alloc] initWithImageNamed:@"wooden"];
+    SKSpriteNode* restartButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     restartButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     restartButton.position = CGPointMake(popupX * -0.3, popupY * -0.35);
     [gameOverPopup addChild:restartButton];
@@ -85,7 +92,7 @@
     [restartButton addChild:restartButtonLabel];
     
     // Create quit button (return to main screen) on popup
-    SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"wooden"];
+    SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"redButton"];
     quitButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     quitButton.position = CGPointMake(popupX * 0.3, popupY * -0.35);
     [gameOverPopup addChild:quitButton];

@@ -26,7 +26,7 @@
     _currentScore.fontColor = [UIColor whiteColor];
     _currentScore.position = CGPointMake(scoreX, headerY);
     _currentScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-    _currentScore.text = [NSString stringWithFormat:@"Score: %.3f", currentScore];
+    _currentScore.text = [NSString stringWithFormat:@"Score: %.2f", currentScore];
     
     // Set up UI for Timer Label
     CGFloat timerX = Xdimensions * .5;
@@ -82,7 +82,7 @@
 // Updates the visual when the score is changed
 - (void) updateScore: (double)newScore
 {
-    _currentScore.text = [NSString stringWithFormat:@"Score: %.3f", newScore];
+    _currentScore.text = [NSString stringWithFormat:@"Score: %.2f", newScore];
 }
 
 // Stop the timer
