@@ -2,16 +2,18 @@
 //  GameViewController.m
 //  Nom Nom Numbers
 //
-//  Created by Dani Demas on 11/4/14.
+//  Created by Hugo Ho on 10/24/14.
 //  Copyright (c) 2014 CS 121 Team 6. All rights reserved.
 //
 
 #import "GameViewController.h"
-#import "GameScene.h"
+#import "MainScene.h"
+#import "StartScene.h"
 
 @implementation SKScene (Unarchive)
 
-+ (instancetype)unarchiveFromFile:(NSString *)file {
++ (instancetype) unarchiveFromFile:(NSString *)file
+{
     /* Retrieve scene file path from the application bundle */
     NSString *nodePath = [[NSBundle mainBundle] pathForResource:file ofType:@"sks"];
     /* Unarchive the file to an SKScene object */
@@ -29,47 +31,52 @@
 @end
 
 @implementation GameViewController
-
-- (void)viewDidLoad
 {
-    [super viewDidLoad];
-
-    // Configure the view.
-    SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    /* Sprite Kit applies additional optimizations to improve rendering performance */
-    skView.ignoresSiblingOrder = YES;
     
-    // Create and configure the scene.
-    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    // Present the scene.
-    [skView presentScene:scene];
+    SKView* _skView;
 }
 
-- (BOOL)shouldAutorotate
+- (void) viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    _skView = (SKView *)self.view;
+    
+    if (!_skView.scene) {
+        
+        SKScene* StartPage = [[StartScene alloc] initWithSize:_skView.frame.size andSKView:_skView];
+        StartPage.scaleMode = SKSceneScaleModeAspectFit;
+        
+        [_skView presentScene:StartPage];
+
+    }
+    
+}
+
+
+- (BOOL) shouldAutorotate
 {
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (NSUInteger) supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
+        
     } else {
         return UIInterfaceOrientationMaskAll;
     }
 }
 
-- (void)didReceiveMemoryWarning
+- (void) didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (BOOL)prefersStatusBarHidden {
+- (BOOL) prefersStatusBarHidden
+{
     return YES;
 }
 

@@ -16,6 +16,19 @@
 		CB9A2CC81A093370004EF777 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9A2CC71A093370004EF777 /* Images.xcassets */; };
 		CB9A2CCB1A093370004EF777 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9A2CC91A093370004EF777 /* LaunchScreen.xib */; };
 		CB9A2CD71A093371004EF777 /* Nom_Nom_NumbersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CD61A093371004EF777 /* Nom_Nom_NumbersTests.m */; };
+		CB9A2CE11A093997004EF777 /* SheepModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CE01A093997004EF777 /* SheepModelTest.m */; };
+		CB9A2CE31A0939A1004EF777 /* GeneratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CE21A0939A1004EF777 /* GeneratorTest.m */; };
+		CB9A2CE51A0939A8004EF777 /* DataModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CE41A0939A8004EF777 /* DataModelTest.m */; };
+		CB9A2CFB1A0939E8004EF777 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CE71A0939E8004EF777 /* DataModel.m */; };
+		CB9A2CFC1A0939E8004EF777 /* DataView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CE91A0939E8004EF777 /* DataView.m */; };
+		CB9A2CFD1A0939E8004EF777 /* GameOverButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CEB1A0939E8004EF777 /* GameOverButton.m */; };
+		CB9A2CFE1A0939E8004EF777 /* Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CED1A0939E8004EF777 /* Generator.m */; };
+		CB9A2D001A0939E8004EF777 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF01A0939E8004EF777 /* MainScene.m */; };
+		CB9A2D011A0939E8004EF777 /* QuitGameButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF21A0939E8004EF777 /* QuitGameButton.m */; };
+		CB9A2D021A0939E8004EF777 /* SheepController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF41A0939E8004EF777 /* SheepController.m */; };
+		CB9A2D031A0939E8004EF777 /* SheepModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF61A0939E8004EF777 /* SheepModel.m */; };
+		CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF81A0939E8004EF777 /* SheepSprite.m */; };
+		CB9A2D051A0939E8004EF777 /* StartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CFA1A0939E8004EF777 /* StartScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +58,29 @@
 		CB9A2CD01A093371004EF777 /* Nom Nom NumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nom Nom NumbersTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9A2CD51A093371004EF777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9A2CD61A093371004EF777 /* Nom_Nom_NumbersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Nom_Nom_NumbersTests.m; sourceTree = "<group>"; };
+		CB9A2CE01A093997004EF777 /* SheepModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepModelTest.m; sourceTree = "<group>"; };
+		CB9A2CE21A0939A1004EF777 /* GeneratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratorTest.m; sourceTree = "<group>"; };
+		CB9A2CE41A0939A8004EF777 /* DataModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModelTest.m; sourceTree = "<group>"; };
+		CB9A2CE61A0939E8004EF777 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
+		CB9A2CE71A0939E8004EF777 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
+		CB9A2CE81A0939E8004EF777 /* DataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataView.h; sourceTree = "<group>"; };
+		CB9A2CE91A0939E8004EF777 /* DataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataView.m; sourceTree = "<group>"; };
+		CB9A2CEA1A0939E8004EF777 /* GameOverButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverButton.h; sourceTree = "<group>"; };
+		CB9A2CEB1A0939E8004EF777 /* GameOverButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverButton.m; sourceTree = "<group>"; };
+		CB9A2CEC1A0939E8004EF777 /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
+		CB9A2CED1A0939E8004EF777 /* Generator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Generator.m; sourceTree = "<group>"; };
+		CB9A2CEF1A0939E8004EF777 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
+		CB9A2CF01A0939E8004EF777 /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScene.m; sourceTree = "<group>"; };
+		CB9A2CF11A0939E8004EF777 /* QuitGameButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuitGameButton.h; sourceTree = "<group>"; };
+		CB9A2CF21A0939E8004EF777 /* QuitGameButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuitGameButton.m; sourceTree = "<group>"; };
+		CB9A2CF31A0939E8004EF777 /* SheepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheepController.h; sourceTree = "<group>"; };
+		CB9A2CF41A0939E8004EF777 /* SheepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepController.m; sourceTree = "<group>"; };
+		CB9A2CF51A0939E8004EF777 /* SheepModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheepModel.h; sourceTree = "<group>"; };
+		CB9A2CF61A0939E8004EF777 /* SheepModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepModel.m; sourceTree = "<group>"; };
+		CB9A2CF71A0939E8004EF777 /* SheepSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheepSprite.h; sourceTree = "<group>"; };
+		CB9A2CF81A0939E8004EF777 /* SheepSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepSprite.m; sourceTree = "<group>"; };
+		CB9A2CF91A0939E8004EF777 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScene.h; sourceTree = "<group>"; };
+		CB9A2CFA1A0939E8004EF777 /* StartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +129,26 @@
 				CB9A2CBF1A093370004EF777 /* GameScene.sks */,
 				CB9A2CC11A093370004EF777 /* GameViewController.h */,
 				CB9A2CC21A093370004EF777 /* GameViewController.m */,
+				CB9A2CE61A0939E8004EF777 /* DataModel.h */,
+				CB9A2CE71A0939E8004EF777 /* DataModel.m */,
+				CB9A2CE81A0939E8004EF777 /* DataView.h */,
+				CB9A2CE91A0939E8004EF777 /* DataView.m */,
+				CB9A2CEA1A0939E8004EF777 /* GameOverButton.h */,
+				CB9A2CEB1A0939E8004EF777 /* GameOverButton.m */,
+				CB9A2CEC1A0939E8004EF777 /* Generator.h */,
+				CB9A2CED1A0939E8004EF777 /* Generator.m */,
+				CB9A2CEF1A0939E8004EF777 /* MainScene.h */,
+				CB9A2CF01A0939E8004EF777 /* MainScene.m */,
+				CB9A2CF11A0939E8004EF777 /* QuitGameButton.h */,
+				CB9A2CF21A0939E8004EF777 /* QuitGameButton.m */,
+				CB9A2CF31A0939E8004EF777 /* SheepController.h */,
+				CB9A2CF41A0939E8004EF777 /* SheepController.m */,
+				CB9A2CF51A0939E8004EF777 /* SheepModel.h */,
+				CB9A2CF61A0939E8004EF777 /* SheepModel.m */,
+				CB9A2CF71A0939E8004EF777 /* SheepSprite.h */,
+				CB9A2CF81A0939E8004EF777 /* SheepSprite.m */,
+				CB9A2CF91A0939E8004EF777 /* StartScene.h */,
+				CB9A2CFA1A0939E8004EF777 /* StartScene.m */,
 				CB9A2CC41A093370004EF777 /* Main.storyboard */,
 				CB9A2CC71A093370004EF777 /* Images.xcassets */,
 				CB9A2CC91A093370004EF777 /* LaunchScreen.xib */,
@@ -114,6 +170,9 @@
 			isa = PBXGroup;
 			children = (
 				CB9A2CD61A093371004EF777 /* Nom_Nom_NumbersTests.m */,
+				CB9A2CE01A093997004EF777 /* SheepModelTest.m */,
+				CB9A2CE21A0939A1004EF777 /* GeneratorTest.m */,
+				CB9A2CE41A0939A8004EF777 /* DataModelTest.m */,
 				CB9A2CD41A093371004EF777 /* Supporting Files */,
 			);
 			path = "Nom Nom NumbersTests";
@@ -228,9 +287,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB9A2CFC1A0939E8004EF777 /* DataView.m in Sources */,
+				CB9A2D021A0939E8004EF777 /* SheepController.m in Sources */,
 				CB9A2CC31A093370004EF777 /* GameViewController.m in Sources */,
+				CB9A2CFB1A0939E8004EF777 /* DataModel.m in Sources */,
+				CB9A2D051A0939E8004EF777 /* StartScene.m in Sources */,
+				CB9A2CFD1A0939E8004EF777 /* GameOverButton.m in Sources */,
+				CB9A2D011A0939E8004EF777 /* QuitGameButton.m in Sources */,
 				CB9A2CBB1A09336F004EF777 /* AppDelegate.m in Sources */,
+				CB9A2CFE1A0939E8004EF777 /* Generator.m in Sources */,
+				CB9A2D031A0939E8004EF777 /* SheepModel.m in Sources */,
 				CB9A2CBE1A093370004EF777 /* GameScene.m in Sources */,
+				CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */,
+				CB9A2D001A0939E8004EF777 /* MainScene.m in Sources */,
 				CB9A2CB81A09336E004EF777 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,7 +308,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB9A2CE31A0939A1004EF777 /* GeneratorTest.m in Sources */,
+				CB9A2CE51A0939A8004EF777 /* DataModelTest.m in Sources */,
 				CB9A2CD71A093371004EF777 /* Nom_Nom_NumbersTests.m in Sources */,
+				CB9A2CE11A093997004EF777 /* SheepModelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +496,7 @@
 				CB9A2CDC1A093371004EF777 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CB9A2CDD1A093371004EF777 /* Build configuration list for PBXNativeTarget "Nom Nom NumbersTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +505,7 @@
 				CB9A2CDF1A093371004EF777 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
