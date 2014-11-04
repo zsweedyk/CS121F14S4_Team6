@@ -80,7 +80,7 @@
     CGPoint point;
     if (input == 'O') {
         point = CGPointMake(_sheepImage.size.width/4, _sheepImage.size.height/3.25);
-    } else if (input == 'V') {
+    } else {
         point = CGPointMake(_sheepImage.size.width/2.15, _sheepImage.size.height/3.5);
     }
     

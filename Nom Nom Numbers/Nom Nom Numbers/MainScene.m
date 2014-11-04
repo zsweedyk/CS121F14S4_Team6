@@ -32,9 +32,10 @@
 
     _gameEnded = false;
     
-    if (self = [super initWithSize:size]) {
-        [self setup];
-    }
+   
+    self = [super initWithSize:size];
+    [self setup];
+
     _sheepController = [[SheepController alloc] init];
     [_sheepController setupSheep:self];
     
