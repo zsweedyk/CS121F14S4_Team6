@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A30FBB141A05DA5100D730B1 /* StartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A30FBB131A05DA5100D730B1 /* StartScene.m */; };
+		A39F46DA1A088963001560D8 /* GeneratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A39F46D91A088963001560D8 /* GeneratorTest.m */; };
+		A39F46DD1A08AB2C001560D8 /* DataModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A39F46DC1A08AB2C001560D8 /* DataModelTest.m */; };
+		A39F46DF1A08C81D001560D8 /* SheepModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A39F46DE1A08C81D001560D8 /* SheepModelTest.m */; };
 		F6A02B9519FB1B3A001B1C68 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02B9419FB1B3A001B1C68 /* main.m */; };
 		F6A02B9819FB1B3A001B1C68 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A02B9719FB1B3A001B1C68 /* AppDelegate.m */; };
 		F6A02B9D19FB1B3A001B1C68 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F6A02B9C19FB1B3A001B1C68 /* GameScene.sks */; };
@@ -41,6 +44,9 @@
 /* Begin PBXFileReference section */
 		A30FBB121A05DA5100D730B1 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartScene.h; path = ../StartScene.h; sourceTree = "<group>"; };
 		A30FBB131A05DA5100D730B1 /* StartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartScene.m; path = ../StartScene.m; sourceTree = "<group>"; };
+		A39F46D91A088963001560D8 /* GeneratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratorTest.m; sourceTree = "<group>"; };
+		A39F46DC1A08AB2C001560D8 /* DataModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModelTest.m; sourceTree = "<group>"; };
+		A39F46DE1A08C81D001560D8 /* SheepModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepModelTest.m; sourceTree = "<group>"; };
 		F6A02B8F19FB1B3A001B1C68 /* Nom Nom Numbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nom Nom Numbers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A02B9319FB1B3A001B1C68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6A02B9419FB1B3A001B1C68 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -161,7 +167,10 @@
 		F6A02BB019FB1B3A001B1C68 /* Nom Nom NumbersTests */ = {
 			isa = PBXGroup;
 			children = (
+				A39F46DE1A08C81D001560D8 /* SheepModelTest.m */,
+				A39F46DC1A08AB2C001560D8 /* DataModelTest.m */,
 				F6A02BB319FB1B3A001B1C68 /* Nom_Nom_NumbersTests.m */,
+				A39F46D91A088963001560D8 /* GeneratorTest.m */,
 				F6A02BB119FB1B3A001B1C68 /* Supporting Files */,
 			);
 			path = "Nom Nom NumbersTests";
@@ -298,6 +307,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6A02BB419FB1B3A001B1C68 /* Nom_Nom_NumbersTests.m in Sources */,
+				A39F46DF1A08C81D001560D8 /* SheepModelTest.m in Sources */,
+				A39F46DA1A088963001560D8 /* GeneratorTest.m in Sources */,
+				A39F46DD1A08AB2C001560D8 /* DataModelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

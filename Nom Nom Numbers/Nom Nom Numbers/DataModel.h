@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface DataModel : NSObject
-{
-    double _currentScore;
-}
+
+@property (nonatomic) double _currentScore;
 
 - (void) applySheepChar:(char)operator andValue:(NSString *)givenValue;
 - (double) getScore;

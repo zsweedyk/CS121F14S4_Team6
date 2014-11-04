@@ -10,7 +10,8 @@
 
 @implementation DataModel
 
-double _currentScore = 0;
+@synthesize _currentScore;
+
 
 // Changes the score appropriately when a sheep is selected
 - (void) applySheepChar:(char)operator andValue:(NSString *)givenValue
