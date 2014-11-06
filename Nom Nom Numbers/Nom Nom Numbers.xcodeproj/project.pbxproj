@@ -29,6 +29,7 @@
 		CB9A2D031A0939E8004EF777 /* SheepModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF61A0939E8004EF777 /* SheepModel.m */; };
 		CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF81A0939E8004EF777 /* SheepSprite.m */; };
 		CB9A2D051A0939E8004EF777 /* StartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CFA1A0939E8004EF777 /* StartScene.m */; };
+		CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		CB9A2CF81A0939E8004EF777 /* SheepSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepSprite.m; sourceTree = "<group>"; };
 		CB9A2CF91A0939E8004EF777 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScene.h; sourceTree = "<group>"; };
 		CB9A2CFA1A0939E8004EF777 /* StartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartScene.m; sourceTree = "<group>"; };
+		CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FireballSprite.h; path = ../FireballSprite.h; sourceTree = "<group>"; };
+		CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FireballSprite.m; path = ../FireballSprite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 		CB9A2CB41A09336D004EF777 /* Nom Nom Numbers */ = {
 			isa = PBXGroup;
 			children = (
+				CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */,
+				CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */,
 				CB9A2CB91A09336F004EF777 /* AppDelegate.h */,
 				CB9A2CBA1A09336F004EF777 /* AppDelegate.m */,
 				CB9A2CBC1A09336F004EF777 /* GameScene.h */,
@@ -301,6 +306,7 @@
 				CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */,
 				CB9A2D001A0939E8004EF777 /* MainScene.m in Sources */,
 				CB9A2CB81A09336E004EF777 /* main.m in Sources */,
+				CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,7 @@
 #import "QuitGameButton.h"
 #import "GameOverButton.h"
 #import "StartScene.h"
+#import "FireballSprite.h"
 
 @implementation MainScene
 {
@@ -113,14 +114,7 @@
     SKNode *node = [self nodeAtPoint:location];
 
     if ([node.name isEqual: @"sheep"]) {
-        [_sheepController generateNewSheep:node];
-        NSMutableDictionary* sheepData = node.userData;
-        char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
-        NSString* sheepValue = [sheepData objectForKey:@"Value"];
-        
-        [_dataModel applySheepChar:sheepOper andValue:sheepValue];
-        _currentScore = [_dataModel getScore];
-        [_dataView updateScore:_currentScore];
+        [self performSelector:@selector(touchedSheep:) withObject:node];
         
     } else if ([node.name isEqual:@"quitbutton"]) {
         NSLog(@"hurlo");
@@ -137,6 +131,31 @@
         NSLog(@"RestartGameWHEE!");
         [self restart];
     }
+}
+
+- (void) touchedSheep:(SKNode*)node
+{
+    FireballSprite* fireball = [[FireballSprite alloc] init];
+    
+    // Send fireball at the middle of the sheep touched
+    SKTexture* sheepTexture = [(SKSpriteNode*) node texture];
+    CGPoint sheepMiddle = CGPointMake(node.position.x - (sheepTexture.size.width/2), node.position.y - (sheepTexture.size.height/2));
+    [fireball sendFireballTo:sheepMiddle OnScene:self];
+    
+    // Wait for fireball to reach the sheep
+    [self performSelector:@selector(makeNewSheep:) withObject:node afterDelay:[fireball fireballTravelTime]];
+}
+
+- (void) makeNewSheep:(SKNode*)node
+{
+    [_sheepController generateNewSheep:node];
+    NSMutableDictionary* sheepData = node.userData;
+    char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
+    NSString* sheepValue = [sheepData objectForKey:@"Value"];
+    
+    [_dataModel applySheepChar:sheepOper andValue:sheepValue];
+    _currentScore = [_dataModel getScore];
+    [_dataView updateScore:_currentScore];
 }
 
 - (void) update:(NSTimeInterval)currentTime
