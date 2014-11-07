@@ -13,8 +13,8 @@
 #import "DataModel.h"
 #import "QuitGameButton.h"
 #import "GameOverButton.h"
-
-@interface MainScene : SKScene <gameOverDelegate>
+//<gameOverDelegate>
+@interface MainScene : SKScene <SKPhysicsContactDelegate>
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView*)skView;
 

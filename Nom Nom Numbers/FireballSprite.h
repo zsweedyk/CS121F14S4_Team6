@@ -11,6 +11,7 @@
 @interface FireballSprite : NSObject
 
 @property NSTimeInterval fireballTravelTime;
+@property SKSpriteNode* fireball;
 
 - (void) sendFireballTo:(CGPoint)destination OnScene:(SKScene*)scene;
 

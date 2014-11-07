@@ -27,6 +27,13 @@
     GameOverButton* gameOverPopup;
 }
 
+// Bitmaps for fireball and sheep collision detection
+// Note that this and all collision related code is slightly adapted from this site:
+// http://www.raywenderlich.com/42699/spritekit-tutorial-for-beginners
+
+static const uint32_t fireballCategory     =  0x1 << 0;
+static const uint32_t sheepCategory        =  0x1 << 1;
+
 - (id) initWithSize:(CGSize)size andSKView:(SKView*)skView
 {
     _skView = skView;
@@ -39,6 +46,10 @@
 
     _sheepController = [[SheepController alloc] init];
     [_sheepController setupSheep:self];
+    
+    // Set up physics and delegate for collision detection
+    self.physicsWorld.gravity = CGVectorMake(0,0);
+    self.physicsWorld.contactDelegate = self;
     
     return self;
 }
@@ -114,7 +125,7 @@
     SKNode *node = [self nodeAtPoint:location];
 
     if ([node.name isEqual: @"sheep"]) {
-        [self performSelector:@selector(touchedSheep:) withObject:node];
+        [self touchedSheep:node];
         
     } else if ([node.name isEqual:@"quitbutton"]) {
         NSLog(@"hurlo");
@@ -135,15 +146,27 @@
 
 - (void) touchedSheep:(SKNode*)node
 {
-    FireballSprite* fireball = [[FireballSprite alloc] init];
+    FireballSprite* fireballSprite = [[FireballSprite alloc] init];
+    SKSpriteNode* fireballNode = [fireballSprite fireball];
     
     // Send fireball at the middle of the sheep touched
-    SKTexture* sheepTexture = [(SKSpriteNode*) node texture];
-    CGPoint sheepMiddle = CGPointMake(node.position.x - (sheepTexture.size.width/2), node.position.y - (sheepTexture.size.height/2));
-    [fireball sendFireballTo:sheepMiddle OnScene:self];
+    SKSpriteNode* sheepSpriteNode = (SKSpriteNode*) node;
+    CGPoint sheepMiddle = CGPointMake(node.position.x + (sheepSpriteNode.size.width/2), node.position.y + (sheepSpriteNode.size.height/2));
+    [fireballSprite sendFireballTo:sheepMiddle OnScene:self];
     
-    // Wait for fireball to reach the sheep
-    [self performSelector:@selector(makeNewSheep:) withObject:node afterDelay:[fireball fireballTravelTime]];
+    // Set up collision physics but only on the sheep that was touched
+    node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sheepSpriteNode.size.width/2];
+    node.physicsBody.dynamic = YES;
+    node.physicsBody.categoryBitMask = sheepCategory;
+    node.physicsBody.contactTestBitMask = fireballCategory;
+    node.physicsBody.collisionBitMask = 0;
+    
+    fireballNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:fireballNode.size];
+    fireballNode.physicsBody.dynamic = YES;
+    fireballNode.physicsBody.categoryBitMask = sheepCategory;
+    fireballNode.physicsBody.contactTestBitMask = fireballCategory;
+    fireballNode.physicsBody.collisionBitMask = 0;
+    fireballNode.physicsBody.usesPreciseCollisionDetection = YES;
 }
 
 - (void) makeNewSheep:(SKNode*)node
@@ -156,6 +179,32 @@
     [_dataModel applySheepChar:sheepOper andValue:sheepValue];
     _currentScore = [_dataModel getScore];
     [_dataView updateScore:_currentScore];
+}
+
+- (void)didBeginContact:(SKPhysicsContact *)contact
+{
+    // Determine which physicsBody has the lower bitmask
+    SKPhysicsBody *firstBody, *secondBody;
+    
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+    {
+        firstBody = contact.bodyA;
+        secondBody = contact.bodyB;
+    }
+    else
+    {
+        firstBody = contact.bodyB;
+        secondBody = contact.bodyA;
+    }
+    
+    NSLog(@"Contact!");
+    
+    // Make sure one body is a sheep and call the makeNewSheep method
+    if ((firstBody.categoryBitMask & fireballCategory) != 0 &&
+        (secondBody.categoryBitMask & sheepCategory) != 0)
+    {
+        [self makeNewSheep:(SKSpriteNode*)secondBody];
+    }
 }
 
 - (void) update:(NSTimeInterval)currentTime
