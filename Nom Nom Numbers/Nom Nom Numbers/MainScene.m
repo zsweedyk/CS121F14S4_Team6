@@ -131,7 +131,6 @@ static const uint32_t sheepCategory        =  0x1 << 1;
             [self touchedSheep:node];
         
     } else if ([node.name isEqual:@"quitbutton"]) {
-        NSLog(@"hurlo");
         //[_sheepController removeFromParentViewController];
         [self quitGame];
     
@@ -142,7 +141,6 @@ static const uint32_t sheepCategory        =  0x1 << 1;
         [self.view presentScene:startScene transition:transition];
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
-        NSLog(@"RestartGameWHEE!");
         [self restart];
     }
 }
@@ -179,9 +177,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
 
 - (void) makeNewSheep:(SKNode*)node
 {
-    NSLog(@"got into makenewsheep");
     [_sheepController generateNewSheep:(SKNode*)node];
-    NSLog(@"survived generate");
     NSMutableDictionary* sheepData = node.userData;
     char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
     NSString* sheepValue = [sheepData objectForKey:@"Value"];

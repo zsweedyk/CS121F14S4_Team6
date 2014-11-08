@@ -31,17 +31,10 @@
     _fireball.size = CGSizeMake(50,50);
     _fireball.position = start;
     
-    NSLog(@"Sending fireball from x %f y %f to x %f y %f", start.x, start.y, destination.x, destination.y);
-    
     [scene addChild:_fireball];
     SKAction* moveFireball = [SKAction moveTo:destination duration:_fireballTravelTime];
     SKAction* remove = [SKAction removeFromParent];
     [_fireball runAction:[SKAction sequence:@[moveFireball, remove]]];
-}
-
-- (void) removeFireball
-{
-    [_fireball removeFromParent];
 }
 
 @end
