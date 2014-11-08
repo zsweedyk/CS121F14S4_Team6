@@ -15,7 +15,7 @@
     self = [super init];
     
     _fireballTravelTime = 0.4;
-    _fireball = [[SKSpriteNode alloc] initWithImageNamed:@"Sheep"];
+    _fireball = [[SKSpriteNode alloc] initWithImageNamed:@"fireball"];
     
     return self;
 }
@@ -28,7 +28,7 @@
     CGSize sceneSize = scene.size;
     
     CGPoint start = CGPointMake(sceneSize.width - barnSize.width, (sceneSize.height / 2) - 50);
-    _fireball.size = CGSizeMake(20,20);
+    _fireball.size = CGSizeMake(50,50);
     _fireball.position = start;
     
     NSLog(@"Sending fireball from x %f y %f to x %f y %f", start.x, start.y, destination.x, destination.y);
@@ -37,6 +37,11 @@
     SKAction* moveFireball = [SKAction moveTo:destination duration:_fireballTravelTime];
     SKAction* remove = [SKAction removeFromParent];
     [_fireball runAction:[SKAction sequence:@[moveFireball, remove]]];
+}
+
+- (void) removeFireball
+{
+    [_fireball removeFromParent];
 }
 
 @end

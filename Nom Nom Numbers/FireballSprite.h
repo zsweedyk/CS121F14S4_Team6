@@ -14,5 +14,6 @@
 @property SKSpriteNode* fireball;
 
 - (void) sendFireballTo:(CGPoint)destination OnScene:(SKScene*)scene;
+- (void) removeFireball;
 
 @end

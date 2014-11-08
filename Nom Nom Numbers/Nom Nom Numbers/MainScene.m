@@ -24,6 +24,7 @@
     DataModel* _dataModel;
     double _currentScore;
     BOOL _gameEnded;
+    BOOL _touchedSheep;
     GameOverButton* gameOverPopup;
 }
 
@@ -40,6 +41,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
 
     _gameEnded = false;
     
+    _touchedSheep = false;
    
     self = [super initWithSize:size];
     [self setup];
@@ -125,7 +127,8 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     SKNode *node = [self nodeAtPoint:location];
 
     if ([node.name isEqual: @"sheep"]) {
-        [self touchedSheep:node];
+        if(!_touchedSheep)
+            [self touchedSheep:node];
         
     } else if ([node.name isEqual:@"quitbutton"]) {
         NSLog(@"hurlo");
@@ -146,13 +149,18 @@ static const uint32_t sheepCategory        =  0x1 << 1;
 
 - (void) touchedSheep:(SKNode*)node
 {
+    _touchedSheep = true;
+    
     FireballSprite* fireballSprite = [[FireballSprite alloc] init];
     SKSpriteNode* fireballNode = [fireballSprite fireball];
     
     // Send fireball at the middle of the sheep touched
     SKSpriteNode* sheepSpriteNode = (SKSpriteNode*) node;
-    CGPoint sheepMiddle = CGPointMake(node.position.x + (sheepSpriteNode.size.width/2), node.position.y + (sheepSpriteNode.size.height/2));
+    CGPoint sheepMiddle = CGPointMake(node.position.x, node.position.y + (sheepSpriteNode.size.height/2));
     [fireballSprite sendFireballTo:sheepMiddle OnScene:self];
+    
+    // Change the name of the sheep so you can't touch it again
+    node.name = @"touchedSheep";
     
     // Set up collision physics but only on the sheep that was touched
     node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sheepSpriteNode.size.width/2];
@@ -163,15 +171,17 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     
     fireballNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:fireballNode.size];
     fireballNode.physicsBody.dynamic = YES;
-    fireballNode.physicsBody.categoryBitMask = sheepCategory;
-    fireballNode.physicsBody.contactTestBitMask = fireballCategory;
+    fireballNode.physicsBody.categoryBitMask = fireballCategory;
+    fireballNode.physicsBody.contactTestBitMask = sheepCategory;
     fireballNode.physicsBody.collisionBitMask = 0;
     fireballNode.physicsBody.usesPreciseCollisionDetection = YES;
 }
 
 - (void) makeNewSheep:(SKNode*)node
 {
-    [_sheepController generateNewSheep:node];
+    NSLog(@"got into makenewsheep");
+    [_sheepController generateNewSheep:(SKNode*)node];
+    NSLog(@"survived generate");
     NSMutableDictionary* sheepData = node.userData;
     char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
     NSString* sheepValue = [sheepData objectForKey:@"Value"];
@@ -179,6 +189,8 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     [_dataModel applySheepChar:sheepOper andValue:sheepValue];
     _currentScore = [_dataModel getScore];
     [_dataView updateScore:_currentScore];
+    
+    _touchedSheep = false;
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
@@ -197,13 +209,15 @@ static const uint32_t sheepCategory        =  0x1 << 1;
         secondBody = contact.bodyA;
     }
     
-    NSLog(@"Contact!");
+    SKNode* sheep = [secondBody node];
+    SKNode* fireball = [firstBody node];
+    fireball.hidden = TRUE;
     
     // Make sure one body is a sheep and call the makeNewSheep method
     if ((firstBody.categoryBitMask & fireballCategory) != 0 &&
         (secondBody.categoryBitMask & sheepCategory) != 0)
     {
-        [self makeNewSheep:(SKSpriteNode*)secondBody];
+        [self makeNewSheep:sheep];
     }
 }
 
