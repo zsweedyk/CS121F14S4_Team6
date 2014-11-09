@@ -9,6 +9,8 @@
 #import "SheepController.h"
 #import "SheepSprite.h"
 #import "SheepModel.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation SheepController
 {
@@ -48,27 +50,49 @@ typedef struct sheepObj sheepObj;
     
         [_skScene addChild:newSheepNode];
     }
+    
+    [self playSheepNoise];
 }
 
 
 - (void) generateNewSheep:(SKNode*)node
 {
-        SheepModel* newSheepModel = [[SheepModel alloc] init];
-        [newSheepModel makeSheep];
-        NSString* value = [newSheepModel getValue];
-        char oper = [newSheepModel getOperator];
+    SheepModel* newSheepModel = [[SheepModel alloc] init];
+    [newSheepModel makeSheep];
+    NSString* value = [newSheepModel getValue];
+    char oper = [newSheepModel getOperator];
     
-        SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:node.position];
-        newSheepNode.name = @"sheep";
+    SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:node.position];
+    newSheepNode.name = @"sheep";
     
-        NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
-        NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
-        [dictionary setValue:value forKey:@"Value"];
-        [dictionary setValue:operAsString forKey:@"Operator"];
-        [newSheepNode setUserData:dictionary];
-
-        [node removeFromParent];
-        [_skScene addChild:newSheepNode];
-        [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
+    NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+    NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
+    [dictionary setValue:value forKey:@"Value"];
+    [dictionary setValue:operAsString forKey:@"Operator"];
+    [newSheepNode setUserData:dictionary];
+    
+    [node removeFromParent];
+    [_skScene addChild:newSheepNode];
+    [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
+    [self playSheepNoise];
 }
+
+- (void)playSheepNoise
+{
+    NSString* fileName = @"Sheep";
+    int randomValue = arc4random_uniform(2);
+    
+    if (randomValue == 1) {
+        fileName = @"Sheep2";
+    }
+    
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    
+    AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    
+    self.sheepPlayer = newPlayer;
+    [self.sheepPlayer play];
+}
+
 @end

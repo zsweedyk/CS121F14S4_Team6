@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "SheepSprite.h"
 #import "SheepModel.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface SheepController : UIViewController
 
 
 - (void) setupSheep:(SKScene*)mainScene;
 - (void) generateNewSheep:(SKNode*)node;
+
+@property (nonatomic, retain) AVAudioPlayer *sheepPlayer;
 
 @end
