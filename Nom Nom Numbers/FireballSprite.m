@@ -31,6 +31,11 @@
     _fireball.size = CGSizeMake(50,50);
     _fireball.position = start;
     
+    NSString *firePath = [[NSBundle mainBundle] pathForResource:@"FireParticle" ofType:@"sks"];
+    SKEmitterNode *fire = [NSKeyedUnarchiver unarchiveObjectWithFile:firePath];
+    fire.targetNode = scene;
+    [_fireball addChild:fire];
+    
     [scene addChild:_fireball];
     SKAction* moveFireball = [SKAction moveTo:destination duration:_fireballTravelTime];
     SKAction* remove = [SKAction removeFromParent];
