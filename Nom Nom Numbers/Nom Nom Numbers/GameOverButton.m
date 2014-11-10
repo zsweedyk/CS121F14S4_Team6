@@ -80,6 +80,7 @@
     SKSpriteNode* restartButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     restartButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     restartButton.position = CGPointMake(popupX * -0.3, popupY * -0.35);
+    restartButton.name = @"playagainaction";
     [gameOverPopup addChild:restartButton];
     
     // Create the label on the confirmation button
@@ -95,6 +96,7 @@
     SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"redButton"];
     quitButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     quitButton.position = CGPointMake(popupX * 0.3, popupY * -0.35);
+    quitButton.name = @"quitaction";
     [gameOverPopup addChild:quitButton];
     
     // Create the label on the confirmation button
