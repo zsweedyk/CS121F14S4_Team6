@@ -42,18 +42,26 @@
     title.name = @"title";
     [self addChild:title];
     
-    SKLabelNode* startButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    startButton.fontSize = 45;
-    startButton.fontColor = [UIColor whiteColor];
-    startButton.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.6);
-    startButton.text = @"Start Game";
-    startButton.name = @"startButton";
-    [self addChild:startButton];
+    SKLabelNode* timeStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    timeStartButton.fontSize = 45;
+    timeStartButton.fontColor = [UIColor whiteColor];
+    timeStartButton.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.6);
+    timeStartButton.text = @"Timed Mode";
+    timeStartButton.name = @"timeStartButton";
+    [self addChild:timeStartButton];
+    
+    SKLabelNode* targetStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    targetStartButton.fontSize = 45;
+    targetStartButton.fontColor = [UIColor whiteColor];
+    targetStartButton.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
+    targetStartButton.text = @"Target Mode";
+    targetStartButton.name = @"targetStartButton";
+    [self addChild:targetStartButton];
     
     SKLabelNode* infoButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     infoButton.fontSize = 45;
     infoButton.fontColor = [UIColor whiteColor];
-    infoButton.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
+    infoButton.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.4);
     infoButton.text = @"How To Play";
     infoButton.name = @"infoButton";
     [self addChild:infoButton];
@@ -66,8 +74,14 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    if ([node.name isEqual: @"startButton"]) {
-        SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+    if ([node.name isEqual: @"timeStartButton"]) {
+        SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
+        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:gameScene transition:transition];
+    }
+    
+    if ([node.name isEqual: @"targetStartButton"]) {
+        SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target"];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:gameScene transition:transition];
     }

@@ -14,10 +14,13 @@
     char _operator;
     NSString *_value;
     Generator *_generator;
+    int _fromInt;
+    int _toInt;
 }
 @end
 
 @implementation SheepModel
+
 
 - (id) init
 {
@@ -39,7 +42,7 @@
 }
 
 // Makes sheep with operator and value
-- (void) makeSheep
+- (void) makeSheepFrom:(int)start to:(int)end
 {
     int chanceIndicator = arc4random_uniform(50);
     
@@ -53,9 +56,9 @@
         
         if (chanceIndicator % 2 == 0) {
             if (_operator == 'x') {
-                value = [_generator generateIntegerfrom:-10 to:10];
+                value = [_generator generateIntegerfrom:start/10 to:end];
             } else {
-                value = [_generator generateIntegerfrom:-100 to:100];
+                value = [_generator generateIntegerfrom:start to:end];
             }
             if ((_operator == '/') && (value == 0)) {++value;}
             _value = [NSString stringWithFormat:@" %d", value];

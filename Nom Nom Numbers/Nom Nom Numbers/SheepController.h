@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "SheepSprite.h"
 #import "SheepModel.h"
+//#import "DataModel.h"
 
-@interface SheepController : UIViewController
+@interface SheepController : UIViewController //<tagetScoreDelegate>
 
 
 - (void) setupSheep:(SKScene*)mainScene;
 - (void) generateNewSheep:(SKNode*)node;
+- (int) getTagetScore;
 
 @end

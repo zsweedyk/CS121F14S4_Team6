@@ -8,9 +8,11 @@
 
 #import "DataModel.h"
 
+
 @implementation DataModel
 
 @synthesize _currentScore;
+@synthesize _targetScore;
 
 
 // Changes the score appropriately when a sheep is selected
@@ -46,6 +48,16 @@
 - (double) getScore
 {
     return _currentScore;
+}
+
+- (void) setTargetScore:(int)score {
+    _targetScore = score;
+}
+
+- (int) getTargetScore
+{
+    
+    return _targetScore;
 }
 
 - (void) resetScore

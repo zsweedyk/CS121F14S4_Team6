@@ -33,7 +33,7 @@
 {
     // check if the score is updated correctly
     
-    [_sheepModel makeSheep];
+    [_sheepModel makeSheepFrom:-100 to:100];
     char operator = [_sheepModel getOperator];
     NSString* value = [_sheepModel getValue];
     XCTAssertThrowsSpecific((operator == '/') && (value == [NSString stringWithFormat:@"0"]), NSException);

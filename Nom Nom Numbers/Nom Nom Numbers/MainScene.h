@@ -16,6 +16,6 @@
 
 @interface MainScene : SKScene <gameOverDelegate>
 
-- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView;
+- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView andMode:(NSString*)mode;
 
 @end
