@@ -14,6 +14,8 @@
 #import "QuitGameButton.h"
 #import "GameOverButton.h"
 #import "StartScene.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation MainScene
 {
@@ -24,17 +26,19 @@
     double _currentScore;
     BOOL _gameEnded;
     GameOverButton* gameOverPopup;
+    NSMutableArray* arrOfSounds;
 }
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView*)skView
 {
     _skView = skView;
-
     _gameEnded = false;
+    arrOfSounds = [NSMutableArray new];
     
     if (self = [super initWithSize:size]) {
         [self setup];
     }
+    
     _sheepController = [[SheepController alloc] init];
     [_sheepController setupSheep:self];
     
@@ -46,7 +50,6 @@
     [self setupBackground];
     [self setupDragon];
     [self setupData];
-
 }
 
 - (void) restart
@@ -117,23 +120,26 @@
         char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
         NSString* sheepValue = [sheepData objectForKey:@"Value"];
         
+        [self playSheepNoise:self];
         [_dataModel applySheepChar:sheepOper andValue:sheepValue];
         _currentScore = [_dataModel getScore];
         [_dataView updateScore:_currentScore];
         
     } else if ([node.name isEqual:@"quitbutton"]) {
-        NSLog(@"hurlo");
-        //[_sheepController removeFromParentViewController];
+        // QUIT BUTTON PRESSED - POPUP APPEARS
+        [self playButtonNoise:self];
         [self quitGame];
     
     } else if ([node.name isEqual:@"quitaction"]) {
         // BACK TO MAIN SCREEN
+        [self playButtonNoise:self];
         SKScene *startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
+        
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
-        NSLog(@"RestartGameWHEE!");
+        [self playButtonNoise:self];
         [self restart];
     }
 }
@@ -174,6 +180,40 @@
     QuitGameButton* quitPopup = [[QuitGameButton alloc] init];
     [quitPopup setupData:self withScore:_currentScore];
     [self addChild:quitPopup];
+}
+
+- (IBAction)playSheepNoise:(id)sender
+{
+    NSString* fileName = @"Deadsheep";
+    int randomValue = arc4random_uniform(2);
+    
+    if (randomValue == 1) {
+        fileName = @"Deadsheep2";
+    }
+    
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    
+    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    [arrOfSounds removeAllObjects];
+    [arrOfSounds insertObject:newPlayer atIndex:0];
+    newPlayer.volume = 1.0;
+    [newPlayer prepareToPlay];
+    [newPlayer play];
+}
+
+- (IBAction)playButtonNoise:(id)sender
+{
+    NSString* fileName = @"Click";
+    
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    
+    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    [arrOfSounds removeAllObjects];
+    [arrOfSounds addObject:newPlayer];
+    [newPlayer prepareToPlay];
+    [newPlayer play];
 }
 
 

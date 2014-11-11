@@ -9,12 +9,16 @@
 
 #import "StartScene.h"
 #import "MainScene.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation StartScene {
     SKView* _skView;
+    NSMutableArray* arrOfSounds;
 }
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
+    arrOfSounds = [NSMutableArray new];
     
     if (self = [super initWithSize:size]) {
         
@@ -68,14 +72,29 @@
     
     if ([node.name isEqual: @"startButton"]) {
         SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        [self playButtonNoise:self];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:gameScene transition:transition];
     }
     
     if ([node.name isEqual: @"infoButton"]) {
+        [self playButtonNoise:self];
         NSLog(@"Information Button Pressed");
     }
+}
+
+- (IBAction)playButtonNoise:(id)sender
+{
+    NSString* fileName = @"Click";
     
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    
+    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    [arrOfSounds removeAllObjects];
+    [arrOfSounds addObject:newPlayer];
+    [newPlayer prepareToPlay];
+    [newPlayer play];
 }
 
 @end

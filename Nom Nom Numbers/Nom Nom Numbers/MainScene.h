@@ -13,6 +13,8 @@
 #import "DataModel.h"
 #import "QuitGameButton.h"
 #import "GameOverButton.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface MainScene : SKScene <gameOverDelegate>
 

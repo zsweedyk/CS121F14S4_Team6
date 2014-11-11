@@ -12,12 +12,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface SheepController : UIViewController
+@interface SheepController : UIViewController {
+    NSMutableArray* arrOfSounds;
+}
 
 
 - (void) setupSheep:(SKScene*)mainScene;
 - (void) generateNewSheep:(SKNode*)node;
-
-@property (nonatomic, retain) AVAudioPlayer *sheepPlayer;
 
 @end

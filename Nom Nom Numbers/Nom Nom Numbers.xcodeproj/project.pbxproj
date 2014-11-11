@@ -25,7 +25,11 @@
 		FB0CD6D21A10242D006A7CDF /* Sheep2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB0CD6D01A10242D006A7CDF /* Sheep2.wav */; };
 		FB0CD6D41A1027AD006A7CDF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0CD6D31A1027AD006A7CDF /* AVFoundation.framework */; };
 		FB0CD6D61A1027F1006A7CDF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0CD6D51A1027F1006A7CDF /* AudioToolbox.framework */; };
-		FBA3F4FA1A03F358009F60DB /* wooden.png in Resources */ = {isa = PBXBuildFile; fileRef = FBA3F4F91A03F358009F60DB /* wooden.png */; };
+		FB1A69E31A11BFF600335644 /* Deadsheep.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB1A69E11A11BFF600335644 /* Deadsheep.wav */; };
+		FB1A69E41A11BFF600335644 /* Deadsheep2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB1A69E21A11BFF600335644 /* Deadsheep2.wav */; };
+		FB1A69E91A11C3DA00335644 /* Click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB1A69E81A11C3DA00335644 /* Click.wav */; };
+		FB1A69EC1A11C74F00335644 /* ScoreDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB1A69EA1A11C74F00335644 /* ScoreDown.wav */; };
+		FB1A69ED1A11C74F00335644 /* ScoreUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB1A69EB1A11C74F00335644 /* ScoreUp.wav */; };
 		FBD0D86F1A031CD80016A3FA /* QuitGameButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD0D86E1A031CD80016A3FA /* QuitGameButton.m */; };
 		FBD0D8741A03536A0016A3FA /* GameOverButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD0D8731A03536A0016A3FA /* GameOverButton.m */; };
 		FBE8798C19FCA94E000F3BE9 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE8798B19FCA94E000F3BE9 /* DataModel.m */; };
@@ -75,7 +79,11 @@
 		FB0CD6D51A1027F1006A7CDF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FB0CD6D71A1027FB006A7CDF /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		FB0CD6D91A10280C006A7CDF /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		FBA3F4F91A03F358009F60DB /* wooden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wooden.png; sourceTree = "<group>"; };
+		FB1A69E11A11BFF600335644 /* Deadsheep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Deadsheep.wav; path = ../Deadsheep.wav; sourceTree = "<group>"; };
+		FB1A69E21A11BFF600335644 /* Deadsheep2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Deadsheep2.wav; path = ../Deadsheep2.wav; sourceTree = "<group>"; };
+		FB1A69E81A11C3DA00335644 /* Click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click.wav; sourceTree = "<group>"; };
+		FB1A69EA1A11C74F00335644 /* ScoreDown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreDown.wav; sourceTree = "<group>"; };
+		FB1A69EB1A11C74F00335644 /* ScoreUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreUp.wav; sourceTree = "<group>"; };
 		FBD0D86D1A031CD80016A3FA /* QuitGameButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuitGameButton.h; sourceTree = "<group>"; };
 		FBD0D86E1A031CD80016A3FA /* QuitGameButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuitGameButton.m; sourceTree = "<group>"; };
 		FBD0D8721A03536A0016A3FA /* GameOverButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverButton.h; sourceTree = "<group>"; };
@@ -152,12 +160,10 @@
 				F6A02BC619FB4463001B1C68 /* MainScene.m */,
 				F6A02BD119FC5405001B1C68 /* SheepController.h */,
 				F6A02BD219FC5405001B1C68 /* SheepController.m */,
-				FB0CD6CF1A10242D006A7CDF /* Sheep.wav */,
-				FB0CD6D01A10242D006A7CDF /* Sheep2.wav */,
 				F6A02BA119FB1B3A001B1C68 /* Main.storyboard */,
-				FBA3F4F91A03F358009F60DB /* wooden.png */,
 				F6A02BA419FB1B3A001B1C68 /* Images.xcassets */,
 				F6A02BA619FB1B3A001B1C68 /* LaunchScreen.xib */,
+				FB1A69E71A11C23200335644 /* Sound FX */,
 				FB0CD6DE1A103493006A7CDF /* Frameworks */,
 				F6A02B9219FB1B3A001B1C68 /* Supporting Files */,
 			);
@@ -199,6 +205,20 @@
 				FB0CD6D31A1027AD006A7CDF /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB1A69E71A11C23200335644 /* Sound FX */ = {
+			isa = PBXGroup;
+			children = (
+				FB1A69EA1A11C74F00335644 /* ScoreDown.wav */,
+				FB1A69EB1A11C74F00335644 /* ScoreUp.wav */,
+				FB1A69E81A11C3DA00335644 /* Click.wav */,
+				FB1A69E11A11BFF600335644 /* Deadsheep.wav */,
+				FB1A69E21A11BFF600335644 /* Deadsheep2.wav */,
+				FB0CD6CF1A10242D006A7CDF /* Sheep.wav */,
+				FB0CD6D01A10242D006A7CDF /* Sheep2.wav */,
+			);
+			name = "Sound FX";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,12 +301,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB1A69ED1A11C74F00335644 /* ScoreUp.wav in Resources */,
 				F6A02BA819FB1B3A001B1C68 /* LaunchScreen.xib in Resources */,
+				FB1A69EC1A11C74F00335644 /* ScoreDown.wav in Resources */,
 				F6A02BA519FB1B3A001B1C68 /* Images.xcassets in Resources */,
 				FB0CD6D11A10242D006A7CDF /* Sheep.wav in Resources */,
 				F6A02B9D19FB1B3A001B1C68 /* GameScene.sks in Resources */,
+				FB1A69E31A11BFF600335644 /* Deadsheep.wav in Resources */,
+				FB1A69E41A11BFF600335644 /* Deadsheep2.wav in Resources */,
 				FB0CD6D21A10242D006A7CDF /* Sheep2.wav in Resources */,
-				FBA3F4FA1A03F358009F60DB /* wooden.png in Resources */,
+				FB1A69E91A11C3DA00335644 /* Click.wav in Resources */,
 				F6A02BA319FB1B3A001B1C68 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
