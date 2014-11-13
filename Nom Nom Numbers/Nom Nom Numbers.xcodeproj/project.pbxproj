@@ -29,8 +29,10 @@
 		CB9A2D031A0939E8004EF777 /* SheepModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF61A0939E8004EF777 /* SheepModel.m */; };
 		CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF81A0939E8004EF777 /* SheepSprite.m */; };
 		CB9A2D051A0939E8004EF777 /* StartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CFA1A0939E8004EF777 /* StartScene.m */; };
+		CBDAC94B1A1335C100A46D7E /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = CBDAC94A1A1335C100A46D7E /* FireParticle.sks */; };
+		CBDAC94D1A1431C100A46D7E /* barnAndDragon.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CBDAC94C1A1431C100A46D7E /* barnAndDragon.atlas */; };
 		CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */; };
-		CBFB884A1A0EDDC900FE2331 /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = CBFB88481A0EDDC900FE2331 /* FireParticle.sks */; };
+		CBFB884A1A0EDDC900FE2331 /* FireballParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */; };
 		CBFB884B1A0EDDCA00FE2331 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFB88491A0EDDC900FE2331 /* spark.png */; };
 /* End PBXBuildFile section */
 
@@ -84,9 +86,11 @@
 		CB9A2CF81A0939E8004EF777 /* SheepSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepSprite.m; sourceTree = "<group>"; };
 		CB9A2CF91A0939E8004EF777 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScene.h; sourceTree = "<group>"; };
 		CB9A2CFA1A0939E8004EF777 /* StartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartScene.m; sourceTree = "<group>"; };
+		CBDAC94A1A1335C100A46D7E /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
+		CBDAC94C1A1431C100A46D7E /* barnAndDragon.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = barnAndDragon.atlas; path = ../../../ProjectImages/barnAndDragon.atlas; sourceTree = "<group>"; };
 		CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FireballSprite.h; path = ../FireballSprite.h; sourceTree = "<group>"; };
 		CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FireballSprite.m; path = ../FireballSprite.m; sourceTree = "<group>"; };
-		CBFB88481A0EDDC900FE2331 /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
+		CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireballParticle.sks; sourceTree = "<group>"; };
 		CBFB88491A0EDDC900FE2331 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,9 +133,11 @@
 		CB9A2CB41A09336D004EF777 /* Nom Nom Numbers */ = {
 			isa = PBXGroup;
 			children = (
+				CBDAC94C1A1431C100A46D7E /* barnAndDragon.atlas */,
 				CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */,
 				CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */,
-				CBFB88481A0EDDC900FE2331 /* FireParticle.sks */,
+				CBDAC94A1A1335C100A46D7E /* FireParticle.sks */,
+				CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */,
 				CBFB88491A0EDDC900FE2331 /* spark.png */,
 				CB9A2CB91A09336F004EF777 /* AppDelegate.h */,
 				CB9A2CBA1A09336F004EF777 /* AppDelegate.m */,
@@ -278,11 +284,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB9A2CCB1A093370004EF777 /* LaunchScreen.xib in Resources */,
+				CBDAC94B1A1335C100A46D7E /* FireParticle.sks in Resources */,
 				CBFB884B1A0EDDCA00FE2331 /* spark.png in Resources */,
 				CB9A2CC81A093370004EF777 /* Images.xcassets in Resources */,
-				CBFB884A1A0EDDC900FE2331 /* FireParticle.sks in Resources */,
+				CBFB884A1A0EDDC900FE2331 /* FireballParticle.sks in Resources */,
 				CB9A2CC01A093370004EF777 /* GameScene.sks in Resources */,
 				CB9A2CC61A093370004EF777 /* Main.storyboard in Resources */,
+				CBDAC94D1A1431C100A46D7E /* barnAndDragon.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
