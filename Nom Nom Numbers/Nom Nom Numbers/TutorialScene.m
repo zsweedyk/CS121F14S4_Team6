@@ -107,17 +107,24 @@
         [_dataView updateScore:_currentScore];
         
         SKSpriteNode* sheepSpriteNode = (SKSpriteNode*) node;
-        sheepSpriteNode.parent.speed = 0;
         
         SKLabelNode* popup = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
         popup.fontSize = 20;
         popup.fontColor = [UIColor whiteColor];
         popup.position = CGPointMake(node.position.x, node.position.y + (sheepSpriteNode.size.height));
-        
         NSString* title = [NSString stringWithFormat:@"the updated score: %d %c %@ = %.2f", 0, sheepOper, sheepValue, _currentScore];
         popup.text = title;
         popup.name = @"popup";
         [self addChild:popup];
+        
+        SKAction *stop = [SKAction speedTo:0 duration:0];
+        SKAction *wait = [SKAction speedTo:0 duration:5];
+        SKAction *run = [SKAction speedTo:1 duration:0];
+        
+        [self runAction:[SKAction sequence:@[stop, wait, run]]];
+        
+        
+        
         
     }
 
