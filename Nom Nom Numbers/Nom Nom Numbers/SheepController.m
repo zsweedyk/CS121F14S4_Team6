@@ -92,7 +92,7 @@ typedef struct sheepObj sheepObj;
     
     AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
     [arrOfSounds addObject:newPlayer];
-    newPlayer.volume = 0.35;
+    newPlayer.volume = 0.5;
     [newPlayer prepareToPlay];
     [newPlayer play];
 }

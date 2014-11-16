@@ -25,23 +25,26 @@
     DataModel* _dataModel;
     double _currentScore;
     BOOL _gameEnded;
+    int _countDownTillStart;
+    SKLabelNode* _readyLabels;
     GameOverButton* gameOverPopup;
     NSMutableArray* arrOfSounds;
+    NSTimer* _gameStartTimer;
 }
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView*)skView
 {
     _skView = skView;
     _gameEnded = false;
+    _countDownTillStart = 4;
+    
     arrOfSounds = [NSMutableArray new];
     
     if (self = [super initWithSize:size]) {
         [self setup];
     }
     
-    _sheepController = [[SheepController alloc] init];
-    [_sheepController setupSheep:self];
-    
+    [self prepareForGame];
     return self;
 }
 
@@ -52,15 +55,69 @@
     [self setupData];
 }
 
+- (void) prepareForGame
+{
+    NSString* fontType = @"MalayalamSangamMN-Bold";
+    CGFloat labelX = self.frame.size.width * 0.5;
+    CGFloat labelY = self.frame.size.height * 0.5;
+    
+    _readyLabels = [[SKLabelNode alloc] initWithFontNamed:fontType];
+    _readyLabels.fontSize = 150;
+    _readyLabels.fontColor = [UIColor redColor];
+    _readyLabels.position = CGPointMake(labelX, labelY);
+    _readyLabels.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    _readyLabels.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    _readyLabels.text = @"Ready?";
+    
+    [self addChild:_readyLabels];
+    [self initializeTimer];
+}
+
+- (void) initializeTimer
+{
+    _gameStartTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(gameStartTimerAction) userInfo:nil repeats:YES];
+}
+
+- (void) gameStartTimerAction
+{
+    if (_countDownTillStart == 1) {
+        _readyLabels.text = @"Go!";
+        --_countDownTillStart;
+        
+    } else if (_countDownTillStart < 1) {
+        [_gameStartTimer invalidate];
+        [_readyLabels removeFromParent];
+        
+        [_dataView initializeTimer];
+        _sheepController = [[SheepController alloc] init];
+        [_sheepController setupSheep:self];
+        
+    } else {
+        --_countDownTillStart;
+        [self changeReadyLabelText];
+    }
+}
+
+- (void) changeReadyLabelText
+{
+    _readyLabels.text = [NSString stringWithFormat:@"%d", _countDownTillStart];
+}
+
 - (void) restart
 {
     _gameEnded = false;
+    [gameOverPopup removeFromParent];
+    
+    // Reset data
     [_dataModel resetScore];
     _currentScore = 0;
     [_dataView updateScore:[_dataModel getScore]];
     [_dataView resetTimer];
-    [gameOverPopup removeFromParent];
-    [_sheepController setupSheep:self];
+    
+    // Reset initial game prep
+    _readyLabels.text = @"Ready?";
+    _countDownTillStart = 4;
+    [self prepareForGame];
 }
 
 - (void) setupBackground
@@ -184,11 +241,13 @@
 
 - (IBAction)playSheepNoise:(id)sender
 {
-    NSString* fileName = @"Deadsheep";
+    // StrongFire is a clip taken from:
+    // http://soundbible.com/1348-Large-Fireball.html
+    NSString* fileName = @"StrongFire";
     int randomValue = arc4random_uniform(2);
     
     if (randomValue == 1) {
-        fileName = @"Deadsheep2";
+        fileName = @"WeakFire";
     }
     
     NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];

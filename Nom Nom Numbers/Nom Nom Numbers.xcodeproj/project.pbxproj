@@ -30,6 +30,8 @@
 		FB1A69E91A11C3DA00335644 /* Click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB1A69E81A11C3DA00335644 /* Click.wav */; };
 		FB1A69EC1A11C74F00335644 /* ScoreDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB1A69EA1A11C74F00335644 /* ScoreDown.wav */; };
 		FB1A69ED1A11C74F00335644 /* ScoreUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB1A69EB1A11C74F00335644 /* ScoreUp.wav */; };
+		FBA64D911A19694600437E51 /* StrongFire.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBA64D8F1A19694600437E51 /* StrongFire.wav */; };
+		FBA64D921A19694600437E51 /* WeakFire.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBA64D901A19694600437E51 /* WeakFire.wav */; };
 		FBD0D86F1A031CD80016A3FA /* QuitGameButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD0D86E1A031CD80016A3FA /* QuitGameButton.m */; };
 		FBD0D8741A03536A0016A3FA /* GameOverButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD0D8731A03536A0016A3FA /* GameOverButton.m */; };
 		FBE8798C19FCA94E000F3BE9 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE8798B19FCA94E000F3BE9 /* DataModel.m */; };
@@ -84,6 +86,8 @@
 		FB1A69E81A11C3DA00335644 /* Click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click.wav; sourceTree = "<group>"; };
 		FB1A69EA1A11C74F00335644 /* ScoreDown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreDown.wav; sourceTree = "<group>"; };
 		FB1A69EB1A11C74F00335644 /* ScoreUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreUp.wav; sourceTree = "<group>"; };
+		FBA64D8F1A19694600437E51 /* StrongFire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = StrongFire.wav; sourceTree = "<group>"; };
+		FBA64D901A19694600437E51 /* WeakFire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WeakFire.wav; sourceTree = "<group>"; };
 		FBD0D86D1A031CD80016A3FA /* QuitGameButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuitGameButton.h; sourceTree = "<group>"; };
 		FBD0D86E1A031CD80016A3FA /* QuitGameButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuitGameButton.m; sourceTree = "<group>"; };
 		FBD0D8721A03536A0016A3FA /* GameOverButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverButton.h; sourceTree = "<group>"; };
@@ -210,6 +214,8 @@
 		FB1A69E71A11C23200335644 /* Sound FX */ = {
 			isa = PBXGroup;
 			children = (
+				FBA64D8F1A19694600437E51 /* StrongFire.wav */,
+				FBA64D901A19694600437E51 /* WeakFire.wav */,
 				FB1A69EA1A11C74F00335644 /* ScoreDown.wav */,
 				FB1A69EB1A11C74F00335644 /* ScoreUp.wav */,
 				FB1A69E81A11C3DA00335644 /* Click.wav */,
@@ -304,8 +310,10 @@
 				FB1A69ED1A11C74F00335644 /* ScoreUp.wav in Resources */,
 				F6A02BA819FB1B3A001B1C68 /* LaunchScreen.xib in Resources */,
 				FB1A69EC1A11C74F00335644 /* ScoreDown.wav in Resources */,
+				FBA64D921A19694600437E51 /* WeakFire.wav in Resources */,
 				F6A02BA519FB1B3A001B1C68 /* Images.xcassets in Resources */,
 				FB0CD6D11A10242D006A7CDF /* Sheep.wav in Resources */,
+				FBA64D911A19694600437E51 /* StrongFire.wav in Resources */,
 				F6A02B9D19FB1B3A001B1C68 /* GameScene.sks in Resources */,
 				FB1A69E31A11BFF600335644 /* Deadsheep.wav in Resources */,
 				FB1A69E41A11BFF600335644 /* Deadsheep2.wav in Resources */,
