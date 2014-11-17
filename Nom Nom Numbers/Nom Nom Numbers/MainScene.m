@@ -153,19 +153,21 @@
 {
     _touchedSheep = true;
     
+    FireballSprite* fireballSprite = [[FireballSprite alloc] init];
+    
+    NSUInteger numFrames = [_dragonAnimationFrames count];
     [_dragonAndBarn runAction:[SKAction animateWithTextures: _dragonAnimationFrames
-                                               timePerFrame: 0.15
+                                               timePerFrame: [fireballSprite animationTime]/numFrames
                                                      resize: YES
                                                     restore: YES]];
-    
-    FireballSprite* fireballSprite = [[FireballSprite alloc] init];
     
     // Send fireball at the middle of the sheep touched
     SKSpriteNode* sheepSpriteNode = (SKSpriteNode*) node;
     CGPoint sheepMiddle = CGPointMake(node.position.x, node.position.y + (sheepSpriteNode.size.height/2));
     [fireballSprite sendFireballTo:sheepMiddle OnScene:self];
     
-    [NSTimer scheduledTimerWithTimeInterval: [fireballSprite fireballTravelTime]
+    [NSTimer scheduledTimerWithTimeInterval: [fireballSprite fireballTravelTime] +
+                                             [fireballSprite animationTime]
                                      target: self
                                    selector: @selector(makeNewSheep:)
                                    userInfo: node

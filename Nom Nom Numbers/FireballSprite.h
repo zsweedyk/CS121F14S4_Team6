@@ -10,6 +10,7 @@
 
 @interface FireballSprite : NSObject
 
+@property NSTimeInterval animationTime;
 @property NSTimeInterval fireballTravelTime;
 @property NSTimeInterval fireBurnTime;
 @property SKEmitterNode* fireball;
