@@ -47,7 +47,7 @@
         desiredValue = [[splitString objectAtIndex:1] doubleValue];
     }
     
-    XCTAssertThrowsSpecific((operator == '/') && (desiredValue == 0), NSException);
+    XCTAssertThrowsSpecific(((operator == '/') && (desiredValue == 0)), NSException);
     
 }
 

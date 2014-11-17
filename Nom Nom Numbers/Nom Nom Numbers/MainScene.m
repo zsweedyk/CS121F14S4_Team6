@@ -25,6 +25,8 @@
     double _currentScore;
     BOOL _gameEnded;
     BOOL _touchedSheep;
+    int _countDownTillStart;
+    SKLabelNode* _readyLabels;
     GameOverButton* gameOverPopup;
     NSMutableArray* arrOfSounds;
     NSTimer* _gameStartTimer;
@@ -49,9 +51,8 @@ static const uint32_t sheepCategory        =  0x1 << 1;
    
     self = [super initWithSize:size];
     [self setup];
-
-    _sheepController = [[SheepController alloc] init];
-    [_sheepController setupSheep:self];
+    
+    [self prepareForGame];
     
     // Set up physics and delegate for collision detection
     self.physicsWorld.gravity = CGVectorMake(0,0);
@@ -103,7 +104,6 @@ static const uint32_t sheepCategory        =  0x1 << 1;
         [_dataView initializeTimer];
         _sheepController = [[SheepController alloc] init];
         [_sheepController setupSheep:self];
-        
     } else {
         --_countDownTillStart;
         [self changeReadyLabelText];
@@ -184,11 +184,14 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     SKNode *node = [self nodeAtPoint:location];
 
     if ([node.name isEqual: @"sheep"]) {
-        if(!_touchedSheep)
+        // Prevents another sheep from being touched during Fireball
+        if(!_touchedSheep) {
             [self touchedSheep:node];
+            [self playSheepNoise:self];
+        }
         
     } else if ([node.name isEqual:@"quitbutton"]) {
-        //[_sheepController removeFromParentViewController];
+        [self playButtonNoise:self];
         [self quitGame];
     
     } else if ([node.name isEqual:@"quitaction"]) {
@@ -200,6 +203,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
         
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
+        [self playButtonNoise:self];
         [self restart];
     }
 }
