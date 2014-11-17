@@ -91,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB0CD6D61A1027F1006A7CDF /* AudioToolbox.framework in Frameworks */,
+				FB0CD6D41A1027AD006A7CDF /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +191,33 @@
 				CB9A2CD51A093371004EF777 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FB0CD6DE1A103493006A7CDF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB0CD6D91A10280C006A7CDF /* OpenAL.framework */,
+				FB0CD6D71A1027FB006A7CDF /* CoreAudio.framework */,
+				FB0CD6D51A1027F1006A7CDF /* AudioToolbox.framework */,
+				FB0CD6D31A1027AD006A7CDF /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB1A69E71A11C23200335644 /* Sound FX */ = {
+			isa = PBXGroup;
+			children = (
+				FBA64D8F1A19694600437E51 /* StrongFire.wav */,
+				FBA64D901A19694600437E51 /* WeakFire.wav */,
+				FB1A69EA1A11C74F00335644 /* ScoreDown.wav */,
+				FB1A69EB1A11C74F00335644 /* ScoreUp.wav */,
+				FB1A69E81A11C3DA00335644 /* Click.wav */,
+				FB1A69E11A11BFF600335644 /* Deadsheep.wav */,
+				FB1A69E21A11BFF600335644 /* Deadsheep2.wav */,
+				FB0CD6CF1A10242D006A7CDF /* Sheep.wav */,
+				FB0CD6D01A10242D006A7CDF /* Sheep2.wav */,
+			);
+			name = "Sound FX";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
