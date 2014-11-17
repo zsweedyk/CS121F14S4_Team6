@@ -48,6 +48,7 @@
     
     _sheepController = [[SheepController alloc] init];
     [_sheepController setupSheep:self];
+
     
     [self setupData];
 
@@ -128,6 +129,7 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
 
+    NSLog(@"touched with %@", node.name);
     if ([node.name isEqual: @"sheep"]) {
         NSLog(@"sheep tapped");
         [_sheepController generateNewSheep:node];

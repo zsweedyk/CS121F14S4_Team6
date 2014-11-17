@@ -74,6 +74,7 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
+    
     if ([node.name isEqual: @"timeStartButton"]) {
         SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];

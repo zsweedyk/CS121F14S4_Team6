@@ -40,8 +40,7 @@ typedef struct sheepObj sheepObj;
         char oper = [sheepModel getOperator];
         
         SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
-        NSString* sheepName = @"sheep";
-        newSheepNode.name = sheepName;
+        newSheepNode.name = @"sheep";
 
         NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
         NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
@@ -49,7 +48,9 @@ typedef struct sheepObj sheepObj;
         [dictionary setValue:operAsString forKey:@"Operator"];
         [newSheepNode setUserData:dictionary];
     
+    
         [_skScene addChild:newSheepNode];
+//        [self generateNewSheep:newSheepNode];
     }
 }
 
