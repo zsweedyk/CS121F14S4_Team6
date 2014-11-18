@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "SheepSprite.h"
 #import "SheepModel.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
-@interface SheepController : UIViewController
+@interface SheepController : UIViewController {
+    NSMutableArray* arrOfSounds;
+}
 
 
 - (void) setupSheep:(SKScene*)mainScene;

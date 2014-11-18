@@ -39,9 +39,6 @@
     // Add Label view
     [self addChild:_currentTime];
     [self addChild:_currentScore];
-    
-    // Initialize timer
-    [self initializeTimer];
     return self;
 }
 
@@ -69,14 +66,12 @@
         [self.customDelegate showGameResults:self];
         
     } else {
-        
         if (_initialTime < 12) {
             _currentTime.fontColor = [UIColor redColor];
         }
         --_initialTime;
         [self changeTimerText];
     }
-    
 }
 
 // Updates the visual when the score is changed
@@ -95,7 +90,6 @@
 {
     _initialTime = 60;
     _currentTime.fontColor = [UIColor whiteColor];
-    [self initializeTimer];
     [self changeTimerText];
 }
 
