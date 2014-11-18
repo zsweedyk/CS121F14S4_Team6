@@ -31,33 +31,25 @@
 
 - (void)setup {
     
-    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
+    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"StartPageBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
     background.xScale = .5;
     background.yScale = .5;
     [self addChild:background];
     
-    SKLabelNode* title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    title.fontSize = 60;
-    title.fontColor = [UIColor whiteColor];
-    title.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.9);
-    title.text = @"Nom Nom Numbers";
-    title.name = @"title";
-    [self addChild:title];
-    
     SKLabelNode* startButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startButton.fontSize = 45;
-    startButton.fontColor = [UIColor whiteColor];
-    startButton.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.6);
+    startButton.fontColor = [UIColor blackColor];
+    startButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.5);
     startButton.text = @"Start Game";
     startButton.name = @"startButton";
     [self addChild:startButton];
     
     SKLabelNode* infoButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     infoButton.fontSize = 45;
-    infoButton.fontColor = [UIColor whiteColor];
-    infoButton.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
+    infoButton.fontColor = [UIColor blackColor];
+    infoButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.4);
     infoButton.text = @"How To Play";
     infoButton.name = @"infoButton";
     [self addChild:infoButton];
