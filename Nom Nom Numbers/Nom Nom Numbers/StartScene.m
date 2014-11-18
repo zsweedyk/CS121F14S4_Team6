@@ -40,21 +40,38 @@
     background.yScale = .5;
     [self addChild:background];
     
-    SKLabelNode* startButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    startButton.fontSize = 45;
-    startButton.fontColor = [UIColor blackColor];
-    startButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.5);
-    startButton.text = @"Start Game";
-    startButton.name = @"startButton";
-    [self addChild:startButton];
+//    SKLabelNode* title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+//    title.fontSize = 60;
+//    title.fontColor = [UIColor whiteColor];
+//    title.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.9);
+//    title.text = @"Nom Nom Numbers";
+//    title.name = @"title";
+//    [self addChild:title];
+    
+    SKLabelNode* timeStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    timeStartButton.fontSize = 45;
+    timeStartButton.fontColor = [UIColor blackColor];
+    timeStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.5);
+    timeStartButton.text = @"Timed Mode";
+    timeStartButton.name = @"timeStartButton";
+    [self addChild:timeStartButton];
+    
+    SKLabelNode* targetStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    targetStartButton.fontSize = 45;
+    targetStartButton.fontColor = [UIColor blackColor];
+    targetStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.41);
+    targetStartButton.text = @"Target Mode";
+    targetStartButton.name = @"targetStartButton";
+    [self addChild:targetStartButton];
     
     SKLabelNode* infoButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     infoButton.fontSize = 45;
     infoButton.fontColor = [UIColor blackColor];
-    infoButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.4);
+    infoButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.32);
+
     infoButton.text = @"How To Play";
     infoButton.name = @"infoButton";
-    [self addChild:infoButton];
+//    [self addChild:infoButton];
 }
 
 
@@ -64,8 +81,8 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    if ([node.name isEqual: @"startButton"]) {
-        /*SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+    if ([node.name isEqual: @"timeStartButton"]) {
+        /*SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:gameScene transition:transition];*/
         
@@ -76,6 +93,12 @@
         /*SKScene *targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:targetTutorialScence transition:transition];*/
+    }
+    
+    if ([node.name isEqual: @"targetStartButton"]) {
+        SKScene *targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:targetTutorialScence transition:transition];
     }
     
     if ([node.name isEqual: @"infoButton"]) {

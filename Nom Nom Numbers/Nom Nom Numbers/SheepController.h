@@ -19,5 +19,6 @@
 
 - (void) setupSheep:(SKScene*)mainScene;
 - (void) generateNewSheep:(SKNode*)node;
+- (int) getTagetScore;
 
 @end

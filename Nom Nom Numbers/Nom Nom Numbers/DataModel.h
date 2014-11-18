@@ -8,12 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface DataModel : NSObject
 
+
 @property (nonatomic) double _currentScore;
+@property (nonatomic) int _targetScore;
 
 - (void) applySheepChar:(char)operator andValue:(NSString *)givenValue;
 - (double) getScore;
+- (void) setTargetScore:(int)score;
+- (int) getTargetScore;
 - (void) resetScore;
 
 @end

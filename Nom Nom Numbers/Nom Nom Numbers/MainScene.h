@@ -16,6 +16,6 @@
 //<gameOverDelegate>
 @interface MainScene : SKScene <SKPhysicsContactDelegate, gameOverDelegate>
 
-- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView;
+- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView andMode:(NSString*)mode;
 
 @end

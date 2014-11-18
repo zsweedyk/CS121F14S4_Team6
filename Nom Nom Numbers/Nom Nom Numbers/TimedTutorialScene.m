@@ -12,12 +12,14 @@
 #import "SheepModel.h"
 #import "DataView.h"
 #import "DataModel.h"
+#import "SheepController.h"
 
 @implementation TimedTutorialScene {
     SKView* _skView;
     DataView* _dataView;
     DataModel* _dataModel;
     bool _firstTime;
+    SheepController* _sheepController;
 }
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
@@ -25,6 +27,7 @@
     self = [super initWithSize:size];
     _skView = [[SKView alloc] init];
     _skView = skView;
+    _sheepController = [[SheepController alloc] init];
     [self setup];
     _firstTime = YES;
     
@@ -160,7 +163,7 @@
     SheepSprite* _sheepSprite = [[SheepSprite alloc] init];
     for (int i = 1; i < 6; i++) {
         SheepModel* sheepModel = [[SheepModel alloc] init];
-        [sheepModel makeSheep];
+        [sheepModel makeSheepFrom:-100 to:100];
         
         NSString* sheepName = @"sheep";
         NSString* value = [sheepModel getValue];
@@ -213,14 +216,14 @@
         [self runAction:[SKAction sequence:@[stop, wait, run]]];
         
     } else if ([node.name isEqual: @"quitaction"]) {
-        SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:gameScene transition:transition];
     } else if ([node.name isEqual: @"startaction"]) {
         
         _dataModel = [DataModel alloc];
         _dataView = [[DataView alloc] init];
-        [_dataView setupData:self withScore:0];
+        [_dataView setupData:self withScore:0 andMode:@"timed" andModel:_dataModel andSheepController:_sheepController];
         [self addChild:_dataView];
         [[self childNodeWithName:@"startpopup"] removeFromParent];
         [self setupSheep];

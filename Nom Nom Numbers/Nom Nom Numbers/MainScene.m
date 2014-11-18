@@ -28,6 +28,7 @@
     int _countDownTillStart;
     SKLabelNode* _readyLabels;
     GameOverButton* gameOverPopup;
+    NSString* _mode;
     NSMutableArray* arrOfSounds;
     NSTimer* _gameStartTimer;
     SKSpriteNode* _dragonAndBarn;
@@ -36,8 +37,20 @@
     NSString* _sheepValue;
 }
 
-- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView
+
+
+// Bitmaps for fireball and sheep collision detection
+// Note that this and all collision related code is slightly adapted from this site:
+// http://www.raywenderlich.com/42699/spritekit-tutorial-for-beginners
+
+static const uint32_t fireballCategory     =  0x1 << 0;
+static const uint32_t sheepCategory        =  0x1 << 1;
+
+- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView andMode:(NSString*)mode
+
 {
+
+    _mode = mode;
     _skView = skView;
     _gameEnded = false;
     _countDownTillStart = 4;
@@ -47,9 +60,12 @@
     _touchedSheep = false;
    
     self = [super initWithSize:size];
+    
+    
+    _sheepController = [[SheepController alloc] init];
+
     [self setup];
     
-    [self prepareForGame];
     
     // Set up dragon animation frames
     NSMutableArray* dragonFrames = [NSMutableArray array];
@@ -69,6 +85,7 @@
 {
     [self setupBackground];
     [self setupDragon];
+    [self prepareForGame];
     [self setupData];
 }
 
@@ -104,9 +121,8 @@
     } else if (_countDownTillStart < 1) {
         [_gameStartTimer invalidate];
         [_readyLabels removeFromParent];
-        
+
         [_dataView initializeTimer];
-        _sheepController = [[SheepController alloc] init];
         [_sheepController setupSheep:self];
     } else {
         --_countDownTillStart;
@@ -162,25 +178,29 @@
 
 - (void) setupData
 {
-    // Create DataModel
-    _dataModel = [DataModel alloc];
-    _currentScore = [_dataModel getScore];
+
+        // Create DataModel
+        _dataModel = [[DataModel alloc] init];
+        _currentScore = [_dataModel getScore];
+        
+        // Create DataView
+        _dataView = [[DataView alloc] init];
+        [_dataView setupData:self withScore:_currentScore andMode:_mode andModel:_dataModel andSheepController:_sheepController];
+        _dataView.customDelegate = self;
+        [self addChild:_dataView];
+        
+        // Create Quit button
+        SKLabelNode* quitButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        quitButton.fontSize = 45;
+        quitButton.fontColor = [UIColor whiteColor];
+        quitButton.position = CGPointMake(self.size.width * 0.8, self.size.height * 0.93);
+        quitButton.text = @"Quit";
+        quitButton.name = @"quitbutton";
+        quitButton.zPosition = 2;
+        [self addChild:quitButton];
+
+
     
-    // Create DataView
-    _dataView = [[DataView alloc] init];
-    [_dataView setupData:self withScore:_currentScore];
-    _dataView.customDelegate = self;
-    [self addChild:_dataView];
-    
-    // Create Quit button
-    SKLabelNode* quitButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    quitButton.fontSize = 45;
-    quitButton.fontColor = [UIColor whiteColor];
-    quitButton.position = CGPointMake(self.size.width * 0.8, self.size.height * 0.93);
-    quitButton.text = @"Quit";
-    quitButton.name = @"quitbutton";
-    quitButton.zPosition = 2;
-    [self addChild:quitButton];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -189,33 +209,40 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
 
+    
     if ([node.name isEqual: @"sheep"]) {
         // Prevents another sheep from being touched during Fireball
         if(!_touchedSheep) {
             [self touchedSheep:node];
             [self playSheepNoise:self];
+
         }
         
     } else if ([node.name isEqual:@"quitbutton"]) {
-//        [self playButtonNoise:self];
+
+        [self playButtonNoise:self];
         [self quitGame];
     
     } else if ([node.name isEqual:@"quitaction"]) {
         // BACK TO MAIN SCREEN
-//        [self playButtonNoise:self];
+        [self playButtonNoise:self];
         SKScene *startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
         
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
-//        [self playButtonNoise:self];
+        [self playButtonNoise:self];
         [self restart];
+    } else if ([node.name isEqual:@"targetbutton"]) {
+        [self showGameResults:_dataView];
+        
     }
 }
 
 - (void) touchedSheep:(SKNode*)node
 {
+
     _touchedSheep = true;
     
     FireballSprite* fireballSprite = [[FireballSprite alloc] init];
@@ -331,6 +358,34 @@
         }];
 }
 
+- (double)calculateTargetScoreAtTime:(double)time {
+    
+    int targetScore = [_dataModel getTargetScore];
+    
+    //calculate difference between current score and target score
+    double diff = abs(_currentScore - targetScore);
+    double scoreTargetScorePortion;
+    
+    //calculate how close current score is to target score as a percentage
+    if (targetScore - diff < 0) {
+        scoreTargetScorePortion = 0;
+    } else {
+        scoreTargetScorePortion = (targetScore - diff)/targetScore;
+    }
+    
+    //reward a fast time; any time over 10 minutes results in a score of 0
+    double score;
+    if (time > 600) {
+        score = 0;
+    } else {
+        score = (600-time)/600 * scoreTargetScorePortion * 100;
+    }
+    
+    return score;
+
+    
+}
+
 // Delegate Function: Shows result when game is over
 - (void) showGameResults:(DataView *)controller
 {
@@ -339,7 +394,23 @@
     
     // Create the Game Over popup
     gameOverPopup = [[GameOverButton alloc] init];
-    [gameOverPopup setupData:self withScore:_currentScore];
+    double score;
+    if ([_mode isEqualToString:@"target"]) {
+        double time = [_dataView getCurrentTime];
+        
+        //prevent divide by 0
+        if (time == 0) {
+            time = 1;
+        }
+        score = [self calculateTargetScoreAtTime:time];
+        if (score < 0) {
+            score = 0;
+        }
+        
+    } else {
+        score = _currentScore;
+    }
+    [gameOverPopup setupData:self withScore:score];
     [self addChild: gameOverPopup];
 }
 
@@ -350,7 +421,24 @@
     
     // Create the Quit popup
     QuitGameButton* quitPopup = [[QuitGameButton alloc] init];
-    [quitPopup setupData:self withScore:_currentScore];
+    
+    double score;
+    if ([_mode isEqualToString:@"target"]) {
+        double time = [_dataView getCurrentTime];
+        
+        if (time == 0) {
+            time = 1;
+        }
+        score = [self calculateTargetScoreAtTime:time];
+        if (score < 0) {
+            score = 0;
+        }
+    }
+    else {
+        score = _currentScore;
+    }
+
+    [quitPopup setupData:self withScore:score];
     [self addChild:quitPopup];
 }
 

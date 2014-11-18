@@ -7,20 +7,80 @@
 //
 
 #import "DataView.h"
+#import "DataModel.h"
+#import "SheepController.h"
 
 @implementation DataView
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore
+#define timeModeStartTime 60
+
+- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andSheepController:(SheepController *)sheepController
 {
+
+    _sheepController = sheepController;
+    _dataModel = model;
+    _mode = mode;
     CGFloat Xdimensions = mainScene.size.width;
     CGFloat Ydimensions = mainScene.size.height;
-    
-    _initialTime = 60;
     CGFloat headerY = Ydimensions * .93;
+    
+    CGFloat scoreX;
+    CGFloat timerX;
+    CGFloat targetScoreX;
     NSString* fontType = @"MarkerFelt-Thin";
     
+    if ([mode isEqualToString:@"timed"]) {
+        scoreX = Xdimensions * .02;
+        timerX = Xdimensions * .5;
+        
+        _initialTime = timeModeStartTime;
+        
+        // Set up UI for Timer Label
+        _currentTime = [[SKLabelNode alloc] initWithFontNamed:fontType];
+        _currentTime.fontSize = 45;
+        _currentTime.fontColor = [UIColor whiteColor];
+        _currentTime.position = CGPointMake(timerX, headerY);
+        [self changeTimerText];
+        [self addChild:_currentTime];
+        
+        
+    } else {
+        scoreX = Xdimensions * .02;
+        //timerX = Xdimensions * .35;
+        targetScoreX = Xdimensions * .45;
+        // Set up Target Score Label
+        _targetScore = [[SKLabelNode alloc] initWithFontNamed:fontType];
+        _targetScore.fontSize = 45;
+        _targetScore.fontColor = [UIColor whiteColor];
+        _targetScore.position = CGPointMake(targetScoreX, headerY);
+        _targetScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        
+        int targetScore = [_sheepController getTagetScore];
+        [_dataModel setTargetScore:targetScore];
+        NSLog(@"data view target score: %d", targetScore);
+        _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
+        [self addChild:_targetScore];
+        
+        _initialTime = 0;
+        
+
+        SKLabelNode* targetButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        targetButton.fontSize = 45;
+        targetButton.fontColor = [UIColor whiteColor];
+        targetButton.position = CGPointMake(Xdimensions*.35, headerY);
+        targetButton.text = @"Hit Me!";
+        targetButton.name = @"targetbutton";
+        targetButton.zPosition = 2;
+        [self addChild:targetButton];
+        
+        
+    }
+    
+
+//    // Initialize timer
+//    [self initializeTimer];
+    
     // Set up UI for Score Label
-    CGFloat scoreX = Xdimensions * .02;
     _currentScore = [[SKLabelNode alloc] initWithFontNamed:fontType];
     _currentScore.fontSize = 45;
     _currentScore.fontColor = [UIColor whiteColor];
@@ -28,19 +88,13 @@
     _currentScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     _currentScore.text = [NSString stringWithFormat:@"Score: %.2f", currentScore];
     
-    // Set up UI for Timer Label
-    CGFloat timerX = Xdimensions * .5;
-    _currentTime = [[SKLabelNode alloc] initWithFontNamed:fontType];
-    _currentTime.fontSize = 45;
-    _currentTime.fontColor = [UIColor whiteColor];
-    _currentTime.position = CGPointMake(timerX, headerY);
-    [self changeTimerText];
+
  
     // Add Label view
-    [self addChild:_currentTime];
     [self addChild:_currentScore];
     return self;
 }
+
 
 // Used to change the text of the timer to a MM:SS format
 - (void) changeTimerText
@@ -54,7 +108,12 @@
 // Creates an NSTimer
 - (void) initializeTimer
 {
-    _gameTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDownTimer) userInfo:nil repeats:YES];
+    if ([_mode isEqualToString:@"timed"]) {
+        _gameTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDownTimer) userInfo:nil repeats:YES];
+    } else {
+        _gameTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countUpTimer) userInfo:nil repeats:YES];
+    }
+    
 }
 
 // Decrements the timer and calls on delegate function when timer reaches 0
@@ -74,6 +133,11 @@
     }
 }
 
+- (void) countUpTimer
+{
+    ++_initialTime;
+}
+
 // Updates the visual when the score is changed
 - (void) updateScore: (double)newScore
 {
@@ -86,11 +150,28 @@
     [_gameTimer invalidate];
 }
 
+- (int) getCurrentTime
+{
+    return _initialTime;
+}
 - (void) resetTimer
 {
-    _initialTime = 60;
-    _currentTime.fontColor = [UIColor whiteColor];
-    [self changeTimerText];
+    
+    [self initializeTimer];
+    
+    if ([_mode isEqualToString:@"timed"]) {
+        _initialTime = timeModeStartTime;
+        _currentTime.fontColor = [UIColor whiteColor];
+        [self changeTimerText];
+    } else {
+        _initialTime = 0;
+        int targetScore = [_sheepController getTagetScore];
+        [_dataModel setTargetScore:targetScore];
+        
+        _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
+
+    }
+    
 }
 
 @end
