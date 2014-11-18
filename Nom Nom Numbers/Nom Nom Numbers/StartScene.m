@@ -68,13 +68,14 @@
         
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TimeModeHasLaunched"]) {
             
-            // first time launch timed-mode, so display the tutorial
+            // already launched timed-mode before, so go straight into the timed-mode gameplay
             SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
             SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
             
         } else {
-            // already launched timed-mode before, so go straight into the timed-mode gameplay
+            
+            // first time launch timed-mode, so display the tutorial
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimeModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
@@ -90,14 +91,14 @@
         
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TargetModeHasLaunched"]) {
             
-            // first time launch target-mode, so display the tutorial
+            // already launched timed-mode before, so go straight into the target-mode gameplay
             SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target"];
             SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
             
         } else {
             
-            // already launched timed-mode before, so go straight into the target-mode gameplay
+            // first time launch target-mode, so display the tutorial
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
