@@ -30,6 +30,8 @@
     GameOverButton* gameOverPopup;
     NSMutableArray* arrOfSounds;
     NSTimer* _gameStartTimer;
+    char _sheepOper;
+    NSString* _sheepValue;
 }
 
 // Bitmaps for fireball and sheep collision detection
@@ -238,16 +240,73 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     fireballNode.physicsBody.usesPreciseCollisionDetection = YES;
 }
 
+- (SKLabelNode*) newScoreNode
+{
+    SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
+    
+    NSString *oper = [NSString stringWithFormat:@"%c",_sheepOper];
+    NSString* myString=[NSString stringWithFormat:@"%@%@",oper,_sheepValue];
+    
+    // if sheep value was a fraction, only display fraction part since displaying decimal
+    // portion as well will get too cramped
+    NSCharacterSet *parens = [NSCharacterSet characterSetWithCharactersInString:@"()"];
+    NSRange searchRange = NSMakeRange(0, myString.length);
+    NSRange foundRange = [myString rangeOfCharacterFromSet:parens options:0 range:searchRange];
+    // check if there are parentheses (the value is a fraction that contains its decimal counterpart
+    if (foundRange.location != NSNotFound){
+        NSRange range = [myString rangeOfString:@"("];
+        NSString *shortString = [myString substringToIndex:range.location];
+        scoreNode.text = shortString;
+    }
+    else {
+        scoreNode.text = myString;
+    }
+    // set color to be off-white so text is visible even with sheep passing by
+    scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
+    scoreNode.fontSize = 24;
+    
+    scoreNode.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-50);
+    scoreNode.name = @"scoreNode";
+    
+    return scoreNode;
+}
+
 - (void) makeNewSheep:(SKNode*)node
 {
     [_sheepController generateNewSheep:(SKNode*)node];
     NSMutableDictionary* sheepData = node.userData;
-    char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
-    NSString* sheepValue = [sheepData objectForKey:@"Value"];
+    _sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
+    _sheepValue = [sheepData objectForKey:@"Value"];
     
-    [_dataModel applySheepChar:sheepOper andValue:sheepValue];
+    [_dataModel applySheepChar:_sheepOper andValue:_sheepValue];
     _currentScore = [_dataModel getScore];
     [_dataView updateScore:_currentScore];
+    
+    // show updating score with animated label
+    [self addChild: [self newScoreNode]];
+    
+    CGFloat Xdimensions = self.size.width;
+    CGFloat Ydimensions = self.size.height;
+    
+    // dimensions of score label (from data view class)
+    CGFloat scoreY = Ydimensions * .93;
+    CGFloat scoreX = Xdimensions * .02;
+    
+    SKNode *scoreNode = [self childNodeWithName:@"scoreNode"];
+    
+    if (scoreNode != nil)
+    {
+        scoreNode.name = nil;
+        
+        SKAction *zoom = [SKAction scaleTo: 2.0 duration: 0.1];
+        SKAction *move = [SKAction moveTo:(CGPointMake(scoreX+150, scoreY-50)) duration:0.5];
+        SKAction *pause = [SKAction waitForDuration: 0.25];
+        SKAction *fadeAway = [SKAction fadeOutWithDuration: 0.25];
+        SKAction *remove = [SKAction removeFromParent];
+        SKAction *moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
+        
+        [scoreNode runAction: moveSequence];
+    }
     
     _touchedSheep = false;
 }
