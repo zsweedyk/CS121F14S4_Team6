@@ -50,7 +50,7 @@ typedef struct sheepObj sheepObj;
     
     
         [_skScene addChild:newSheepNode];
-//        [self generateNewSheep:newSheepNode];
+        newSheepNode.zPosition = 1.0;
     }
 }
 
@@ -80,7 +80,6 @@ typedef struct sheepObj sheepObj;
 - (int)getTagetScore {
     _generator = [[Generator alloc] init];
     _targetScore = [_generator generateIntegerfrom:-100 to:100];
-    NSLog(@"SheepController %d", _targetScore);
     return _targetScore;
 }
 @end

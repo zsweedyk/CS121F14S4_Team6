@@ -31,7 +31,7 @@
 
 @property(nonatomic, weak) id<gameOverDelegate> customDelegate;
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model;
+- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andSheepController:(SheepController *)sheepController;
 - (void) updateScore: (double)newScore;
 - (void) stopTimer;
 - (void) resetTimer;

@@ -91,12 +91,12 @@
 {
 
         // Create DataModel
-        _dataModel = [DataModel alloc];
+        _dataModel = [[DataModel alloc] init];
         _currentScore = [_dataModel getScore];
         
         // Create DataView
         _dataView = [[DataView alloc] init];
-        [_dataView setupData:self withScore:_currentScore andMode:_mode andModel:_dataModel];
+        [_dataView setupData:self withScore:_currentScore andMode:_mode andModel:_dataModel andSheepController:_sheepController];
         _dataView.customDelegate = self;
         [self addChild:_dataView];
         
@@ -129,9 +129,8 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
 
-    NSLog(@"touched with %@", node.name);
+    
     if ([node.name isEqual: @"sheep"]) {
-        NSLog(@"sheep tapped");
         [_sheepController generateNewSheep:node];
         NSMutableDictionary* sheepData = node.userData;
         char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
@@ -142,8 +141,6 @@
         [_dataView updateScore:_currentScore];
         
     } else if ([node.name isEqual:@"quitbutton"]) {
-        NSLog(@"hurlo");
-        //[_sheepController removeFromParentViewController];
         [self quitGame];
     
     } else if ([node.name isEqual:@"quitaction"]) {
@@ -153,10 +150,8 @@
         [self.view presentScene:startScene transition:transition];
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
-        NSLog(@"RestartGameWHEE!");
         [self restart];
     } else if ([node.name isEqual:@"targetbutton"]) {
-        NSLog(@"target button clicked");
         [self showGameResults:_dataView];
         
     }
@@ -177,6 +172,34 @@
         }];
 }
 
+- (double)calculateTargetScoreAtTime:(double)time {
+    
+    int targetScore = [_dataModel getTargetScore];
+    
+    //calculate difference between current score and target score
+    double diff = abs(_currentScore - targetScore);
+    double scoreTargetScorePortion;
+    
+    //calculate how close current score is to target score as a percentage
+    if (targetScore - diff < 0) {
+        scoreTargetScorePortion = 0;
+    } else {
+        scoreTargetScorePortion = (targetScore - diff)/targetScore;
+    }
+    
+    //reward a fast time; any time over 10 minutes results in a score of 0
+    double score;
+    if (time > 600) {
+        score = 0;
+    } else {
+        score = (600-time)/600 * scoreTargetScorePortion * 100;
+    }
+    
+    return score;
+
+    
+}
+
 // Delegate Function: Shows result when game is over
 - (void) showGameResults:(DataView *)controller
 {
@@ -188,19 +211,12 @@
     double score;
     if ([_mode isEqualToString:@"target"]) {
         double time = [_dataView getCurrentTime];
-        //calculate difference in score
-        int targetScore = [_dataModel getTargetScore];
-        double diff = abs(_currentScore - targetScore);
-        //calculate percentage off of target score that current score is
-        score = (targetScore - diff)/targetScore;
         
         //prevent divide by 0
         if (time == 0) {
             time = 1;
         }
-        NSLog(@"1/time) * score * 100 = %f * %f * 100", (1/time), score);
-        //reward a faster time
-        score = (1/time) * score * 100;
+        score = [self calculateTargetScoreAtTime:time];
         if (score < 0) {
             score = 0;
         }
@@ -219,8 +235,24 @@
     
     // Create the Quit popup
     QuitGameButton* quitPopup = [[QuitGameButton alloc] init];
+    
+    double score;
+    if ([_mode isEqualToString:@"target"]) {
+        double time = [_dataView getCurrentTime];
+        
+        if (time == 0) {
+            time = 1;
+        }
+        score = [self calculateTargetScoreAtTime:time];
+        if (score < 0) {
+            score = 0;
+        }
+    }
+    else {
+        score = _currentScore;
+    }
 
-    [quitPopup setupData:self withScore:_currentScore];
+    [quitPopup setupData:self withScore:score];
     [self addChild:quitPopup];
 }
 

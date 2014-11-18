@@ -27,6 +27,7 @@
     
     _sheepNode = [[SKSpriteNode alloc] init];
     _sheepNode = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:_sheepImage]];
+    _sheepNode.name = @"sheep";
     
     _sheepNode.position = pos;
     _sheepNode.anchorPoint = CGPointZero;

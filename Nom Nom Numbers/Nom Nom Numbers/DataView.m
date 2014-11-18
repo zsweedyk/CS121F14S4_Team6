@@ -14,9 +14,10 @@
 
 #define timeModeStartTime 60
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model
+- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andSheepController:(SheepController *)sheepController
 {
 
+    _sheepController = sheepController;
     _dataModel = model;
     _mode = mode;
     CGFloat Xdimensions = mainScene.size.width;
@@ -54,7 +55,6 @@
         _targetScore.position = CGPointMake(targetScoreX, headerY);
         _targetScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         
-        _sheepController = [[SheepController alloc] init];
         int targetScore = [_sheepController getTagetScore];
         [_dataModel setTargetScore:targetScore];
         _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
