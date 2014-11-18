@@ -12,7 +12,6 @@
 		CB2C6A6C1A1B347A00ADFBAF /* barnAndDragon.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CB2C6A6B1A1B347A00ADFBAF /* barnAndDragon.atlas */; };
 		CB9A2CB81A09336E004EF777 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CB71A09336E004EF777 /* main.m */; };
 		CB9A2CBB1A09336F004EF777 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CBA1A09336F004EF777 /* AppDelegate.m */; };
-		CB9A2CBE1A093370004EF777 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CBD1A093370004EF777 /* GameScene.m */; };
 		CB9A2CC01A093370004EF777 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CB9A2CBF1A093370004EF777 /* GameScene.sks */; };
 		CB9A2CC31A093370004EF777 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CC21A093370004EF777 /* GameViewController.m */; };
 		CB9A2CC61A093370004EF777 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB9A2CC41A093370004EF777 /* Main.storyboard */; };
@@ -66,8 +65,6 @@
 		CB9A2CB71A09336E004EF777 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CB9A2CB91A09336F004EF777 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CB9A2CBA1A09336F004EF777 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CB9A2CBC1A09336F004EF777 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		CB9A2CBD1A093370004EF777 /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		CB9A2CBF1A093370004EF777 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		CB9A2CC11A093370004EF777 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		CB9A2CC21A093370004EF777 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
@@ -165,8 +162,6 @@
 				CBFB88491A0EDDC900FE2331 /* spark.png */,
 				CB9A2CB91A09336F004EF777 /* AppDelegate.h */,
 				CB9A2CBA1A09336F004EF777 /* AppDelegate.m */,
-				CB9A2CBC1A09336F004EF777 /* GameScene.h */,
-				CB9A2CBD1A093370004EF777 /* GameScene.m */,
 				CB9A2CBF1A093370004EF777 /* GameScene.sks */,
 				CB9A2CC11A093370004EF777 /* GameViewController.h */,
 				CB9A2CC21A093370004EF777 /* GameViewController.m */,
@@ -357,7 +352,6 @@
 				CB9A2CBB1A09336F004EF777 /* AppDelegate.m in Sources */,
 				CB9A2CFE1A0939E8004EF777 /* Generator.m in Sources */,
 				CB9A2D031A0939E8004EF777 /* SheepModel.m in Sources */,
-				CB9A2CBE1A093370004EF777 /* GameScene.m in Sources */,
 				CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */,
 				A3DC1B211A11E77000232403 /* TimedTutorialScene.m in Sources */,
 				CB9A2D001A0939E8004EF777 /* MainScene.m in Sources */,
