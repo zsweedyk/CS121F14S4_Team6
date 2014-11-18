@@ -9,6 +9,8 @@
 
 #import "StartScene.h"
 #import "MainScene.h"
+#import "TimedTutorialScene.h"
+#import "TargetTutorialScene.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -63,10 +65,17 @@
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name isEqual: @"startButton"]) {
-        SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
-        [self playButtonNoise:self];
+        /*SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
-        [self.view presentScene:gameScene transition:transition];
+        [self.view presentScene:gameScene transition:transition];*/
+        
+        /*SKScene *timedTutorialScence = [[TimedTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:timedTutorialScence transition:transition];*/
+        
+        SKScene *targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:targetTutorialScence transition:transition];
     }
     
     if ([node.name isEqual: @"infoButton"]) {
