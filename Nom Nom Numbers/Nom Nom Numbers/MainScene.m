@@ -32,6 +32,8 @@
     NSTimer* _gameStartTimer;
     SKSpriteNode* _dragonAndBarn;
     NSArray* _dragonAnimationFrames;
+    char _sheepOper;
+    NSString* _sheepValue;
 }
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView*)skView
@@ -235,6 +237,37 @@
                                    selector: @selector(makeNewSheep:)
                                    userInfo: node
                                     repeats: NO];
+}
+
+- (SKLabelNode*) newScoreNode
+{
+    SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
+    
+    NSString *oper = [NSString stringWithFormat:@"%c",_sheepOper];
+    NSString* myString=[NSString stringWithFormat:@"%@%@",oper,_sheepValue];
+    
+    // if sheep value was a fraction, only display fraction part since displaying decimal
+    // portion as well will get too cramped
+    NSCharacterSet *parens = [NSCharacterSet characterSetWithCharactersInString:@"()"];
+    NSRange searchRange = NSMakeRange(0, myString.length);
+    NSRange foundRange = [myString rangeOfCharacterFromSet:parens options:0 range:searchRange];
+    // check if there are parentheses (the value is a fraction that contains its decimal counterpart
+    if (foundRange.location != NSNotFound){
+        NSRange range = [myString rangeOfString:@"("];
+        NSString *shortString = [myString substringToIndex:range.location];
+        scoreNode.text = shortString;
+    }
+    else {
+        scoreNode.text = myString;
+    }
+    // set color to be off-white so text is visible even with sheep passing by
+    scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
+    scoreNode.fontSize = 24;
+    
+    scoreNode.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-50);
+    scoreNode.name = @"scoreNode";
+    
+    return scoreNode;
 }
 
 - (void) makeNewSheep:(NSTimer*)incomingTimer
