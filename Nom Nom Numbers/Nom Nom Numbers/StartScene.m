@@ -9,6 +9,8 @@
 
 #import "StartScene.h"
 #import "MainScene.h"
+#import "TimedTutorialScene.h"
+#import "TargetTutorialScene.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -88,7 +90,7 @@
     if ([node.name isEqual: @"targetStartButton"]) {
         SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target"];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
-        [self.view presentScene:gameScene transition:transition];
+        [self.view presentScene:targetTutorialScence transition:transition];*/
     }
     
     if ([node.name isEqual: @"infoButton"]) {
