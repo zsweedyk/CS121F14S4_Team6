@@ -19,8 +19,6 @@
 // Randomly generate a fraction
 - (NSMutableArray*) generateFraction
 {
-    //NSMutableArray *values = [NSMutableArray array];
-    //values = [[NSMutableArray alloc] init];
     NSMutableArray *values = [[NSMutableArray alloc] init];
     
     NSInteger denomenator = arc4random_uniform(10) + 1;

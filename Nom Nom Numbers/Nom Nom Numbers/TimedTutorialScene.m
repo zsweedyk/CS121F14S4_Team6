@@ -14,7 +14,8 @@
 #import "DataModel.h"
 #import "SheepController.h"
 
-@implementation TimedTutorialScene {
+@implementation TimedTutorialScene
+{
     SKView* _skView;
     DataView* _dataView;
     DataModel* _dataModel;
@@ -22,22 +23,26 @@
     SheepController* _sheepController;
 }
 
--(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
+-(id)initWithSize:(CGSize)size andSKView:(SKView*)skView
+{
     
     self = [super initWithSize:size];
     _skView = [[SKView alloc] init];
     _skView = skView;
     _sheepController = [[SheepController alloc] init];
-    [self setup];
-    _firstTime = YES;
+    _firstTime = YES; //varialbe indicating the first time sheep are off-screen
     
+    [self setup];
     return self;
 }
 
-- (void) setup {
+- (void) setup
+{
     
     [self setupBackground];
     [self setupDragon];
+    
+    // add "Tutorial" at top-right corner
     SKLabelNode* title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     title.fontSize = 40;
     title.fontColor = [UIColor whiteColor];
@@ -49,7 +54,8 @@
     [self startGame];
 }
 
-- (void) setupBackground {
+- (void) setupBackground
+{
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
@@ -70,20 +76,18 @@
     [self addChild:dragon];
 }
 
-- (void) startGame {
+- (void) startGame
+{
     
     CGFloat sceneX = self.size.width;
     CGFloat sceneY = self.size.height;
     
-    // Create popup
+    // Create popup to start the game
     SKSpriteNode* startPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
     startPopup.size = CGSizeMake(sceneX * 0.4, sceneY * 0.4);
     startPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
     startPopup.name = @"startpopup";
-    
     startPopup.zPosition = 2;
-    
-    //[self addChild:shadow];
     [self addChild:startPopup];
     
     CGFloat popupX = startPopup.size.width;
@@ -123,7 +127,7 @@
     startPopupDragon3.text = [NSString stringWithFormat:@"Your score will update based on the sheep you click on."];
     [startPopup addChild:startPopupDragon3];
     
-    // Create content text on the popup
+    // Ask the user to click on a sheep
     SKLabelNode* startPopupClick = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startPopupClick.fontColor = [UIColor blueColor];
     startPopupClick.fontSize = 25;
@@ -140,13 +144,12 @@
     startPopupClick2.text = [NSString stringWithFormat:@" your score changes."];
     [startPopup addChild:startPopupClick2];
     
-    // Create confirmation button (return to main screen) on popup
+    // Create confirmation button (start the game)
     SKSpriteNode* startButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     startButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     startButton.position = CGPointMake(0, popupY * -0.35);
     [startPopup addChild:startButton];
     
-    // Create the label on the confirmation button
     SKLabelNode* startButtonLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startButtonLabel.fontColor = [UIColor whiteColor];
     startButtonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
@@ -158,7 +161,8 @@
 }
 
 
-- (void) setupSheep {
+- (void) setupSheep
+{
     
     SheepSprite* _sheepSprite = [[SheepSprite alloc] init];
     for (int i = 1; i < 6; i++) {
@@ -184,17 +188,18 @@
 }
 
 
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
 
     if ([node.name isEqual: @"sheep"]) {
         
+        // if clicking on a sheep
         NSMutableDictionary* sheepData = node.userData;
         char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
         NSString* sheepValue = [sheepData objectForKey:@"Value"];
-        
         [_dataModel applySheepChar:sheepOper andValue:sheepValue];
         
         double _currentScore = [_dataModel getScore];
@@ -212,15 +217,18 @@
         SKAction *stop = [SKAction speedTo:0 duration:0];
         SKAction *wait = [SKAction speedTo:0 duration:5];
         SKAction *run = [SKAction speedTo:1 duration:0];
-        //SKAction *remove = [SKAction removeFromParent];
         [self runAction:[SKAction sequence:@[stop, wait, run]]];
         
-    } else if ([node.name isEqual: @"quitaction"]) {
+    } else if ([node.name isEqual: @"startgame"]) {
+        
+        // if finishing the game and clicking 'Start' button
         SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:gameScene transition:transition];
+        
     } else if ([node.name isEqual: @"startaction"]) {
         
+        // if clicking 'Start' to start the tutorial
         _dataModel = [DataModel alloc];
         _dataView = [[DataView alloc] init];
         [_dataView setupData:self withScore:0 andMode:@"timed" andModel:_dataModel andSheepController:_sheepController];
@@ -231,14 +239,15 @@
 
 }
 
-- (void) update:(NSTimeInterval)currentTime {
+- (void) update:(NSTimeInterval)currentTime
+{
     
     if (_firstTime == YES) {
         __block _Bool flag1 = TRUE; // detect if sheep are all off screen
         __block _Bool flag2 = FALSE; // detect if sheep objects exist
         
         [self enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode *node, BOOL *stop) {
-            // sheep exist
+            // sheep nodes exist
             flag2 = TRUE;
             
             // If at least one sheep is on screen, flag1 is FALSE
@@ -254,7 +263,8 @@
     }
 }
 
-- (void) tutorialEnds {
+- (void) tutorialEnds
+{
     [_dataView stopTimer];
     CGFloat sceneX = self.size.width;
     CGFloat sceneY = self.size.height;
@@ -275,7 +285,6 @@
     shadow.size = CGSizeMake(quitPopup.size.width * 1.1, quitPopup.size.height * 1.1);
     shadow.position = CGPointMake(quitPopup.position.x, quitPopup.position.y - 5);
     shadow.alpha = 0.5;
-    
     quitPopup.zPosition = 2;
     
     [self addChild:shadow];
@@ -310,11 +319,11 @@
     quitPopupTextTime.text = [NSString stringWithFormat:@"You have 1 minute to go!"];
     [quitPopup addChild:quitPopupTextTime];
     
-    // Create confirmation button (return to main screen) on popup
+    // Create confirmation button (start timed mode) on popup
     SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     quitButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     quitButton.position = CGPointMake(0, popupY * -0.35);
-    quitButton.name = @"quitaction";
+    quitButton.name = @"startgame";
     [quitPopup addChild:quitButton];
     
     // Create the label on the confirmation button
@@ -323,7 +332,7 @@
     quitButtonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
     quitButtonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     quitButtonLabel.text = @"Start";
-    quitButtonLabel.name = @"quitaction";
+    quitButtonLabel.name = @"startgame";
     [quitButton addChild:quitButtonLabel];
 
 }

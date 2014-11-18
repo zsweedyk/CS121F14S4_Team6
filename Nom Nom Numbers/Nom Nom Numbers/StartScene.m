@@ -40,14 +40,6 @@
     background.yScale = .5;
     [self addChild:background];
     
-//    SKLabelNode* title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-//    title.fontSize = 60;
-//    title.fontColor = [UIColor whiteColor];
-//    title.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.9);
-//    title.text = @"Nom Nom Numbers";
-//    title.name = @"title";
-//    [self addChild:title];
-    
     SKLabelNode* timeStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     timeStartButton.fontSize = 45;
     timeStartButton.fontColor = [UIColor blackColor];
@@ -82,17 +74,11 @@
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name isEqual: @"timeStartButton"]) {
-        /*SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
-        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
-        [self.view presentScene:gameScene transition:transition];*/
         
         SKScene *timedTutorialScence = [[TimedTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:timedTutorialScence transition:transition];
-        
-        /*SKScene *targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
-        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
-        [self.view presentScene:targetTutorialScence transition:transition];*/
+
     }
     
     if ([node.name isEqual: @"targetStartButton"]) {
@@ -103,7 +89,6 @@
     
     if ([node.name isEqual: @"infoButton"]) {
         [self playButtonNoise:self];
-        NSLog(@"Information Button Pressed");
     }
 }
 
