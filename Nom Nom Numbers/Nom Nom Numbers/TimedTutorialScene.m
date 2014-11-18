@@ -141,7 +141,7 @@
     startPopupClick2.fontSize = 25;
     startPopupClick2.position = CGPointMake(0, popupY*(-0.12));
     startPopupClick2.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    startPopupClick2.text = [NSString stringWithFormat:@" your score changes."];
+    startPopupClick2.text = [NSString stringWithFormat:@" your score changes accordingly."];
     [startPopup addChild:startPopupClick2];
     
     // Create confirmation button (start the game)

@@ -43,7 +43,7 @@
     SKLabelNode* timeStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     timeStartButton.fontSize = 45;
     timeStartButton.fontColor = [UIColor blackColor];
-    timeStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.5);
+    timeStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.4);
     timeStartButton.text = @"Timed Mode";
     timeStartButton.name = @"timeStartButton";
     [self addChild:timeStartButton];
@@ -51,19 +51,11 @@
     SKLabelNode* targetStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     targetStartButton.fontSize = 45;
     targetStartButton.fontColor = [UIColor blackColor];
-    targetStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.41);
+    targetStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.3);
     targetStartButton.text = @"Target Mode";
     targetStartButton.name = @"targetStartButton";
     [self addChild:targetStartButton];
     
-    SKLabelNode* infoButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    infoButton.fontSize = 45;
-    infoButton.fontColor = [UIColor blackColor];
-    infoButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.32);
-
-    infoButton.text = @"How To Play";
-    infoButton.name = @"infoButton";
-//    [self addChild:infoButton];
 }
 
 
