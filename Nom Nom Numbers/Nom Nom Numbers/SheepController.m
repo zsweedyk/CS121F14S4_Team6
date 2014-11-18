@@ -19,30 +19,24 @@
     SheepSprite* _sheepSprite;
     Generator* _generator;
     int _targetScore;
-
 }
 
 // Called only first time to initialize necessary sprite nodes and scenes, and then
 // creates 5 sheep to be sent across the screen
-- (void) setupSheep:(SKScene*)mainScene
+- (void) setupSheep:(SKScene *)mainScene
 {
-
     _sheepSprite = [[SheepSprite alloc] init];
     _skScene = mainScene;
-    arrOfSounds = [NSMutableArray new];
+    _arrOfSounds = [NSMutableArray new];
 
-    
-    
     for (int i = 1; i < 6; i++) {
         SheepModel* sheepModel = [[SheepModel alloc] init];
         [sheepModel makeSheepFrom: -100 to: 100];
         NSString* value = [sheepModel getValue];
         char oper = [sheepModel getOperator];
         
-
         SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
         newSheepNode.name = @"sheep";
-
 
         NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
         NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
@@ -53,18 +47,13 @@
         [_skScene addChild:newSheepNode];
         newSheepNode.zPosition = 1.0;
         [self playSheepNoise:self];
-
     }
-    
-    
 }
 
 // Each time a sheep runs off the screen, this method creates a new individual sheep
 // with coresponding sheep models
-- (void) generateNewSheep:(SKNode*)node
+- (void) generateNewSheep:(SKNode *)node
 {
-
-    
     SheepModel* newSheepModel = [[SheepModel alloc] init];
     [newSheepModel makeSheepFrom:-100 to:100];
     NSString* value = [newSheepModel getValue];
@@ -85,7 +74,8 @@
     [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
 }
 
-- (IBAction)playSheepNoise:(id)sender
+// Plays noise when sheep is created
+- (IBAction) playSheepNoise:(id)sender
 {
     NSString* fileName = @"Sheep";
     int randomValue = arc4random_uniform(2);
@@ -94,18 +84,19 @@
         fileName = @"Sheep2";
     }
     
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
-    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    NSString* soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL* fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
     
-    AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
-    [arrOfSounds addObject:newPlayer];
+    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    [_arrOfSounds addObject:newPlayer];
     newPlayer.volume = 0.5;
     [newPlayer prepareToPlay];
     [newPlayer play];
 }
 
 // Generates a random integer from -100 to 100 in order to obtain a target score
-- (int)getTagetScore {
+- (int) getTargetScore
+{
     _generator = [[Generator alloc] init];
     _targetScore = [_generator generateIntegerfrom:-100 to:100];
     return _targetScore;

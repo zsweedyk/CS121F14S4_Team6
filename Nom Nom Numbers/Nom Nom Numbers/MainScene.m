@@ -27,9 +27,9 @@
     BOOL _touchedSheep;
     int _countDownTillStart;
     SKLabelNode* _readyLabels;
-    GameOverButton* gameOverPopup;
+    GameOverButton* _gameOverPopup;
     NSString* _mode;
-    NSMutableArray* arrOfSounds;
+    NSMutableArray* _arrOfSounds;
     NSTimer* _gameStartTimer;
     SKSpriteNode* _dragonAndBarn;
     NSArray* _dragonAnimationFrames;
@@ -39,7 +39,7 @@
 
 
 // Creates an SKScene while noting which mode we have entered
-- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView andMode:(NSString*)mode
+- (id) initWithSize:(CGSize)size andSKView:(SKView *)skView andMode:(NSString *)mode
 
 {
 
@@ -48,7 +48,7 @@
     _gameEnded = false;
     _countDownTillStart = 4;
     
-    arrOfSounds = [NSMutableArray new];
+    _arrOfSounds = [NSMutableArray new];
     _touchedSheep = false;
    
     self = [super initWithSize:size];
@@ -60,13 +60,14 @@
     NSMutableArray* dragonFrames = [NSMutableArray array];
     SKTextureAtlas* dragonAnimationAtlas = [SKTextureAtlas atlasNamed:@"barnAndDragon"];
     NSUInteger numImages = dragonAnimationAtlas.textureNames.count;
+    
     for (int i = 1; i <= numImages; i++) {
         NSString* textureName = [NSString stringWithFormat:@"barnAndDragonAnimation%d",i];
         SKTexture* temp = [dragonAnimationAtlas textureNamed:textureName];
         [dragonFrames addObject:temp];
     }
-    _dragonAnimationFrames = dragonFrames;
     
+    _dragonAnimationFrames = dragonFrames;
     return self;
 }
 
@@ -103,6 +104,7 @@
     _gameStartTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(gameStartTimerAction) userInfo:nil repeats:YES];
 }
 
+// Displays preparation timer
 - (void) gameStartTimerAction
 {
     if (_countDownTillStart == 1) {
@@ -115,21 +117,24 @@
 
         [_dataView initializeTimer];
         [_sheepController setupSheep:self];
+    
     } else {
         --_countDownTillStart;
         [self changeReadyLabelText];
     }
 }
 
+// Changes label in preparation timer to appropriate text
 - (void) changeReadyLabelText
 {
     _readyLabels.text = [NSString stringWithFormat:@"%d", _countDownTillStart];
 }
 
+// Used to reset settings for a new game
 - (void) restart
 {
     _gameEnded = false;
-    [gameOverPopup removeFromParent];
+    [_gameOverPopup removeFromParent];
     
     // Reset data
     [_dataModel resetScore];
@@ -145,7 +150,7 @@
 
 - (void) setupBackground
 {
-    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
+    SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
     background.xScale = .5;
@@ -155,7 +160,7 @@
 
 - (void) setupDragon
 {
-    SKSpriteNode *dragon = [SKSpriteNode spriteNodeWithImageNamed:@"barnAndDragon"];
+    SKSpriteNode* dragon = [SKSpriteNode spriteNodeWithImageNamed:@"barnAndDragon"];
     CGSize barnSize = [UIImage imageNamed:@"barnAndDragon"].size;
     dragon.position = CGPointMake(self.size.width - barnSize.width*0.5, 0);
     dragon.anchorPoint = CGPointZero;
@@ -167,73 +172,71 @@
     [self addChild:dragon];
 }
 
+// Sets up data for the game
 - (void) setupData
 {
-
-        // Create DataModel
-        _dataModel = [[DataModel alloc] init];
-        _currentScore = [_dataModel getScore];
-        
-        // Create DataView
-        _dataView = [[DataView alloc] init];
-        [_dataView setupData:self withScore:_currentScore andMode:_mode andModel:_dataModel andSheepController:_sheepController];
-        _dataView.customDelegate = self;
-        [self addChild:_dataView];
-        
-        // Create Quit button
-        SKLabelNode* quitButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-        quitButton.fontSize = 45;
-        quitButton.fontColor = [UIColor whiteColor];
-        quitButton.position = CGPointMake(self.size.width * 0.8, self.size.height * 0.93);
-        quitButton.text = @"Quit";
-        quitButton.name = @"quitbutton";
-        quitButton.zPosition = 2;
-        [self addChild:quitButton];
-
-
+    // Create DataModel
+    _dataModel = [[DataModel alloc] init];
+    _currentScore = [_dataModel getScore];
     
+    // Create DataView
+    _dataView = [[DataView alloc] init];
+    [_dataView setupData:self withScore:_currentScore andMode:_mode andModel:_dataModel andSheepController:_sheepController];
+    _dataView.customDelegate = self;
+    [self addChild:_dataView];
+    
+    // Create Quit button
+    SKLabelNode* quitButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    quitButton.fontSize = 45;
+    quitButton.fontColor = [UIColor whiteColor];
+    quitButton.position = CGPointMake(self.size.width * 0.8, self.size.height * 0.93);
+    quitButton.text = @"Quit";
+    quitButton.name = @"quitbutton";
+    quitButton.zPosition = 2;
+    [self addChild:quitButton];
 }
 
 // Looks for touches to the screen, matches touch to an appropriately named node
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
+    UITouch* touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
+    SKNode* node = [self nodeAtPoint:location];
 
-    
+    // Sheep clicked
     if ([node.name isEqual: @"sheep"]) {
+        
         // Prevents another sheep from being touched during Fireball
         if(!_touchedSheep) {
             [self touchedSheep:node];
             [self playSheepNoise:self];
         }
-        
+    
     } else if ([node.name isEqual:@"quitbutton"]) {
-
         [self playButtonNoise:self];
         [self quitGame];
     
+    // Back to main screen
     } else if ([node.name isEqual:@"quitaction"]) {
-        // BACK TO MAIN SCREEN
         [self playButtonNoise:self];
-        SKScene *startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
-        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+        SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
-        
+    
+    // Play Again
     } else if ([node.name isEqual:@"playagainaction"]) {
-        // PLAY AGAIN
         [self playButtonNoise:self];
         [self restart];
+    
+    // TARGET MODE: End Game
     } else if ([node.name isEqual:@"targetbutton"]) {
+        [self playButtonNoise:self];
         [self showGameResults:_dataView];
-        
     }
 }
 
-- (void) touchedSheep:(SKNode*)node
+- (void) touchedSheep:(SKNode *)node
 {
-
     _touchedSheep = true;
     
     FireballSprite* fireballSprite = [[FireballSprite alloc] init];
@@ -245,7 +248,7 @@
                                                     restore: YES]];
     
     // Send fireball at the middle of the sheep touched
-    SKSpriteNode* sheepSpriteNode = (SKSpriteNode*) node;
+    SKSpriteNode* sheepSpriteNode = (SKSpriteNode *) node;
     CGPoint sheepMiddle = CGPointMake(node.position.x, node.position.y + (sheepSpriteNode.size.height/2));
     [fireballSprite sendFireballTo:sheepMiddle OnScene:self];
     
@@ -257,7 +260,8 @@
                                     repeats: NO];
 }
 
-- (SKLabelNode*) newScoreNode
+
+- (SKLabelNode *) newScoreNode
 {
     SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
     
@@ -266,18 +270,20 @@
     
     // If sheep value was a fraction, only display fraction part since displaying decimal
     // portion as well will get too cramped
-    NSCharacterSet *parens = [NSCharacterSet characterSetWithCharactersInString:@"()"];
+    NSCharacterSet* parens = [NSCharacterSet characterSetWithCharactersInString:@"()"];
     NSRange searchRange = NSMakeRange(0, myString.length);
     NSRange foundRange = [myString rangeOfCharacterFromSet:parens options:0 range:searchRange];
-    // check if there are parentheses (the value is a fraction that contains its decimal counterpart
+    
+    // Check if there are parentheses (the value is a fraction that contains its decimal counterpart
     if (foundRange.location != NSNotFound){
         NSRange range = [myString rangeOfString:@"("];
-        NSString *shortString = [myString substringToIndex:range.location];
+        NSString* shortString = [myString substringToIndex:range.location];
         scoreNode.text = shortString;
-    }
-    else {
+    
+    } else {
         scoreNode.text = myString;
     }
+    
     // Set color to be off-white so text is visible even with sheep passing by
     scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
     scoreNode.fontSize = 24;
@@ -288,11 +294,12 @@
     return scoreNode;
 }
 
-- (void) makeNewSheep:(NSTimer*)incomingTimer
+
+- (void) makeNewSheep:(NSTimer *)incomingTimer
 {
     SKNode* node;
     
-    if([incomingTimer userInfo] != nil) {
+    if ([incomingTimer userInfo] != nil) {
         node = [incomingTimer userInfo];
     }
     
@@ -305,28 +312,27 @@
     _currentScore = [_dataModel getScore];
     [_dataView updateScore:_currentScore];
     
-    // show updating score with animated label
+    // Show updating score with animated label
     [self addChild: [self newScoreNode]];
     
     CGFloat Xdimensions = self.size.width;
     CGFloat Ydimensions = self.size.height;
     
-    // dimensions of score label (from data view class)
+    // Dimensions of score label (from data view class)
     CGFloat scoreY = Ydimensions * .93;
     CGFloat scoreX = Xdimensions * .02;
     
-    SKNode *scoreNode = [self childNodeWithName:@"scoreNode"];
+    SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
     
-    if (scoreNode != nil)
-    {
+    if (scoreNode != nil) {
         scoreNode.name = nil;
         
-        SKAction *zoom = [SKAction scaleTo: 2.0 duration: 0.1];
-        SKAction *move = [SKAction moveTo:(CGPointMake(scoreX+150, scoreY-50)) duration:0.5];
-        SKAction *pause = [SKAction waitForDuration: 0.25];
-        SKAction *fadeAway = [SKAction fadeOutWithDuration: 0.25];
-        SKAction *remove = [SKAction removeFromParent];
-        SKAction *moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
+        SKAction* zoom = [SKAction scaleTo: 2.0 duration: 0.1];
+        SKAction* move = [SKAction moveTo:(CGPointMake(scoreX+150, scoreY-50)) duration:0.5];
+        SKAction* pause = [SKAction waitForDuration: 0.25];
+        SKAction* fadeAway = [SKAction fadeOutWithDuration: 0.25];
+        SKAction* remove = [SKAction removeFromParent];
+        SKAction* moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
         
         [scoreNode runAction: moveSequence];
     }
@@ -338,47 +344,45 @@
 // and generates a new one if needed
 - (void) update:(NSTimeInterval)currentTime
 {
-        [self enumerateChildNodesWithName:@"sheep"
-              usingBlock:^(SKNode *node, BOOL *stop) {
-            
-            if (node.position.x < -150){
-                [_sheepController generateNewSheep:node];
-            }
-                  
-            if (_gameEnded) {
-                [node removeFromParent];
-            }
-        }];
+    [self enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode* node, BOOL* stop) {
+        
+        if (node.position.x < -150) {
+            [_sheepController generateNewSheep:node];
+        }
+        
+        if (_gameEnded) {
+            [node removeFromParent];
+        }
+    }];
 }
 
 // Algorithm to calculate final score when 'Hit me' is pressed
 // in target mode
-- (double)calculateTargetScoreAtTime:(double)time {
-    
+- (double) calculateTargetScoreAtTime:(double)time
+{
     int targetScore = [_dataModel getTargetScore];
     
-    //calculate difference between current score and target score
+    // Calculate difference between current score and target score
     double diff = abs(_currentScore - targetScore);
     double scoreTargetScorePortion;
     
-    //calculate how close current score is to target score as a percentage
+    // Calculate how close current score is to target score as a percentage
     if (targetScore - diff < 0) {
         scoreTargetScorePortion = 0;
     } else {
         scoreTargetScorePortion = (targetScore - diff)/targetScore;
     }
     
-    //reward a fast time; any time over 10 minutes results in a score of 0
+    // Reward a fast time; any time over 10 minutes results in a score of 0
     double score;
     if (time > 600) {
         score = 0;
+    
     } else {
         score = (600-time)/600 * scoreTargetScorePortion * 100;
     }
     
     return score;
-
-    
 }
 
 // Delegate Function: Shows result when game is over
@@ -388,7 +392,7 @@
     [_dataView stopTimer];
     
     // Create the Game Over popup
-    gameOverPopup = [[GameOverButton alloc] init];
+    _gameOverPopup = [[GameOverButton alloc] init];
     double score;
     if ([_mode isEqualToString:@"target"]) {
         double time = [_dataView getCurrentTime];
@@ -405,10 +409,12 @@
     } else {
         score = _currentScore;
     }
-    [gameOverPopup setupData:self withScore:score];
-    [self addChild: gameOverPopup];
+    
+    [_gameOverPopup setupData:self withScore:score];
+    [self addChild: _gameOverPopup];
 }
 
+// Displays the popup for when Quit Game is pressed
 - (void) quitGame
 {
     _gameEnded = true;
@@ -418,6 +424,8 @@
     QuitGameButton* quitPopup = [[QuitGameButton alloc] init];
     
     double score;
+    
+    // Calculates score for Target mode
     if ([_mode isEqualToString:@"target"]) {
         double time = [_dataView getCurrentTime];
         
@@ -428,8 +436,9 @@
         if (score < 0) {
             score = 0;
         }
-    }
-    else {
+        
+    // Calculates score for Timed mode
+    } else {
         score = _currentScore;
     }
 
@@ -437,7 +446,8 @@
     [self addChild:quitPopup];
 }
 
-- (IBAction)playSheepNoise:(id)sender
+// Plays noise when a sheep is clicked
+- (IBAction) playSheepNoise:(id)sender
 {
     // StrongFire is a clip taken from:
     // http://soundbible.com/1348-Large-Fireball.html
@@ -448,29 +458,30 @@
         fileName = @"WeakFire";
     }
     
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
-    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    NSString* soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL* fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
     
     AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
-    [arrOfSounds removeAllObjects];
-    [arrOfSounds insertObject:newPlayer atIndex:0];
+    [_arrOfSounds removeAllObjects];
+    [_arrOfSounds insertObject:newPlayer atIndex:0];
     newPlayer.volume = 1.0;
     [newPlayer prepareToPlay];
     [newPlayer play];
 }
 
-- (IBAction)playButtonNoise:(id)sender
+// Plays noise when a button is clicked
+- (IBAction) playButtonNoise:(id)sender
 {
-//    NSString* fileName = @"Click";
-//    
-//    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
-//    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
-//    
-//    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
-//    [arrOfSounds removeAllObjects];
-//    [arrOfSounds addObject:newPlayer];
-//    [newPlayer prepareToPlay];
-//    [newPlayer play];
+    NSString* fileName = @"Click";
+    
+    NSString* soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL* fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    
+    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    [_arrOfSounds removeAllObjects];
+    [_arrOfSounds addObject:newPlayer];
+    [newPlayer prepareToPlay];
+    [newPlayer play];
 }
 
 

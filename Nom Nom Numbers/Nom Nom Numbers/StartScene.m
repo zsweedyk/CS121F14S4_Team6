@@ -17,13 +17,13 @@
 @implementation StartScene
 {
     SKView* _skView;
-    NSMutableArray* arrOfSounds;
+    NSMutableArray* _arrOfSounds;
 }
 
--(id)initWithSize:(CGSize)size andSKView:(SKView*)skView
+- (id) initWithSize:(CGSize)size andSKView:(SKView *)skView
 {
     
-    arrOfSounds = [NSMutableArray new];
+    _arrOfSounds = [NSMutableArray new];
     self = [super initWithSize:size];
     _skView = [[SKView alloc] init];
     _skView = skView;
@@ -32,10 +32,9 @@
     return self;
 }
 
-- (void)setup
+- (void) setup
 {
-    
-    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"StartPageBG"];
+    SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"StartPageBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
     background.xScale = .5;
@@ -57,62 +56,51 @@
     targetStartButton.text = @"Target Mode";
     targetStartButton.name = @"targetStartButton";
     [self addChild:targetStartButton];
-    
 }
 
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
-    UITouch *touch = [touches anyObject];
+    UITouch* touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
+    SKNode* node = [self nodeAtPoint:location];
     
     if ([node.name isEqual: @"timeStartButton"]) {
         
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TimeModeHasLaunched"]) {
             
-            // already launched timed-mode before, so go straight into the timed-mode gameplay
-            SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
-            SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+            // Already launched timed-mode before, so go straight into the timed-mode gameplay
+            SKScene* gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
+            SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
             
         } else {
-            
-            // first time launch timed-mode, so display the tutorial
+            // First time launch timed-mode, so display the tutorial
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimeModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SKScene *timedTutorialScence = [[TimedTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
-            SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+            SKScene* timedTutorialScence = [[TimedTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+            SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:timedTutorialScence transition:transition];
-
         }
-        
     }
     
     if ([node.name isEqual: @"targetStartButton"]) {
         
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TargetModeHasLaunched"]) {
-            
-            // already launched timed-mode before, so go straight into the target-mode gameplay
-            SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target"];
-            SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+            // Already launched timed-mode before, so go straight into the target-mode gameplay
+            SKScene* gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target"];
+            SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
             
         } else {
-            
-            // first time launch target-mode, so display the tutorial
+            // First time launch target-mode, so display the tutorial
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SKScene *targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
-            SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+            SKScene* targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+            SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:targetTutorialScence transition:transition];
-
         }
-        
-        
     }
     
     if ([node.name isEqual: @"infoButton"]) {
@@ -120,16 +108,17 @@
     }
 }
 
-- (IBAction)playButtonNoise:(id)sender
+// Plays noise when button is clicked
+- (IBAction) playButtonNoise:(id)sender
 {
     NSString* fileName = @"Click";
     
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
-    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    NSString* soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL* fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
     
     AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
-    [arrOfSounds removeAllObjects];
-    [arrOfSounds addObject:newPlayer];
+    [_arrOfSounds removeAllObjects];
+    [_arrOfSounds addObject:newPlayer];
     [newPlayer prepareToPlay];
     [newPlayer play];
 }

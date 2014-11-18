@@ -18,9 +18,8 @@
 }
 
 // Generate individual sheep and set SKActions to move sheep across screen
-- (SKSpriteNode*) createSheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos
+- (SKSpriteNode *) createSheepWithValue:(NSString *)value andOper:(char)oper atPos:(CGPoint)pos
 {
-    
     _value = value;
     _oper = oper;
     
@@ -39,8 +38,8 @@
     acrossScreenTime /= 10.0;
     
     // SK actions to move sheep left
-    SKAction *moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:acrossScreenTime];
-    SKAction *repeatMoveLeft = [SKAction repeatActionForever:moveSheepLeft];
+    SKAction* moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:acrossScreenTime];
+    SKAction* repeatMoveLeft = [SKAction repeatActionForever:moveSheepLeft];
     
     double wobbleTime = acrossScreenTime / 40.0;
     
@@ -48,7 +47,7 @@
     SKAction* wobbleForward = [SKAction rotateToAngle:M_PI/60.0 duration:wobbleTime];
     SKAction* wobbleBackward = [SKAction rotateToAngle:-M_PI/60.0 duration:wobbleTime];
     SKAction* sequence = [SKAction sequence:@[wobbleForward,wobbleBackward]];
-    SKAction *repeatWobble = [SKAction repeatActionForever:sequence];
+    SKAction* repeatWobble = [SKAction repeatActionForever:sequence];
     
     [_sheepNode runAction:repeatWobble];
     [_sheepNode runAction:repeatMoveLeft];
@@ -57,9 +56,8 @@
 }
 
 // Calls auxillary functions to place image onto sheep node
-- (SKSpriteNode*) displayASheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos
+- (SKSpriteNode *) displayASheepWithValue:(NSString *)value andOper:(char)oper atPos:(CGPoint)pos
 {
-    
     _value = value;
     _oper = oper;
     
@@ -74,7 +72,7 @@
 {
     UIGraphicsBeginImageContext(_sheepImage.size);
     [_sheepImage drawInRect:CGRectMake(0,0,_sheepImage.size.width,_sheepImage.size.height)];
-    UITextView *myText = [[UITextView alloc] init];
+    UITextView* myText = [[UITextView alloc] init];
     
     myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:40];
     myText.textColor = [UIColor blackColor];
@@ -90,16 +88,15 @@
     
     myText.frame = CGRectMake(point.x, point.y, _sheepImage.size.width, _sheepImage.size.height);
     [[UIColor clearColor] set];
-    NSDictionary *att = @{NSFontAttributeName:myText.font};
+    NSDictionary* att = @{NSFontAttributeName:myText.font};
     [myText.text drawInRect:myText.frame withAttributes:att];
     
     _sheepImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 }
 
-
 // Calls getImageForText with appropriate operator and values
-- (void)makeSheepImage
+- (void) makeSheepImage
 {
     _sheepImage = [[UIImage alloc] init];
     _sheepImage = [UIImage imageNamed:@"Sheep"];
@@ -108,10 +105,6 @@
     
     [self getImageForText:stringOperator for:'O'];
     [self getImageForText:_value for:'V'];
-
-    
 }
-
-
 
 @end

@@ -12,6 +12,6 @@
 
 @interface StartScene : SKScene
 
--(id)initWithSize:(CGSize)size andSKView:(SKView*)skView;
+- (id) initWithSize:(CGSize)size andSKView:(SKView *)skView;
 
 @end

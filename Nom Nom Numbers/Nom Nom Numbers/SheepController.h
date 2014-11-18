@@ -12,13 +12,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface SheepController : UIViewController {
-    NSMutableArray* arrOfSounds;
+@interface SheepController : UIViewController
+{
+    NSMutableArray* _arrOfSounds;
 }
 
-
-- (void) setupSheep:(SKScene*)mainScene;
-- (void) generateNewSheep:(SKNode*)node;
-- (int) getTagetScore;
+- (void) setupSheep:(SKScene *)mainScene;
+- (void) generateNewSheep:(SKNode *)node;
+- (int) getTargetScore;
 
 @end

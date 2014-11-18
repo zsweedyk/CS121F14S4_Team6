@@ -10,6 +10,6 @@
 
 @interface QuitGameButton : SKLabelNode
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore;
+- (id) setupData:(SKScene *)mainScene withScore:(double)currentScore;
 
 @end

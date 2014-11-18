@@ -16,7 +16,6 @@
 
 - (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andSheepController:(SheepController *)sheepController
 {
-
     _sheepController = sheepController;
     _dataModel = model;
     _mode = mode;
@@ -57,7 +56,7 @@
         _targetScore.position = CGPointMake(targetScoreX, headerY);
         _targetScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         
-        int targetScore = [_sheepController getTagetScore];
+        int targetScore = [_sheepController getTargetScore];
         [_dataModel setTargetScore:targetScore];
         _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
         [self addChild:_targetScore];
@@ -73,10 +72,7 @@
         targetButton.name = @"targetbutton";
         targetButton.zPosition = 2;
         [self addChild:targetButton];
-        
-        
     }
-    
 
     // Set up UI for Score Label
     _currentScore = [[SKLabelNode alloc] initWithFontNamed:fontType];
@@ -85,8 +81,6 @@
     _currentScore.position = CGPointMake(scoreX, headerY);
     _currentScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     _currentScore.text = [NSString stringWithFormat:@"Score: %.2f", currentScore];
-    
-
  
     // Add Label view
     [self addChild:_currentScore];
@@ -159,7 +153,6 @@
 // while target mode must start incrementing from 0
 - (void) resetTimer
 {
-    
     [self initializeTimer];
     
     if ([_mode isEqualToString:@"timed"]) {
@@ -168,13 +161,11 @@
         [self changeTimerText];
     } else {
         _initialTime = 0;
-        int targetScore = [_sheepController getTagetScore];
+        int targetScore = [_sheepController getTargetScore];
         [_dataModel setTargetScore:targetScore];
         
         _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
-
     }
-    
 }
 
 @end

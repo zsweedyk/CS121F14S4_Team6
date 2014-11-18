@@ -10,6 +10,6 @@
 
 @interface GameOverButton : SKLabelNode
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore;
+- (id) setupData:(SKScene *)mainScene withScore:(double)currentScore;
 
 @end
