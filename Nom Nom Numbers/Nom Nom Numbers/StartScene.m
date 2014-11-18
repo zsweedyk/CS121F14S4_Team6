@@ -67,9 +67,8 @@
     if ([node.name isEqual: @"timeStartButton"]) {
         
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TimeModeHasLaunched"]) {
-            // first time launch timed-mode, so display the tutorial
-            NSLog(@"Timed-Mode Already Launched");
             
+            // first time launch timed-mode, so display the tutorial
             SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
             SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
@@ -82,8 +81,7 @@
             SKScene *timedTutorialScence = [[TimedTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
             SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:timedTutorialScence transition:transition];
-            
-            NSLog(@"First time launch timed-mode");
+
         }
         
     }
@@ -91,9 +89,8 @@
     if ([node.name isEqual: @"targetStartButton"]) {
         
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TargetModeHasLaunched"]) {
-            // first time launch target-mode, so display the tutorial
-            NSLog(@"Target-Mode Already Launched");
             
+            // first time launch target-mode, so display the tutorial
             SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target"];
             SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
@@ -107,8 +104,7 @@
             SKScene *targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
             SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:targetTutorialScence transition:transition];
-            
-            NSLog(@"First time launch target-mode");
+
         }
         
         
