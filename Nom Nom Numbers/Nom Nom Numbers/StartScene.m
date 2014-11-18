@@ -9,6 +9,8 @@
 
 #import "StartScene.h"
 #import "MainScene.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "TutorialScene.h"
 
 @implementation StartScene {
