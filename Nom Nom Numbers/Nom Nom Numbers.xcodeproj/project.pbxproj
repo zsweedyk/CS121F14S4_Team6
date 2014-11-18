@@ -31,6 +31,8 @@
 		CB9A2D031A0939E8004EF777 /* SheepModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF61A0939E8004EF777 /* SheepModel.m */; };
 		CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF81A0939E8004EF777 /* SheepSprite.m */; };
 		CB9A2D051A0939E8004EF777 /* StartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CFA1A0939E8004EF777 /* StartScene.m */; };
+		CBDAC94B1A1335C100A46D7E /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = CBDAC94A1A1335C100A46D7E /* FireParticle.sks */; };
+		CBDAC94D1A1431C100A46D7E /* barnAndDragon.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CBDAC94C1A1431C100A46D7E /* barnAndDragon.atlas */; };
 		CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */; };
 		FB86E0E71A1B03E300ABE87A /* Click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E01A1B03E300ABE87A /* Click.wav */; };
 		FB86E0E81A1B03E300ABE87A /* ScoreDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E11A1B03E300ABE87A /* ScoreDown.wav */; };
@@ -39,6 +41,8 @@
 		FB86E0EB1A1B03E300ABE87A /* Sheep2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E41A1B03E300ABE87A /* Sheep2.wav */; };
 		FB86E0EC1A1B03E300ABE87A /* StrongFire.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E51A1B03E300ABE87A /* StrongFire.wav */; };
 		FB86E0ED1A1B03E300ABE87A /* WeakFire.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E61A1B03E300ABE87A /* WeakFire.wav */; };
+		CBFB884A1A0EDDC900FE2331 /* FireballParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */; };
+		CBFB884B1A0EDDCA00FE2331 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFB88491A0EDDC900FE2331 /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +99,8 @@
 		CB9A2CF81A0939E8004EF777 /* SheepSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepSprite.m; sourceTree = "<group>"; };
 		CB9A2CF91A0939E8004EF777 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScene.h; sourceTree = "<group>"; };
 		CB9A2CFA1A0939E8004EF777 /* StartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartScene.m; sourceTree = "<group>"; };
+		CBDAC94A1A1335C100A46D7E /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
+		CBDAC94C1A1431C100A46D7E /* barnAndDragon.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = barnAndDragon.atlas; path = ../../../ProjectImages/barnAndDragon.atlas; sourceTree = "<group>"; };
 		CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FireballSprite.h; path = ../FireballSprite.h; sourceTree = "<group>"; };
 		CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FireballSprite.m; path = ../FireballSprite.m; sourceTree = "<group>"; };
 		FB86E0E01A1B03E300ABE87A /* Click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click.wav; sourceTree = "<group>"; };
@@ -104,6 +110,8 @@
 		FB86E0E41A1B03E300ABE87A /* Sheep2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sheep2.wav; sourceTree = "<group>"; };
 		FB86E0E51A1B03E300ABE87A /* StrongFire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = StrongFire.wav; sourceTree = "<group>"; };
 		FB86E0E61A1B03E300ABE87A /* WeakFire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WeakFire.wav; sourceTree = "<group>"; };
+		CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireballParticle.sks; sourceTree = "<group>"; };
+		CBFB88491A0EDDC900FE2331 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,12 +153,16 @@
 		CB9A2CB41A09336D004EF777 /* Nom Nom Numbers */ = {
 			isa = PBXGroup;
 			children = (
+				CBDAC94C1A1431C100A46D7E /* barnAndDragon.atlas */,
 				CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */,
 				CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */,
 				A3DC1B1F1A11E77000232403 /* TimedTutorialScene.h */,
 				A3DC1B201A11E77000232403 /* TimedTutorialScene.m */,
 				A3EBB44B1A1AF371001DB3F8 /* TargetTutorialScene.h */,
 				A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */,
+				CBDAC94A1A1335C100A46D7E /* FireParticle.sks */,
+				CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */,
+				CBFB88491A0EDDC900FE2331 /* spark.png */,
 				CB9A2CB91A09336F004EF777 /* AppDelegate.h */,
 				CB9A2CBA1A09336F004EF777 /* AppDelegate.m */,
 				CB9A2CBC1A09336F004EF777 /* GameScene.h */,
@@ -307,12 +319,16 @@
 				FB86E0EB1A1B03E300ABE87A /* Sheep2.wav in Resources */,
 				FB86E0EA1A1B03E300ABE87A /* Sheep.wav in Resources */,
 				FB86E0E81A1B03E300ABE87A /* ScoreDown.wav in Resources */,
+				CBDAC94B1A1335C100A46D7E /* FireParticle.sks in Resources */,
+				CBFB884B1A0EDDCA00FE2331 /* spark.png in Resources */,
 				CB9A2CC81A093370004EF777 /* Images.xcassets in Resources */,
+				CBFB884A1A0EDDC900FE2331 /* FireballParticle.sks in Resources */,
 				CB9A2CC01A093370004EF777 /* GameScene.sks in Resources */,
 				CB9A2CC61A093370004EF777 /* Main.storyboard in Resources */,
 				FB86E0E71A1B03E300ABE87A /* Click.wav in Resources */,
 				FB86E0EC1A1B03E300ABE87A /* StrongFire.wav in Resources */,
 				FB86E0ED1A1B03E300ABE87A /* WeakFire.wav in Resources */,
+				CBDAC94D1A1431C100A46D7E /* barnAndDragon.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

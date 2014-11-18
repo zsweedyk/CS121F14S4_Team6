@@ -31,6 +31,8 @@
     NSString* _mode;
     NSMutableArray* arrOfSounds;
     NSTimer* _gameStartTimer;
+    SKSpriteNode* _dragonAndBarn;
+    NSArray* _dragonAnimationFrames;
 }
 
 
@@ -64,9 +66,16 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     
     
     
-    // Set up physics and delegate for collision detection
-    self.physicsWorld.gravity = CGVectorMake(0,0);
-    self.physicsWorld.contactDelegate = self;
+    // Set up dragon animation frames
+    NSMutableArray* dragonFrames = [NSMutableArray array];
+    SKTextureAtlas* dragonAnimationAtlas = [SKTextureAtlas atlasNamed:@"barnAndDragon"];
+    NSUInteger numImages = dragonAnimationAtlas.textureNames.count;
+    for (int i = 1; i <= numImages; i++) {
+        NSString* textureName = [NSString stringWithFormat:@"barnAndDragonAnimation%d",i];
+        SKTexture* temp = [dragonAnimationAtlas textureNamed:textureName];
+        [dragonFrames addObject:temp];
+    }
+    _dragonAnimationFrames = dragonFrames;
     
     return self;
 }
@@ -161,6 +170,8 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     dragon.xScale = .5;
     dragon.yScale = .5;
     dragon.zPosition = 2;
+    
+    _dragonAndBarn = dragon;
     [self addChild:dragon];
 }
 
@@ -234,71 +245,70 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     _touchedSheep = true;
     
     FireballSprite* fireballSprite = [[FireballSprite alloc] init];
-    SKSpriteNode* fireballNode = [fireballSprite fireball];
+    
+    NSUInteger numFrames = [_dragonAnimationFrames count];
+    [_dragonAndBarn runAction:[SKAction animateWithTextures: _dragonAnimationFrames
+                                               timePerFrame: [fireballSprite animationTime]/numFrames
+                                                     resize: YES
+                                                    restore: YES]];
     
     // Send fireball at the middle of the sheep touched
     SKSpriteNode* sheepSpriteNode = (SKSpriteNode*) node;
     CGPoint sheepMiddle = CGPointMake(node.position.x, node.position.y + (sheepSpriteNode.size.height/2));
     [fireballSprite sendFireballTo:sheepMiddle OnScene:self];
     
-    // Change the name of the sheep so you can't touch it again
-    node.name = @"touchedSheep";
-    
-    // Set up collision physics but only on the sheep that was touched
-    node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sheepSpriteNode.size.width/2];
-    node.physicsBody.dynamic = YES;
-    node.physicsBody.categoryBitMask = sheepCategory;
-    node.physicsBody.contactTestBitMask = fireballCategory;
-    node.physicsBody.collisionBitMask = 0;
-    
-    fireballNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:fireballNode.size];
-    fireballNode.physicsBody.dynamic = YES;
-    fireballNode.physicsBody.categoryBitMask = fireballCategory;
-    fireballNode.physicsBody.contactTestBitMask = sheepCategory;
-    fireballNode.physicsBody.collisionBitMask = 0;
-    fireballNode.physicsBody.usesPreciseCollisionDetection = YES;
+    [NSTimer scheduledTimerWithTimeInterval: [fireballSprite fireballTravelTime] +
+                                             [fireballSprite animationTime]
+                                     target: self
+                                   selector: @selector(makeNewSheep:)
+                                   userInfo: node
+                                    repeats: NO];
 }
 
-- (void) makeNewSheep:(SKNode*)node
+- (void) makeNewSheep:(NSTimer*)incomingTimer
 {
+    SKNode* node;
+    
+    if([incomingTimer userInfo] != nil) {
+        node = [incomingTimer userInfo];
+    }
+    
     [_sheepController generateNewSheep:(SKNode*)node];
     NSMutableDictionary* sheepData = node.userData;
-    char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
-    NSString* sheepValue = [sheepData objectForKey:@"Value"];
+    _sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
+    _sheepValue = [sheepData objectForKey:@"Value"];
     
-    [_dataModel applySheepChar:sheepOper andValue:sheepValue];
+    [_dataModel applySheepChar:_sheepOper andValue:_sheepValue];
     _currentScore = [_dataModel getScore];
     [_dataView updateScore:_currentScore];
     
+    // show updating score with animated label
+    [self addChild: [self newScoreNode]];
+    
+    CGFloat Xdimensions = self.size.width;
+    CGFloat Ydimensions = self.size.height;
+    
+    // dimensions of score label (from data view class)
+    CGFloat scoreY = Ydimensions * .93;
+    CGFloat scoreX = Xdimensions * .02;
+    
+    SKNode *scoreNode = [self childNodeWithName:@"scoreNode"];
+    
+    if (scoreNode != nil)
+    {
+        scoreNode.name = nil;
+        
+        SKAction *zoom = [SKAction scaleTo: 2.0 duration: 0.1];
+        SKAction *move = [SKAction moveTo:(CGPointMake(scoreX+150, scoreY-50)) duration:0.5];
+        SKAction *pause = [SKAction waitForDuration: 0.25];
+        SKAction *fadeAway = [SKAction fadeOutWithDuration: 0.25];
+        SKAction *remove = [SKAction removeFromParent];
+        SKAction *moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
+        
+        [scoreNode runAction: moveSequence];
+    }
+    
     _touchedSheep = false;
-}
-
-- (void)didBeginContact:(SKPhysicsContact *)contact
-{
-    // Determine which physicsBody has the lower bitmask
-    SKPhysicsBody *firstBody, *secondBody;
-    
-    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
-    {
-        firstBody = contact.bodyA;
-        secondBody = contact.bodyB;
-    }
-    else
-    {
-        firstBody = contact.bodyB;
-        secondBody = contact.bodyA;
-    }
-    
-    SKNode* sheep = [secondBody node];
-    SKNode* fireball = [firstBody node];
-    fireball.hidden = TRUE;
-    
-    // Make sure one body is a sheep and call the makeNewSheep method
-    if ((firstBody.categoryBitMask & fireballCategory) != 0 &&
-        (secondBody.categoryBitMask & sheepCategory) != 0)
-    {
-        [self makeNewSheep:sheep];
-    }
 }
 
 - (void) update:(NSTimeInterval)currentTime
