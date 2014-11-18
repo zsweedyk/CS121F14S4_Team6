@@ -33,6 +33,8 @@
     NSTimer* _gameStartTimer;
     SKSpriteNode* _dragonAndBarn;
     NSArray* _dragonAnimationFrames;
+    char _sheepOper;
+    NSString* _sheepValue;
 }
 
 
@@ -63,7 +65,6 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     _sheepController = [[SheepController alloc] init];
 
     [self setup];
-    
     
     
     // Set up dragon animation frames
