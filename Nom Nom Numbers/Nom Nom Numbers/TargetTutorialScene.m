@@ -75,7 +75,7 @@
     
     // Create popup
     SKSpriteNode* startPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
-    startPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
+    startPopup.size = CGSizeMake(sceneX * 0.45, sceneY * 0.4);
     startPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
     startPopup.name = @"startpopup";
     
@@ -108,16 +108,24 @@
     SKLabelNode* startPopupDragon2 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startPopupDragon2.fontColor = [UIColor whiteColor];
     startPopupDragon2.fontSize = 18;
-    startPopupDragon2.position = CGPointMake(0, popupY * 0.07);
+    startPopupDragon2.position = CGPointMake(0, popupY * 0.05);
     startPopupDragon2.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    startPopupDragon2.text = [NSString stringWithFormat:@"Your final point will be based on the difference between your score and the target value."];
+    startPopupDragon2.text = [NSString stringWithFormat:@"Your final point will be based on the difference between "];
     [startPopup addChild:startPopupDragon2];
+    
+    SKLabelNode* startPopupDragon3 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    startPopupDragon3.fontColor = [UIColor whiteColor];
+    startPopupDragon3.fontSize = 18;
+    startPopupDragon3.position = CGPointMake(0, popupY * -0.02);
+    startPopupDragon3.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    startPopupDragon3.text = [NSString stringWithFormat:@"your score and the target value, and the time you have spent."];
+    [startPopup addChild:startPopupDragon3];
     
     // Create content text on the popup
     SKLabelNode* startPopupClick = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startPopupClick.fontColor = [UIColor blueColor];
     startPopupClick.fontSize = 25;
-    startPopupClick.position = CGPointMake(0, popupY*(-0.07));
+    startPopupClick.position = CGPointMake(0, popupY*(-0.17));
     startPopupClick.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     startPopupClick.text = [NSString stringWithFormat:@"Please click on a sheep."];
     [startPopup addChild:startPopupClick];
