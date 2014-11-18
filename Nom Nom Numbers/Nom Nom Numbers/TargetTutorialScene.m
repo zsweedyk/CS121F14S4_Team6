@@ -258,7 +258,7 @@
     
     // Create popup
     SKSpriteNode* quitPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
-    quitPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
+    quitPopup.size = CGSizeMake(sceneX * 0.50, sceneY * 0.4);
     quitPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
     
     SKSpriteNode* shadow = [[SKSpriteNode alloc] initWithImageNamed:@"popupShadow"];
@@ -289,7 +289,7 @@
     quitPopupText.fontSize = 20;
     quitPopupText.position = CGPointMake(0, popupY * 0.10);
     quitPopupText.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    quitPopupText.text = [NSString stringWithFormat:@"Your goal is to get as close as possible to the target value!"];
+    quitPopupText.text = [NSString stringWithFormat:@"Your goal is to get as close as possible to the target point!"];
     [quitPopup addChild:quitPopupText];
     
     SKLabelNode* quitPopupTextTime = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
@@ -297,8 +297,16 @@
     quitPopupTextTime.fontSize = 25;
     quitPopupTextTime.position = CGPointMake(0, popupY * -0.05);
     quitPopupTextTime.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    quitPopupTextTime.text = [NSString stringWithFormat:@"Click 'Hit Me!' if you want to stop the game early!"];
+    quitPopupTextTime.text = [NSString stringWithFormat:@"When you think you are close enough,"];
     [quitPopup addChild:quitPopupTextTime];
+    
+    SKLabelNode* quitPopupTextTime2 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    quitPopupTextTime2.fontColor = [UIColor blueColor];
+    quitPopupTextTime2.fontSize = 25;
+    quitPopupTextTime2.position = CGPointMake(0, popupY * -0.12);
+    quitPopupTextTime2.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    quitPopupTextTime2.text = [NSString stringWithFormat:@" press 'Hit Me!' to view your final score."];
+    [quitPopup addChild:quitPopupTextTime2];
     
     // Create confirmation button (return to main screen) on popup
     SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];

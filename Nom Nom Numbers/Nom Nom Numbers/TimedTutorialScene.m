@@ -24,7 +24,6 @@
     
     self = [super initWithSize:size];
     _skView = [[SKView alloc] init];
-    
     _skView = skView;
     [self setup];
     _firstTime = YES;
@@ -75,7 +74,7 @@
     
     // Create popup
     SKSpriteNode* startPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
-    startPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
+    startPopup.size = CGSizeMake(sceneX * 0.4, sceneY * 0.4);
     startPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
     startPopup.name = @"startpopup";
     
@@ -108,19 +107,35 @@
     SKLabelNode* startPopupDragon2 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startPopupDragon2.fontColor = [UIColor whiteColor];
     startPopupDragon2.fontSize = 18;
-    startPopupDragon2.position = CGPointMake(0, popupY * 0.07);
+    startPopupDragon2.position = CGPointMake(0, popupY * 0.09);
     startPopupDragon2.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     startPopupDragon2.text = [NSString stringWithFormat:@"However, you need to pick right sheep to eat."];
     [startPopup addChild:startPopupDragon2];
+    
+    SKLabelNode* startPopupDragon3 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    startPopupDragon3.fontColor = [UIColor whiteColor];
+    startPopupDragon3.fontSize = 18;
+    startPopupDragon3.position = CGPointMake(0, popupY * 3);
+    startPopupDragon3.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    startPopupDragon3.text = [NSString stringWithFormat:@"Your score will update based on the sheep you click on."];
+    [startPopup addChild:startPopupDragon3];
     
     // Create content text on the popup
     SKLabelNode* startPopupClick = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startPopupClick.fontColor = [UIColor blueColor];
     startPopupClick.fontSize = 25;
-    startPopupClick.position = CGPointMake(0, popupY*(-0.07));
+    startPopupClick.position = CGPointMake(0, popupY*(-0.05));
     startPopupClick.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    startPopupClick.text = [NSString stringWithFormat:@"Please click on a sheep."];
+    startPopupClick.text = [NSString stringWithFormat:@"Please click on a sheep to learn how"];
     [startPopup addChild:startPopupClick];
+    
+    SKLabelNode* startPopupClick2 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    startPopupClick2.fontColor = [UIColor blueColor];
+    startPopupClick2.fontSize = 25;
+    startPopupClick2.position = CGPointMake(0, popupY*(-0.12));
+    startPopupClick2.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    startPopupClick2.text = [NSString stringWithFormat:@" your score changes."];
+    [startPopup addChild:startPopupClick2];
     
     // Create confirmation button (return to main screen) on popup
     SKSpriteNode* startButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
