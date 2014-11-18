@@ -17,6 +17,7 @@
     char _oper;
 }
 
+// Generate individual sheep and set SKActions to move sheep across screen
 - (SKSpriteNode*) createSheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos
 {
     
@@ -55,6 +56,7 @@
     return [self displayASheepWithValue:value andOper:oper atPos:pos];
 }
 
+// Calls auxillary functions to place image onto sheep node
 - (SKSpriteNode*) displayASheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos
 {
     
@@ -67,6 +69,7 @@
     return _sheepNode;
 }
 
+// Creates UIImage given operators or values and places it on top of sheep in appropriate location
 - (void) getImageForText:(NSString *)text for:(char)input
 {
     UIGraphicsBeginImageContext(_sheepImage.size);
@@ -95,7 +98,7 @@
 }
 
 
-
+// Calls getImageForText with appropriate operator and values
 - (void)makeSheepImage
 {
     _sheepImage = [[UIImage alloc] init];

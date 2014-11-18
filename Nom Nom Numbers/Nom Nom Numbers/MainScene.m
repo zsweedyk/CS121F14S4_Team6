@@ -38,14 +38,7 @@
 }
 
 
-
-// Bitmaps for fireball and sheep collision detection
-// Note that this and all collision related code is slightly adapted from this site:
-// http://www.raywenderlich.com/42699/spritekit-tutorial-for-beginners
-
-static const uint32_t fireballCategory     =  0x1 << 0;
-static const uint32_t sheepCategory        =  0x1 << 1;
-
+// Creates an SKScene while noting which mode we have entered
 - (id) initWithSize:(CGSize)size andSKView:(SKView*)skView andMode:(NSString*)mode
 
 {
@@ -56,14 +49,10 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     _countDownTillStart = 4;
     
     arrOfSounds = [NSMutableArray new];
-    
     _touchedSheep = false;
    
     self = [super initWithSize:size];
-    
-    
     _sheepController = [[SheepController alloc] init];
-
     [self setup];
     
     
@@ -89,6 +78,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     [self setupData];
 }
 
+// 3, 2, 1, Go! Before the game starts
 - (void) prepareForGame
 {
     NSString* fontType = @"MalayalamSangamMN-Bold";
@@ -107,6 +97,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     [self initializeTimer];
 }
 
+// Start timer countdown
 - (void) initializeTimer
 {
     _gameStartTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(gameStartTimerAction) userInfo:nil repeats:YES];
@@ -203,6 +194,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     
 }
 
+// Looks for touches to the screen, matches touch to an appropriately named node
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
@@ -215,7 +207,6 @@ static const uint32_t sheepCategory        =  0x1 << 1;
         if(!_touchedSheep) {
             [self touchedSheep:node];
             [self playSheepNoise:self];
-
         }
         
     } else if ([node.name isEqual:@"quitbutton"]) {
@@ -273,7 +264,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     NSString *oper = [NSString stringWithFormat:@"%c",_sheepOper];
     NSString* myString=[NSString stringWithFormat:@"%@%@",oper,_sheepValue];
     
-    // if sheep value was a fraction, only display fraction part since displaying decimal
+    // If sheep value was a fraction, only display fraction part since displaying decimal
     // portion as well will get too cramped
     NSCharacterSet *parens = [NSCharacterSet characterSetWithCharactersInString:@"()"];
     NSRange searchRange = NSMakeRange(0, myString.length);
@@ -287,7 +278,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     else {
         scoreNode.text = myString;
     }
-    // set color to be off-white so text is visible even with sheep passing by
+    // Set color to be off-white so text is visible even with sheep passing by
     scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
     scoreNode.fontSize = 24;
     
@@ -343,6 +334,8 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     _touchedSheep = false;
 }
 
+// Update function continuously checks for sheep that exit the screen,
+// and generates a new one if needed
 - (void) update:(NSTimeInterval)currentTime
 {
         [self enumerateChildNodesWithName:@"sheep"
@@ -358,6 +351,8 @@ static const uint32_t sheepCategory        =  0x1 << 1;
         }];
 }
 
+// Algorithm to calculate final score when 'Hit me' is pressed
+// in target mode
 - (double)calculateTargetScoreAtTime:(double)time {
     
     int targetScore = [_dataModel getTargetScore];

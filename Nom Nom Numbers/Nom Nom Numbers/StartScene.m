@@ -14,12 +14,14 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@implementation StartScene {
+@implementation StartScene
+{
     SKView* _skView;
     NSMutableArray* arrOfSounds;
 }
 
--(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
+-(id)initWithSize:(CGSize)size andSKView:(SKView*)skView
+{
     
     arrOfSounds = [NSMutableArray new];
     self = [super initWithSize:size];
@@ -30,7 +32,8 @@
     return self;
 }
 
-- (void)setup {
+- (void)setup
+{
     
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"StartPageBG"];
     background.position = CGPointZero;
@@ -58,7 +61,8 @@
 }
 
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
     
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];

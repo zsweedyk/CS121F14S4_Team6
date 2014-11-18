@@ -31,17 +31,19 @@
     return self;
 }
 
+// Return value of sheep
 - (NSString*) getValue
 {
     return _value;
 }
 
+// Return operator of sheep
 - (char) getOperator
 {
     return _operator;
 }
 
-// Makes sheep with operator and value
+
 - (void) makeSheepFrom:(int)start to:(int)end
 {
     int chanceIndicator = arc4random_uniform(50);

@@ -29,6 +29,7 @@
     CGFloat targetScoreX;
     NSString* fontType = @"MarkerFelt-Thin";
     
+    // If we are in timed mode, set up and display timer
     if ([mode isEqualToString:@"timed"]) {
         scoreX = Xdimensions * .02;
         timerX = Xdimensions * .5;
@@ -43,11 +44,12 @@
         [self changeTimerText];
         [self addChild:_currentTime];
         
-        
+    
+    // If we are in target mode, set up and display target score
     } else {
         scoreX = Xdimensions * .02;
-        //timerX = Xdimensions * .35;
         targetScoreX = Xdimensions * .45;
+        
         // Set up Target Score Label
         _targetScore = [[SKLabelNode alloc] initWithFontNamed:fontType];
         _targetScore.fontSize = 45;
@@ -62,7 +64,7 @@
         
         _initialTime = 0;
         
-
+        // Set up 'Hit Me!' Label
         SKLabelNode* targetButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
         targetButton.fontSize = 45;
         targetButton.fontColor = [UIColor whiteColor];
@@ -76,9 +78,6 @@
     }
     
 
-//    // Initialize timer
-//    [self initializeTimer];
-    
     // Set up UI for Score Label
     _currentScore = [[SKLabelNode alloc] initWithFontNamed:fontType];
     _currentScore.fontSize = 45;
@@ -132,6 +131,7 @@
     }
 }
 
+// Increments timer - used for target mode
 - (void) countUpTimer
 {
     ++_initialTime;
@@ -149,10 +149,14 @@
     [_gameTimer invalidate];
 }
 
+// Return current time as name suggests
 - (int) getCurrentTime
 {
     return _initialTime;
 }
+
+// When game is restarted, timed mode must start decrementing from the set macro
+// while target mode must start incrementing from 0
 - (void) resetTimer
 {
     

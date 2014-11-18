@@ -22,6 +22,8 @@
 
 }
 
+// Called only first time to initialize necessary sprite nodes and scenes, and then
+// creates 5 sheep to be sent across the screen
 - (void) setupSheep:(SKScene*)mainScene
 {
 
@@ -57,7 +59,8 @@
     
 }
 
-
+// Each time a sheep runs off the screen, this method creates a new individual sheep
+// with coresponding sheep models
 - (void) generateNewSheep:(SKNode*)node
 {
 
@@ -101,7 +104,7 @@
     [newPlayer play];
 }
 
-
+// Generates a random integer from -100 to 100 in order to obtain a target score
 - (int)getTagetScore {
     _generator = [[Generator alloc] init];
     _targetScore = [_generator generateIntegerfrom:-100 to:100];

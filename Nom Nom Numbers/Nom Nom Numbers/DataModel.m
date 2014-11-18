@@ -50,16 +50,19 @@
     return _currentScore;
 }
 
+// Given a target score, assign this value to a public variable
 - (void) setTargetScore:(int)score {
     _targetScore = score;
 }
 
+// Return targetScore
 - (int) getTargetScore
 {
     
     return _targetScore;
 }
 
+// Reset score when game is restarted
 - (void) resetScore
 {
     _currentScore = 0;
