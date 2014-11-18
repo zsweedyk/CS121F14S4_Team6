@@ -83,7 +83,7 @@
     
     // Create popup to start the game
     SKSpriteNode* startPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
-    startPopup.size = CGSizeMake(sceneX * 0.45, sceneY * 0.4);
+    startPopup.size = CGSizeMake(sceneX * 0.48, sceneY * 0.45);
     startPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
     startPopup.name = @"startpopup";
     startPopup.zPosition = 2;
@@ -98,7 +98,7 @@
     startPopupTitle.fontSize = 30;
     startPopupTitle.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     startPopupTitle.position = CGPointMake(0, popupY * 0.35);
-    startPopupTitle.text = @"Welcome to target mode!";
+    startPopupTitle.text = @"Welcome to target mode tutorial!";
     [startPopup addChild:startPopupTitle];
     
     // Create title label for dragon description
@@ -122,7 +122,7 @@
     SKLabelNode* startPopupDragon3 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startPopupDragon3.fontColor = [UIColor whiteColor];
     startPopupDragon3.fontSize = 18;
-    startPopupDragon3.position = CGPointMake(0, popupY * -0.02);
+    startPopupDragon3.position = CGPointMake(0, popupY * 0.01);
     startPopupDragon3.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     startPopupDragon3.text = [NSString stringWithFormat:@"your score and the target value, and the time you have spent."];
     [startPopup addChild:startPopupDragon3];
@@ -130,10 +130,18 @@
     SKLabelNode* startPopupClick = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startPopupClick.fontColor = [UIColor blueColor];
     startPopupClick.fontSize = 25;
-    startPopupClick.position = CGPointMake(0, popupY*(-0.17));
+    startPopupClick.position = CGPointMake(0, popupY*(-0.13));
     startPopupClick.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    startPopupClick.text = [NSString stringWithFormat:@"Please click on a sheep."];
+    startPopupClick.text = [NSString stringWithFormat:@"Please click on a sheep to learn how"];
     [startPopup addChild:startPopupClick];
+    
+    SKLabelNode* startPopupClick2 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    startPopupClick2.fontColor = [UIColor blueColor];
+    startPopupClick2.fontSize = 25;
+    startPopupClick2.position = CGPointMake(0, popupY*(-0.20));
+    startPopupClick2.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    startPopupClick2.text = [NSString stringWithFormat:@"your score changes accordingly."];
+    [startPopup addChild:startPopupClick2];
     
     // Create confirmation button (start the game)
     SKSpriteNode* startButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];

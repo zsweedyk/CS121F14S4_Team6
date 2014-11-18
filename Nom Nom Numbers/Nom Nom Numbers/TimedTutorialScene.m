@@ -84,7 +84,7 @@
     
     // Create popup to start the game
     SKSpriteNode* startPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
-    startPopup.size = CGSizeMake(sceneX * 0.4, sceneY * 0.4);
+    startPopup.size = CGSizeMake(sceneX * 0.42, sceneY * 0.4);
     startPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
     startPopup.name = @"startpopup";
     startPopup.zPosition = 2;
@@ -99,7 +99,7 @@
     startPopupTitle.fontSize = 30;
     startPopupTitle.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     startPopupTitle.position = CGPointMake(0, popupY * 0.35);
-    startPopupTitle.text = @"Welcome to timed mode!";
+    startPopupTitle.text = @"Welcome to timed mode tutorial!";
     [startPopup addChild:startPopupTitle];
     
     // Create title label for dragon description
