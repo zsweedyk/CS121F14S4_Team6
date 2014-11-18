@@ -63,6 +63,17 @@
         
         _initialTime = 0;
         
+
+        SKLabelNode* targetButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        targetButton.fontSize = 45;
+        targetButton.fontColor = [UIColor whiteColor];
+        targetButton.position = CGPointMake(Xdimensions*.35, headerY);
+        targetButton.text = @"Hit Me!";
+        targetButton.name = @"targetbutton";
+        targetButton.zPosition = 2;
+        [self addChild:targetButton];
+        
+        
     }
     
 

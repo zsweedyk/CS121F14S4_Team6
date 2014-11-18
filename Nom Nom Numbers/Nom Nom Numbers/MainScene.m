@@ -187,16 +187,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
         quitButton.zPosition = 2;
         [self addChild:quitButton];
 
-    if ([_mode isEqualToString:@"target"]) {
-        SKLabelNode* targetButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-        targetButton.fontSize = 45;
-        targetButton.fontColor = [UIColor whiteColor];
-        targetButton.position = CGPointMake(self.size.width*.35, self.size.height * .93);
-        targetButton.text = @"Hit Me!";
-        targetButton.name = @"targetbutton";
-        targetButton.zPosition = 2;
-        [self addChild:targetButton];
-    }
+
     
 }
 

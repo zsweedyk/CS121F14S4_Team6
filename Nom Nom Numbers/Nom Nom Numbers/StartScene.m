@@ -82,15 +82,23 @@
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name isEqual: @"timeStartButton"]) {
-        SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
+        /*SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
-        [self.view presentScene:gameScene transition:transition];
+        [self.view presentScene:gameScene transition:transition];*/
+        
+        SKScene *timedTutorialScence = [[TimedTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:timedTutorialScence transition:transition];
+        
+        /*SKScene *targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:targetTutorialScence transition:transition];*/
     }
     
     if ([node.name isEqual: @"targetStartButton"]) {
-        SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target"];
+        SKScene *targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
-        [self.view presentScene:targetTutorialScence transition:transition];*/
+        [self.view presentScene:targetTutorialScence transition:transition];
     }
     
     if ([node.name isEqual: @"infoButton"]) {
