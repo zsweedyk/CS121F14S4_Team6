@@ -29,6 +29,14 @@
 		CB9A2D031A0939E8004EF777 /* SheepModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF61A0939E8004EF777 /* SheepModel.m */; };
 		CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CF81A0939E8004EF777 /* SheepSprite.m */; };
 		CB9A2D051A0939E8004EF777 /* StartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CFA1A0939E8004EF777 /* StartScene.m */; };
+		CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */; };
+		FB86E0E71A1B03E300ABE87A /* Click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E01A1B03E300ABE87A /* Click.wav */; };
+		FB86E0E81A1B03E300ABE87A /* ScoreDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E11A1B03E300ABE87A /* ScoreDown.wav */; };
+		FB86E0E91A1B03E300ABE87A /* ScoreUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E21A1B03E300ABE87A /* ScoreUp.wav */; };
+		FB86E0EA1A1B03E300ABE87A /* Sheep.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E31A1B03E300ABE87A /* Sheep.wav */; };
+		FB86E0EB1A1B03E300ABE87A /* Sheep2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E41A1B03E300ABE87A /* Sheep2.wav */; };
+		FB86E0EC1A1B03E300ABE87A /* StrongFire.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E51A1B03E300ABE87A /* StrongFire.wav */; };
+		FB86E0ED1A1B03E300ABE87A /* WeakFire.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E61A1B03E300ABE87A /* WeakFire.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +89,15 @@
 		CB9A2CF81A0939E8004EF777 /* SheepSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheepSprite.m; sourceTree = "<group>"; };
 		CB9A2CF91A0939E8004EF777 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScene.h; sourceTree = "<group>"; };
 		CB9A2CFA1A0939E8004EF777 /* StartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartScene.m; sourceTree = "<group>"; };
+		CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FireballSprite.h; path = ../FireballSprite.h; sourceTree = "<group>"; };
+		CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FireballSprite.m; path = ../FireballSprite.m; sourceTree = "<group>"; };
+		FB86E0E01A1B03E300ABE87A /* Click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click.wav; sourceTree = "<group>"; };
+		FB86E0E11A1B03E300ABE87A /* ScoreDown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreDown.wav; sourceTree = "<group>"; };
+		FB86E0E21A1B03E300ABE87A /* ScoreUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreUp.wav; sourceTree = "<group>"; };
+		FB86E0E31A1B03E300ABE87A /* Sheep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sheep.wav; sourceTree = "<group>"; };
+		FB86E0E41A1B03E300ABE87A /* Sheep2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sheep2.wav; sourceTree = "<group>"; };
+		FB86E0E51A1B03E300ABE87A /* StrongFire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = StrongFire.wav; sourceTree = "<group>"; };
+		FB86E0E61A1B03E300ABE87A /* WeakFire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WeakFire.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +139,8 @@
 		CB9A2CB41A09336D004EF777 /* Nom Nom Numbers */ = {
 			isa = PBXGroup;
 			children = (
+				CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */,
+				CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */,
 				CB9A2CB91A09336F004EF777 /* AppDelegate.h */,
 				CB9A2CBA1A09336F004EF777 /* AppDelegate.m */,
 				CB9A2CBC1A09336F004EF777 /* GameScene.h */,
@@ -160,6 +179,13 @@
 		CB9A2CB51A09336E004EF777 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FB86E0E01A1B03E300ABE87A /* Click.wav */,
+				FB86E0E11A1B03E300ABE87A /* ScoreDown.wav */,
+				FB86E0E21A1B03E300ABE87A /* ScoreUp.wav */,
+				FB86E0E31A1B03E300ABE87A /* Sheep.wav */,
+				FB86E0E41A1B03E300ABE87A /* Sheep2.wav */,
+				FB86E0E51A1B03E300ABE87A /* StrongFire.wav */,
+				FB86E0E61A1B03E300ABE87A /* WeakFire.wav */,
 				CB9A2CB61A09336E004EF777 /* Info.plist */,
 				CB9A2CB71A09336E004EF777 /* main.m */,
 			);
@@ -266,10 +292,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB86E0E91A1B03E300ABE87A /* ScoreUp.wav in Resources */,
 				CB9A2CCB1A093370004EF777 /* LaunchScreen.xib in Resources */,
+				FB86E0EB1A1B03E300ABE87A /* Sheep2.wav in Resources */,
+				FB86E0EA1A1B03E300ABE87A /* Sheep.wav in Resources */,
+				FB86E0E81A1B03E300ABE87A /* ScoreDown.wav in Resources */,
 				CB9A2CC81A093370004EF777 /* Images.xcassets in Resources */,
 				CB9A2CC01A093370004EF777 /* GameScene.sks in Resources */,
 				CB9A2CC61A093370004EF777 /* Main.storyboard in Resources */,
+				FB86E0E71A1B03E300ABE87A /* Click.wav in Resources */,
+				FB86E0EC1A1B03E300ABE87A /* StrongFire.wav in Resources */,
+				FB86E0ED1A1B03E300ABE87A /* WeakFire.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +334,7 @@
 				CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */,
 				CB9A2D001A0939E8004EF777 /* MainScene.m in Sources */,
 				CB9A2CB81A09336E004EF777 /* main.m in Sources */,
+				CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +462,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Nom Nom Numbers/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -438,6 +473,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Nom Nom Numbers/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

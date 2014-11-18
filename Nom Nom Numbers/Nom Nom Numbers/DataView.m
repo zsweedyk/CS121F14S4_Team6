@@ -80,9 +80,12 @@
  
     // Add Label view
     [self addChild:_currentScore];
+<<<<<<< HEAD
 
     
 
+=======
+>>>>>>> Beta
     return self;
 }
 
@@ -116,14 +119,12 @@
         [self.customDelegate showGameResults:self];
         
     } else {
-        
         if (_initialTime < 12) {
             _currentTime.fontColor = [UIColor redColor];
         }
         --_initialTime;
         [self changeTimerText];
     }
-    
 }
 
 - (void) countUpTimer
@@ -149,6 +150,7 @@
 }
 - (void) resetTimer
 {
+<<<<<<< HEAD
     [self initializeTimer];
     
     if ([_mode isEqualToString:@"timed"]) {
@@ -164,6 +166,11 @@
 
     }
     
+=======
+    _initialTime = 60;
+    _currentTime.fontColor = [UIColor whiteColor];
+    [self changeTimerText];
+>>>>>>> Beta
 }
 
 @end

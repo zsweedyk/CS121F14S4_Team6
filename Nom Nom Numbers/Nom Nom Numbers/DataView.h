@@ -33,6 +33,7 @@
 
 - (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andSheepController:(SheepController *)sheepController;
 - (void) updateScore: (double)newScore;
+- (void) initializeTimer;
 - (void) stopTimer;
 - (void) resetTimer;
 - (int) getCurrentTime;
