@@ -71,7 +71,7 @@
 
     infoButton.text = @"How To Play";
     infoButton.name = @"infoButton";
-    [self addChild:infoButton];
+//    [self addChild:infoButton];
 }
 
 
