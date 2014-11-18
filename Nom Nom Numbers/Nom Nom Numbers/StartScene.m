@@ -9,7 +9,8 @@
 
 #import "StartScene.h"
 #import "MainScene.h"
-#import "TutorialScene.h"
+#import "TimedTutorialScene.h"
+#import "TargetTutorialScene.h"
 
 @implementation StartScene {
     SKView* _skView;
@@ -72,9 +73,13 @@
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:gameScene transition:transition];*/
         
-        SKScene *tutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        /*SKScene *timedTutorialScence = [[TimedTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
-        [self.view presentScene:tutorialScence transition:transition];
+        [self.view presentScene:timedTutorialScence transition:transition];*/
+        
+        SKScene *targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:targetTutorialScence transition:transition];
     }
     
     if ([node.name isEqual: @"infoButton"]) {

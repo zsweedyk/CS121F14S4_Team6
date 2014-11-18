@@ -1,5 +1,5 @@
 //
-//  TutorialScene.m
+//  TimedTutorialScene.m
 //  Nom Nom Numbers
 //
 //  Created by Yaxi Gao on 11/10/14.
@@ -7,13 +7,13 @@
 //
 
 #import "MainScene.h"
-#import "TutorialScene.h"
+#import "TimedTutorialScene.h"
 #import "SheepSprite.h"
 #import "SheepModel.h"
 #import "DataView.h"
 #import "DataModel.h"
 
-@implementation TutorialScene {
+@implementation TimedTutorialScene {
     SKView* _skView;
     DataView* _dataView;
     DataModel* _dataModel;
@@ -283,6 +283,14 @@
     quitPopupText.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     quitPopupText.text = [NSString stringWithFormat:@"Your goal is to maximize the score!"];
     [quitPopup addChild:quitPopupText];
+    
+    SKLabelNode* quitPopupTextTime = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    quitPopupTextTime.fontColor = [UIColor blueColor];
+    quitPopupTextTime.fontSize = 25;
+    quitPopupTextTime.position = CGPointMake(0, popupY * -0.05);
+    quitPopupTextTime.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    quitPopupTextTime.text = [NSString stringWithFormat:@"You have 1 minute to go!"];
+    [quitPopup addChild:quitPopupTextTime];
     
     // Create confirmation button (return to main screen) on popup
     SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
