@@ -9,46 +9,27 @@
 #import "SheepController.h"
 #import "SheepSprite.h"
 #import "SheepModel.h"
-<<<<<<< HEAD
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "Generator.h"
 
 @implementation SheepController
 {
     SKScene* _skScene;
-    NSMutableArray* _arrOfSheepModel;
     SheepSprite* _sheepSprite;
     Generator* _generator;
     int _targetScore;
-=======
-#import <AVFoundation/AVFoundation.h>
-#import <AudioToolbox/AudioToolbox.h>
 
-@implementation SheepController
-{
-    SKScene* skScene;
-    NSMutableArray* arrOfSheepModel;
-    SheepSprite* sheepSprite;
->>>>>>> Beta
 }
 
-struct sheepObj
-{
-    __unsafe_unretained SheepModel* model;
-    __unsafe_unretained SKNode* spriteNode;
-};
 
-typedef struct sheepObj sheepObj;
 
 - (void) setupSheep:(SKScene*)mainScene {
-<<<<<<< HEAD
+
     _sheepSprite = [[SheepSprite alloc] init];
     _skScene = mainScene;
-=======
-    sheepSprite = [[SheepSprite alloc] init];
-    arrOfSheepModel = [[NSMutableArray alloc] initWithCapacity:5];
     arrOfSounds = [NSMutableArray new];
-    skScene = mainScene;
->>>>>>> Beta
+
     
     
     for (int i = 1; i < 6; i++) {
@@ -57,50 +38,37 @@ typedef struct sheepObj sheepObj;
         NSString* value = [sheepModel getValue];
         char oper = [sheepModel getOperator];
         
-<<<<<<< HEAD
+
         SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
         newSheepNode.name = @"sheep";
-=======
-        SKNode *newSheepNode = [sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
-        NSString* sheepName = @"sheep"; //[NSString stringWithFormat:@"sheep%d",i];
-        newSheepNode.name = sheepName;
->>>>>>> Beta
+
 
         NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
         NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
         [dictionary setValue:value forKey:@"Value"];
         [dictionary setValue:operAsString forKey:@"Operator"];
         [newSheepNode setUserData:dictionary];
-    
-<<<<<<< HEAD
-    
+        
         [_skScene addChild:newSheepNode];
         newSheepNode.zPosition = 1.0;
-=======
-        [skScene addChild:newSheepNode];
->>>>>>> Beta
+        [self playSheepNoise:self];
+
     }
     
-    [self playSheepNoise:self];
+    
 }
 
 
 - (void) generateNewSheep:(SKNode*)node
 {
-<<<<<<< HEAD
+
     
-        SheepModel* newSheepModel = [[SheepModel alloc] init];
-        [newSheepModel makeSheepFrom:-100 to:100];
-        NSString* value = [newSheepModel getValue];
-        char oper = [newSheepModel getOperator];
-=======
     SheepModel* newSheepModel = [[SheepModel alloc] init];
-    [newSheepModel makeSheep];
+    [newSheepModel makeSheepFrom:-100 to:100];
     NSString* value = [newSheepModel getValue];
     char oper = [newSheepModel getOperator];
->>>>>>> Beta
     
-    SKNode *newSheepNode = [sheepSprite createSheepWithValue:value andOper:oper atPos:node.position];
+    SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:node.position];
     newSheepNode.name = @"sheep";
     
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
@@ -110,7 +78,7 @@ typedef struct sheepObj sheepObj;
     [newSheepNode setUserData:dictionary];
     
     [node removeFromParent];
-    [skScene addChild:newSheepNode];
+    [_skScene addChild:newSheepNode];
     [self playSheepNoise:self];
     [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
 }
@@ -134,12 +102,11 @@ typedef struct sheepObj sheepObj;
     [newPlayer play];
 }
 
-<<<<<<< HEAD
+
 - (int)getTagetScore {
     _generator = [[Generator alloc] init];
     _targetScore = [_generator generateIntegerfrom:-100 to:100];
+    NSLog(@"sheep controller target score: %d", _targetScore);
     return _targetScore;
 }
-=======
->>>>>>> Beta
 @end

@@ -57,6 +57,7 @@
         
         int targetScore = [_sheepController getTagetScore];
         [_dataModel setTargetScore:targetScore];
+        NSLog(@"data view target score: %d", targetScore);
         _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
         [self addChild:_targetScore];
         
@@ -65,8 +66,8 @@
     }
     
 
-    // Initialize timer
-    [self initializeTimer];
+//    // Initialize timer
+//    [self initializeTimer];
     
     // Set up UI for Score Label
     _currentScore = [[SKLabelNode alloc] initWithFontNamed:fontType];
@@ -80,12 +81,6 @@
  
     // Add Label view
     [self addChild:_currentScore];
-<<<<<<< HEAD
-
-    
-
-=======
->>>>>>> Beta
     return self;
 }
 
@@ -150,7 +145,7 @@
 }
 - (void) resetTimer
 {
-<<<<<<< HEAD
+    
     [self initializeTimer];
     
     if ([_mode isEqualToString:@"timed"]) {
@@ -166,11 +161,6 @@
 
     }
     
-=======
-    _initialTime = 60;
-    _currentTime.fontColor = [UIColor whiteColor];
-    [self changeTimerText];
->>>>>>> Beta
 }
 
 @end

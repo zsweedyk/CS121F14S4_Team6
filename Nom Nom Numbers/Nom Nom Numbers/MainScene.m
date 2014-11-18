@@ -28,15 +28,12 @@
     int _countDownTillStart;
     SKLabelNode* _readyLabels;
     GameOverButton* gameOverPopup;
-<<<<<<< HEAD
     NSString* _mode;
-}
-
-- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView andMode:(NSString*)mode
-=======
     NSMutableArray* arrOfSounds;
     NSTimer* _gameStartTimer;
 }
+
+
 
 // Bitmaps for fireball and sheep collision detection
 // Note that this and all collision related code is slightly adapted from this site:
@@ -45,9 +42,10 @@
 static const uint32_t fireballCategory     =  0x1 << 0;
 static const uint32_t sheepCategory        =  0x1 << 1;
 
-- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView
->>>>>>> Beta
+- (id) initWithSize:(CGSize)size andSKView:(SKView*)skView andMode:(NSString*)mode
+
 {
+
     _mode = mode;
     _skView = skView;
     _gameEnded = false;
@@ -58,17 +56,17 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     _touchedSheep = false;
    
     self = [super initWithSize:size];
-    [self setup];
-<<<<<<< HEAD
-
-=======
     
-    [self prepareForGame];
+    
+    _sheepController = [[SheepController alloc] init];
+
+    [self setup];
+    
+    
     
     // Set up physics and delegate for collision detection
     self.physicsWorld.gravity = CGVectorMake(0,0);
     self.physicsWorld.contactDelegate = self;
->>>>>>> Beta
     
     return self;
 }
@@ -77,11 +75,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
 {
     [self setupBackground];
     [self setupDragon];
-    
-    _sheepController = [[SheepController alloc] init];
-    [_sheepController setupSheep:self];
-
-    
+    [self prepareForGame];
     [self setupData];
 }
 
@@ -117,9 +111,8 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     } else if (_countDownTillStart < 1) {
         [_gameStartTimer invalidate];
         [_readyLabels removeFromParent];
-        
+
         [_dataView initializeTimer];
-        _sheepController = [[SheepController alloc] init];
         [_sheepController setupSheep:self];
     } else {
         --_countDownTillStart;
@@ -219,28 +212,24 @@ static const uint32_t sheepCategory        =  0x1 << 1;
         if(!_touchedSheep) {
             [self touchedSheep:node];
             [self playSheepNoise:self];
+
         }
         
     } else if ([node.name isEqual:@"quitbutton"]) {
-<<<<<<< HEAD
-=======
-//        [self playButtonNoise:self];
->>>>>>> Beta
+
+        [self playButtonNoise:self];
         [self quitGame];
     
     } else if ([node.name isEqual:@"quitaction"]) {
         // BACK TO MAIN SCREEN
-//        [self playButtonNoise:self];
+        [self playButtonNoise:self];
         SKScene *startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
         
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
-<<<<<<< HEAD
-=======
-//        [self playButtonNoise:self];
->>>>>>> Beta
+        [self playButtonNoise:self];
         [self restart];
     } else if ([node.name isEqual:@"targetbutton"]) {
         [self showGameResults:_dataView];
@@ -250,6 +239,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
 
 - (void) touchedSheep:(SKNode*)node
 {
+
     _touchedSheep = true;
     
     FireballSprite* fireballSprite = [[FireballSprite alloc] init];
