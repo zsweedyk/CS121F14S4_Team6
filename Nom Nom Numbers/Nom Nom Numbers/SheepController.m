@@ -22,9 +22,8 @@
 
 }
 
-
-
-- (void) setupSheep:(SKScene*)mainScene {
+- (void) setupSheep:(SKScene*)mainScene
+{
 
     _sheepSprite = [[SheepSprite alloc] init];
     _skScene = mainScene;
@@ -106,7 +105,6 @@
 - (int)getTagetScore {
     _generator = [[Generator alloc] init];
     _targetScore = [_generator generateIntegerfrom:-100 to:100];
-    NSLog(@"sheep controller target score: %d", _targetScore);
     return _targetScore;
 }
 @end

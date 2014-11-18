@@ -97,7 +97,7 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     
     _readyLabels = [[SKLabelNode alloc] initWithFontNamed:fontType];
     _readyLabels.fontSize = 150;
-    _readyLabels.fontColor = [UIColor redColor];
+    _readyLabels.fontColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.8 alpha:1.0];
     _readyLabels.position = CGPointMake(labelX, labelY);
     _readyLabels.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     _readyLabels.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;

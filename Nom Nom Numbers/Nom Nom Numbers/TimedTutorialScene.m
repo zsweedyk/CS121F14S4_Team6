@@ -42,14 +42,14 @@
     [self setupBackground];
     [self setupDragon];
     
-    // add "Tutorial" at top-right corner
-    SKLabelNode* title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    title.fontSize = 40;
-    title.fontColor = [UIColor whiteColor];
-    title.position = CGPointMake(self.size.width * 0.8, self.size.height * 0.93);
-    title.text = @"Tutorial";
-    title.name = @"title";
-    [self addChild:title];
+    // add Quit button on the top-right
+    SKLabelNode* quit = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    quit.fontSize = 40;
+    quit.fontColor = [UIColor whiteColor];
+    quit.position = CGPointMake(self.size.width * 0.8, self.size.height * 0.93);
+    quit.text = @"Quit";
+    quit.name = @"quit";
+    [self addChild:quit];
     
     [self startGame];
 }
@@ -219,9 +219,9 @@
         SKAction *run = [SKAction speedTo:1 duration:0];
         [self runAction:[SKAction sequence:@[stop, wait, run]]];
         
-    } else if ([node.name isEqual: @"startgame"]) {
+    } else if ([node.name isEqual: @"startgame"] || [node.name isEqual: @"quit"]) {
         
-        // if finishing the game and clicking 'Start' button
+        // if finishing the game and clicking 'Start' button or quit the tutorial
         SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:gameScene transition:transition];

@@ -57,7 +57,6 @@
         
         int targetScore = [_sheepController getTagetScore];
         [_dataModel setTargetScore:targetScore];
-        NSLog(@"data view target score: %d", targetScore);
         _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
         [self addChild:_targetScore];
         

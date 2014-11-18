@@ -20,11 +20,10 @@
 }
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
-    arrOfSounds = [NSMutableArray new];
     
+    arrOfSounds = [NSMutableArray new];
     self = [super initWithSize:size];
     _skView = [[SKView alloc] init];
-    
     _skView = skView;
     [self setup];
     
