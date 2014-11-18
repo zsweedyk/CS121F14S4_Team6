@@ -191,19 +191,19 @@ static const uint32_t sheepCategory        =  0x1 << 1;
         }
         
     } else if ([node.name isEqual:@"quitbutton"]) {
-        [self playButtonNoise:self];
+//        [self playButtonNoise:self];
         [self quitGame];
     
     } else if ([node.name isEqual:@"quitaction"]) {
         // BACK TO MAIN SCREEN
-        [self playButtonNoise:self];
+//        [self playButtonNoise:self];
         SKScene *startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
         
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
-        [self playButtonNoise:self];
+//        [self playButtonNoise:self];
         [self restart];
     }
 }
@@ -342,16 +342,16 @@ static const uint32_t sheepCategory        =  0x1 << 1;
 
 - (IBAction)playButtonNoise:(id)sender
 {
-    NSString* fileName = @"Click";
-    
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
-    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
-    
-    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
-    [arrOfSounds removeAllObjects];
-    [arrOfSounds addObject:newPlayer];
-    [newPlayer prepareToPlay];
-    [newPlayer play];
+//    NSString* fileName = @"Click";
+//    
+//    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+//    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+//    
+//    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+//    [arrOfSounds removeAllObjects];
+//    [arrOfSounds addObject:newPlayer];
+//    [newPlayer prepareToPlay];
+//    [newPlayer play];
 }
 
 
