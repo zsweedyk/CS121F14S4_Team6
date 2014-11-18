@@ -367,7 +367,7 @@
     double scoreTargetScorePortion;
     
     //calculate how close current score is to target score as a percentage
-    if (abs(targetScore - diff < 0)) {
+    if (abs(targetScore - diff) < 0) {
         scoreTargetScorePortion = 0;
     } else {
         scoreTargetScorePortion = (targetScore - diff)/targetScore;
