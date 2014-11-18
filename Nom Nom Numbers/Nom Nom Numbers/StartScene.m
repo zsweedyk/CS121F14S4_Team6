@@ -11,6 +11,8 @@
 #import "MainScene.h"
 #import "TimedTutorialScene.h"
 #import "TargetTutorialScene.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation StartScene {
     SKView* _skView;
