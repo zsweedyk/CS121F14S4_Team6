@@ -10,8 +10,10 @@
 
 @interface FireballSprite : NSObject
 
+@property NSTimeInterval animationTime;
 @property NSTimeInterval fireballTravelTime;
-@property SKSpriteNode* fireball;
+@property NSTimeInterval fireBurnTime;
+@property SKEmitterNode* fireball;
 
 - (void) sendFireballTo:(CGPoint)destination OnScene:(SKScene*)scene;
 
