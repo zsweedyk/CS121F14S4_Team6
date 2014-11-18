@@ -11,7 +11,6 @@
 
 @interface DataModel : NSObject
 
-
 @property (nonatomic) double _currentScore;
 @property (nonatomic) int _targetScore;
 

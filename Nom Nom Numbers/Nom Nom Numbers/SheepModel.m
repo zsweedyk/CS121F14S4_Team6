@@ -12,8 +12,8 @@
 @interface SheepModel ()
 {
     char _operator;
-    NSString *_value;
-    Generator *_generator;
+    NSString* _value;
+    Generator* _generator;
     int _fromInt;
     int _toInt;
 }
@@ -21,7 +21,7 @@
 
 @implementation SheepModel
 
-
+// Initialize SheepModel
 - (id) init
 {
     if (self = [super init]) {
@@ -32,7 +32,7 @@
 }
 
 // Return value of sheep
-- (NSString*) getValue
+- (NSString *) getValue
 {
     return _value;
 }
@@ -42,7 +42,6 @@
 {
     return _operator;
 }
-
 
 - (void) makeSheepFrom:(int)start to:(int)end
 {

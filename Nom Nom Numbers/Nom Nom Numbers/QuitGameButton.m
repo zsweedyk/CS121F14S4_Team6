@@ -10,7 +10,7 @@
 
 @implementation QuitGameButton
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore
+- (id) setupData:(SKScene *)mainScene withScore:(double)currentScore
 {
     CGFloat sceneX = mainScene.size.width;
     CGFloat sceneY = mainScene.size.height;

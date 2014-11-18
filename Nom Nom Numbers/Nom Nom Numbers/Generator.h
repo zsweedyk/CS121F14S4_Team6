@@ -11,7 +11,7 @@
 @interface Generator : NSObject
 
 - (int) generateIntegerfrom:(int)lower to:(int)upper;
-- (NSMutableArray*) generateFraction;
+- (NSMutableArray *) generateFraction;
 - (char) generateOperator;
 
 @end
