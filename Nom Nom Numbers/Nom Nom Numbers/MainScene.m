@@ -25,7 +25,11 @@
     double _currentScore;
     BOOL _gameEnded;
     BOOL _touchedSheep;
+    int _countDownTillStart;
+    SKLabelNode* _readyLabels;
     GameOverButton* gameOverPopup;
+    NSMutableArray* arrOfSounds;
+    NSTimer* _gameStartTimer;
 }
 
 // Bitmaps for fireball and sheep collision detection
@@ -38,16 +42,17 @@ static const uint32_t sheepCategory        =  0x1 << 1;
 - (id) initWithSize:(CGSize)size andSKView:(SKView*)skView
 {
     _skView = skView;
-
     _gameEnded = false;
+    _countDownTillStart = 4;
+    
+    arrOfSounds = [NSMutableArray new];
     
     _touchedSheep = false;
    
     self = [super initWithSize:size];
     [self setup];
-
-    _sheepController = [[SheepController alloc] init];
-    [_sheepController setupSheep:self];
+    
+    [self prepareForGame];
     
     // Set up physics and delegate for collision detection
     self.physicsWorld.gravity = CGVectorMake(0,0);
@@ -61,18 +66,70 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     [self setupBackground];
     [self setupDragon];
     [self setupData];
+}
 
+- (void) prepareForGame
+{
+    NSString* fontType = @"MalayalamSangamMN-Bold";
+    CGFloat labelX = self.frame.size.width * 0.5;
+    CGFloat labelY = self.frame.size.height * 0.5;
+    
+    _readyLabels = [[SKLabelNode alloc] initWithFontNamed:fontType];
+    _readyLabels.fontSize = 150;
+    _readyLabels.fontColor = [UIColor redColor];
+    _readyLabels.position = CGPointMake(labelX, labelY);
+    _readyLabels.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    _readyLabels.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    _readyLabels.text = @"Ready?";
+    
+    [self addChild:_readyLabels];
+    [self initializeTimer];
+}
+
+- (void) initializeTimer
+{
+    _gameStartTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(gameStartTimerAction) userInfo:nil repeats:YES];
+}
+
+- (void) gameStartTimerAction
+{
+    if (_countDownTillStart == 1) {
+        _readyLabels.text = @"Go!";
+        --_countDownTillStart;
+        
+    } else if (_countDownTillStart < 1) {
+        [_gameStartTimer invalidate];
+        [_readyLabels removeFromParent];
+        
+        [_dataView initializeTimer];
+        _sheepController = [[SheepController alloc] init];
+        [_sheepController setupSheep:self];
+    } else {
+        --_countDownTillStart;
+        [self changeReadyLabelText];
+    }
+}
+
+- (void) changeReadyLabelText
+{
+    _readyLabels.text = [NSString stringWithFormat:@"%d", _countDownTillStart];
 }
 
 - (void) restart
 {
     _gameEnded = false;
+    [gameOverPopup removeFromParent];
+    
+    // Reset data
     [_dataModel resetScore];
     _currentScore = 0;
     [_dataView updateScore:[_dataModel getScore]];
     [_dataView resetTimer];
-    [gameOverPopup removeFromParent];
-    [_sheepController setupSheep:self];
+    
+    // Reset initial game prep
+    _readyLabels.text = @"Ready?";
+    _countDownTillStart = 4;
+    [self prepareForGame];
 }
 
 - (void) setupBackground
@@ -127,20 +184,26 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     SKNode *node = [self nodeAtPoint:location];
 
     if ([node.name isEqual: @"sheep"]) {
-        if(!_touchedSheep)
+        // Prevents another sheep from being touched during Fireball
+        if(!_touchedSheep) {
             [self touchedSheep:node];
+            [self playSheepNoise:self];
+        }
         
     } else if ([node.name isEqual:@"quitbutton"]) {
-        //[_sheepController removeFromParentViewController];
+//        [self playButtonNoise:self];
         [self quitGame];
     
     } else if ([node.name isEqual:@"quitaction"]) {
         // BACK TO MAIN SCREEN
+//        [self playButtonNoise:self];
         SKScene *startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
+        
     } else if ([node.name isEqual:@"playagainaction"]) {
         // PLAY AGAIN
+//        [self playButtonNoise:self];
         [self restart];
     }
 }
@@ -253,6 +316,42 @@ static const uint32_t sheepCategory        =  0x1 << 1;
     QuitGameButton* quitPopup = [[QuitGameButton alloc] init];
     [quitPopup setupData:self withScore:_currentScore];
     [self addChild:quitPopup];
+}
+
+- (IBAction)playSheepNoise:(id)sender
+{
+    // StrongFire is a clip taken from:
+    // http://soundbible.com/1348-Large-Fireball.html
+    NSString* fileName = @"StrongFire";
+    int randomValue = arc4random_uniform(2);
+    
+    if (randomValue == 1) {
+        fileName = @"WeakFire";
+    }
+    
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    
+    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    [arrOfSounds removeAllObjects];
+    [arrOfSounds insertObject:newPlayer atIndex:0];
+    newPlayer.volume = 1.0;
+    [newPlayer prepareToPlay];
+    [newPlayer play];
+}
+
+- (IBAction)playButtonNoise:(id)sender
+{
+//    NSString* fileName = @"Click";
+//    
+//    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+//    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+//    
+//    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+//    [arrOfSounds removeAllObjects];
+//    [arrOfSounds addObject:newPlayer];
+//    [newPlayer prepareToPlay];
+//    [newPlayer play];
 }
 
 

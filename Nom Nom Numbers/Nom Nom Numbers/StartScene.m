@@ -13,9 +13,11 @@
 
 @implementation StartScene {
     SKView* _skView;
+    NSMutableArray* arrOfSounds;
 }
 
 -(id)initWithSize:(CGSize)size andSKView:(SKView*)skView {
+    arrOfSounds = [NSMutableArray new];
     
     self = [super initWithSize:size];
     _skView = [[SKView alloc] init];
@@ -28,33 +30,25 @@
 
 - (void)setup {
     
-    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
+    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"StartPageBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
     background.xScale = .5;
     background.yScale = .5;
     [self addChild:background];
     
-    SKLabelNode* title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    title.fontSize = 60;
-    title.fontColor = [UIColor whiteColor];
-    title.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.9);
-    title.text = @"Nom Nom Numbers";
-    title.name = @"title";
-    [self addChild:title];
-    
     SKLabelNode* startButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     startButton.fontSize = 45;
-    startButton.fontColor = [UIColor whiteColor];
-    startButton.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.6);
+    startButton.fontColor = [UIColor blackColor];
+    startButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.5);
     startButton.text = @"Start Game";
     startButton.name = @"startButton";
     [self addChild:startButton];
     
     SKLabelNode* infoButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     infoButton.fontSize = 45;
-    infoButton.fontColor = [UIColor whiteColor];
-    infoButton.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
+    infoButton.fontColor = [UIColor blackColor];
+    infoButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.4);
     infoButton.text = @"How To Play";
     infoButton.name = @"infoButton";
     [self addChild:infoButton];
@@ -78,9 +72,23 @@
     }
     
     if ([node.name isEqual: @"infoButton"]) {
+        [self playButtonNoise:self];
         NSLog(@"Information Button Pressed");
     }
+}
+
+- (IBAction)playButtonNoise:(id)sender
+{
+    NSString* fileName = @"Click";
     
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    
+    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    [arrOfSounds removeAllObjects];
+    [arrOfSounds addObject:newPlayer];
+    [newPlayer prepareToPlay];
+    [newPlayer play];
 }
 
 @end

@@ -27,6 +27,7 @@
 
 - (id) setupData:(SKScene*)mainScene withScore:(double)currentScore;
 - (void) updateScore: (double)newScore;
+- (void) initializeTimer;
 - (void) stopTimer;
 - (void) resetTimer;
 

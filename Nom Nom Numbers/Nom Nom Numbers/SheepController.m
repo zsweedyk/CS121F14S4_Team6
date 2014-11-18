@@ -9,12 +9,14 @@
 #import "SheepController.h"
 #import "SheepSprite.h"
 #import "SheepModel.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation SheepController
 {
-    SKScene* _skScene;
-    NSMutableArray* _arrOfSheepModel;
-    SheepSprite* _sheepSprite;
+    SKScene* skScene;
+    NSMutableArray* arrOfSheepModel;
+    SheepSprite* sheepSprite;
 }
 
 struct sheepObj
@@ -26,9 +28,10 @@ struct sheepObj
 typedef struct sheepObj sheepObj;
 
 - (void) setupSheep:(SKScene*)mainScene {
-    _sheepSprite = [[SheepSprite alloc] init];
-    _arrOfSheepModel = [[NSMutableArray alloc] initWithCapacity:5];
-    _skScene = mainScene;
+    sheepSprite = [[SheepSprite alloc] init];
+    arrOfSheepModel = [[NSMutableArray alloc] initWithCapacity:5];
+    arrOfSounds = [NSMutableArray new];
+    skScene = mainScene;
     
     for (int i = 1; i < 6; i++) {
         SheepModel* sheepModel = [[SheepModel alloc] init];
@@ -36,7 +39,7 @@ typedef struct sheepObj sheepObj;
         NSString* value = [sheepModel getValue];
         char oper = [sheepModel getOperator];
         
-        SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
+        SKNode *newSheepNode = [sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
         NSString* sheepName = @"sheep"; //[NSString stringWithFormat:@"sheep%d",i];
         newSheepNode.name = sheepName;
 
@@ -46,29 +49,52 @@ typedef struct sheepObj sheepObj;
         [dictionary setValue:operAsString forKey:@"Operator"];
         [newSheepNode setUserData:dictionary];
     
-        [_skScene addChild:newSheepNode];
+        [skScene addChild:newSheepNode];
     }
+    
+    [self playSheepNoise:self];
 }
 
 
 - (void) generateNewSheep:(SKNode*)node
 {
-        SheepModel* newSheepModel = [[SheepModel alloc] init];
-        [newSheepModel makeSheep];
-        NSString* value = [newSheepModel getValue];
-        char oper = [newSheepModel getOperator];
+    SheepModel* newSheepModel = [[SheepModel alloc] init];
+    [newSheepModel makeSheep];
+    NSString* value = [newSheepModel getValue];
+    char oper = [newSheepModel getOperator];
     
-        SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:node.position];
-        newSheepNode.name = @"sheep";
+    SKNode *newSheepNode = [sheepSprite createSheepWithValue:value andOper:oper atPos:node.position];
+    newSheepNode.name = @"sheep";
     
-        NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
-        NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
-        [dictionary setValue:value forKey:@"Value"];
-        [dictionary setValue:operAsString forKey:@"Operator"];
-        [newSheepNode setUserData:dictionary];
-
-        [node removeFromParent];
-        [_skScene addChild:newSheepNode];
-        [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
+    NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+    NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
+    [dictionary setValue:value forKey:@"Value"];
+    [dictionary setValue:operAsString forKey:@"Operator"];
+    [newSheepNode setUserData:dictionary];
+    
+    [node removeFromParent];
+    [skScene addChild:newSheepNode];
+    [self playSheepNoise:self];
+    [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
 }
+
+- (IBAction)playSheepNoise:(id)sender
+{
+    NSString* fileName = @"Sheep";
+    int randomValue = arc4random_uniform(2);
+    
+    if (randomValue == 1) {
+        fileName = @"Sheep2";
+    }
+    
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    
+    AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    [arrOfSounds addObject:newPlayer];
+    newPlayer.volume = 0.5;
+    [newPlayer prepareToPlay];
+    [newPlayer play];
+}
+
 @end
