@@ -196,6 +196,7 @@
 
     if ([node.name isEqual: @"sheep"]) {
         
+        node.name = @"sheep1";
         // if clicking on a sheep
         NSMutableDictionary* sheepData = node.userData;
         char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
@@ -217,7 +218,9 @@
         SKAction *stop = [SKAction speedTo:0 duration:0];
         SKAction *wait = [SKAction speedTo:0 duration:5];
         SKAction *run = [SKAction speedTo:1 duration:0];
-        [self runAction:[SKAction sequence:@[stop, wait, run]]];
+        SKAction *remove = [SKAction removeFromParent];
+        SKAction *disappear = [SKAction runAction:remove onChildWithName:@"sheep1"];
+        [self runAction:[SKAction sequence:@[stop, wait, disappear, run]]];
         
     } else if ([node.name isEqual: @"startgame"] || [node.name isEqual: @"quit"]) {
         
