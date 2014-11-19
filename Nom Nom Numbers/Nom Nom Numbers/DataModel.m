@@ -68,4 +68,33 @@
     _currentScore = 0;
 }
 
+// Algorithm to calculate final score when 'Hit me' is pressed
+// in target mode
+- (double) calculateTargetScoreAtTime:(double)time
+{
+    int targetScore =  _targetScore;
+    
+    // Calculate difference between current score and target score
+    double diff = abs(_currentScore - targetScore);
+    double scoreTargetScorePortion;
+    
+    //calculate how close current score is to target score as a percentage
+    if (abs(targetScore - diff) < 0) {
+        scoreTargetScorePortion = 0;
+    } else {
+        scoreTargetScorePortion = (targetScore - diff)/targetScore;
+    }
+    
+    // Reward a fast time; any time over 10 minutes results in a score of 0
+    double score;
+    if (time > 600) {
+        score = 0;
+        
+    } else {
+        score = (600-time)/600 * scoreTargetScorePortion * 100;
+    }
+    
+    return score;
+}
+
 @end
