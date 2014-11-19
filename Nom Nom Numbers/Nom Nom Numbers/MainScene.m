@@ -260,7 +260,7 @@
                                     repeats: NO];
 }
 
-
+// add score animation
 - (SKLabelNode *) newScoreNode
 {
     SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
