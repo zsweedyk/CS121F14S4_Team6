@@ -196,31 +196,66 @@
 
     if ([node.name isEqual: @"sheep"]) {
         
-        node.name = @"sheep1";
         // if clicking on a sheep
+        node.name = @"sheep1";
+    
         NSMutableDictionary* sheepData = node.userData;
         char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
         NSString* sheepValue = [sheepData objectForKey:@"Value"];
+        double _originalScore = [_dataModel getScore];
         [_dataModel applySheepChar:sheepOper andValue:sheepValue];
         
         double _currentScore = [_dataModel getScore];
-        [_dataView updateScore:_currentScore];
         
         SKLabelNode* popup = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
         popup.fontSize = 35;
         popup.fontColor = [UIColor whiteColor];
-        popup.position = CGPointMake(550,140);
-        NSString* title = [NSString stringWithFormat:@"the updated score: %d %c %@ = %.2f", 0, sheepOper, sheepValue, _currentScore];
+        popup.position = CGPointMake(500,140);
+        NSString* title = [NSString stringWithFormat:@"the score is updated to: "];
         popup.text = title;
         popup.name = @"popup";
         [node addChild:popup];
         
+        SKLabelNode* popup2 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        popup2.fontSize = 35;
+        popup2.fontColor = [UIColor whiteColor];
+        popup2.position = CGPointMake(500,100);
+        NSString* title2 = [NSString stringWithFormat:@"%.2f %c %@ = %.2f", _originalScore, sheepOper, sheepValue, _currentScore];
+        popup2.text = title2;
+        popup2.name = @"popup2";
+        [node addChild:popup2];
+        
         SKAction *stop = [SKAction speedTo:0 duration:0];
-        SKAction *wait = [SKAction speedTo:0 duration:5];
+        SKAction *wait = [SKAction speedTo:0 duration:4];
         SKAction *run = [SKAction speedTo:1 duration:0];
         SKAction *remove = [SKAction removeFromParent];
         SKAction *disappear = [SKAction runAction:remove onChildWithName:@"sheep1"];
         [self runAction:[SKAction sequence:@[stop, wait, disappear, run]]];
+        
+        [self addChild:[self newScoreNode:node]];
+        CGFloat Xdimensions = self.size.width;
+        CGFloat Ydimensions = self.size.height;
+        
+        // Dimensions of score label (from data view class)
+        CGFloat scoreY = Ydimensions * 0.93;
+        CGFloat scoreX = Xdimensions * 0.02;
+        
+        SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
+        
+        if (scoreNode != nil) {
+            scoreNode.name = nil;
+            
+            SKAction* zoom = [SKAction scaleTo: 2.0 duration: 0.1];
+            SKAction* move = [SKAction moveTo:(CGPointMake(scoreX+150, scoreY-50)) duration:0.5];
+            SKAction* pause = [SKAction waitForDuration: 0.25];
+            SKAction* fadeAway = [SKAction fadeOutWithDuration: 0.25];
+            SKAction* remove = [SKAction removeFromParent];
+            SKAction* moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
+            
+            [scoreNode runAction: moveSequence completion:^{
+                [_dataView updateScore:_currentScore];
+            }];
+        }
         
     } else if ([node.name isEqual: @"startgame"] || [node.name isEqual: @"quit"]) {
         
@@ -241,6 +276,44 @@
     }
 
 }
+
+- (SKLabelNode *) newScoreNode:(SKNode*) node
+{
+    SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
+    
+    NSMutableDictionary* sheepData = node.userData;
+    char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
+    NSString* sheepValue = [sheepData objectForKey:@"Value"];
+    
+    NSString *oper = [NSString stringWithFormat:@"%c",sheepOper];
+    NSString* myString=[NSString stringWithFormat:@"%@%@",oper,sheepValue];
+    
+    // If sheep value was a fraction, only display fraction part since displaying decimal
+    // portion as well will get too cramped
+    NSCharacterSet* parens = [NSCharacterSet characterSetWithCharactersInString:@"()"];
+    NSRange searchRange = NSMakeRange(0, myString.length);
+    NSRange foundRange = [myString rangeOfCharacterFromSet:parens options:0 range:searchRange];
+    
+    // Check if there are parentheses (the value is a fraction that contains its decimal counterpart
+    if (foundRange.location != NSNotFound){
+        NSRange range = [myString rangeOfString:@"("];
+        NSString* shortString = [myString substringToIndex:range.location];
+        scoreNode.text = shortString;
+        
+    } else {
+        scoreNode.text = myString;
+    }
+    
+    // Set color to be off-white so text is visible even with sheep passing by
+    scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:200/255.0f blue:150/255.0f alpha:1.0f];
+    scoreNode.fontSize = 45;
+    
+    scoreNode.position = CGPointMake(node.position.x+200, node.position.y);
+    scoreNode.name = @"scoreNode";
+    
+    return scoreNode;
+}
+
 
 - (void) update:(NSTimeInterval)currentTime
 {
