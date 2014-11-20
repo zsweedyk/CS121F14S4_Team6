@@ -31,23 +31,20 @@
 
 - (void) testMakeSheep
 {
-    // check if the score is updated correctly
+
     
+    //Assert that an incorrect range raises an exception
+    XCTAssertThrowsSpecific([_sheepModel makeSheepFrom:100 to:99], NSException);
+    
+    //Assert that operator and value is never returned uninitialized
     [_sheepModel makeSheepFrom:-100 to:100];
     char operator = [_sheepModel getOperator];
     NSString* value = [_sheepModel getValue];
-    XCTAssertThrowsSpecific((operator == '/') && (value == [NSString stringWithFormat:@"0"]), NSException);
-    
-    double desiredValue;
-    NSRange textRange = [value rangeOfString:@"("];
-    if (textRange.location != NSNotFound)
-    {
-        NSCharacterSet *delimiters = [NSCharacterSet characterSetWithCharactersInString:@"()"];
-        NSArray *splitString = [value componentsSeparatedByCharactersInSet:delimiters];
-        desiredValue = [[splitString objectAtIndex:1] doubleValue];
+    NSAssert(operator != ' ', @"empty operator string");
+    if (operator != 'A') {
+        NSAssert(![value isEqualToString:@" "], @"empty value string");
     }
     
-    XCTAssertThrowsSpecific(((operator == '/') && (desiredValue == 0)), NSException);
     
 }
 

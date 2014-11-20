@@ -64,7 +64,7 @@
     [_skScene addChild:newSheepNode];
     [self playSheepNoise:self];
     [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
-    newSheepNode.zPosition = 1.0;
+    newSheepNode.zPosition = 0;
 }
 
 // Plays noise when sheep is created
@@ -90,8 +90,13 @@
 // Generates a random integer from -100 to 100 in order to obtain a target score
 - (int) getTargetScore
 {
+    _targetScore = 0;
     _generator = [[Generator alloc] init];
-    _targetScore = [_generator generateIntegerfrom:-100 to:100];
+    
+    while (_targetScore == 0) {
+        _targetScore = [_generator generateIntegerfrom:-100 to:100];
+    }
+    
     return _targetScore;
 }
 @end

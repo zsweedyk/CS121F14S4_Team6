@@ -52,6 +52,10 @@
     value = [NSString stringWithFormat:@"-5"];
     [_dataModel applySheepChar:operator andValue:value];
     XCTAssertTrue(_dataModel._currentScore == (double)-35.8, @"Wrong Score");
+    
+    operator = 'B';
+    value = [NSString stringWithFormat:@"-80"];
+    XCTAssertThrows([_dataModel applySheepChar:operator andValue:value], @"Not a valid operator");
 }
 
 
@@ -64,6 +68,21 @@
     [_dataModel applySheepChar:operator andValue:value];
     [_dataModel resetScore];
     XCTAssertTrue(_dataModel._currentScore == 0, @"Score is not reset");
+}
+
+- (void) testCalculateTargetScore
+{
+    double time = 40.0;
+    
+    [_dataModel setTargetScore:(arc4random_uniform(100) - 50)];
+    
+    
+    double targetScore = [_dataModel calculateTargetScoreAtTime:time];
+    XCTAssert(targetScore != 0, @"target score is 0");
+    XCTAssert(!isnan([_dataModel getScore]), @"nan returned as final score");
+
+    
+    
 }
 
 

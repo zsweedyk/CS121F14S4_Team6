@@ -163,7 +163,7 @@
 
 - (void) setupSheep
 {
-    
+    // Add sheep to the tutorial screen
     SheepSprite* _sheepSprite = [[SheepSprite alloc] init];
     for (int i = 1; i < 6; i++) {
         SheepModel* sheepModel = [[SheepModel alloc] init];
@@ -198,15 +198,16 @@
         
         // if clicking on a sheep
         node.name = @"sheep1";
-    
+        
+        // get the operator and value of the sheep, and store the original and updated scores
         NSMutableDictionary* sheepData = node.userData;
         char sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
         NSString* sheepValue = [sheepData objectForKey:@"Value"];
         double _originalScore = [_dataModel getScore];
         [_dataModel applySheepChar:sheepOper andValue:sheepValue];
-        
         double _currentScore = [_dataModel getScore];
         
+        // setup popup explaining how score changes
         SKLabelNode* popup = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
         popup.fontSize = 35;
         popup.fontColor = [UIColor whiteColor];
@@ -225,8 +226,9 @@
         popup2.name = @"popup2";
         [node addChild:popup2];
         
+        // pause all animation for 5 seconds
         SKAction *stop = [SKAction speedTo:0 duration:0];
-        SKAction *wait = [SKAction speedTo:0 duration:4];
+        SKAction *wait = [SKAction speedTo:0 duration:2];
         SKAction *run = [SKAction speedTo:1 duration:0];
         SKAction *remove = [SKAction removeFromParent];
         SKAction *disappear = [SKAction runAction:remove onChildWithName:@"sheep1"];
@@ -236,12 +238,13 @@
         CGFloat Xdimensions = self.size.width;
         CGFloat Ydimensions = self.size.height;
         
-        // Dimensions of score label (from data view class)
+        // create newScore label for score animation
         CGFloat scoreY = Ydimensions * 0.93;
         CGFloat scoreX = Xdimensions * 0.02;
         
         SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
         
+        // score animation
         if (scoreNode != nil) {
             scoreNode.name = nil;
             
@@ -323,9 +326,9 @@
         __block _Bool flag2 = FALSE; // detect if sheep objects exist
         
         [self enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode *node, BOOL *stop) {
+            
             // sheep nodes exist
             flag2 = TRUE;
-            
             // If at least one sheep is on screen, flag1 is FALSE
             if (node.position.x > -150) {
                 flag1 = FALSE;
@@ -354,7 +357,7 @@
     
     // Create popup
     SKSpriteNode* quitPopup = [[SKSpriteNode alloc] initWithImageNamed:@"popup"];
-    quitPopup.size = CGSizeMake(sceneX * 0.35, sceneY * 0.3);
+    quitPopup.size = CGSizeMake(sceneX * 0.38, sceneY * 0.3);
     quitPopup.position = CGPointMake(sceneX * 0.5, sceneY * 0.5);
     
     SKSpriteNode* shadow = [[SKSpriteNode alloc] initWithImageNamed:@"popupShadow"];
