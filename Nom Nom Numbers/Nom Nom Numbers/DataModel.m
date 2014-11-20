@@ -38,8 +38,8 @@
         _currentScore = _currentScore / desiredValue;
     } else if (operator == 'x') {
         _currentScore = _currentScore * desiredValue;
-    } else {
-        _currentScore = abs(_currentScore);
+    } else if (operator == 'A') {
+        _currentScore = fabs(_currentScore);
     }
     
 }
