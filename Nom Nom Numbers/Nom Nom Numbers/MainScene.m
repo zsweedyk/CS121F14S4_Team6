@@ -294,7 +294,33 @@
     return scoreNode;
 }
 
+// add animation to the score node
+- (void) animateScoreNode
+{
+    CGFloat Xdimensions = self.size.width;
+    CGFloat Ydimensions = self.size.height;
+    
+    // Dimensions of score label (from data view class)
+    CGFloat scoreY = Ydimensions * .93;
+    CGFloat scoreX = Xdimensions * .02;
+    
+    SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
+    
+    if (scoreNode != nil) {
+        scoreNode.name = nil; // change name so we don't affect this node anymore
+        
+        SKAction* zoom = [SKAction scaleTo: 2.0 duration: 0.1];
+        SKAction* move = [SKAction moveTo:(CGPointMake(scoreX+150, scoreY-50)) duration:0.5];
+        SKAction* pause = [SKAction waitForDuration: 0.25];
+        SKAction* fadeAway = [SKAction fadeOutWithDuration: 0.25];
+        SKAction* remove = [SKAction removeFromParent];
+        SKAction* moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
+        
+        [scoreNode runAction: moveSequence];
+    }
+}
 
+// create new sheep with value and operator
 - (void) makeNewSheep:(NSTimer *)incomingTimer
 {
     SKNode* node;
@@ -314,28 +340,7 @@
     
     // Show updating score with animated label
     [self addChild: [self newScoreNode]];
-    
-    CGFloat Xdimensions = self.size.width;
-    CGFloat Ydimensions = self.size.height;
-    
-    // Dimensions of score label (from data view class)
-    CGFloat scoreY = Ydimensions * .93;
-    CGFloat scoreX = Xdimensions * .02;
-    
-    SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
-    
-    if (scoreNode != nil) {
-        scoreNode.name = nil;
-        
-        SKAction* zoom = [SKAction scaleTo: 2.0 duration: 0.1];
-        SKAction* move = [SKAction moveTo:(CGPointMake(scoreX+150, scoreY-50)) duration:0.5];
-        SKAction* pause = [SKAction waitForDuration: 0.25];
-        SKAction* fadeAway = [SKAction fadeOutWithDuration: 0.25];
-        SKAction* remove = [SKAction removeFromParent];
-        SKAction* moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
-        
-        [scoreNode runAction: moveSequence];
-    }
+    [self animateScoreNode];
     
     _touchedSheep = false;
 }
