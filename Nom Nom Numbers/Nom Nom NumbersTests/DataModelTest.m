@@ -23,19 +23,16 @@
 @implementation DataModelTest
 
 - (void)setUp {
+    
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
     
     _dataModel = [[DataModel alloc] init];
     _sheepModel = [[SheepModel alloc] init];
-    
 }
 
-
+// Check if the score is updated correctly
 - (void) testApplySheep
 {
-    // check if the score is updated correctly
-    
     char operator = '+';
     NSString* value = [NSString stringWithFormat:@"34"];
     [_dataModel applySheepChar:operator andValue:value];
@@ -55,21 +52,19 @@
     value = [NSString stringWithFormat:@"-5"];
     [_dataModel applySheepChar:operator andValue:value];
     XCTAssertTrue(_dataModel._currentScore == (double)-35.8, @"Wrong Score");
-    
 }
 
+
+
+// Check if the resetScore works properly
 - (void) testResetScore
 {
-    // check if the resetScore works properly
-    
     char operator = '-';
     NSString* value = [NSString stringWithFormat:@"34"];
     [_dataModel applySheepChar:operator andValue:value];
     [_dataModel resetScore];
     XCTAssertTrue(_dataModel._currentScore == 0, @"Score is not reset");
 }
-
-
 
 
 @end
