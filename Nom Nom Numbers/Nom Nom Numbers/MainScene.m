@@ -259,7 +259,7 @@
                                     repeats: NO];
 }
 
-
+// add score animation
 - (SKLabelNode *) newScoreNode
 {
     SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
@@ -355,34 +355,6 @@
     }];
 }
 
-// Algorithm to calculate final score when 'Hit me' is pressed
-// in target mode
-- (double) calculateTargetScoreAtTime:(double)time
-{
-    int targetScore = [_dataModel getTargetScore];
-    
-    // Calculate difference between current score and target score
-    double diff = abs(_currentScore - targetScore);
-    double scoreTargetScorePortion;
-    
-    //calculate how close current score is to target score as a percentage
-    if (abs(targetScore - diff) < 0) {
-        scoreTargetScorePortion = 0;
-    } else {
-        scoreTargetScorePortion = (targetScore - diff)/targetScore;
-    }
-    
-    // Reward a fast time; any time over 10 minutes results in a score of 0
-    double score;
-    if (time > 600) {
-        score = 0;
-    
-    } else {
-        score = (600-time)/600 * scoreTargetScorePortion * 100;
-    }
-    
-    return score;
-}
 
 // Delegate Function: Shows result when game is over
 - (void) showGameResults:(DataView *)controller
@@ -394,18 +366,12 @@
     _gameOverPopup = [[GameOverButton alloc] init];
     double score;
     if ([_mode isEqualToString:@"target"]) {
+        //Generate score for target mode
         double time = [_dataView getCurrentTime];
-        
-        //prevent divide by 0
-        if (time == 0) {
-            time = 1;
-        }
-        score = [self calculateTargetScoreAtTime:time];
-        if (score < 0) {
-            score = 0;
-        }
+        score = [_dataModel calculateTargetScoreAtTime:time];
         
     } else {
+        //Return score for timed mode
         score = _currentScore;
     }
     
@@ -427,17 +393,9 @@
     // Calculates score for Target mode
     if ([_mode isEqualToString:@"target"]) {
         double time = [_dataView getCurrentTime];
-        
-        if (time == 0) {
-            time = 1;
-        }
-        score = [self calculateTargetScoreAtTime:time];
-        if (score < 0) {
-            score = 0;
-        }
-        
-    // Calculates score for Timed mode
+        score = [_dataModel calculateTargetScoreAtTime:time];
     } else {
+        // Calculates score for Timed mode
         score = _currentScore;
     }
 

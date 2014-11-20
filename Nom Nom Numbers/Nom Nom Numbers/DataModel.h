@@ -17,7 +17,8 @@
 - (void) applySheepChar:(char)operator andValue:(NSString *)givenValue;
 - (double) getScore;
 - (void) setTargetScore:(int)score;
-- (int) getTargetScore;
+//- (int) getTargetScore;
 - (void) resetScore;
+- (double) calculateTargetScoreAtTime:(double)time;
 
 @end

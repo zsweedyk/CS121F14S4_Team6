@@ -30,29 +30,22 @@
     _arrOfSounds = [NSMutableArray new];
 
     for (int i = 1; i < 6; i++) {
-        SheepModel* sheepModel = [[SheepModel alloc] init];
-        [sheepModel makeSheepFrom: -100 to: 100];
-        NSString* value = [sheepModel getValue];
-        char oper = [sheepModel getOperator];
-        
-        SKNode *newSheepNode = [_sheepSprite createSheepWithValue:value andOper:oper atPos:CGPointMake(740, i*100 - 40)];
-        newSheepNode.name = @"sheep";
-
-        NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
-        NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
-        [dictionary setValue:value forKey:@"Value"];
-        [dictionary setValue:operAsString forKey:@"Operator"];
-        [newSheepNode setUserData:dictionary];
-        
-        [_skScene addChild:newSheepNode];
-        newSheepNode.zPosition = 1.0;
-        [self playSheepNoise:self];
+        SKNode *newSheepNode = [[SKNode alloc] init];
+        newSheepNode.position = CGPointMake(740, i*100 - 40);
+        [self makeSheep:newSheepNode];
     }
 }
 
 // Each time a sheep runs off the screen, this method creates a new individual sheep
-// with coresponding sheep models
 - (void) generateNewSheep:(SKNode *)node
+{
+    [node removeFromParent];
+    [self makeSheep:node];
+}
+
+// Given a node, this method does all the initilizations and communication necessary to create
+// a fully functional sheep node
+- (void) makeSheep:(SKNode *)node
 {
     SheepModel* newSheepModel = [[SheepModel alloc] init];
     [newSheepModel makeSheepFrom:-100 to:100];
@@ -68,10 +61,10 @@
     [dictionary setValue:operAsString forKey:@"Operator"];
     [newSheepNode setUserData:dictionary];
     
-    [node removeFromParent];
     [_skScene addChild:newSheepNode];
     [self playSheepNoise:self];
     [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
+    newSheepNode.zPosition = 1.0;
 }
 
 // Plays noise when sheep is created
