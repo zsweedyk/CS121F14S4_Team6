@@ -196,10 +196,6 @@
 				CB9A2CBA1A09336F004EF777 /* AppDelegate.m */,
 				CB9A2CC11A093370004EF777 /* GameViewController.h */,
 				CB9A2CC21A093370004EF777 /* GameViewController.m */,
-				CB68059E1A1D8B130023EA58 /* Sheep */,
-				CB68059D1A1D8A5B0023EA58 /* Scenes */,
-				CBDBDAE31A1D875B00A9BF78 /* Particles */,
-				CB68059F1A1D8B730023EA58 /* Data and Models */,
 				CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */,
 				CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */,
 				CB9A2CEA1A0939E8004EF777 /* GameOverButton.h */,
@@ -210,6 +206,10 @@
 				CB9A2CC41A093370004EF777 /* Main.storyboard */,
 				CB9A2CC71A093370004EF777 /* Images.xcassets */,
 				CB9A2CC91A093370004EF777 /* LaunchScreen.xib */,
+				CB68059E1A1D8B130023EA58 /* Sheep */,
+				CB68059D1A1D8A5B0023EA58 /* Scenes */,
+				CBDBDAE31A1D875B00A9BF78 /* Particles */,
+				CB68059F1A1D8B730023EA58 /* Data and Models */,
 				CB9A2CB51A09336E004EF777 /* Supporting Files */,
 			);
 			path = "Nom Nom Numbers";
