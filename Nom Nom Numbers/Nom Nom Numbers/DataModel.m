@@ -56,11 +56,6 @@
     _targetScore = score;
 }
 
-// Return targetScore
-- (int) getTargetScore
-{
-    return _targetScore;
-}
 
 // Reset score when game is restarted
 - (void) resetScore
@@ -94,6 +89,7 @@
         score = (600-time)/600 * scoreTargetScorePortion * 100;
     }
     
+    NSAssert(!isnan(score), @"not a number returned");
     return score;
 }
 

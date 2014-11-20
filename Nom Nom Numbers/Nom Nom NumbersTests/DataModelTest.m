@@ -66,5 +66,20 @@
     XCTAssertTrue(_dataModel._currentScore == 0, @"Score is not reset");
 }
 
+- (void) testCalculateTargetScore
+{
+    double time = 40.0;
+    
+    [_dataModel setTargetScore:(arc4random_uniform(100) - 50)];
+    
+    
+    double targetScore = [_dataModel calculateTargetScoreAtTime:time];
+    XCTAssert(targetScore != 0, @"target score is 0");
+    XCTAssert(!isnan([_dataModel getScore]), @"nan returned as final score");
+
+    
+    
+}
+
 
 @end

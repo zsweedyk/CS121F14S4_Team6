@@ -36,6 +36,7 @@
     _fireball = [NSKeyedUnarchiver unarchiveObjectWithFile:fireballPath];
     _fireball.targetNode = scene;
     _fireball.position = start;
+    _fireball.zPosition = 1;
     
     // Set up and run fireball actions
     SKAction* waitForAnimation = [SKAction waitForDuration:_animationTime / 3];
