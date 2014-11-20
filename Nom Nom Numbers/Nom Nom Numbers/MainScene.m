@@ -42,7 +42,6 @@
 - (id) initWithSize:(CGSize)size andSKView:(SKView *)skView andMode:(NSString *)mode
 
 {
-
     _mode = mode;
     _skView = skView;
     _gameEnded = false;
