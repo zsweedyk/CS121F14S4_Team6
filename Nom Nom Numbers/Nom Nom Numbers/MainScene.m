@@ -259,7 +259,7 @@
                                     repeats: NO];
 }
 
-// add score animation
+// Add score animation
 - (SKLabelNode *) newScoreNode
 {
     SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
@@ -283,8 +283,7 @@
     }
     
     // Set color to be off-white so text is visible even with sheep passing by
-    // scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
-    scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:200/255.0f blue:150/255.0f alpha:1.0f];
+    scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
     scoreNode.fontSize = 24;
     
     scoreNode.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-50);
@@ -293,7 +292,7 @@
     return scoreNode;
 }
 
-// add animation to the score node
+// Add animation to the score node
 - (void) animateScoreNode
 {
     CGFloat Xdimensions = self.size.width;
@@ -322,7 +321,7 @@
     }
 }
 
-// create new sheep with value and operator
+// Create new sheep with value and operator
 - (void) makeNewSheep:(NSTimer *)incomingTimer
 {
     SKNode* node;
