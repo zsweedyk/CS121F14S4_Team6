@@ -99,7 +99,14 @@
 - (void) makeSheepImage
 {
     _sheepImage = [[UIImage alloc] init];
-    _sheepImage = [UIImage imageNamed:@"Sheep"];
+    
+    if (_oper == 'A') {
+        _sheepImage = [UIImage imageNamed:@"SheepRainbow"];
+    } else if (_oper == '/' || _oper == 'x') {
+        _sheepImage = [UIImage imageNamed:@"SheepRam"];
+    } else {
+        _sheepImage = [UIImage imageNamed:@"Sheep"];
+    }
     
     NSString* stringOperator = [NSString stringWithFormat:@"%c" , _oper];
     
