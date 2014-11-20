@@ -18,12 +18,14 @@
 // Changes the score appropriately when a sheep is selected
 - (void) applySheepChar:(char)operator andValue:(NSString *)givenValue
 {
+    NSAssert((operator == '+' || operator == '-' ||
+              operator == '/' || operator == 'x' || operator == 'A'), @"Not a valid operator");
+    
     double desiredValue = [givenValue doubleValue];
     
     // Parse the NSString
     NSRange textRange = [givenValue rangeOfString:@"("];
-    if (textRange.location != NSNotFound)
-    {
+    if (textRange.location != NSNotFound) {
         NSCharacterSet *delimiters = [NSCharacterSet characterSetWithCharactersInString:@"()"];
         NSArray *splitString = [givenValue componentsSeparatedByCharactersInSet:delimiters];
         desiredValue = [[splitString objectAtIndex:1] doubleValue];
@@ -38,8 +40,8 @@
         _currentScore = _currentScore / desiredValue;
     } else if (operator == 'x') {
         _currentScore = _currentScore * desiredValue;
-    } else {
-        _currentScore = abs(_currentScore);
+    } else if (operator == 'A') {
+        _currentScore = fabs(_currentScore);
     }
     
 }
@@ -56,11 +58,6 @@
     _targetScore = score;
 }
 
-// Return targetScore
-- (int) getTargetScore
-{
-    return _targetScore;
-}
 
 // Reset score when game is restarted
 - (void) resetScore
@@ -94,6 +91,7 @@
         score = (600-time)/600 * scoreTargetScorePortion * 100;
     }
     
+    NSAssert(!isnan(score), @"not a number returned");
     return score;
 }
 

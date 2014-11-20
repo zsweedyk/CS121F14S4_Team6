@@ -21,7 +21,7 @@
 {
     NSMutableArray* values = [[NSMutableArray alloc] init];
     
-    NSInteger denomenator = arc4random_uniform(10) + 1;
+    NSInteger denomenator = arc4random_uniform(5) + 1;
     NSInteger numerator = arc4random_uniform((int)denomenator);
     [values addObject:[NSNumber numberWithInteger:numerator]];
     [values addObject:[NSNumber numberWithInteger:denomenator]];

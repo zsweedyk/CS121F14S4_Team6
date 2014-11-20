@@ -23,19 +23,16 @@
 @implementation DataModelTest
 
 - (void)setUp {
+    
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
     
     _dataModel = [[DataModel alloc] init];
     _sheepModel = [[SheepModel alloc] init];
-    
 }
 
-
+// Check if the score is updated correctly
 - (void) testApplySheep
 {
-    // check if the score is updated correctly
-    
     char operator = '+';
     NSString* value = [NSString stringWithFormat:@"34"];
     [_dataModel applySheepChar:operator andValue:value];
@@ -56,12 +53,16 @@
     [_dataModel applySheepChar:operator andValue:value];
     XCTAssertTrue(_dataModel._currentScore == (double)-35.8, @"Wrong Score");
     
+    operator = 'B';
+    value = [NSString stringWithFormat:@"-80"];
+    XCTAssertThrows([_dataModel applySheepChar:operator andValue:value], @"Not a valid operator");
 }
 
+
+
+// Check if the resetScore works properly
 - (void) testResetScore
 {
-    // check if the resetScore works properly
-    
     char operator = '-';
     NSString* value = [NSString stringWithFormat:@"34"];
     [_dataModel applySheepChar:operator andValue:value];
@@ -69,7 +70,20 @@
     XCTAssertTrue(_dataModel._currentScore == 0, @"Score is not reset");
 }
 
+- (void) testCalculateTargetScore
+{
+    double time = 40.0;
+    
+    [_dataModel setTargetScore:(arc4random_uniform(100) - 50)];
+    
+    
+    double targetScore = [_dataModel calculateTargetScoreAtTime:time];
+    XCTAssert(targetScore != 0, @"target score is 0");
+    XCTAssert(!isnan([_dataModel getScore]), @"nan returned as final score");
 
+    
+    
+}
 
 
 @end

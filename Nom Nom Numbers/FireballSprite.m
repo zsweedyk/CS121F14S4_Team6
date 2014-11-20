@@ -36,10 +36,10 @@
     _fireball = [NSKeyedUnarchiver unarchiveObjectWithFile:fireballPath];
     _fireball.targetNode = scene;
     _fireball.position = start;
+    _fireball.zPosition = 1;
     
     // Set up and run fireball actions
     SKAction* waitForAnimation = [SKAction waitForDuration:_animationTime / 3];
-    //SKAction* unhide = [SKAction unhide];
     SKAction* addFireball = [SKAction runBlock:^{ [scene addChild: _fireball]; }];
     [scene runAction:[SKAction sequence:@[waitForAnimation, addFireball]]];
                                               

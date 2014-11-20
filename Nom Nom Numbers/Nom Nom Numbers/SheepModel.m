@@ -45,6 +45,8 @@
 
 - (void) makeSheepFrom:(int)start to:(int)end
 {
+    NSAssert(start <= end, @"end is less than start");
+    
     int chanceIndicator = arc4random_uniform(50);
     
     if (chanceIndicator == 1) {
