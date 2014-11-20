@@ -267,8 +267,7 @@
     NSString *oper = [NSString stringWithFormat:@"%c",_sheepOper];
     NSString* myString=[NSString stringWithFormat:@"%@%@",oper,_sheepValue];
     
-    // If sheep value was a fraction, only display fraction part since displaying decimal
-    // portion as well will get too cramped
+    // If sheep value was a fraction, only display fraction part (not decimal part)
     NSCharacterSet* parens = [NSCharacterSet characterSetWithCharactersInString:@"()"];
     NSRange searchRange = NSMakeRange(0, myString.length);
     NSRange foundRange = [myString rangeOfCharacterFromSet:parens options:0 range:searchRange];
@@ -284,7 +283,8 @@
     }
     
     // Set color to be off-white so text is visible even with sheep passing by
-    scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
+    // scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
+    scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:200/255.0f blue:150/255.0f alpha:1.0f];
     scoreNode.fontSize = 24;
     
     scoreNode.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-50);
@@ -304,6 +304,7 @@
     CGFloat scoreX = Xdimensions * .02;
     
     SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
+    _currentScore = [_dataModel getScore];
     
     if (scoreNode != nil) {
         scoreNode.name = nil; // change name so we don't affect this node anymore
@@ -315,7 +316,9 @@
         SKAction* remove = [SKAction removeFromParent];
         SKAction* moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
         
-        [scoreNode runAction: moveSequence];
+        [scoreNode runAction: moveSequence completion:^{
+            [_dataView updateScore:_currentScore];
+        }];
     }
 }
 
@@ -334,12 +337,11 @@
     _sheepValue = [sheepData objectForKey:@"Value"];
     
     [_dataModel applySheepChar:_sheepOper andValue:_sheepValue];
-    _currentScore = [_dataModel getScore];
-    [_dataView updateScore:_currentScore];
     
     // Show updating score with animated label
     [self addChild: [self newScoreNode]];
     [self animateScoreNode];
+    
     
     _touchedSheep = false;
 }
