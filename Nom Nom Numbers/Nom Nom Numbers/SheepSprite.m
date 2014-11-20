@@ -70,19 +70,21 @@
 // Creates UIImage given operators or values and places it on top of sheep in appropriate location
 - (void) getImageForText:(NSString *)text for:(char)input
 {
+    NSAssert(input == 'O' || input == 'V', @"Invalid: input was neither 'V' for value nor 'O' for operator");
+    
     UIGraphicsBeginImageContext(_sheepImage.size);
     [_sheepImage drawInRect:CGRectMake(0,0,_sheepImage.size.width,_sheepImage.size.height)];
-    UITextView* myText = [[UITextView alloc] init];
     
+    UITextView* myText = [[UITextView alloc] init];
     myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:40];
     myText.textColor = [UIColor blackColor];
     myText.text = text;
     myText.backgroundColor = [UIColor clearColor];
     
     CGPoint point;
-    if (input == 'O') {
+    if (input == 'O') { // put operator in correct location on sheep
         point = CGPointMake(_sheepImage.size.width/4, _sheepImage.size.height/3.25);
-    } else {
+    } else { // put value in correct location on sheep
         point = CGPointMake(_sheepImage.size.width/2.15, _sheepImage.size.height/3.5);
     }
     

@@ -129,6 +129,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB68059D1A1D8A5B0023EA58 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				CB9A2CF91A0939E8004EF777 /* StartScene.h */,
+				CB9A2CFA1A0939E8004EF777 /* StartScene.m */,
+				CB9A2CEF1A0939E8004EF777 /* MainScene.h */,
+				CB9A2CF01A0939E8004EF777 /* MainScene.m */,
+				A3DC1B1F1A11E77000232403 /* TimedTutorialScene.h */,
+				A3DC1B201A11E77000232403 /* TimedTutorialScene.m */,
+				A3EBB44B1A1AF371001DB3F8 /* TargetTutorialScene.h */,
+				A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		CB68059E1A1D8B130023EA58 /* Sheep */ = {
+			isa = PBXGroup;
+			children = (
+				CB9A2CF31A0939E8004EF777 /* SheepController.h */,
+				CB9A2CF41A0939E8004EF777 /* SheepController.m */,
+				CB9A2CF51A0939E8004EF777 /* SheepModel.h */,
+				CB9A2CF61A0939E8004EF777 /* SheepModel.m */,
+				CB9A2CF71A0939E8004EF777 /* SheepSprite.h */,
+				CB9A2CF81A0939E8004EF777 /* SheepSprite.m */,
+			);
+			name = Sheep;
+			sourceTree = "<group>";
+		};
+		CB68059F1A1D8B730023EA58 /* Data and Models */ = {
+			isa = PBXGroup;
+			children = (
+				CB9A2CEC1A0939E8004EF777 /* Generator.h */,
+				CB9A2CED1A0939E8004EF777 /* Generator.m */,
+				CB9A2CE61A0939E8004EF777 /* DataModel.h */,
+				CB9A2CE71A0939E8004EF777 /* DataModel.m */,
+				CB9A2CE81A0939E8004EF777 /* DataView.h */,
+				CB9A2CE91A0939E8004EF777 /* DataView.m */,
+			);
+			name = "Data and Models";
+			sourceTree = "<group>";
+		};
 		CB9A2CA91A09336D004EF777 = {
 			isa = PBXGroup;
 			children = (
@@ -151,43 +192,24 @@
 		CB9A2CB41A09336D004EF777 /* Nom Nom Numbers */ = {
 			isa = PBXGroup;
 			children = (
-				CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */,
-				CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */,
-				A3DC1B1F1A11E77000232403 /* TimedTutorialScene.h */,
-				A3DC1B201A11E77000232403 /* TimedTutorialScene.m */,
-				A3EBB44B1A1AF371001DB3F8 /* TargetTutorialScene.h */,
-				A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */,
-				CBDAC94A1A1335C100A46D7E /* FireParticle.sks */,
-				CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */,
-				CBFB88491A0EDDC900FE2331 /* spark.png */,
 				CB9A2CB91A09336F004EF777 /* AppDelegate.h */,
 				CB9A2CBA1A09336F004EF777 /* AppDelegate.m */,
-				CB9A2CBF1A093370004EF777 /* GameScene.sks */,
 				CB9A2CC11A093370004EF777 /* GameViewController.h */,
 				CB9A2CC21A093370004EF777 /* GameViewController.m */,
-				CB9A2CE61A0939E8004EF777 /* DataModel.h */,
-				CB9A2CE71A0939E8004EF777 /* DataModel.m */,
-				CB9A2CE81A0939E8004EF777 /* DataView.h */,
-				CB9A2CE91A0939E8004EF777 /* DataView.m */,
+				CBEBD7761A0B1F2C0075D081 /* FireballSprite.h */,
+				CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */,
 				CB9A2CEA1A0939E8004EF777 /* GameOverButton.h */,
 				CB9A2CEB1A0939E8004EF777 /* GameOverButton.m */,
-				CB9A2CEC1A0939E8004EF777 /* Generator.h */,
-				CB9A2CED1A0939E8004EF777 /* Generator.m */,
-				CB9A2CEF1A0939E8004EF777 /* MainScene.h */,
-				CB9A2CF01A0939E8004EF777 /* MainScene.m */,
 				CB9A2CF11A0939E8004EF777 /* QuitGameButton.h */,
 				CB9A2CF21A0939E8004EF777 /* QuitGameButton.m */,
-				CB9A2CF31A0939E8004EF777 /* SheepController.h */,
-				CB9A2CF41A0939E8004EF777 /* SheepController.m */,
-				CB9A2CF51A0939E8004EF777 /* SheepModel.h */,
-				CB9A2CF61A0939E8004EF777 /* SheepModel.m */,
-				CB9A2CF71A0939E8004EF777 /* SheepSprite.h */,
-				CB9A2CF81A0939E8004EF777 /* SheepSprite.m */,
-				CB9A2CF91A0939E8004EF777 /* StartScene.h */,
-				CB9A2CFA1A0939E8004EF777 /* StartScene.m */,
+				CB9A2CBF1A093370004EF777 /* GameScene.sks */,
 				CB9A2CC41A093370004EF777 /* Main.storyboard */,
 				CB9A2CC71A093370004EF777 /* Images.xcassets */,
 				CB9A2CC91A093370004EF777 /* LaunchScreen.xib */,
+				CB68059E1A1D8B130023EA58 /* Sheep */,
+				CB68059D1A1D8A5B0023EA58 /* Scenes */,
+				CBDBDAE31A1D875B00A9BF78 /* Particles */,
+				CB68059F1A1D8B730023EA58 /* Data and Models */,
 				CB9A2CB51A09336E004EF777 /* Supporting Files */,
 			);
 			path = "Nom Nom Numbers";
@@ -227,6 +249,16 @@
 				CB9A2CD51A093371004EF777 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CBDBDAE31A1D875B00A9BF78 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */,
+				CBDAC94A1A1335C100A46D7E /* FireParticle.sks */,
+				CBFB88491A0EDDC900FE2331 /* spark.png */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
