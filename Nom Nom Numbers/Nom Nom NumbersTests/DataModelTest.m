@@ -52,6 +52,10 @@
     value = [NSString stringWithFormat:@"-5"];
     [_dataModel applySheepChar:operator andValue:value];
     XCTAssertTrue(_dataModel._currentScore == (double)-35.8, @"Wrong Score");
+    
+    operator = 'B';
+    value = [NSString stringWithFormat:@"-80"];
+    XCTAssertThrows([_dataModel applySheepChar:operator andValue:value], @"Not a valid operator");
 }
 
 
