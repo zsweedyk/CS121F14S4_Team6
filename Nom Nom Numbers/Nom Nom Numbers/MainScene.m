@@ -18,7 +18,6 @@
 
 @implementation MainScene
 {
-    SKView* _skView;
     SheepController* _sheepController;
     DataView* _dataView;
     DataModel* _dataModel;
@@ -43,7 +42,6 @@
 
 {
     _mode = mode;
-    _skView = skView;
     _gameEnded = false;
     _countDownTillStart = 4;
     
