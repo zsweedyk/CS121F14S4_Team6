@@ -83,7 +83,14 @@
     
     CGPoint point;
     if (input == 'O') { // put operator in correct location on sheep
-        point = CGPointMake(_sheepImage.size.width/4, _sheepImage.size.height/3.25);
+        if (_oper == 'A') {
+            // fit the words "Absolute Value" on the body of the sheep
+            point = CGPointMake(_sheepImage.size.width/2.15, _sheepImage.size.height/3.5);
+            myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:35];
+        }
+        else {
+            point = CGPointMake(_sheepImage.size.width/4, _sheepImage.size.height/3.25);
+        }
     } else { // put value in correct location on sheep
         point = CGPointMake(_sheepImage.size.width/2.15, _sheepImage.size.height/3.5);
     }
@@ -102,7 +109,10 @@
 {
     _sheepImage = [[UIImage alloc] init];
     
+    NSString* stringOperator = [NSString stringWithFormat:@"%c" , _oper];
+    
     if (_oper == 'A') {
+        stringOperator = @"Absolute\nValue";
         _sheepImage = [UIImage imageNamed:@"SheepRainbow"];
     } else if (_oper == '/' || _oper == 'x') {
         _sheepImage = [UIImage imageNamed:@"SheepRam"];
@@ -110,7 +120,7 @@
         _sheepImage = [UIImage imageNamed:@"Sheep"];
     }
     
-    NSString* stringOperator = [NSString stringWithFormat:@"%c" , _oper];
+
     
     [self getImageForText:stringOperator for:'O'];
     [self getImageForText:_value for:'V'];
