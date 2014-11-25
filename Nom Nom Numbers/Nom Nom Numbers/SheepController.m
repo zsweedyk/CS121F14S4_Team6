@@ -19,7 +19,7 @@
     SheepSprite* _sheepSprite;
     Generator* _generator;
     int _targetScore;
-    int staggerOffset;
+    int _staggerOffset;
 }
 
 // Called only first time to initialize necessary sprite nodes and scenes, and then
@@ -32,8 +32,8 @@
 
     for (int i = 0; i < 5; i++) {
         SKNode *newSheepNode = [[SKNode alloc] init];
-        staggerOffset = (i % 2)*80;
-        newSheepNode.position = CGPointMake(860 + staggerOffset, i*100 + 50);
+        _staggerOffset = (i % 2)*80;
+        newSheepNode.position = CGPointMake(860 + _staggerOffset, i*100 + 50);
         [self makeSheep:newSheepNode];
     }
 }
@@ -67,7 +67,7 @@
     
     [_skScene addChild:newSheepNode];
     [self playSheepNoise:self];
-    [newSheepNode setPosition:CGPointMake((860 + staggerOffset), newSheepNode.position.y)];
+    [newSheepNode setPosition:CGPointMake((860 + _staggerOffset), newSheepNode.position.y)];
     newSheepNode.zPosition = 0;
 }
 
