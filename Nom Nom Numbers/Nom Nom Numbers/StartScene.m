@@ -56,6 +56,14 @@
     targetStartButton.text = @"Target Mode";
     targetStartButton.name = @"targetStartButton";
     [self addChild:targetStartButton];
+    
+    SKLabelNode* tutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    tutorialButton.fontSize = 45;
+    tutorialButton.fontColor = [UIColor blackColor];
+    tutorialButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.2);
+    tutorialButton.text = @"Tutorial";
+    tutorialButton.name = @"tutorialButton";
+    [self addChild:tutorialButton];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -101,6 +109,10 @@
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:targetTutorialScence transition:transition];
         }
+    }
+    
+    if ([node.name isEqual: @"tutorialButton"]) {
+        [self playButtonNoise:self];
     }
     
     if ([node.name isEqual: @"infoButton"]) {
