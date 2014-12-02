@@ -330,7 +330,7 @@
     
     [_sheepController generateNewSheep:(SKNode*)node];
     NSMutableDictionary* sheepData = node.userData;
-    _sheepOper = *[[sheepData objectForKey:@"Operator"] UTF8String];
+    _sheepOper = *[[sheepData valueForKey:@"Operator"] UTF8String];
     _sheepValue = [sheepData objectForKey:@"Value"];
     
     [_dataModel applySheepChar:_sheepOper andValue:_sheepValue];
