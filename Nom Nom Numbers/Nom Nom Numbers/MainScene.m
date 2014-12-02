@@ -18,7 +18,6 @@
 
 @implementation MainScene
 {
-    SKView* _skView;
     SheepController* _sheepController;
     DataView* _dataView;
     DataModel* _dataModel;
@@ -43,7 +42,6 @@
 
 {
     _mode = mode;
-    _skView = skView;
     _gameEnded = false;
     _countDownTillStart = 4;
     
@@ -259,7 +257,7 @@
                                     repeats: NO];
 }
 
-// add score animation
+// Add score animation
 - (SKLabelNode *) newScoreNode
 {
     SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
@@ -267,8 +265,7 @@
     NSString *oper = [NSString stringWithFormat:@"%c",_sheepOper];
     NSString* myString=[NSString stringWithFormat:@"%@%@",oper,_sheepValue];
     
-    // If sheep value was a fraction, only display fraction part since displaying decimal
-    // portion as well will get too cramped
+    // If sheep value was a fraction, only display fraction part (not decimal part)
     NSCharacterSet* parens = [NSCharacterSet characterSetWithCharactersInString:@"()"];
     NSRange searchRange = NSMakeRange(0, myString.length);
     NSRange foundRange = [myString rangeOfCharacterFromSet:parens options:0 range:searchRange];
@@ -293,7 +290,7 @@
     return scoreNode;
 }
 
-// add animation to the score node
+// Add animation to the score node
 - (void) animateScoreNode
 {
     CGFloat Xdimensions = self.size.width;
@@ -304,6 +301,7 @@
     CGFloat scoreX = Xdimensions * .02;
     
     SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
+    _currentScore = [_dataModel getScore];
     
     if (scoreNode != nil) {
         scoreNode.name = nil; // change name so we don't affect this node anymore
@@ -315,11 +313,13 @@
         SKAction* remove = [SKAction removeFromParent];
         SKAction* moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
         
-        [scoreNode runAction: moveSequence];
+        [scoreNode runAction: moveSequence completion:^{
+            [_dataView updateScore:_currentScore];
+        }];
     }
 }
 
-// create new sheep with value and operator
+// Create new sheep with value and operator
 - (void) makeNewSheep:(NSTimer *)incomingTimer
 {
     SKNode* node;
@@ -334,12 +334,11 @@
     _sheepValue = [sheepData objectForKey:@"Value"];
     
     [_dataModel applySheepChar:_sheepOper andValue:_sheepValue];
-    _currentScore = [_dataModel getScore];
-    [_dataView updateScore:_currentScore];
     
     // Show updating score with animated label
     [self addChild: [self newScoreNode]];
     [self animateScoreNode];
+    
     
     _touchedSheep = false;
 }

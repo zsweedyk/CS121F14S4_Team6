@@ -19,6 +19,7 @@
     SheepSprite* _sheepSprite;
     Generator* _generator;
     int _targetScore;
+    int _staggerOffset;
 }
 
 // Called only first time to initialize necessary sprite nodes and scenes, and then
@@ -29,9 +30,10 @@
     _skScene = mainScene;
     _arrOfSounds = [NSMutableArray new];
 
-    for (int i = 1; i < 6; i++) {
+    for (int i = 0; i < 5; i++) {
         SKNode *newSheepNode = [[SKNode alloc] init];
-        newSheepNode.position = CGPointMake(740, i*100 - 40);
+        _staggerOffset = (i % 2)*80;
+        newSheepNode.position = CGPointMake(860 + _staggerOffset, i*100 + 50);
         [self makeSheep:newSheepNode];
     }
 }
@@ -56,14 +58,16 @@
     newSheepNode.name = @"sheep";
     
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+    
     NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
+
     [dictionary setValue:value forKey:@"Value"];
     [dictionary setValue:operAsString forKey:@"Operator"];
     [newSheepNode setUserData:dictionary];
     
     [_skScene addChild:newSheepNode];
     [self playSheepNoise:self];
-    [newSheepNode setPosition:CGPointMake(880, newSheepNode.position.y)];
+    [newSheepNode setPosition:CGPointMake((860 + _staggerOffset), newSheepNode.position.y)];
     newSheepNode.zPosition = 0;
 }
 
