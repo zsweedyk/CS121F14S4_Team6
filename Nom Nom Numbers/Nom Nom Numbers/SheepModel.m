@@ -59,7 +59,7 @@
         
         if (chanceIndicator % 2 == 0) {
             if (_operator == 'x') {
-                value = [_generator generateIntegerfrom:start/10 to:end];
+                value = [_generator generateIntegerfrom:start/20 to:end/20];
             } else {
                 value = [_generator generateIntegerfrom:start to:end];
             }
