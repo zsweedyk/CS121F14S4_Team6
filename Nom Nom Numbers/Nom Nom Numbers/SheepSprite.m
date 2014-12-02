@@ -85,14 +85,15 @@
     if (input == 'O') { // put operator in correct location on sheep
         if (_oper == 'A') {
             // fit the words "Absolute Value" on the body of the sheep
-            point = CGPointMake(_sheepImage.size.width/2.15, _sheepImage.size.height/3.5);
+            point = CGPointMake(_sheepImage.size.width/3.5, _sheepImage.size.height/2);
             myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:35];
         }
         else {
-            point = CGPointMake(_sheepImage.size.width/4, _sheepImage.size.height/3.25);
+            myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:50];
+            point = CGPointMake(_sheepImage.size.width/2.25, _sheepImage.size.height/5.25);
         }
     } else { // put value in correct location on sheep
-        point = CGPointMake(_sheepImage.size.width/2.15, _sheepImage.size.height/3.5);
+        point = CGPointMake(_sheepImage.size.width/3.5, _sheepImage.size.height/2);
     }
     
     myText.frame = CGRectMake(point.x, point.y, _sheepImage.size.width, _sheepImage.size.height);
@@ -113,11 +114,19 @@
     
     if (_oper == 'A') {
         stringOperator = @"Absolute\nValue";
-        _sheepImage = [UIImage imageNamed:@"SheepRainbow"];
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepRainbow"] CGImage]
+                                            scale:1.0
+                                            orientation:UIImageOrientationRight];
+        
     } else if (_oper == '/' || _oper == 'x') {
-        _sheepImage = [UIImage imageNamed:@"SheepRam"];
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepRam"] CGImage]
+                                            scale:1.0
+                                            orientation:UIImageOrientationRight];
+        
     } else {
-        _sheepImage = [UIImage imageNamed:@"Sheep"];
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"Sheep"] CGImage]
+                                            scale:1.0
+                                            orientation:UIImageOrientationRight];
     }
     
 
