@@ -15,6 +15,7 @@
 #import "GameOverButton.h"
 #import "StartScene.h"
 #import "FireballSprite.h"
+#import "HighScoreModel.h"
 
 @implementation MainScene
 {
@@ -35,6 +36,7 @@
     NSArray* _dragonAnimationFrames;
     char _sheepOper;
     NSString* _sheepValue;
+    HighScoreModel* _highScoreModel;
 }
 
 
@@ -42,6 +44,7 @@
 - (id) initWithSize:(CGSize)size andSKView:(SKView *)skView andMode:(NSString *)mode
 
 {
+    
     _mode = mode;
     _skView = skView;
     _gameEnded = false;
@@ -49,6 +52,7 @@
     
     _arrOfSounds = [NSMutableArray new];
     _touchedSheep = false;
+    _highScoreModel = [[HighScoreModel alloc] init];
    
     self = [super initWithSize:size];
     _sheepController = [[SheepController alloc] init];
@@ -231,7 +235,7 @@
     } else if ([node.name isEqual:@"targetbutton"]) {
         [self playButtonNoise:self];
         [self showGameResults:_dataView];
-    }
+    } 
 }
 
 - (void) touchedSheep:(SKNode *)node
@@ -381,6 +385,7 @@
     }
     
     [_gameOverPopup setupData:self withScore:score];
+    [_highScoreModel updateHighScores:score forMode:_mode];
     [self addChild: _gameOverPopup];
 }
 
@@ -405,6 +410,7 @@
     }
 
     [quitPopup setupData:self withScore:score];
+    [_highScoreModel updateHighScores:round (score * 100)/100.00 forMode:_mode];
     [self addChild:quitPopup];
 }
 
