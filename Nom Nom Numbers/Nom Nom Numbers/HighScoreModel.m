@@ -12,6 +12,12 @@
 
 @implementation HighScoreModel
 
+- (id) init
+{
+    [self checkExists];
+    return self;
+}
+
 - (void) checkExists
 {
     NSString* docsDir;
@@ -46,7 +52,7 @@
     }
 }
 
-- (IBAction) saveScore:(double)currentScore
+- (void) saveScore:(double)currentScore
 {
     sqlite3_stmt* statementInSQL;
     const char* dbPath = [_highScoreDBPath UTF8String];
@@ -54,17 +60,21 @@
     if (sqlite3_open(dbPath, &_highScoreDB) == SQLITE_OK) {
         NSString* insertScoreSQL = [NSString stringWithFormat:@"INSERT INTO highScores (score) VALUES (\"%f\")]", currentScore];
         const char* insertSQLStatement = [insertScoreSQL UTF8String];
-        sqlite3_prepare_v2(_highScoreDB, insertSQLStatement, -1, &statementInSQL, NULL);
         
-        if (sqlite3_step(statementInSQL) == SQLITE_DONE) {
-            NSLog(@"Added score of %f to database!", currentScore);
-        } else {
-            NSLog(@"Failed to add score to database...");
+        if (sqlite3_prepare_v2(_highScoreDB, insertSQLStatement, -1, &statementInSQL, nil) == SQLITE_OK) {
+        
+            if (sqlite3_step(statementInSQL) == SQLITE_DONE) {
+                NSLog(@"Added score of %f to database!", currentScore);
+            } else {
+                NSLog(@"Failed to add score to database...");
+            }
+            NSLog(@"aaghhgahg");
+            sqlite3_finalize(statementInSQL);
         }
-        
-        sqlite3_finalize(statementInSQL);
-        sqlite3_close(_highScoreDB);
     }
+    
+    sqlite3_finalize(statementInSQL);
+    sqlite3_close(_highScoreDB);
 }
 
 - (NSMutableArray *) getTopTen
@@ -78,7 +88,7 @@
         NSString *getTopTenSQL = @"SELECT score FROM highScores ORDER BY score DESC LIMIT 10";
         const char* querySQLStatement = [getTopTenSQL UTF8String];
         
-        if (sqlite3_prepare_v2(_highScoreDB, querySQLStatement, -1, &statementInSQL, NULL) == SQLITE_OK) {
+        if (sqlite3_prepare_v2(_highScoreDB, querySQLStatement, -1, &statementInSQL, nil) == SQLITE_OK) {
             
             while (sqlite3_step(statementInSQL) == SQLITE_ROW) {
                 NSString* score = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statementInSQL, 0)];

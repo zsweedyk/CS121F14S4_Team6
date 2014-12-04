@@ -23,7 +23,7 @@
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView *)skView
 {
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"timedHighScores" ofType:@"txt"];
+    //NSString* filePath = [[NSBundle mainBundle] pathForResource:@"timedHighScores" ofType:@"txt"];
     //NSLog(@"filepath: %@", filePath);
     
     

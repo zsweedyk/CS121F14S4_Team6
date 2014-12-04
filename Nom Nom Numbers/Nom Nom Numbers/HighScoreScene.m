@@ -7,12 +7,14 @@
 //
 
 #import "HighScoreScene.h"
+#import "HighScoreModel.h"
 #import "StartScene.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
 @implementation HighScoreScene {
     NSMutableArray* _arrOfSounds;
+    HighScoreModel * _model;
 }
 
 
@@ -20,6 +22,7 @@
 {
     
     _arrOfSounds = [NSMutableArray new];
+    _model = [[HighScoreModel alloc] init];
 
     self = [super initWithSize:size];
     [self setup];
@@ -32,6 +35,13 @@
     [self setupBackground];
     //[self setupDragon];
     [self setupButtons];
+    [self setupTable];
+}
+
+- (void) setupTable
+{
+    NSMutableArray* toptenscores = [_model getTopTen];
+    NSLog(@"array: %@", toptenscores);
 }
 
 - (void) setupBackground

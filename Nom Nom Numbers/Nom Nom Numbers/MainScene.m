@@ -53,6 +53,7 @@
     _arrOfSounds = [NSMutableArray new];
     _touchedSheep = false;
     _highScoreModel = [[HighScoreModel alloc] init];
+    [_highScoreModel checkExists];
    
     self = [super initWithSize:size];
     _sheepController = [[SheepController alloc] init];
@@ -385,7 +386,7 @@
     }
     
     [_gameOverPopup setupData:self withScore:score];
-    //[_highScoreModel updateHighScores:score forMode:_mode];
+    [_highScoreModel saveScore:score];
     [self addChild: _gameOverPopup];
 }
 
@@ -410,7 +411,7 @@
     }
 
     [quitPopup setupData:self withScore:score];
-    //[_highScoreModel updateHighScores:round (score * 100)/100.00 forMode:_mode];
+    [_highScoreModel saveScore:round (score * 100)/100.00];
     [self addChild:quitPopup];
 }
 

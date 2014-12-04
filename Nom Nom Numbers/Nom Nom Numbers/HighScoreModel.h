@@ -15,7 +15,7 @@
 @property (nonatomic) sqlite3* highScoreDB;
 
 - (void) checkExists;
-- (IBAction) saveScore:(double)currentScore;
+- (void) saveScore:(double)currentScore;
 - (NSMutableArray *) getTopTen;
 
 @end

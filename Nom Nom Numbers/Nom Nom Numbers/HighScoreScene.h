@@ -7,9 +7,12 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "HighScoreModel.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
 @interface HighScoreScene : SKScene
+
+//- (id) initWithSize:(CGSize)size andModel:(HighScoreModel*)model;
 
 @end
