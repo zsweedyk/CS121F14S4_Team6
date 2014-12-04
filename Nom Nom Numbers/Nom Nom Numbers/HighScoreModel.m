@@ -1,84 +1,102 @@
 //
-//  HighScoreModel.m
+//  HighScoreDB.m
 //  Nom Nom Numbers
 //
-//  Created by Hugo Ho on 11/23/14.
-//  Copyright (c) 2014 CS 121 Team 6. All rights reserved.
+//  Created by Shannon on 11/29/14.
+//  Copyright (c) 2014 CS 121 Team 6. All rights reserved.c
 //
+//  Referred to Computer Science Tutorials
 
 #import "HighScoreModel.h"
+#import <sqlite3.h>
 
 @implementation HighScoreModel
 
-
+- (void) checkExists
 {
-    NSMutableArray* _timedHighScores;
-}
-
-- (id)init {
+    NSString* docsDir;
+    NSArray* dirPaths;
     
-    _timedHighScores = [[NSMutableArray alloc] init];
+    // Get directory of documents
+    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = dirPaths[0];
     
-    return self;
-}
-
-- (bool) updateHighScores:(double)newScore forMode:(NSString *)mode {
+    // Build database path
+    _highScoreDBPath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent:@"highScores.db"]];
     
-//    NSFileManager *filemgr = [NSFileManager defaultManager];
-//    NSData *databuffer;
-      //NSString* filePath = [[NSBundle mainBundle] pathForResource:@"timedHighScores" ofType:@"txt"];
-//    
-//    databuffer = [filemgr contentsAtPath:filePath];
-//    
-//   _timedHighScores = [NSKeyedUnarchiver unarchiveObjectWithData:databuffer];
-//    NSLog(@"timed scores count: %d", _timedHighScores.count);
+    NSFileManager* fileManager = [NSFileManager defaultManager];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"timedHighScores.txt"];
-    
-    NSFileManager *filemgr;
-    
-    filemgr = [NSFileManager defaultManager];   
-    
-        if ([filemgr fileExistsAtPath:filePath] == YES) {
-            NSLog(@"File exists");
+    // If the database file doesn't already exist, create it
+    if ([fileManager fileExistsAtPath:_highScoreDBPath] == NO) {
+        const char* dbPath = [_highScoreDBPath UTF8String];
+        
+        if (sqlite3_open(dbPath, &_highScoreDB) == SQLITE_OK) {
+            char* errorMessage;
+            const char* createDBFileSQL = "CREATE TABLE IF NOT EXISTS highScores (ID INTEGER PRIMARY KEY AUTOINCREMENT, SCORE REAL)";
+            
+            if (sqlite3_exec(_highScoreDB, createDBFileSQL, NULL, NULL, &errorMessage) != SQLITE_OK) {
+                NSLog(@"Failed to create table");
+            }
+            
+            sqlite3_close(_highScoreDB);
+            
         } else {
-            NSLog(@"File not found");
+            NSLog(@"Failed to open or create table");
         }
-    
-    
-    //_timedHighScores = [NSMutableArray arrayWithContentsOfFile:filePath];
-    
+    }
+}
 
-    bool newHighScore = false;
-    NSNumber* score = [NSNumber numberWithDouble:newScore];
-    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
+- (IBAction) saveScore:(double)currentScore
+{
+    sqlite3_stmt* statementInSQL;
+    const char* dbPath = [_highScoreDBPath UTF8String];
     
-    if (_timedHighScores.count == 10) {
-        if ([[_timedHighScores objectAtIndex:9] doubleValue] < newScore) {
-            [_timedHighScores replaceObjectAtIndex:9 withObject:score];
-            newHighScore = true;
-            NSLog(@"in if if");
+    if (sqlite3_open(dbPath, &_highScoreDB) == SQLITE_OK) {
+        NSString* insertScoreSQL = [NSString stringWithFormat:@"INSERT INTO highScores (score) VALUES (\"%f\")]", currentScore];
+        const char* insertSQLStatement = [insertScoreSQL UTF8String];
+        sqlite3_prepare_v2(_highScoreDB, insertSQLStatement, -1, &statementInSQL, NULL);
+        
+        if (sqlite3_step(statementInSQL) == SQLITE_DONE) {
+            NSLog(@"Added score of %f to database!", currentScore);
+        } else {
+            NSLog(@"Failed to add score to database...");
         }
-    } else {
-        [_timedHighScores addObject:score];
-        newHighScore = true;
-        NSLog(@"in else");
+        
+        sqlite3_finalize(statementInSQL);
+        sqlite3_close(_highScoreDB);
+    }
+}
+
+- (NSMutableArray *) getTopTen
+{
+    NSMutableArray* arrayOfScores = [[NSMutableArray alloc] init];
+    
+    sqlite3_stmt* statementInSQL;
+    const char* dbPath = [_highScoreDBPath UTF8String];
+    
+    if (sqlite3_open(dbPath, &_highScoreDB) == SQLITE_OK) {
+        NSString *getTopTenSQL = @"SELECT score FROM highScores ORDER BY score DESC LIMIT 10";
+        const char* querySQLStatement = [getTopTenSQL UTF8String];
+        
+        if (sqlite3_prepare_v2(_highScoreDB, querySQLStatement, -1, &statementInSQL, NULL) == SQLITE_OK) {
+            
+            while (sqlite3_step(statementInSQL) == SQLITE_ROW) {
+                NSString* score = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statementInSQL, 0)];
+                NSLog(@"Score is %@", score);
+                
+                [arrayOfScores addObject:score];
+            }
+            
+            sqlite3_finalize(statementInSQL);
+            
+        } else {
+            NSLog(@"No data found");
+        }
     }
     
-    
-    [_timedHighScores sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
-    //NSData* myData = [NSKeyedArchiver archivedDataWithRootObject:_timedHighScores];
-    
-    NSLog(@"timed high scores: %@", _timedHighScores);
-    
-    [_timedHighScores writeToFile:filePath atomically:YES];
-    
-    return newHighScore;
+    sqlite3_finalize(statementInSQL);
+    sqlite3_close(_highScoreDB);
+    return arrayOfScores;
 }
 
-- (NSArray *) getTimedHighScores {
-    return _timedHighScores;
-}
 @end

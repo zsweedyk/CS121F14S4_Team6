@@ -385,7 +385,7 @@
     }
     
     [_gameOverPopup setupData:self withScore:score];
-    [_highScoreModel updateHighScores:score forMode:_mode];
+    //[_highScoreModel updateHighScores:score forMode:_mode];
     [self addChild: _gameOverPopup];
 }
 
@@ -410,7 +410,7 @@
     }
 
     [quitPopup setupData:self withScore:score];
-    [_highScoreModel updateHighScores:round (score * 100)/100.00 forMode:_mode];
+    //[_highScoreModel updateHighScores:round (score * 100)/100.00 forMode:_mode];
     [self addChild:quitPopup];
 }
 

@@ -1,17 +1,21 @@
 //
-//  HighScoreModel.h
+//  HighScoreDB.h
 //  Nom Nom Numbers
 //
-//  Created by Hugo Ho on 11/23/14.
+//  Created by Shannon on 11/29/14.
 //  Copyright (c) 2014 CS 121 Team 6. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
+#import <sqlite3.h>
 
 @interface HighScoreModel : NSObject
 
-- (bool) updateHighScores:(double)newScore forMode:(NSString *)mode;
-- (NSArray *) getTimedHighScores;
+@property (strong, nonatomic) NSString* highScoreDBPath;
+@property (nonatomic) sqlite3* highScoreDB;
+
+- (void) checkExists;
+- (IBAction) saveScore:(double)currentScore;
+- (NSMutableArray *) getTopTen;
 
 @end
