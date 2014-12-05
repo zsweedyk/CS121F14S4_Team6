@@ -20,7 +20,7 @@
     _dataModel = model;
     _mode = mode;
     CGFloat Xdimensions = mainScene.size.width;
-    CGFloat Ydimensions = mainScene.size.height;
+    CGFloat Ydimensions = mainScene.size.height * 0.05;
     CGFloat headerY = Ydimensions * .93;
     
     CGFloat scoreX;
@@ -30,8 +30,9 @@
     
     // If we are in timed mode, set up and display timer
     if ([mode isEqualToString:@"timed"]) {
-        scoreX = Xdimensions * .02;
-        timerX = Xdimensions * .5;
+        scoreX = Xdimensions * .25;
+        timerX = Xdimensions * .05;
+        CGFloat timerY = Ydimensions * 7;
         
         _initialTime = timeModeStartTime;
         
@@ -39,14 +40,14 @@
         _currentTime = [[SKLabelNode alloc] initWithFontNamed:fontType];
         _currentTime.fontSize = 45;
         _currentTime.fontColor = [UIColor whiteColor];
-        _currentTime.position = CGPointMake(timerX, headerY);
+        _currentTime.position = CGPointMake(timerX, timerY);
         [self changeTimerText];
         [self addChild:_currentTime];
         
     
     // If we are in target mode, set up and display target score
     } else {
-        scoreX = Xdimensions * .02;
+        scoreX = Xdimensions * .25;
         targetScoreX = Xdimensions * .45;
         
         // Set up Target Score Label

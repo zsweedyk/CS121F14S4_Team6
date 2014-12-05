@@ -30,7 +30,8 @@
     NSString* _mode;
     NSMutableArray* _arrOfSounds;
     NSTimer* _gameStartTimer;
-    SKSpriteNode* _dragonAndBarn;
+    SKSpriteNode* _dragonGreen;
+    SKSpriteNode* _dragonBlue;
     NSArray* _dragonAnimationFrames;
     char _sheepOper;
     NSString* _sheepValue;
@@ -55,11 +56,11 @@
     
     // Set up dragon animation frames
     NSMutableArray* dragonFrames = [NSMutableArray array];
-    SKTextureAtlas* dragonAnimationAtlas = [SKTextureAtlas atlasNamed:@"barnAndDragon"];
+    SKTextureAtlas* dragonAnimationAtlas = [SKTextureAtlas atlasNamed:@"dragon"];
     NSUInteger numImages = dragonAnimationAtlas.textureNames.count;
     
     for (int i = 1; i <= numImages; i++) {
-        NSString* textureName = [NSString stringWithFormat:@"barnAndDragonAnimation%d",i];
+        NSString* textureName = [NSString stringWithFormat:@"dragonAnimation%d",i];
         SKTexture* temp = [dragonAnimationAtlas textureNamed:textureName];
         [dragonFrames addObject:temp];
     }
@@ -71,7 +72,7 @@
 - (void) setup
 {
     [self setupBackground];
-    [self setupDragon];
+    [self setupDragons];
     [self prepareForGame];
     [self setupData];
 }
@@ -153,20 +154,43 @@
     background.xScale = .5;
     background.yScale = .5;
     [self addChild:background];
+    
+    SKSpriteNode* barn = [SKSpriteNode spriteNodeWithImageNamed:@"barnHorizontal"];
+    CGSize barnSize = [UIImage imageNamed:@"barnHorizontal"].size;
+    barn.position = CGPointMake(0, (background.size.height - barnSize.height*.5));
+    barn.anchorPoint = CGPointZero;
+    barn.xScale = .5;
+    barn.yScale = .5;
+    barn.zPosition = 3;
+    [self addChild:barn];
 }
 
-- (void) setupDragon
+- (void) setupDragons
 {
-    SKSpriteNode* dragon = [SKSpriteNode spriteNodeWithImageNamed:@"barnAndDragon"];
-    CGSize barnSize = [UIImage imageNamed:@"barnAndDragon"].size;
-    dragon.position = CGPointMake(self.size.width - barnSize.width*0.5, 0);
+    SKSpriteNode* dragon = [SKSpriteNode spriteNodeWithImageNamed:@"dragon"];
+    CGSize dragonSize = [UIImage imageNamed:@"dragon"].size;
+    CGSize screenSize = self.size;
+    dragon.position = CGPointMake(screenSize.width - dragonSize.width*0.5,
+                                  (screenSize.height / 2) - dragonSize.height*0.25);
     dragon.anchorPoint = CGPointZero;
     dragon.xScale = .5;
     dragon.yScale = .5;
     dragon.zPosition = 2;
     
-    _dragonAndBarn = dragon;
+    _dragonGreen = dragon;
     [self addChild:dragon];
+    
+    SKSpriteNode* dragon2 = [SKSpriteNode spriteNodeWithImageNamed:@"blueDragon"];
+    CGSize dragonSize2 = [UIImage imageNamed:@"blueDragon"].size;
+    dragon.position = CGPointMake(screenSize.width - dragonSize2.width*0.5,
+                                  screenSize.height - dragonSize2.height*0.5);
+    dragon2.anchorPoint = CGPointZero;
+    dragon2.xScale = .5;
+    dragon2.yScale = .5;
+    dragon2.zPosition = 2;
+    
+    _dragonBlue = dragon2;
+    [self addChild:dragon2];
 }
 
 // Sets up data for the game
@@ -239,7 +263,7 @@
     FireballSprite* fireballSprite = [[FireballSprite alloc] init];
     
     NSUInteger numFrames = [_dragonAnimationFrames count];
-    [_dragonAndBarn runAction:[SKAction animateWithTextures: _dragonAnimationFrames
+    [_dragonGreen runAction:[SKAction animateWithTextures: _dragonAnimationFrames
                                                timePerFrame: [fireballSprite animationTime]/numFrames
                                                      resize: YES
                                                     restore: YES]];
@@ -258,8 +282,9 @@
 }
 
 // Add score animation
-- (SKLabelNode *) newScoreNode
+- (SKSpriteNode *) newScoreNode
 {
+    SKSpriteNode* mutton = [SKSpriteNode spriteNodeWithImageNamed:@"mutton"];
     SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
     
     NSString *oper = [NSString stringWithFormat:@"%c",_sheepOper];
@@ -284,10 +309,14 @@
     scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
     scoreNode.fontSize = 24;
     
-    scoreNode.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-50);
-    scoreNode.name = @"scoreNode";
+    [mutton addChild:scoreNode];
     
-    return scoreNode;
+    mutton.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-50);
+    mutton.name = @"scoreNode";
+    mutton.xScale = 0.5;
+    mutton.yScale = 0.5;
+    
+    return mutton;
 }
 
 // Add animation to the score node
@@ -297,7 +326,7 @@
     CGFloat Ydimensions = self.size.height;
     
     // Dimensions of score label (from data view class)
-    CGFloat scoreY = Ydimensions * .93;
+    CGFloat scoreY = Ydimensions * 0.1;
     CGFloat scoreX = Xdimensions * .02;
     
     SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
@@ -349,7 +378,7 @@
 {
     [self enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode* node, BOOL* stop) {
         
-        if (node.position.x < -150) {
+        if (node.position.y > self.size.height + 150) {
             [_sheepController generateNewSheep:node];
         }
         

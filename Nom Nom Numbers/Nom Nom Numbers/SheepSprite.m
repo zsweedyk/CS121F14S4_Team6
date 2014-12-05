@@ -38,8 +38,8 @@
     acrossScreenTime /= 10.0;
     
     // SK actions to move sheep left
-    SKAction* moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:acrossScreenTime];
-    SKAction* repeatMoveLeft = [SKAction repeatActionForever:moveSheepLeft];
+    SKAction* moveSheepUp = [SKAction moveBy:CGVectorMake(0, 1000) duration:acrossScreenTime];
+    SKAction* repeatMoveUp = [SKAction repeatActionForever:moveSheepUp];
     
     double wobbleTime = acrossScreenTime / 40.0;
     
@@ -50,7 +50,7 @@
     SKAction* repeatWobble = [SKAction repeatActionForever:sequence];
     
     [_sheepNode runAction:repeatWobble];
-    [_sheepNode runAction:repeatMoveLeft];
+    [_sheepNode runAction:repeatMoveUp];
     
     return [self displayASheepWithValue:value andOper:oper atPos:pos];
 }
