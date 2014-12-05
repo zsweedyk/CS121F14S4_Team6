@@ -33,7 +33,7 @@
     for (int i = 0; i < 6; i++) {
         SKNode *newSheepNode = [[SKNode alloc] init];
         _staggerOffset = (i % 2)*80;
-        newSheepNode.position = CGPointMake(i*100 + 300, -100 - _staggerOffset);
+        newSheepNode.position = CGPointMake(i*105 + 250, -200 - _staggerOffset);
         [self makeSheep:newSheepNode];
     }
 }
@@ -67,7 +67,7 @@
     
     [_skScene addChild:newSheepNode];
     [self playSheepNoise:self];
-    [newSheepNode setPosition:CGPointMake(newSheepNode.position.x, -100)];
+    [newSheepNode setPosition:CGPointMake(newSheepNode.position.x, -150)];
     newSheepNode.zPosition = 0;
 }
 

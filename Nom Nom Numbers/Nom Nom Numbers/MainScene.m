@@ -161,7 +161,7 @@
     barn.anchorPoint = CGPointZero;
     barn.xScale = .5;
     barn.yScale = .5;
-    barn.zPosition = 3;
+    barn.zPosition = 2;
     [self addChild:barn];
 }
 
@@ -170,8 +170,8 @@
     SKSpriteNode* dragon = [SKSpriteNode spriteNodeWithImageNamed:@"dragon"];
     CGSize dragonSize = [UIImage imageNamed:@"dragon"].size;
     CGSize screenSize = self.size;
-    dragon.position = CGPointMake(screenSize.width - dragonSize.width*0.5,
-                                  (screenSize.height / 2) - dragonSize.height*0.25);
+    dragon.position = CGPointMake(screenSize.width - dragonSize.width*0.5 + 50,
+                                  screenSize.height*0.5 - dragonSize.height*0.25);
     dragon.anchorPoint = CGPointZero;
     dragon.xScale = .5;
     dragon.yScale = .5;
@@ -181,9 +181,7 @@
     [self addChild:dragon];
     
     SKSpriteNode* dragon2 = [SKSpriteNode spriteNodeWithImageNamed:@"blueDragon"];
-    CGSize dragonSize2 = [UIImage imageNamed:@"blueDragon"].size;
-    dragon.position = CGPointMake(screenSize.width - dragonSize2.width*0.5,
-                                  screenSize.height - dragonSize2.height*0.5);
+    dragon2.position = CGPointZero;
     dragon2.anchorPoint = CGPointZero;
     dragon2.xScale = .5;
     dragon2.yScale = .5;
@@ -207,14 +205,21 @@
     [self addChild:_dataView];
     
     // Create Quit button
-    SKLabelNode* quitButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    quitButton.fontSize = 45;
-    quitButton.fontColor = [UIColor whiteColor];
-    quitButton.position = CGPointMake(self.size.width * 0.8, self.size.height * 0.93);
-    quitButton.text = @"Quit";
+    SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"redButton"];
+    quitButton.size = CGSizeMake(120, 60);
+    quitButton.position = CGPointMake(self.size.width * 0.92, self.size.height * 0.95);
     quitButton.name = @"quitbutton";
     quitButton.zPosition = 2;
     [self addChild:quitButton];
+    
+    SKLabelNode* quitButtonLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    quitButtonLabel.fontSize = 45;
+    quitButtonLabel.fontColor = [UIColor whiteColor];
+    quitButtonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    quitButtonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    quitButtonLabel.text = @"Quit";
+    quitButtonLabel.name = @"quitbutton";
+    [quitButton addChild:quitButtonLabel];
 }
 
 // Looks for touches to the screen, matches touch to an appropriately named node
@@ -270,7 +275,8 @@
     
     // Send fireball at the middle of the sheep touched
     SKSpriteNode* sheepSpriteNode = (SKSpriteNode *) node;
-    CGPoint sheepMiddle = CGPointMake(node.position.x, node.position.y + (sheepSpriteNode.size.height/2));
+    CGPoint sheepMiddle = CGPointMake(node.position.x + (sheepSpriteNode.size.width/2),
+                                      node.position.y + (sheepSpriteNode.size.height));
     [fireballSprite sendFireballTo:sheepMiddle OnScene:self];
     
     [NSTimer scheduledTimerWithTimeInterval: [fireballSprite fireballTravelTime] +
@@ -282,10 +288,15 @@
 }
 
 // Add score animation
-- (SKSpriteNode *) newScoreNode
+- (SKSpriteNode *) newScoreNodeAtLocation: (CGPoint)loc
 {
     SKSpriteNode* mutton = [SKSpriteNode spriteNodeWithImageNamed:@"mutton"];
     SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
+    
+    mutton.position = loc;
+    mutton.name = @"scoreNode";
+    mutton.xScale = .1;
+    mutton.yScale = .1;
     
     NSString *oper = [NSString stringWithFormat:@"%c",_sheepOper];
     NSString* myString=[NSString stringWithFormat:@"%@%@",oper,_sheepValue];
@@ -305,16 +316,10 @@
         scoreNode.text = myString;
     }
     
-    // Set color to be off-white so text is visible even with sheep passing by
-    scoreNode.fontColor = [UIColor colorWithRed:235/255.0f green:235/255.0f blue:235/255.0f alpha:1.0f];
-    scoreNode.fontSize = 24;
+    scoreNode.fontColor = [UIColor blackColor];
+    scoreNode.fontSize = 48;
     
     [mutton addChild:scoreNode];
-    
-    mutton.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-50);
-    mutton.name = @"scoreNode";
-    mutton.xScale = 0.5;
-    mutton.yScale = 0.5;
     
     return mutton;
 }
@@ -326,8 +331,8 @@
     CGFloat Ydimensions = self.size.height;
     
     // Dimensions of score label (from data view class)
-    CGFloat scoreY = Ydimensions * 0.1;
-    CGFloat scoreX = Xdimensions * .02;
+    CGFloat scoreY = Ydimensions * 0.2;
+    CGFloat scoreX = Xdimensions * 0.1;
     
     SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
     _currentScore = [_dataModel getScore];
@@ -335,13 +340,19 @@
     if (scoreNode != nil) {
         scoreNode.name = nil; // change name so we don't affect this node anymore
         
-        SKAction* zoom = [SKAction scaleTo: 2.0 duration: 0.1];
-        SKAction* move = [SKAction moveTo:(CGPointMake(scoreX+150, scoreY-50)) duration:0.5];
-        SKAction* pause = [SKAction waitForDuration: 0.25];
+        SKAction* zoom = [SKAction scaleTo: 0.5 duration: 0.1];
+        SKAction* move = [SKAction moveTo:(CGPointMake(scoreX-2, scoreY-50)) duration:0.5];
+        SKAction* pause = [SKAction waitForDuration: 0.1];
         SKAction* fadeAway = [SKAction fadeOutWithDuration: 0.25];
         SKAction* remove = [SKAction removeFromParent];
         SKAction* moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
         
+        SKAction* open = [SKAction setTexture:[SKTexture textureWithImage:[UIImage imageNamed:@"blueDragonOpen"]]];
+        SKAction* basketPause = [SKAction waitForDuration: 0.5];
+        SKAction* close = [SKAction setTexture:[SKTexture textureWithImage:[UIImage imageNamed:@"blueDragon"]]];
+        SKAction* dragonSequence = [SKAction sequence:@[open, basketPause, close]];
+        
+        [_dragonBlue runAction:dragonSequence];
         [scoreNode runAction: moveSequence completion:^{
             [_dataView updateScore:_currentScore];
         }];
@@ -364,8 +375,10 @@
     
     [_dataModel applySheepChar:_sheepOper andValue:_sheepValue];
     
+    CGPoint sheepLocation = node.position;
+    
     // Show updating score with animated label
-    [self addChild: [self newScoreNode]];
+    [self addChild: [self newScoreNodeAtLocation:sheepLocation]];
     [self animateScoreNode];
     
     
@@ -378,7 +391,7 @@
 {
     [self enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode* node, BOOL* stop) {
         
-        if (node.position.y > self.size.height + 150) {
+        if (node.position.y > self.size.height - 100) {
             [_sheepController generateNewSheep:node];
         }
         
