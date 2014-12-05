@@ -38,7 +38,7 @@
         
         if (sqlite3_open(dbPath, &_highScoreDB) == SQLITE_OK) {
             char* errorMessage;
-            const char* createDBFileSQL = "CREATE TABLE IF NOT EXISTS highScores (ID INTEGER PRIMARY KEY AUTOINCREMENT, SCORE REAL)";
+            const char* createDBFileSQL = "CREATE TABLE IF NOT EXISTS highScores (id INTEGER PRIMARY KEY, score REAL)";
             
             if (sqlite3_exec(_highScoreDB, createDBFileSQL, NULL, NULL, &errorMessage) != SQLITE_OK) {
                 NSLog(@"Failed to create table");
@@ -58,7 +58,7 @@
     const char* dbPath = [_highScoreDBPath UTF8String];
     
     if (sqlite3_open(dbPath, &_highScoreDB) == SQLITE_OK) {
-        NSString* insertScoreSQL = [NSString stringWithFormat:@"INSERT INTO highScores (score) VALUES (\"%f\")]", currentScore];
+        NSString* insertScoreSQL = [NSString stringWithFormat:@"INSERT INTO highScores (score) VALUES ('%f')", currentScore];
         const char* insertSQLStatement = [insertScoreSQL UTF8String];
         
         if (sqlite3_prepare_v2(_highScoreDB, insertSQLStatement, -1, &statementInSQL, nil) == SQLITE_OK) {
@@ -68,9 +68,11 @@
             } else {
                 NSLog(@"Failed to add score to database...");
             }
-            NSLog(@"aaghhgahg");
+    
             sqlite3_finalize(statementInSQL);
         }
+        
+        NSLog(@"aaghhgahg");
     }
     
     sqlite3_finalize(statementInSQL);
