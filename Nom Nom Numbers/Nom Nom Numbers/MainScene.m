@@ -376,17 +376,17 @@
     _gameOverPopup = [[GameOverButton alloc] init];
     double score;
     if ([_mode isEqualToString:@"target"]) {
-        //Generate score for target mode
+        // Generate score for target mode
         double time = [_dataView getCurrentTime];
         score = [_dataModel calculateTargetScoreAtTime:time];
         
     } else {
-        //Return score for timed mode
-        score = _currentScore;
+        // Return score for timed mode
+        score = round(100 *_currentScore)/100.00;
+        [_highScoreModel saveScore:score];
     }
     
     [_gameOverPopup setupData:self withScore:score];
-    [_highScoreModel saveScore:score];
     [self addChild: _gameOverPopup];
 }
 
@@ -408,10 +408,10 @@
     } else {
         // Calculates score for Timed mode
         score = _currentScore;
+        [_highScoreModel saveScore:round(100 * score)/100.00];
     }
 
     [quitPopup setupData:self withScore:score];
-    [_highScoreModel saveScore:round (score * 100)/100.00];
     [self addChild:quitPopup];
 }
 

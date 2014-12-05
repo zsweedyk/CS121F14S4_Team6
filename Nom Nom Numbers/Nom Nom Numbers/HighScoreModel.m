@@ -72,7 +72,6 @@
             sqlite3_finalize(statementInSQL);
         }
         
-        NSLog(@"aaghhgahg");
     }
     
     sqlite3_finalize(statementInSQL);

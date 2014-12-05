@@ -35,13 +35,6 @@
     [self setupBackground];
     //[self setupDragon];
     [self setupButtons];
-    [self setupTable];
-}
-
-- (void) setupTable
-{
-    NSMutableArray* toptenscores = [_model getTopTen];
-    NSLog(@"array: %@", toptenscores);
 }
 
 - (void) setupBackground
@@ -52,6 +45,60 @@
     background.xScale = .5;
     background.yScale = .5;
     [self addChild:background];
+    
+    SKSpriteNode* scoreBoard = [SKSpriteNode spriteNodeWithImageNamed:@"popup"];
+    scoreBoard.size = CGSizeMake(self.size.width*0.7, self.size.height*0.73);
+    scoreBoard.position = CGPointMake(self.size.width*0.42, self.size.height*0.4);
+    [self addChild:scoreBoard];
+    
+    SKLabelNode* title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    title.fontColor = [UIColor whiteColor];
+    title.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+    title.position = CGPointMake(scoreBoard.size.width*-0.45, scoreBoard.size.height*0.38);
+    title.text = @"High Scores";
+    title.fontSize = 40;
+    [scoreBoard addChild:title];
+    
+    [self setupScoreOn:scoreBoard];
+    [self setupButtonsOn:scoreBoard];
+}
+
+- (void) setupButtonsOn: (SKSpriteNode *)scoreBoard
+{
+    SKLabelNode* timedMode = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    timedMode.fontColor = [UIColor lightTextColor];
+    timedMode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+    timedMode.position = CGPointMake(scoreBoard.size.width*0.45, scoreBoard.size.height*0.3 - 360);
+    timedMode.text = @"Timed Mode";
+    [scoreBoard addChild:timedMode];
+    
+    SKLabelNode* targetMode = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    targetMode.fontColor = [UIColor lightTextColor];
+    targetMode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+    targetMode.position = CGPointMake(scoreBoard.size.width*0.45, scoreBoard.size.height*0.3 - 405);
+    targetMode.text = @"Target Mode";
+    [scoreBoard addChild:targetMode];
+}
+
+- (void) setupScoreOn: (SKSpriteNode *)scoreBoard
+{
+    NSMutableArray* topTenScores = [_model getTopTen];
+    
+    for (int i = 0; i < [topTenScores count]; i++) {
+        SKLabelNode* number = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        number.fontColor = [UIColor whiteColor];
+        number.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        number.position = CGPointMake(scoreBoard.size.width*-0.43, scoreBoard.size.height*0.3 - (45*i));
+        number.text = [NSString stringWithFormat:@"%i.", i+1];
+        [scoreBoard addChild:number];
+        
+        SKLabelNode* scoreText = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        scoreText.fontColor = [UIColor whiteColor];
+        scoreText.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        scoreText.position = CGPointMake(scoreBoard.size.width*-0.35, scoreBoard.size.height*0.3 - (45*i));
+        scoreText.text = [NSString stringWithFormat:@"%@", [topTenScores objectAtIndex:i]];
+        [scoreBoard addChild:scoreText];
+    }
 }
 
 - (void) setupButtons

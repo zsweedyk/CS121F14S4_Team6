@@ -13,6 +13,5 @@
 
 @interface HighScoreScene : SKScene
 
-//- (id) initWithSize:(CGSize)size andModel:(HighScoreModel*)model;
 
 @end
