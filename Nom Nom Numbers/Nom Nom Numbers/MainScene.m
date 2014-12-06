@@ -379,9 +379,10 @@
         // Generate score for target mode
         double time = [_dataView getCurrentTime];
         score = [_dataModel calculateTargetScoreAtTime:time];
+        [_highScoreModel saveTargetScore:score atTime:time];
         
+    // Return score for timed mode
     } else {
-        // Return score for timed mode
         score = round(100 *_currentScore)/100.00;
         [_highScoreModel saveScore:score];
     }
@@ -405,8 +406,10 @@
     if ([_mode isEqualToString:@"target"]) {
         double time = [_dataView getCurrentTime];
         score = [_dataModel calculateTargetScoreAtTime:time];
+        [_highScoreModel saveTargetScore:score atTime:time];
+        
+    // Calculates score for Timed mode
     } else {
-        // Calculates score for Timed mode
         score = _currentScore;
         [_highScoreModel saveScore:round(100 * score)/100.00];
     }

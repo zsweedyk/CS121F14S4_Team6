@@ -14,8 +14,13 @@
 @property (strong, nonatomic) NSString* highScoreDBPath;
 @property (nonatomic) sqlite3* highScoreDB;
 
+@property (strong, nonatomic) NSString* targetScoreDBPath;
+@property (nonatomic) sqlite3* targetScoreDB;
+
 - (void) checkExists;
 - (void) saveScore:(double)currentScore;
-- (NSMutableArray *) getTopTen;
+- (void) saveTargetScore:(double)currentScore atTime:(double)currentTime;
+- (NSMutableArray *) getTopTenForTimed;
+- (NSMutableArray *) getTopTenForTarget;
 
 @end

@@ -14,15 +14,18 @@
 
 @implementation HighScoreScene {
     NSMutableArray* _arrOfSounds;
+    SKSpriteNode* _scoreBoard;
     HighScoreModel * _model;
+    SKLabelNode* _scoreText;
+    BOOL _onTimed;
 }
 
 
 - (id) initWithSize:(CGSize)size
 {
-    
     _arrOfSounds = [NSMutableArray new];
     _model = [[HighScoreModel alloc] init];
+    _onTimed = true;
 
     self = [super initWithSize:size];
     [self setup];
@@ -32,12 +35,13 @@
 
 - (void) setup
 {
-    [self setupBackground];
-    //[self setupDragon];
+    [self setupBackgroundWithMode];
+    [self setupLayoutOn:_scoreBoard];
+    [self setupScoreOn:_scoreBoard ForTimed:true];
     [self setupButtons];
 }
 
-- (void) setupBackground
+- (void) setupBackgroundWithMode
 {
     SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
     background.position = CGPointZero;
@@ -46,30 +50,28 @@
     background.yScale = .5;
     [self addChild:background];
     
-    SKSpriteNode* scoreBoard = [SKSpriteNode spriteNodeWithImageNamed:@"popup"];
-    scoreBoard.size = CGSizeMake(self.size.width*0.7, self.size.height*0.73);
-    scoreBoard.position = CGPointMake(self.size.width*0.42, self.size.height*0.4);
-    [self addChild:scoreBoard];
-    
+    _scoreBoard = [SKSpriteNode spriteNodeWithImageNamed:@"popup"];
+    _scoreBoard.size = CGSizeMake(self.size.width*0.7, self.size.height*0.73);
+    _scoreBoard.position = CGPointMake(self.size.width*0.42, self.size.height*0.4);
+    [self addChild:_scoreBoard];
+}
+
+- (void) setupLayoutOn: (SKSpriteNode *)scoreBoard
+{
     SKLabelNode* title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     title.fontColor = [UIColor whiteColor];
     title.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-    title.position = CGPointMake(scoreBoard.size.width*-0.45, scoreBoard.size.height*0.38);
+    title.position = CGPointMake(_scoreBoard.size.width*-0.45, _scoreBoard.size.height*0.38);
     title.text = @"High Scores";
     title.fontSize = 40;
-    [scoreBoard addChild:title];
+    [_scoreBoard addChild:title];
     
-    [self setupScoreOn:scoreBoard];
-    [self setupButtonsOn:scoreBoard];
-}
-
-- (void) setupButtonsOn: (SKSpriteNode *)scoreBoard
-{
     SKLabelNode* timedMode = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     timedMode.fontColor = [UIColor lightTextColor];
     timedMode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
     timedMode.position = CGPointMake(scoreBoard.size.width*0.45, scoreBoard.size.height*0.3 - 360);
     timedMode.text = @"Timed Mode";
+    timedMode.name = @"timedMode";
     [scoreBoard addChild:timedMode];
     
     SKLabelNode* targetMode = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
@@ -77,12 +79,18 @@
     targetMode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
     targetMode.position = CGPointMake(scoreBoard.size.width*0.45, scoreBoard.size.height*0.3 - 405);
     targetMode.text = @"Target Mode";
+    targetMode.name = @"targetMode";
     [scoreBoard addChild:targetMode];
 }
 
-- (void) setupScoreOn: (SKSpriteNode *)scoreBoard
+- (void) setupScoreOn: (SKSpriteNode *)scoreBoard ForTimed:(BOOL)timed
 {
-    NSMutableArray* topTenScores = [_model getTopTen];
+    NSMutableArray* topTenScores = [_model getTopTenForTimed];
+    
+    if (!timed) {
+        topTenScores = [_model getTopTenForTarget];
+        NSLog(@"topTenScores has %@", topTenScores);
+    }
     
     for (int i = 0; i < [topTenScores count]; i++) {
         SKLabelNode* number = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
@@ -92,13 +100,23 @@
         number.text = [NSString stringWithFormat:@"%i.", i+1];
         [scoreBoard addChild:number];
         
-        SKLabelNode* scoreText = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-        scoreText.fontColor = [UIColor whiteColor];
-        scoreText.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-        scoreText.position = CGPointMake(scoreBoard.size.width*-0.35, scoreBoard.size.height*0.3 - (45*i));
-        scoreText.text = [NSString stringWithFormat:@"%@", [topTenScores objectAtIndex:i]];
-        [scoreBoard addChild:scoreText];
+        _scoreText = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        _scoreText.fontColor = [UIColor whiteColor];
+        _scoreText.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        _scoreText.position = CGPointMake(scoreBoard.size.width*-0.35, scoreBoard.size.height*0.3 - (45*i));
+        _scoreText.text = [NSString stringWithFormat:@"%@", [topTenScores objectAtIndex:i]];
+        
+        if (!timed) {
+            _scoreText.text = @"Hi";
+        }
+        [scoreBoard addChild:_scoreText];
     }
+}
+
+- (void) clearScores
+{
+    [_scoreBoard removeAllChildren];
+    [self setupLayoutOn:_scoreBoard];
 }
 
 - (void) setupButtons
@@ -132,6 +150,29 @@
         SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
+    
+    // Show Timed Mode scores
+    } else if ([node.name isEqual: @"timedMode"]) {
+        [self playButtonNoise:self];
+        
+        if (_onTimed) {
+            // Do nothing
+        } else {
+            _onTimed = true;
+            [self clearScores];
+            [self setupScoreOn:_scoreBoard ForTimed:true];
+        }
+    // Show Target Mode scores
+    } else if ([node.name isEqual:@"targetMode"]) {
+        [self playButtonNoise:self];
+        
+        if (!_onTimed) {
+            // Do nothing
+        } else {
+            _onTimed = false;
+            [self clearScores];
+            [self setupScoreOn:_scoreBoard ForTimed:false];
+        }
     }
 
 }
