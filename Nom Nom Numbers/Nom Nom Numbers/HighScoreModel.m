@@ -145,7 +145,7 @@
             sqlite3_finalize(statementInSQL);
             
         } else {
-            NSLog(@"No data found");
+            NSLog(@"No data found!");
         }
     }
     
