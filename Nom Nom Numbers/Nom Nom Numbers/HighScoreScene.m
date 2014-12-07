@@ -89,7 +89,6 @@
     
     if (!timed) {
         topTenScores = [_model getTopTenForTarget];
-        NSLog(@"topTenScores has %@", topTenScores);
     }
     
     for (int i = 0; i < [topTenScores count]; i++) {
@@ -107,7 +106,14 @@
         _scoreText.text = [NSString stringWithFormat:@"%@", [topTenScores objectAtIndex:i]];
         
         if (!timed) {
-            _scoreText.text = @"Hi";
+            _scoreText.text = [NSString stringWithFormat:@"%@", [[topTenScores objectAtIndex:i] objectAtIndex:1]];
+            
+            SKLabelNode* time = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+            time.fontColor = [UIColor whiteColor];
+            time.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+            time.position = CGPointMake(scoreBoard.size.width*-0.15, scoreBoard.size.height*0.3 - (45*i));
+            time.text = [NSString stringWithFormat:@"in %@ seconds", [[topTenScores objectAtIndex:i] objectAtIndex:0]];
+            [scoreBoard addChild:time];
         }
         [scoreBoard addChild:_scoreText];
     }

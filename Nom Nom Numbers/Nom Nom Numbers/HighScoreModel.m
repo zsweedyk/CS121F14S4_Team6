@@ -166,16 +166,13 @@
         const char* querySQLStatement = [getTopTenSQL UTF8String];
         
         if (sqlite3_prepare_v2(_targetScoreDB, querySQLStatement, -1, &statementInSQL, nil) == SQLITE_OK) {
-            
-            NSMutableArray* currentScore = [[NSMutableArray alloc] init];
-            
             while (sqlite3_step(statementInSQL) == SQLITE_ROW) {
+                NSMutableArray* currentScore = [[NSMutableArray alloc] init];
                 NSString* time = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statementInSQL, 0)];
                 NSString* score = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statementInSQL, 1)];
-                
+
                 [currentScore addObject:time];
                 [currentScore addObject:score];
-                
                 [arrayOfScores addObject:currentScore];
             }
             
