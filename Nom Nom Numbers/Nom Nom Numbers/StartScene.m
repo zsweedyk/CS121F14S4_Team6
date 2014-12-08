@@ -113,10 +113,40 @@
     
     if ([node.name isEqual: @"tutorialButton"]) {
         [self playButtonNoise:self];
+        
+        SKLabelNode* timedTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        timedTutorialButton.fontSize = 30;
+        timedTutorialButton.fontColor = [UIColor blackColor];
+        timedTutorialButton.position = CGPointMake(self.size.width * 0.4, self.size.height * 0.31);
+        timedTutorialButton.text = @"Timed Mode";
+        timedTutorialButton.name = @"timedTutorialButton";
+        [self addChild:timedTutorialButton];
+        
+        SKLabelNode* targetTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        targetTutorialButton.fontSize = 30;
+        targetTutorialButton.fontColor = [UIColor blackColor];
+        targetTutorialButton.position = CGPointMake(self.size.width * 0.4, self.size.height * 0.27);
+        targetTutorialButton.text = @"Target Mode";
+        targetTutorialButton.name = @"targetTutorialButton";
+        [self addChild:targetTutorialButton];
     }
     
-    if ([node.name isEqual: @"infoButton"]) {
-        [self playButtonNoise:self];
+    if ([node.name isEqual: @"timedTutorialButton"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimeModeHasLaunched"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        SKScene* timedTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode: @"timed"  andOrigin:@"tutorialButton"];
+        SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:timedTutorialScence transition:transition];
+    }
+    
+    if ([node.name isEqual: @"targetTutorialButton"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        SKScene* targetTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"tutorialButton"];
+        SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:targetTutorialScence transition:transition];
     }
 }
 
