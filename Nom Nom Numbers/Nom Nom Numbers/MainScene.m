@@ -28,6 +28,7 @@
     BOOL _touchedSheep;
     int _countDownTillStart;
     SKLabelNode* _readyLabels;
+    SKSpriteNode* _gameOverBacklay;
     GameOverButton* _gameOverPopup;
     NSString* _mode;
     NSMutableArray* _arrOfSounds;
@@ -90,10 +91,17 @@
     CGFloat labelX = self.frame.size.width * 0.5;
     CGFloat labelY = self.frame.size.height * 0.5;
     
+    UIColor* transparentColor = [[UIColor alloc] initWithRed:0.3 green:0.3 blue:0.3 alpha:0.45];
+    _gameOverBacklay = [[SKSpriteNode alloc] initWithColor:transparentColor size:CGSizeMake(self.size.width, self.size.height)];
+    _gameOverBacklay.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
+    _gameOverBacklay.zPosition = 3;
+    [self addChild:_gameOverBacklay];
+    
     _readyLabels = [[SKLabelNode alloc] initWithFontNamed:fontType];
     _readyLabels.fontSize = 150;
-    _readyLabels.fontColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.8 alpha:1.0];
+    _readyLabels.fontColor = [UIColor colorWithRed:0.5 green:0.5 blue:1 alpha:1.0];
     _readyLabels.position = CGPointMake(labelX, labelY);
+    _readyLabels.zPosition = 4;
     _readyLabels.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     _readyLabels.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
     _readyLabels.text = @"Ready?";
@@ -118,6 +126,7 @@
     } else if (_countDownTillStart < 1) {
         [_gameStartTimer invalidate];
         [_readyLabels removeFromParent];
+        [_gameOverBacklay removeFromParent];
 
         [_dataView initializeTimer];
         [_sheepController setupSheep:self];
@@ -198,6 +207,22 @@
     quitButton.name = @"quitbutton";
     quitButton.zPosition = 2;
     [self addChild:quitButton];
+    
+    // Set up 'Hit Me!' Label
+    SKSpriteNode* targetButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
+    targetButton.size = CGSizeMake(120, 60);
+    targetButton.position = CGPointMake(self.size.width*.92, self.size.height*0.05);
+    targetButton.name = @"targetbutton";
+    targetButton.zPosition = 2;
+    [self addChild:targetButton];
+    
+    SKLabelNode* targetButtonLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    targetButtonLabel.fontColor = [UIColor whiteColor];
+    targetButtonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    targetButtonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    targetButtonLabel.text = @"Hit Me!";
+    targetButtonLabel.name = @"targetbutton";
+    [targetButton addChild:targetButtonLabel];
 }
 
 // Looks for touches to the screen, matches touch to an appropriately named node
