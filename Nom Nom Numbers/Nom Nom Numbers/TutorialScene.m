@@ -50,14 +50,23 @@
     [self setupBackground];
     [self setupDragon];
     
-    // add Quit button on the top-right
-    SKLabelNode* quit = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    quit.fontSize = 40;
-    quit.fontColor = [UIColor whiteColor];
-    quit.position = CGPointMake(self.size.width * 0.8, self.size.height * 0.93);
-    quit.text = @"Quit";
-    quit.name = @"quit";
-    [self addChild:quit];
+    // Create Quit button
+    SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"redButton"];
+    quitButton.size = CGSizeMake(120, 60);
+    quitButton.position = CGPointMake(self.size.width * 0.92, self.size.height * 0.95);
+    quitButton.name = @"quit";
+    quitButton.zPosition = 2;
+    [self addChild:quitButton];
+    
+    SKLabelNode* quitButtonLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    quitButtonLabel.fontSize = 45;
+    quitButtonLabel.fontColor = [UIColor whiteColor];
+    quitButtonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    quitButtonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    quitButtonLabel.text = @"Quit";
+    quitButtonLabel.name = @"quit";
+    [quitButton addChild:quitButtonLabel];
+    
     [self startGame];
 }
 
@@ -292,20 +301,22 @@
         
         // setup popup explaining how score changes
         SKLabelNode* popup = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-        popup.fontSize = 35;
+        popup.fontSize = 38;
         popup.fontColor = [UIColor whiteColor];
         popup.position = CGPointMake(150,380);
         NSString* title = [NSString stringWithFormat:@"the score is updated to: "];
         popup.text = title;
+        popup.zPosition = 2;
         popup.name = @"popup";
         [node addChild:popup];
         
         SKLabelNode* popup2 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-        popup2.fontSize = 35;
+        popup2.fontSize = 38;
         popup2.fontColor = [UIColor whiteColor];
         popup2.position = CGPointMake(150,330);
         NSString* title2 = [NSString stringWithFormat:@"%.2f %c %@ = %.2f", _originalScore, sheepOper, sheepValue, _currentScore];
         popup2.text = title2;
+        popup2.zPosition = 2;
         popup2.name = @"popup2";
         [node addChild:popup2];
         
@@ -322,8 +333,8 @@
         CGFloat Ydimensions = self.size.height;
         
         // create newScore label for score animation
-        CGFloat scoreY = Ydimensions * 0.93;
-        CGFloat scoreX = Xdimensions * 0.02;
+        CGFloat scoreY = Ydimensions * 0.10;
+        CGFloat scoreX = Xdimensions * 0.17;
         
         SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
         
@@ -333,7 +344,7 @@
             
             SKAction* zoom = [SKAction scaleTo: 2.0 duration: 0.1];
             SKAction* move = [SKAction moveTo:(CGPointMake(scoreX+150, scoreY-50)) duration:0.5];
-            SKAction* pause = [SKAction waitForDuration: 0.25];
+            SKAction* pause = [SKAction waitForDuration: 0.20];
             SKAction* fadeAway = [SKAction fadeOutWithDuration: 0.25];
             SKAction* remove = [SKAction removeFromParent];
             SKAction* moveSequence = [SKAction sequence:@[zoom, move, pause, fadeAway, remove]];
@@ -422,7 +433,7 @@
             // sheep nodes exist
             flag2 = TRUE;
             // If at least one sheep is on screen, flag1 is FALSE
-            if (node.position.x > -150) {
+            if (node.position.y < self.size.height * 0.9) {
                 flag1 = FALSE;
             }
         }];
