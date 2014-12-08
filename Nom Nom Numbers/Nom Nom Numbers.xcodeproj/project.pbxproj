@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A30806B31A355709000ADBB4 /* TutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A30806B21A355709000ADBB4 /* TutorialScene.m */; };
-		A3DC1B211A11E77000232403 /* TimedTutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DC1B201A11E77000232403 /* TimedTutorialScene.m */; };
-		A3EBB44D1A1AF371001DB3F8 /* TargetTutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */; };
 		CB96D3C91A2EDF1A003598A5 /* dragon.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CB96D3C81A2EDF1A003598A5 /* dragon.atlas */; };
 		CB9A2CB81A09336E004EF777 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CB71A09336E004EF777 /* main.m */; };
 		CB9A2CBB1A09336F004EF777 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CBA1A09336F004EF777 /* AppDelegate.m */; };
@@ -57,10 +55,6 @@
 /* Begin PBXFileReference section */
 		A30806B11A355709000ADBB4 /* TutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialScene.h; sourceTree = "<group>"; };
 		A30806B21A355709000ADBB4 /* TutorialScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialScene.m; sourceTree = "<group>"; };
-		A3DC1B1F1A11E77000232403 /* TimedTutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedTutorialScene.h; sourceTree = "<group>"; };
-		A3DC1B201A11E77000232403 /* TimedTutorialScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimedTutorialScene.m; sourceTree = "<group>"; };
-		A3EBB44B1A1AF371001DB3F8 /* TargetTutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetTutorialScene.h; sourceTree = "<group>"; };
-		A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetTutorialScene.m; sourceTree = "<group>"; };
 		CB96D3C81A2EDF1A003598A5 /* dragon.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = dragon.atlas; sourceTree = "<group>"; };
 		CB9A2CB21A09336D004EF777 /* Nom Nom Numbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nom Nom Numbers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9A2CB61A09336E004EF777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -137,10 +131,6 @@
 				CB9A2CFA1A0939E8004EF777 /* StartScene.m */,
 				CB9A2CEF1A0939E8004EF777 /* MainScene.h */,
 				CB9A2CF01A0939E8004EF777 /* MainScene.m */,
-				A3DC1B1F1A11E77000232403 /* TimedTutorialScene.h */,
-				A3DC1B201A11E77000232403 /* TimedTutorialScene.m */,
-				A3EBB44B1A1AF371001DB3F8 /* TargetTutorialScene.h */,
-				A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */,
 				A30806B11A355709000ADBB4 /* TutorialScene.h */,
 				A30806B21A355709000ADBB4 /* TutorialScene.m */,
 			);
@@ -379,7 +369,6 @@
 				CB9A2CC31A093370004EF777 /* GameViewController.m in Sources */,
 				CB9A2CFB1A0939E8004EF777 /* DataModel.m in Sources */,
 				CB9A2D051A0939E8004EF777 /* StartScene.m in Sources */,
-				A3EBB44D1A1AF371001DB3F8 /* TargetTutorialScene.m in Sources */,
 				CB9A2CFD1A0939E8004EF777 /* GameOverButton.m in Sources */,
 				CB9A2D011A0939E8004EF777 /* QuitGameButton.m in Sources */,
 				CB9A2CBB1A09336F004EF777 /* AppDelegate.m in Sources */,
@@ -387,7 +376,6 @@
 				CB9A2CFE1A0939E8004EF777 /* Generator.m in Sources */,
 				CB9A2D031A0939E8004EF777 /* SheepModel.m in Sources */,
 				CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */,
-				A3DC1B211A11E77000232403 /* TimedTutorialScene.m in Sources */,
 				CB9A2D001A0939E8004EF777 /* MainScene.m in Sources */,
 				CB9A2CB81A09336E004EF777 /* main.m in Sources */,
 				CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */,

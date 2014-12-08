@@ -9,8 +9,7 @@
 
 #import "StartScene.h"
 #import "MainScene.h"
-#import "TimedTutorialScene.h"
-#import "TargetTutorialScene.h"
+#import "TutorialScene.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -44,7 +43,7 @@
     SKLabelNode* timeStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     timeStartButton.fontSize = 45;
     timeStartButton.fontColor = [UIColor blackColor];
-    timeStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.4);
+    timeStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.45);
     timeStartButton.text = @"Timed Mode";
     timeStartButton.name = @"timeStartButton";
     [self addChild:timeStartButton];
@@ -52,7 +51,7 @@
     SKLabelNode* targetStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     targetStartButton.fontSize = 45;
     targetStartButton.fontColor = [UIColor blackColor];
-    targetStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.3);
+    targetStartButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.37);
     targetStartButton.text = @"Target Mode";
     targetStartButton.name = @"targetStartButton";
     [self addChild:targetStartButton];
@@ -60,7 +59,7 @@
     SKLabelNode* tutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     tutorialButton.fontSize = 45;
     tutorialButton.fontColor = [UIColor blackColor];
-    tutorialButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.2);
+    tutorialButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.29);
     tutorialButton.text = @"Tutorial";
     tutorialButton.name = @"tutorialButton";
     [self addChild:tutorialButton];
@@ -86,7 +85,7 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimeModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SKScene* timedTutorialScence = [[TimedTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+            SKScene* timedTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode: @"timed" andOrigin:@"startingGame"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:timedTutorialScence transition:transition];
         }
@@ -105,7 +104,7 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SKScene* targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+            SKScene* targetTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"startingGame"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:targetTutorialScence transition:transition];
         }
@@ -117,7 +116,7 @@
         SKLabelNode* timedTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
         timedTutorialButton.fontSize = 30;
         timedTutorialButton.fontColor = [UIColor blackColor];
-        timedTutorialButton.position = CGPointMake(self.size.width * 0.4, self.size.height * 0.31);
+        timedTutorialButton.position = CGPointMake(self.size.width * 0.42, self.size.height * 0.31);
         timedTutorialButton.text = @"Timed Mode";
         timedTutorialButton.name = @"timedTutorialButton";
         [self addChild:timedTutorialButton];
@@ -125,7 +124,7 @@
         SKLabelNode* targetTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
         targetTutorialButton.fontSize = 30;
         targetTutorialButton.fontColor = [UIColor blackColor];
-        targetTutorialButton.position = CGPointMake(self.size.width * 0.4, self.size.height * 0.27);
+        targetTutorialButton.position = CGPointMake(self.size.width * 0.42, self.size.height * 0.27);
         targetTutorialButton.text = @"Target Mode";
         targetTutorialButton.name = @"targetTutorialButton";
         [self addChild:targetTutorialButton];

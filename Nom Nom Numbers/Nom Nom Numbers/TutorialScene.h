@@ -10,4 +10,6 @@
 
 @interface TutorialScene : SKScene
 
+-(id)initWithSize:(CGSize)size andSKView:(SKView*)skView andMode:(NSString *)mode andOrigin:(NSString *)origin;
+
 @end
