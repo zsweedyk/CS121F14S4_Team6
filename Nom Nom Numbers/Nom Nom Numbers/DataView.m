@@ -63,22 +63,6 @@
         [self addChild:_targetScore];
         
         _initialTime = 0;
-        
-        // Set up 'Hit Me!' Label
-        SKSpriteNode* targetButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
-        targetButton.size = CGSizeMake(120, 60);
-        targetButton.position = CGPointMake(Xdimensions*.1, Ydimensions);
-        targetButton.name = @"targetbutton";
-        targetButton.zPosition = 2;
-        [self addChild:targetButton];
-        
-        SKLabelNode* targetButtonLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-        targetButtonLabel.fontColor = [UIColor whiteColor];
-        targetButtonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-        targetButtonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-        targetButtonLabel.text = @"Hit Me!";
-        targetButtonLabel.name = @"targetbutton";
-        [targetButton addChild:targetButtonLabel];
     }
     
     // Set up UI for Score Label
