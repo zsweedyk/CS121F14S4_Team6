@@ -35,6 +35,16 @@
     return self;
 }
 
+- (void) setValue:(NSString *)value
+{
+    _value = value;
+}
+
+- (void) setOper:(char)operator
+{
+    _operator = operator;
+}
+
 // Return value of sheep
 - (NSString *) getValue
 {
@@ -54,7 +64,7 @@
     int chanceIndicator = arc4random_uniform(50);
     
     if (_scoreIsLow) {
-        if (chanceIndicator < 35) {
+        if (chanceIndicator < 40) {
             chanceIndicator = 32;
         } else {
             chanceIndicator = 34;
@@ -109,7 +119,6 @@
 
 - (void)scoreIsLow:(bool)boolean
 {
-    NSLog(@"score is low");
     _scoreIsLow = boolean;
     [_generator setScoreIsLow:boolean];
 }

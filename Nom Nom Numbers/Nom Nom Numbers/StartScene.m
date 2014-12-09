@@ -18,6 +18,8 @@
 {
     SKView* _skView;
     NSMutableArray* _arrOfSounds;
+    SKLabelNode* _timedTutorialButton;
+    SKLabelNode* _targetTutorialButton;
 }
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView *)skView
@@ -115,7 +117,7 @@
         }
     }
     
-    if ([node.name isEqual: @"targetStartButton"]) {
+    else if ([node.name isEqual: @"targetStartButton"]) {
         
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TargetModeHasLaunched"]) {
             // Already launched timed-mode before, so go straight into the target-mode gameplay
@@ -136,14 +138,35 @@
         }
     }
     
-    if ([node.name isEqual: @"highScoreButton"]) {
+    else if ([node.name isEqual: @"highScoreButton"]) {
         [self playButtonNoise:self];
         SKScene* highScoreScene = [[HighScoreScene alloc] initWithSize:self.size];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:highScoreScene transition:transition];
     }
     
-    if ([node.name isEqual: @"timedTutorialButton"]) {
+    else if ([node.name isEqual: @"tutorialButton"]) {
+        [self playButtonNoise:self];
+        [self removeTutorialButtons];
+        
+        _timedTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        _timedTutorialButton.fontSize = 30;
+        _timedTutorialButton.fontColor = [UIColor blackColor];
+        _timedTutorialButton.position = CGPointMake(self.size.width * 0.42, self.size.height * 0.22);
+        _timedTutorialButton.text = @"Timed Mode";
+        _timedTutorialButton.name = @"timedTutorialButton";
+        [self addChild:_timedTutorialButton];
+        
+        _targetTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        _targetTutorialButton.fontSize = 30;
+        _targetTutorialButton.fontColor = [UIColor blackColor];
+        _targetTutorialButton.position = CGPointMake(self.size.width * 0.42, self.size.height * 0.18);
+        _targetTutorialButton.text = @"Target Mode";
+        _targetTutorialButton.name = @"targetTutorialButton";
+        [self addChild:_targetTutorialButton];
+    }
+    
+    else if ([node.name isEqual: @"timedTutorialButton"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -152,27 +175,7 @@
         [self.view presentScene:targetTutorialScene transition:transition];
     }
     
-    if ([node.name isEqual: @"tutorialButton"]) {
-        [self playButtonNoise:self];
-        
-        SKLabelNode* timedTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-        timedTutorialButton.fontSize = 30;
-        timedTutorialButton.fontColor = [UIColor blackColor];
-        timedTutorialButton.position = CGPointMake(self.size.width * 0.42, self.size.height * 0.22);
-        timedTutorialButton.text = @"Timed Mode";
-        timedTutorialButton.name = @"timedTutorialButton";
-        [self addChild:timedTutorialButton];
-        
-        SKLabelNode* targetTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-        targetTutorialButton.fontSize = 30;
-        targetTutorialButton.fontColor = [UIColor blackColor];
-        targetTutorialButton.position = CGPointMake(self.size.width * 0.42, self.size.height * 0.18);
-        targetTutorialButton.text = @"Target Mode";
-        targetTutorialButton.name = @"targetTutorialButton";
-        [self addChild:targetTutorialButton];
-    }
-    
-    if ([node.name isEqual: @"targetTutorialButton"]) {
+    else if ([node.name isEqual: @"targetTutorialButton"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -180,6 +183,20 @@
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:targetTutorialScence transition:transition];
     }
+    else {
+        [self removeTutorialButtons];
+    }
+}
+
+- (void) removeTutorialButtons
+{
+    if ([self childNodeWithName:@"timedTutorialButton"] != nil) {
+        [_timedTutorialButton removeFromParent];
+    }
+    if ([self childNodeWithName:@"targetTutorialButton"]!= nil) {
+        [_targetTutorialButton removeFromParent];
+    }
+
 }
 
 // Plays noise when button is clicked
