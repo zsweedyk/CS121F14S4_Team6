@@ -93,7 +93,6 @@
         
     }
     
-    sqlite3_finalize(statementInSQL);
     sqlite3_close(_highScoreDB);
 }
 
@@ -119,7 +118,6 @@
         
     }
     
-    sqlite3_finalize(statementInSQL);
     sqlite3_close(_targetScoreDB);
 }
 
@@ -149,7 +147,6 @@
         }
     }
     
-    sqlite3_finalize(statementInSQL);
     sqlite3_close(_highScoreDB);
     return arrayOfScores;
 }
@@ -183,7 +180,6 @@
         }
     }
     
-    sqlite3_finalize(statementInSQL);
     sqlite3_close(_targetScoreDB);
     return arrayOfScores;
 }
