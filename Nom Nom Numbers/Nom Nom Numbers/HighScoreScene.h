@@ -13,5 +13,6 @@
 
 @interface HighScoreScene : SKScene
 
+- (id) initWithSize:(CGSize)size;
 
 @end

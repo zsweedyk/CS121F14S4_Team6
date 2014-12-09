@@ -24,7 +24,7 @@
 
 - (id) initWithSize:(CGSize)size
 {
-    self = [super init];
+    self = [super initWithSize:size];
     
     _arrOfSounds = [NSMutableArray new];
     _model = [[HighScoreModel alloc] init];

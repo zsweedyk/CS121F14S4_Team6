@@ -94,7 +94,6 @@
             SKScene* gameScene = [[MainScene alloc] initWithSize:self.size andSKView:nil andMode:@"timed"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
-            [self removeFromParent];
             
         } else {
             // First time launch timed-mode, so display the tutorial
