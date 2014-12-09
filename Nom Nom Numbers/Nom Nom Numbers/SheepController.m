@@ -55,11 +55,85 @@
     _currentScore = score;
 }
 
+- (NSString *)createValueForOper:(int)oper
+{
+    int pickValue = arc4random_uniform(5);
+    int value = 5 * pickValue;
+    NSString* valueString;
+    
+    switch (oper) {
+        case 0:
+            value = _targetScore - value;
+            valueString = [NSString stringWithFormat:@" %d", value];
+            break;
+        case 1:
+            value = _targetScore + value;
+        default:
+            break;
+    }
+    
+    return valueString;
+}
+
+// Creates a sheep that is some operation and value away from target score
+- (void) createTargetSheep:(SheepModel *)sheepModel
+{
+    int pickOperator = arc4random_uniform(4);
+    int pickValue1 = arc4random_uniform(3)+1;
+    int pickValue2 = arc4random_uniform(7)+1;
+    int value = pickValue1 * pickValue2;
+    NSString* valueString;
+    
+    int pickOffset = arc4random_uniform(8);
+    
+    int approxTarget;
+    if (pickOffset == 0) {
+        approxTarget = _targetScore;
+    } else if (pickOffset < 4) {
+        approxTarget = _targetScore - value*pickValue1;
+    } else {
+        approxTarget = _targetScore + value*pickValue1;
+    }
+    
+    if (value == 0) {
+        pickOperator = 0;
+    }
+
+    
+    switch (pickOperator) {
+        // addition case
+        case 0:
+            value = approxTarget - value;
+            [sheepModel setOper:'+'];
+            break;
+        // subtraction case
+        case 1:
+            value = approxTarget + value;
+            [sheepModel setOper:'-'];
+            break;
+        // multiplication case
+        case 2:
+            value = approxTarget / value;
+            [sheepModel setOper:'x'];
+            break;
+        // division case
+        default:
+            value = pickValue2;
+            [sheepModel setOper:'/'];
+            break;
+    }
+    
+    valueString = [NSString stringWithFormat:@" %d", value];
+    [sheepModel setValue:valueString];
+    
+}
+
 // Given a node, this method does all the initilizations and communication necessary to create
 // a fully functional sheep node
 - (void) makeSheep:(SKNode *)node
 {
     SheepModel* newSheepModel = [[SheepModel alloc] init];
+    int generateNiceSheep = arc4random_uniform(3);
     if ([_mode isEqualToString:@"timed"]) {
         if (_currentScore < 5) {
             [newSheepModel scoreIsLow:true];
@@ -68,8 +142,11 @@
             [newSheepModel makeSheepFrom:-100 to:100];
         }
     } else {
-        NSLog(@"target score: %d", _targetScore);
-        [newSheepModel makeSheepFrom:-100 to:100];
+        if (generateNiceSheep == 0) {
+            [newSheepModel makeSheepFrom:-100 to:100];
+        } else {
+            [self createTargetSheep:newSheepModel];
+        }
         
     }
     
