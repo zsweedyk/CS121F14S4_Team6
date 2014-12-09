@@ -53,8 +53,8 @@
     [self addChild:background];
     
     _scoreBoard = [SKSpriteNode spriteNodeWithImageNamed:@"popup"];
-    _scoreBoard.size = CGSizeMake(self.size.width*0.7, self.size.height*0.73);
-    _scoreBoard.position = CGPointMake(self.size.width*0.42, self.size.height*0.4);
+    _scoreBoard.size = CGSizeMake(self.size.width*0.85, self.size.height*0.73);
+    _scoreBoard.position = CGPointMake(self.size.width*0.5, self.size.height*0.4);
     [self addChild:_scoreBoard];
 }
 
@@ -64,7 +64,7 @@
     _title.fontColor = [UIColor whiteColor];
     _title.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     _title.position = CGPointMake(_scoreBoard.size.width*-0.45, _scoreBoard.size.height*0.38);
-    _title.text = @"Timed Mode High Scores";
+    _title.text = @"High Scores in Timed Mode";
     _title.fontSize = 40;
     [_scoreBoard addChild:_title];
     
@@ -170,7 +170,7 @@
             [self clearScores];
             [self setupScoreOn:_scoreBoard ForTimed:true];
             
-            _title.text = @"Timed Mode High Scores";
+            _title.text = @"High Scores in Timed Mode";
             
         }
     // Show Target Mode scores
@@ -184,7 +184,7 @@
             [self clearScores];
             [self setupScoreOn:_scoreBoard ForTimed:false];
             
-            _title.text = @"Target Mode High Scores";
+            _title.text = @"High Scores in Target Mode";
         }
     }
 

@@ -69,7 +69,7 @@
 
 - (void) setupBackground
 {
-
+    
     SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
@@ -375,7 +375,7 @@
         // if clicking 'Start' to start the tutorial
         _dataModel = [DataModel alloc];
         _dataView = [[DataView alloc] init];
-        [_dataView setupData:self withScore:0 andMode:_mode andModel:_dataModel andSheepController:_sheepController];
+        [_dataView setupData:self withScore:0 andMode:_mode andModel:_dataModel andTargetScore:50];
         [self addChild:_dataView];
         [[self childNodeWithName:@"startpopup"] removeFromParent];
         [self setupSheep];
