@@ -123,7 +123,7 @@
     
     _readyLabels = [[SKLabelNode alloc] initWithFontNamed:fontType];
     _readyLabels.fontSize = 150;
-    _readyLabels.fontColor = [UIColor colorWithRed:0.5 green:0.5 blue:1 alpha:1.0];
+    _readyLabels.fontColor = [UIColor colorWithRed:1 green:0.5 blue:1 alpha:1.0];
     _readyLabels.position = CGPointMake(labelX, labelY);
     _readyLabels.zPosition = 4;
     _readyLabels.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
