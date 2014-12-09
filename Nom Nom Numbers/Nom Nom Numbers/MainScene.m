@@ -198,6 +198,10 @@
     [_dataView updateScore:[_dataModel getScore]];
     [_dataView resetTimer];
     
+    _targetScore = [_sheepController getTargetScore];
+    [_dataView setTargetValue:_targetScore];
+    [_dataModel setTargetScore:_targetScore];
+    
     // Reset initial game prep
     _readyLabels.text = @"Ready?";
     _countDownTillStart = 4;
@@ -296,6 +300,7 @@
     _dataView = [[DataView alloc] init];
     _targetScore = [_sheepController getTargetScore];
     [_dataView setupData:self withScore:_currentScore andMode:_mode andModel:_dataModel andTargetScore:_targetScore];
+    [_dataModel setTargetScore:_targetScore];
     _dataView.customDelegate = self;
 
     [self addChild:_dataView];
@@ -333,7 +338,7 @@
     UITouch* touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode* node = [self nodeAtPoint:location];
-    
+
     // Sheep clicked
     if ([node.name isEqual: @"sheep"]) {
         
@@ -351,6 +356,7 @@
         // Back to main screen
     } else if ([node.name isEqual:@"quitaction"]) {
         [self playButtonNoise:self];
+        [self stopMusic:self];
         SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:nil];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self removeAllChildren];

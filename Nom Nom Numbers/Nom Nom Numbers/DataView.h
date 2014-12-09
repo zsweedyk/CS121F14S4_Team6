@@ -36,5 +36,6 @@
 - (void) stopTimer;
 - (void) resetTimer;
 - (int) getCurrentTime;
+- (void) setTargetValue: (int)target;
 
 @end

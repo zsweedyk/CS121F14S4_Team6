@@ -36,12 +36,17 @@
     [self writeLine:@"as part of the CS 121 class at Harvey Mudd College."];
     [self writeLine:@"It was developed as part of the Games Network,"];
     [self writeLine:@"which is funded by NSF grant #1042472."];
-    [self writeLine:@""];
-    [self writeLine:@"The Large Fireball sound was recorded by Mike Koenig"];
-    [self writeLine:@"and is used under Creative Commons Attribution 3.0."];
-    [self writeLine:@"It can be found at http://soundbible.com/1348-Large-Fireball.html."];
+    [self writeSmallLine:@""];
+    [self writeSmallLine:@"Large Fireball sound was recorded by Mike Koenig"];
+    [self writeSmallLine:@"It can be found at http://soundbible.com/1348-Large-Fireball.html."];
+    [self writeSmallLine:@"Licensed under Creative Commons: By Attribution 3.0"];
+    [self writeSmallLine:@""];
+    [self writeSmallLine:@"Music is \"Thatched Villagers\" by Kevin MacLeod (incompetech.com)"];
+    [self writeSmallLine:@"Licensed under Creative Commons: By Attribution 3.0"];
+    [self writeSmallLine:@"http://creativecommons.org/licenses/by/3.0/"];
     [self writeLine:@""];
     [self writeLine:@"Thank you for trying our game and we hope you have fun!"];
+    
 }
 
 - (void) createBackground
@@ -77,6 +82,19 @@
 {
     SKLabelNode* textLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     textLabel.fontSize = 32;
+    textLabel.fontColor = [UIColor blackColor];
+    textLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    textLabel.position = CGPointMake(self.size.width / 2, _nextLineY);
+    textLabel.text = text;
+    [self addChild:textLabel];
+    
+    _nextLineY -= textLabel.fontSize + 5;
+}
+
+- (void) writeSmallLine: (NSString*) text
+{
+    SKLabelNode* textLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    textLabel.fontSize = 16;
     textLabel.fontColor = [UIColor blackColor];
     textLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
     textLabel.position = CGPointMake(self.size.width / 2, _nextLineY);

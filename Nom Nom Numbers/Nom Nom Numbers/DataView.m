@@ -58,7 +58,6 @@
         _targetScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         _targetScore.zPosition = 2;
         
-        [_dataModel setTargetScore:targetScore];
         _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
         [self addChild:_targetScore];
         
@@ -167,6 +166,11 @@
         
         _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
     }
+}
+
+- (void) setTargetValue: (int)target
+{
+    _targetScore.text = [NSString stringWithFormat:@"Target: %d",target];
 }
 
 @end

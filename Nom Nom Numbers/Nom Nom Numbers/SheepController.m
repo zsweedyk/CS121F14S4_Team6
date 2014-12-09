@@ -51,7 +51,6 @@
 }
 
 - (void) sendScore:(double)score {
-    NSLog(@"in delegate with: %f", score);
     _currentScore = score;
 }
 
@@ -90,9 +89,9 @@
     if (pickOffset == 0) {
         approxTarget = _targetScore;
     } else if (pickOffset < 4) {
-        approxTarget = _targetScore - value*pickValue1;
+        approxTarget = _targetScore - _currentScore - value*pickValue1;
     } else {
-        approxTarget = _targetScore + value*pickValue1;
+        approxTarget = _targetScore - _currentScore + value*pickValue1;
     }
     
     if (value == 0) {
