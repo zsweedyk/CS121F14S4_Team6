@@ -51,8 +51,8 @@
     [self addChild:background];
     
     _scoreBoard = [SKSpriteNode spriteNodeWithImageNamed:@"popup"];
-    _scoreBoard.size = CGSizeMake(self.size.width*0.7, self.size.height*0.73);
-    _scoreBoard.position = CGPointMake(self.size.width*0.42, self.size.height*0.4);
+    _scoreBoard.size = CGSizeMake(self.size.width*0.85, self.size.height*0.73);
+    _scoreBoard.position = CGPointMake(self.size.width*0.5, self.size.height*0.4);
     [self addChild:_scoreBoard];
 }
 
