@@ -44,6 +44,7 @@
         _currentScore = fabs(_currentScore);
     }
     
+    [self.customDelegate sendScore:_currentScore];
 }
 
 // Retrieves the score in the DataModel
@@ -52,10 +53,16 @@
     return _currentScore;
 }
 
+
 // Given a target score, assign this value to a public variable
 - (void) setTargetScore:(int)score
 {
     _targetScore = score;
+}
+
+- (int) getTargetScore
+{
+    return _targetScore;
 }
 
 
@@ -72,39 +79,26 @@
     int targetScore =  _targetScore;
     
     // Calculate difference between current score and target score
-    double diff = abs(targetScore - _currentScore);
-    double score = 0.0;
+    double diff = abs(_currentScore - targetScore);
+    double scoreTargetScorePortion;
     
-    // Give scores according to proximity to target score
-    if (diff == 0) {
-        score = 100;
-    } else if (diff <= 10) {
-        score = 95;
-    } else if (diff <= 15) {
-        score = 90;
-    } else if (diff <= 20) {
-        score = 80;
-    } else if (diff <= 40) {
-        score = 70;
-    } else if (diff <= 80) {
-        score = 60;
-    } else if (diff <= 100) {
-        score = 50;
+    //calculate how close current score is to target score as a percentage
+    if (abs(targetScore - diff) < 0) {
+        scoreTargetScorePortion = 0;
     } else {
-        score = 40;
+        scoreTargetScorePortion = (targetScore - diff)/targetScore;
     }
     
-    // Alter scores depending on time taken
+    // Reward a fast time; any time over 10 minutes results in a score of 0
+    double score;
     if (time > 600) {
         score = 0;
-    } else if (time < 15) {
-        // Do nothing
+        
     } else {
-        score = score * (600 - time)/600;
+        score = (600-time)/600 * scoreTargetScorePortion * 100;
     }
-
-    score = round(100 * score)/100.00;
-    NSAssert(!isnan(score), @"Not a number returned");
+    
+    NSAssert(!isnan(score), @"not a number returned");
     return score;
 }
 

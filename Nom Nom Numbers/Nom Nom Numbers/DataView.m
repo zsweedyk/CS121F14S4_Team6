@@ -8,15 +8,14 @@
 
 #import "DataView.h"
 #import "DataModel.h"
-#import "SheepController.h"
 
 @implementation DataView
 
 #define timeModeStartTime 60
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andSheepController:(SheepController *)sheepController
+- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andTargetScore:(int)targetScore
 {
-    _sheepController = sheepController;
+    
     _dataModel = model;
     _mode = mode;
     CGFloat Xdimensions = mainScene.size.width;
@@ -45,8 +44,8 @@
         [self changeTimerText];
         [self addChild:_currentTime];
         
-    
-    // If we are in target mode, set up and display target score
+        
+        // If we are in target mode, set up and display target score
     } else {
         scoreX = Xdimensions * .2;
         targetScoreX = Xdimensions * .75;
@@ -59,14 +58,13 @@
         _targetScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         _targetScore.zPosition = 2;
         
-        int targetScore = [_sheepController getTargetScore];
         [_dataModel setTargetScore:targetScore];
         _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];
         [self addChild:_targetScore];
         
         _initialTime = 0;
     }
-
+    
     // Set up UI for Score Label
     _currentScore = [[SKLabelNode alloc] initWithFontNamed:fontType];
     _currentScore.fontSize = 45;
@@ -75,7 +73,7 @@
     _currentScore.zPosition = 2;
     _currentScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     _currentScore.text = [NSString stringWithFormat:@"Score: %.2f", currentScore];
- 
+    
     // Add Label view
     [self addChild:_currentScore];
     return self;
@@ -143,7 +141,6 @@
         _currentScore.fontSize = 45;
     }
 }
-
 // Stop the timer
 - (void) stopTimer
 {
@@ -166,7 +163,7 @@
         [self changeTimerText];
     } else {
         _initialTime = 0;
-        int targetScore = [_sheepController getTargetScore];
+        int targetScore = [_dataModel getTargetScore];
         [_dataModel setTargetScore:targetScore];
         
         _targetScore.text = [NSString stringWithFormat:@"Target: %d",targetScore];

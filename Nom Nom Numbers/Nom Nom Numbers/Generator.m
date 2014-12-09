@@ -8,7 +8,15 @@
 
 #import "Generator.h"
 
-@implementation Generator
+@implementation Generator {
+    bool _scoreIsLow;
+}
+
+- (id) init {
+    _scoreIsLow = false;
+    
+    return self;
+}
 
 // Randomly generate an integer between the given range
 - (int) generateIntegerfrom:(int)lower to:(int)upper
@@ -31,7 +39,7 @@
 // Randomly generate one of the four operators
 - (char) generateOperator
 {
-    int value = arc4random_uniform(4);
+    int value = arc4random_uniform(6);
     switch (value) {
         case 0:
             return '+';
@@ -42,11 +50,28 @@
         case 2:
             return '/';
             break;
-        default:
+        case 3:
             return 'x';
             break;
+        case 4:
+            if (_scoreIsLow) {
+                return '+';
+            } else {
+                return '-';
+            }
+        default:
+            if (_scoreIsLow) {
+                return 'x';
+            } else {
+                return '/';
+            }
+            
     }
 }
 
-@end
+- (void)setScoreIsLow:(bool)boolean
+{
+    _scoreIsLow = boolean;
+}
 
+@end

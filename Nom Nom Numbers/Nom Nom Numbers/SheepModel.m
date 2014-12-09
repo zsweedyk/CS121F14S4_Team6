@@ -12,6 +12,8 @@
 @interface SheepModel ()
 {
     char _operator;
+    bool _scoreIsLow;
+    bool _firstRound;
     NSString* _value;
     Generator* _generator;
     int _fromInt;
@@ -27,6 +29,8 @@
     if (self = [super init]) {
         _generator = [[Generator alloc]init];
     }
+    _scoreIsLow = false;
+    _firstRound = true;
     
     return self;
 }
@@ -49,15 +53,29 @@
     
     int chanceIndicator = arc4random_uniform(50);
     
+    if (_scoreIsLow) {
+        if (chanceIndicator < 35) {
+            chanceIndicator = 32;
+        } else {
+            chanceIndicator = 34;
+        }
+    }
+    
+    
     if (chanceIndicator == 1) {
         _operator = 'A';
         _value= [NSString stringWithFormat:@" "];
         
     } else {
         _operator = _generator.generateOperator;
+        if (_firstRound) {
+            if (chanceIndicator < 30) {
+                _operator = '+';
+            }
+        }
         int value;
         
-        if (chanceIndicator % 2 == 0) {
+        if (chanceIndicator < 33) {
             if (_operator == 'x') {
                 value = [_generator generateIntegerfrom:start/20 to:end/20];
             } else {
@@ -85,8 +103,16 @@
             
         }
     }
+    
+    _firstRound = false;
+}
+
+- (void)scoreIsLow:(bool)boolean
+{
+    NSLog(@"score is low");
+    _scoreIsLow = boolean;
+    [_generator setScoreIsLow:boolean];
 }
 
 
 @end
-
