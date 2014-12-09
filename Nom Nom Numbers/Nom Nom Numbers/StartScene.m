@@ -11,6 +11,7 @@
 #import "MainScene.h"
 #import "HighScoreScene.h"
 #import "TutorialScene.h"
+#import "CreditsScene.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -85,6 +86,14 @@
     tutorialButton.text = @"Tutorial";
     tutorialButton.name = @"tutorialButton";
     [self addChild:tutorialButton];
+    
+    SKLabelNode* creditsButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    creditsButton.fontSize = 45;
+    creditsButton.fontColor = [UIColor blackColor];
+    creditsButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.1);
+    creditsButton.text = @"Credits";
+    creditsButton.name = @"creditsButton";
+    [self addChild:creditsButton];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -176,9 +185,17 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        SKScene* targetTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"tutorialButton"];
+        SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"tutorialButton"];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
-        [self.view presentScene:targetTutorialScence transition:transition];
+        [self.view presentScene:targetTutorialScene transition:transition];
+    }
+    
+    if ([node.name isEqual: @"creditsButton"]) {
+        [self playButtonNoise:self];
+        
+        SKScene* creditsScene = [[CreditsScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:creditsScene transition:transition];
     }
 }
 

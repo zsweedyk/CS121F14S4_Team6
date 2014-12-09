@@ -33,6 +33,7 @@
 		CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */; };
 		CBFB884A1A0EDDC900FE2331 /* FireballParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */; };
 		CBFB884B1A0EDDCA00FE2331 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFB88491A0EDDC900FE2331 /* spark.png */; };
+		DAFD9CB41A36A6A100E8AB48 /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFD9CB31A36A6A100E8AB48 /* CreditsScene.m */; };
 		F62565CB1A25396E00DF8EC6 /* timedHighScores.txt in Resources */ = {isa = PBXBuildFile; fileRef = F62565CA1A25396E00DF8EC6 /* timedHighScores.txt */; };
 		F646D0E31A22F0F40008C2A2 /* HighScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F646D0E21A22F0F40008C2A2 /* HighScoreModel.m */; };
 		F646D0E61A22F1790008C2A2 /* HighScoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F646D0E51A22F1790008C2A2 /* HighScoreScene.m */; };
@@ -101,6 +102,8 @@
 		CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FireballSprite.m; path = ../FireballSprite.m; sourceTree = "<group>"; };
 		CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireballParticle.sks; sourceTree = "<group>"; };
 		CBFB88491A0EDDC900FE2331 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		DAFD9CB21A36A6A100E8AB48 /* CreditsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsScene.h; sourceTree = "<group>"; };
+		DAFD9CB31A36A6A100E8AB48 /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsScene.m; sourceTree = "<group>"; };
 		F62565CA1A25396E00DF8EC6 /* timedHighScores.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = timedHighScores.txt; path = ../timedHighScores.txt; sourceTree = "<group>"; };
 		F646D0E11A22F0F40008C2A2 /* HighScoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoreModel.h; sourceTree = "<group>"; };
 		F646D0E21A22F0F40008C2A2 /* HighScoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreModel.m; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 			children = (
 				CB9A2CF91A0939E8004EF777 /* StartScene.h */,
 				CB9A2CFA1A0939E8004EF777 /* StartScene.m */,
+				DAFD9CB21A36A6A100E8AB48 /* CreditsScene.h */,
+				DAFD9CB31A36A6A100E8AB48 /* CreditsScene.m */,
 				CB9A2CEF1A0939E8004EF777 /* MainScene.h */,
 				CB9A2CF01A0939E8004EF777 /* MainScene.m */,
 				F646D0E41A22F1790008C2A2 /* HighScoreScene.h */,
@@ -399,6 +404,7 @@
 				CB9A2D001A0939E8004EF777 /* MainScene.m in Sources */,
 				CB9A2CB81A09336E004EF777 /* main.m in Sources */,
 				CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */,
+				DAFD9CB41A36A6A100E8AB48 /* CreditsScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
