@@ -71,6 +71,7 @@
     self = [super initWithSize:size];
     _sheepController = [[SheepController alloc] init];
     [self setup];
+    [self playBackgroundNoise:self];
     
    
     // Set up dragon animation frames
@@ -122,7 +123,7 @@
     
     _readyLabels = [[SKLabelNode alloc] initWithFontNamed:fontType];
     _readyLabels.fontSize = 150;
-    _readyLabels.fontColor = [UIColor colorWithRed:0.5 green:0.5 blue:1 alpha:1.0];
+    _readyLabels.fontColor = [UIColor colorWithRed:1 green:0.5 blue:1 alpha:1.0];
     _readyLabels.position = CGPointMake(labelX, labelY);
     _readyLabels.zPosition = 4;
     _readyLabels.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
@@ -130,6 +131,7 @@
     _readyLabels.text = @"Ready?";
     
     [self addChild:_readyLabels];
+    [self playBackgroundNoise:self];
     [self initializeTimer];
     
 }
@@ -225,6 +227,23 @@
     
     [self addChild:barn];
     
+    if ([_mode isEqualToString:@"target"]) {
+        // Set up 'Hit Me!' Label
+        SKSpriteNode* targetButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
+        targetButton.size = CGSizeMake(120, 60);
+        targetButton.position = CGPointMake(self.size.width*.1, self.size.height * .07);
+        targetButton.name = @"targetbutton";
+        targetButton.zPosition = 3;
+        [self addChild:targetButton];
+        
+        SKLabelNode* targetButtonLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        targetButtonLabel.fontColor = [UIColor whiteColor];
+        targetButtonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        targetButtonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        targetButtonLabel.text = @"Hit Me!";
+        targetButtonLabel.name = @"targetbutton";
+        [targetButton addChild:targetButtonLabel];
+    }
 }
 
 
@@ -331,6 +350,7 @@
         // Back to main screen
     } else if ([node.name isEqual:@"quitaction"]) {
         [self playButtonNoise:self];
+        [self stopMusic:self];
         SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
@@ -338,6 +358,7 @@
         // Play Again
     } else if ([node.name isEqual:@"playagainaction"]) {
         [self playButtonNoise:self];
+        [self stopMusic:self];
         [self restart];
         
         // TARGET MODE: End Game
@@ -567,7 +588,24 @@
     
 }
 
+- (IBAction) playBackgroundNoise:(id)sender
+{
+    NSString* soundFilePath = [[NSBundle mainBundle] pathForResource:@"Thatched Villagers" ofType: @"wav"];
+    NSURL* fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
+    
+    AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
+    [_arrOfSounds addObject:newPlayer];
+    newPlayer.volume = 0.5;
+    [newPlayer prepareToPlay];
+    [newPlayer play];
+}
 
+- (IBAction) stopMusic:(id)sender
+{
+    for (AVAudioPlayer *a in _arrOfSounds) {
+        [a stop];
+    }
+}
 
 // Plays noise when a sheep is clicked
 - (IBAction) playSheepNoise:(id)sender
@@ -585,9 +623,7 @@
     NSURL* fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
     
     AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
-    [_arrOfSounds removeAllObjects];
-    [_arrOfSounds insertObject:newPlayer atIndex:0];
-    newPlayer.volume = 1.0;
+    [_arrOfSounds addObject:newPlayer];
     [newPlayer prepareToPlay];
     [newPlayer play];
     
@@ -605,7 +641,6 @@
 
     
     AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
-    [_arrOfSounds removeAllObjects];
     [_arrOfSounds addObject:newPlayer];
     [newPlayer prepareToPlay];
     [newPlayer play];

@@ -12,6 +12,8 @@
 
 - (NSString *) getValue;
 - (char) getOperator;
+- (void) setValue:(NSString *)value;
+- (void) setOper:(char)operator;
 - (void) makeSheepFrom:(int)start to:(int)end;
 - (void)scoreIsLow:(bool)boolean;
 
