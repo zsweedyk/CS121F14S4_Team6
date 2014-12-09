@@ -19,7 +19,6 @@
 
 @implementation TutorialScene
 {
-    SKView* _skView;
     DataView* _dataView;
     DataModel* _dataModel;
     bool _firstTime;
@@ -33,8 +32,6 @@
 {
     
     self = [super initWithSize:size];
-    _skView = [[SKView alloc] init];
-    _skView = skView;
     _sheepController = [[SheepController alloc] init];
     _firstTime = YES; // varialbe indicating the first time sheep are off-screen
     _click = NO;
@@ -360,14 +357,14 @@
         if ([_origin isEqual: @"startingGame"]) {
             
             // if the tutorial starts from the initial game loading, we start the game
-            SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:_mode];
+            SKScene *gameScene = [[MainScene alloc] initWithSize:self.size andSKView:nil andMode:_mode];
             SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
             
         } else {
             
             // if the tutorial starts from the tutorial button, we go back to the home screen
-            SKScene *startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+            SKScene *startScene = [[StartScene alloc] initWithSize:self.size andSKView:nil];
             SKTransition *transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:startScene transition:transition];
             

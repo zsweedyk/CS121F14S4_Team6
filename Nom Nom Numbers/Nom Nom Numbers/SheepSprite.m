@@ -108,11 +108,15 @@
 // Calls getImageForText with appropriate operator and values
 - (void) makeSheepImage
 {
-    _sheepImage = [[UIImage alloc] init];
+    //_sheepImage = [[UIImage alloc] init];
     
     NSString* stringOperator = [NSString stringWithFormat:@"%c" , _oper];
     
-    if (_oper == 'A') {
+    if ([_value doubleValue] > 75) {
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepGold"] CGImage]
+                                          scale:1.0
+                                    orientation:UIImageOrientationRight];
+    } else if (_oper == 'A') {
         stringOperator = @"Absolute\nValue";
         _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepRainbow"] CGImage]
                                             scale:1.0

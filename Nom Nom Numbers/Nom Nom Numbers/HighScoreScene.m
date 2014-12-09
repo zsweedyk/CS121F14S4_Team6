@@ -24,6 +24,8 @@
 
 - (id) initWithSize:(CGSize)size
 {
+    self = [super initWithSize:size];
+    
     _arrOfSounds = [NSMutableArray new];
     _model = [[HighScoreModel alloc] init];
     _onTimed = true;
@@ -153,7 +155,7 @@
     // Back to main menu
     if ([node.name isEqual:@"mainMenu"]) {
         [self playButtonNoise:self];
-        SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:nil];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
     
