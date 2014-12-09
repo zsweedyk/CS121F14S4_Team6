@@ -72,25 +72,37 @@
     int targetScore =  _targetScore;
     
     // Calculate difference between current score and target score
-    double diff = abs(_currentScore - targetScore);
-    double scoreTargetScorePortion;
+    double diff = abs(targetScore - _currentScore);
+    double score = 0.0;
     
-    //calculate how close current score is to target score as a percentage
-    if (abs(targetScore - diff) < 0) {
-        scoreTargetScorePortion = 0;
+    // Give scores according to proximity to target score
+    if (diff == 0) {
+        score = 100;
+    } else if (diff <= 10) {
+        score = 95;
+    } else if (diff <= 15) {
+        score = 90;
+    } else if (diff <= 20) {
+        score = 80;
+    } else if (diff <= 40) {
+        score = 70;
+    } else if (diff <= 80) {
+        score = 60;
+    } else if (diff <= 100) {
+        score = 50;
     } else {
-        scoreTargetScorePortion = (targetScore - diff)/targetScore;
+        score = 40;
     }
     
-    // Reward a fast time; any time over 10 minutes results in a score of 0
-    double score;
+    // Alter scores depending on time taken
     if (time > 600) {
         score = 0;
-        
+    } else if (time < 15) {
+        // Do nothing
     } else {
-        score = (600-time)/600 * scoreTargetScorePortion * 100;
+        score = score * (600 - time)/600;
     }
-    
+
     score = round(100 * score)/100.00;
     NSAssert(!isnan(score), @"Not a number returned");
     return score;
