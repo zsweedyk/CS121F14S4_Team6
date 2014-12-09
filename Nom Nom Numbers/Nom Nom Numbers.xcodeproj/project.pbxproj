@@ -7,16 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A3DC1B211A11E77000232403 /* TimedTutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DC1B201A11E77000232403 /* TimedTutorialScene.m */; };
-		A3EBB44D1A1AF371001DB3F8 /* TargetTutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */; };
-		CB2C6A6C1A1B347A00ADFBAF /* barnAndDragon.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CB2C6A6B1A1B347A00ADFBAF /* barnAndDragon.atlas */; };
+		A30806B31A355709000ADBB4 /* TutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A30806B21A355709000ADBB4 /* TutorialScene.m */; };
+		CB96D3C91A2EDF1A003598A5 /* dragon.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CB96D3C81A2EDF1A003598A5 /* dragon.atlas */; };
 		CB9A2CB81A09336E004EF777 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CB71A09336E004EF777 /* main.m */; };
 		CB9A2CBB1A09336F004EF777 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CBA1A09336F004EF777 /* AppDelegate.m */; };
 		CB9A2CC01A093370004EF777 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CB9A2CBF1A093370004EF777 /* GameScene.sks */; };
 		CB9A2CC31A093370004EF777 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CC21A093370004EF777 /* GameViewController.m */; };
 		CB9A2CC61A093370004EF777 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB9A2CC41A093370004EF777 /* Main.storyboard */; };
 		CB9A2CC81A093370004EF777 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9A2CC71A093370004EF777 /* Images.xcassets */; };
-		CB9A2CCB1A093370004EF777 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9A2CC91A093370004EF777 /* LaunchScreen.xib */; };
 		CB9A2CD71A093371004EF777 /* Nom_Nom_NumbersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CD61A093371004EF777 /* Nom_Nom_NumbersTests.m */; };
 		CB9A2CE11A093997004EF777 /* SheepModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CE01A093997004EF777 /* SheepModelTest.m */; };
 		CB9A2CE31A0939A1004EF777 /* GeneratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9A2CE21A0939A1004EF777 /* GeneratorTest.m */; };
@@ -59,11 +57,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A3DC1B1F1A11E77000232403 /* TimedTutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedTutorialScene.h; sourceTree = "<group>"; };
-		A3DC1B201A11E77000232403 /* TimedTutorialScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimedTutorialScene.m; sourceTree = "<group>"; };
-		A3EBB44B1A1AF371001DB3F8 /* TargetTutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetTutorialScene.h; sourceTree = "<group>"; };
-		A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetTutorialScene.m; sourceTree = "<group>"; };
-		CB2C6A6B1A1B347A00ADFBAF /* barnAndDragon.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = barnAndDragon.atlas; sourceTree = "<group>"; };
+		A30806B11A355709000ADBB4 /* TutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialScene.h; sourceTree = "<group>"; };
+		A30806B21A355709000ADBB4 /* TutorialScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialScene.m; sourceTree = "<group>"; };
+		CB96D3C81A2EDF1A003598A5 /* dragon.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = dragon.atlas; sourceTree = "<group>"; };
 		CB9A2CB21A09336D004EF777 /* Nom Nom Numbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nom Nom Numbers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9A2CB61A09336E004EF777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9A2CB71A09336E004EF777 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -74,7 +70,6 @@
 		CB9A2CC21A093370004EF777 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		CB9A2CC51A093370004EF777 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CB9A2CC71A093370004EF777 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CB9A2CCA1A093370004EF777 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CB9A2CD01A093371004EF777 /* Nom Nom NumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nom Nom NumbersTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9A2CD51A093371004EF777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9A2CD61A093371004EF777 /* Nom_Nom_NumbersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Nom_Nom_NumbersTests.m; sourceTree = "<group>"; };
@@ -147,12 +142,10 @@
 				CB9A2CFA1A0939E8004EF777 /* StartScene.m */,
 				CB9A2CEF1A0939E8004EF777 /* MainScene.h */,
 				CB9A2CF01A0939E8004EF777 /* MainScene.m */,
-				A3DC1B1F1A11E77000232403 /* TimedTutorialScene.h */,
-				A3DC1B201A11E77000232403 /* TimedTutorialScene.m */,
-				A3EBB44B1A1AF371001DB3F8 /* TargetTutorialScene.h */,
-				A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */,
 				F646D0E41A22F1790008C2A2 /* HighScoreScene.h */,
 				F646D0E51A22F1790008C2A2 /* HighScoreScene.m */,
+				A30806B11A355709000ADBB4 /* TutorialScene.h */,
+				A30806B21A355709000ADBB4 /* TutorialScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -189,7 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				F646D0E71A24532A0008C2A2 /* libsqlite3.dylib */,
-				CB2C6A6B1A1B347A00ADFBAF /* barnAndDragon.atlas */,
+				CB96D3C81A2EDF1A003598A5 /* dragon.atlas */,
 				CB9A2CB41A09336D004EF777 /* Nom Nom Numbers */,
 				CB9A2CD31A093371004EF777 /* Nom Nom NumbersTests */,
 				CB9A2CB31A09336D004EF777 /* Products */,
@@ -221,7 +214,6 @@
 				CB9A2CBF1A093370004EF777 /* GameScene.sks */,
 				CB9A2CC41A093370004EF777 /* Main.storyboard */,
 				CB9A2CC71A093370004EF777 /* Images.xcassets */,
-				CB9A2CC91A093370004EF777 /* LaunchScreen.xib */,
 				CB68059E1A1D8B130023EA58 /* Sheep */,
 				CB68059D1A1D8A5B0023EA58 /* Scenes */,
 				CBDBDAE31A1D875B00A9BF78 /* Particles */,
@@ -359,7 +351,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB86E0E91A1B03E300ABE87A /* ScoreUp.wav in Resources */,
-				CB9A2CCB1A093370004EF777 /* LaunchScreen.xib in Resources */,
 				FB86E0EB1A1B03E300ABE87A /* Sheep2.wav in Resources */,
 				F62565CB1A25396E00DF8EC6 /* timedHighScores.txt in Resources */,
 				FB86E0EA1A1B03E300ABE87A /* Sheep.wav in Resources */,
@@ -370,8 +361,8 @@
 				CBFB884A1A0EDDC900FE2331 /* FireballParticle.sks in Resources */,
 				CB9A2CC01A093370004EF777 /* GameScene.sks in Resources */,
 				CB9A2CC61A093370004EF777 /* Main.storyboard in Resources */,
+				CB96D3C91A2EDF1A003598A5 /* dragon.atlas in Resources */,
 				FB86E0E71A1B03E300ABE87A /* Click.wav in Resources */,
-				CB2C6A6C1A1B347A00ADFBAF /* barnAndDragon.atlas in Resources */,
 				FB86E0EC1A1B03E300ABE87A /* StrongFire.wav in Resources */,
 				FB86E0ED1A1B03E300ABE87A /* WeakFire.wav in Resources */,
 			);
@@ -397,15 +388,14 @@
 				CB9A2CC31A093370004EF777 /* GameViewController.m in Sources */,
 				CB9A2CFB1A0939E8004EF777 /* DataModel.m in Sources */,
 				CB9A2D051A0939E8004EF777 /* StartScene.m in Sources */,
-				A3EBB44D1A1AF371001DB3F8 /* TargetTutorialScene.m in Sources */,
 				CB9A2CFD1A0939E8004EF777 /* GameOverButton.m in Sources */,
 				F646D0E31A22F0F40008C2A2 /* HighScoreModel.m in Sources */,
 				CB9A2D011A0939E8004EF777 /* QuitGameButton.m in Sources */,
 				CB9A2CBB1A09336F004EF777 /* AppDelegate.m in Sources */,
+				A30806B31A355709000ADBB4 /* TutorialScene.m in Sources */,
 				CB9A2CFE1A0939E8004EF777 /* Generator.m in Sources */,
 				CB9A2D031A0939E8004EF777 /* SheepModel.m in Sources */,
 				CB9A2D041A0939E8004EF777 /* SheepSprite.m in Sources */,
-				A3DC1B211A11E77000232403 /* TimedTutorialScene.m in Sources */,
 				CB9A2D001A0939E8004EF777 /* MainScene.m in Sources */,
 				CB9A2CB81A09336E004EF777 /* main.m in Sources */,
 				CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */,
@@ -440,14 +430,6 @@
 				CB9A2CC51A093370004EF777 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CB9A2CC91A093370004EF777 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CB9A2CCA1A093370004EF777 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -535,16 +517,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Nom",
-					Nom,
-					Numbers,
-				);
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "Nom Nom Numbers/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -552,16 +530,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Nom",
-					Nom,
-					Numbers,
-				);
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "Nom Nom Numbers/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

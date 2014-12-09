@@ -14,7 +14,7 @@
 #import "QuitGameButton.h"
 #import "GameOverButton.h"
 
-@interface MainScene : SKScene <SKPhysicsContactDelegate, gameOverDelegate>
+@interface MainScene : SKScene <gameOverDelegate>
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView *)skView andMode:(NSString *)mode;
 
