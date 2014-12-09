@@ -174,16 +174,13 @@
         SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:nil andMode:@"target" andOrigin:@"tutorialButton"];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:targetTutorialScene transition:transition];
-    }
-    
-    if ([node.name isEqual: @"creditsButton"]) {
+    } else if ([node.name isEqual: @"creditsButton"]) {
         [self playButtonNoise:self];
         
         SKScene* creditsScene = [[CreditsScene alloc] initWithSize:self.size andSKView:nil];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:creditsScene transition:transition];
-    }
-    else {
+    } else {
         [self removeTutorialButtons];
     }
 }
