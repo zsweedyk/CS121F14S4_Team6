@@ -46,7 +46,20 @@
     gameOverPopupTitle.fontSize = 35;
     gameOverPopupTitle.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     gameOverPopupTitle.position = CGPointMake(0, popupY * 0.35);
-    gameOverPopupTitle.text = @"Game Over!";
+    if (currentScore < 0)
+        gameOverPopupTitle.text = @"Try again...";
+    else if (currentScore > 2500)
+        gameOverPopupTitle.text = @"AMAZING!!";
+    else if (currentScore > 1000)
+        gameOverPopupTitle.text = @"Fantastic!!";
+    else if (currentScore > 600)
+        gameOverPopupTitle.text = @"Great!";
+    else if (currentScore > 200)
+        gameOverPopupTitle.text = @"Good job!";
+    else if (currentScore > 50)
+        gameOverPopupTitle.text = @"Wow!";
+    else
+        gameOverPopupTitle.text = @"Nice!";
     [gameOverPopup addChild:gameOverPopupTitle];
     
     // Create score content text on the popup

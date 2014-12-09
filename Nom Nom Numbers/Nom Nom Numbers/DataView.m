@@ -163,8 +163,6 @@
 // while target mode must start incrementing from 0
 - (void) resetTimer
 {
-    [self initializeTimer];
-    
     if ([_mode isEqualToString:@"timed"]) {
         _initialTime = timeModeStartTime;
         _currentTime.fontColor = [UIColor whiteColor];
