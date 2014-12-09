@@ -111,7 +111,7 @@
 - (void) prepareForGame
 {
     
-    NSString* fontType = @"MalayalamSangamMN-Bold";
+    NSString* fontType = @"AvenirNext-Heavy";
     CGFloat labelX = self.frame.size.width * 0.5;
     CGFloat labelY = self.frame.size.height * 0.5;
     
