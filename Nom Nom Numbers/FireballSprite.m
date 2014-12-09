@@ -24,12 +24,12 @@
 
 - (void) sendFireballTo:(CGPoint)destination OnScene:(SKScene*)scene
 {
-    CGSize barnSize = [UIImage imageNamed:@"barnAndDragon"].size;
-    barnSize.height *= 0.5;
-    barnSize.width *= 0.5;
+    CGSize dragonSize = [UIImage imageNamed:@"dragon"].size;
+    dragonSize.height *= 0.5;
+    dragonSize.width *= 0.5;
     CGSize sceneSize = scene.size;
     
-    CGPoint start = CGPointMake(sceneSize.width - barnSize.width + 30, (sceneSize.height / 2) - 50);
+    CGPoint start = CGPointMake(sceneSize.width - dragonSize.width + 30, (sceneSize.height / 2) - 50);
     
     // Set up fireball
     NSString *fireballPath = [[NSBundle mainBundle] pathForResource:@"FireballParticle" ofType:@"sks"];

@@ -38,8 +38,8 @@
     acrossScreenTime /= 10.0;
     
     // SK actions to move sheep left
-    SKAction* moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:acrossScreenTime];
-    SKAction* repeatMoveLeft = [SKAction repeatActionForever:moveSheepLeft];
+    SKAction* moveSheepUp = [SKAction moveBy:CGVectorMake(0, 1000) duration:acrossScreenTime];
+    SKAction* repeatMoveUp = [SKAction repeatActionForever:moveSheepUp];
     
     double wobbleTime = acrossScreenTime / 40.0;
     
@@ -50,7 +50,7 @@
     SKAction* repeatWobble = [SKAction repeatActionForever:sequence];
     
     [_sheepNode runAction:repeatWobble];
-    [_sheepNode runAction:repeatMoveLeft];
+    [_sheepNode runAction:repeatMoveUp];
     
     return [self displayASheepWithValue:value andOper:oper atPos:pos];
 }
@@ -83,9 +83,17 @@
     
     CGPoint point;
     if (input == 'O') { // put operator in correct location on sheep
-        point = CGPointMake(_sheepImage.size.width/4, _sheepImage.size.height/3.25);
+        if (_oper == 'A') {
+            // fit the words "Absolute Value" on the body of the sheep
+            point = CGPointMake(_sheepImage.size.width/3.5, _sheepImage.size.height/2);
+            myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:35];
+        }
+        else {
+            myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:50];
+            point = CGPointMake(_sheepImage.size.width/2.25, _sheepImage.size.height/5.25);
+        }
     } else { // put value in correct location on sheep
-        point = CGPointMake(_sheepImage.size.width/2.15, _sheepImage.size.height/3.5);
+        point = CGPointMake(_sheepImage.size.width/3.5, _sheepImage.size.height/2);
     }
     
     myText.frame = CGRectMake(point.x, point.y, _sheepImage.size.width, _sheepImage.size.height);
@@ -102,15 +110,26 @@
 {
     _sheepImage = [[UIImage alloc] init];
     
+    NSString* stringOperator = [NSString stringWithFormat:@"%c" , _oper];
+    
     if (_oper == 'A') {
-        _sheepImage = [UIImage imageNamed:@"SheepRainbow"];
+        stringOperator = @"Absolute\nValue";
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepRainbow"] CGImage]
+                                            scale:1.0
+                                            orientation:UIImageOrientationRight];
+        
     } else if (_oper == '/' || _oper == 'x') {
-        _sheepImage = [UIImage imageNamed:@"SheepRam"];
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepRam"] CGImage]
+                                            scale:1.0
+                                            orientation:UIImageOrientationRight];
+        
     } else {
-        _sheepImage = [UIImage imageNamed:@"Sheep"];
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"Sheep"] CGImage]
+                                            scale:1.0
+                                            orientation:UIImageOrientationRight];
     }
     
-    NSString* stringOperator = [NSString stringWithFormat:@"%c" , _oper];
+
     
     [self getImageForText:stringOperator for:'O'];
     [self getImageForText:_value for:'V'];
