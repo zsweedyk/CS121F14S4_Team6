@@ -49,7 +49,6 @@
         StartPage.scaleMode = SKSceneScaleModeAspectFit;
         
         [_skView presentScene:StartPage];
-
     }
     
 }
