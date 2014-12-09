@@ -71,13 +71,14 @@
     targetStartButton.name = @"targetStartButton";
     [self addChild:targetStartButton];
     
-    SKLabelNode* tutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    tutorialButton.fontSize = 45;
-    tutorialButton.fontColor = [UIColor blackColor];
-    tutorialButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.2);
-    tutorialButton.text = @"Tutorial";
-    tutorialButton.name = @"tutorialButton";
-    [self addChild:tutorialButton];
+    SKLabelNode* highScoreButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    highScoreButton.fontSize = 45;
+    highScoreButton.fontColor = [UIColor blackColor];
+    highScoreButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.3);
+    highScoreButton.text = @"High Scores";
+    highScoreButton.name = @"highScoreButton";
+    [self addChild:highScoreButton];
+    
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -129,11 +130,7 @@
         }
     }
     
-    if ([node.name isEqual: @"tutorialButton"]) {
-        [self playButtonNoise:self];
-    }
-    
-    if ([node.name isEqual: @"infoButton"]) {
+    if ([node.name isEqual: @"highScoreButton"]) {
         [self playButtonNoise:self];
         SKScene* highScoreScene = [[HighScoreScene alloc] initWithSize:self.size];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];

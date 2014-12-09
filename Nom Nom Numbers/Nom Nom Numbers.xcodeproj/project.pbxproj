@@ -186,6 +186,7 @@
 		CB9A2CA91A09336D004EF777 = {
 			isa = PBXGroup;
 			children = (
+				F646D0E71A24532A0008C2A2 /* libsqlite3.dylib */,
 				CB96D3C81A2EDF1A003598A5 /* dragon.atlas */,
 				CB9A2CB41A09336D004EF777 /* Nom Nom Numbers */,
 				CB9A2CD31A093371004EF777 /* Nom Nom NumbersTests */,
