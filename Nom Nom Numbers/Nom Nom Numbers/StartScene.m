@@ -147,6 +147,7 @@
     
     else if ([node.name isEqual: @"tutorialButton"]) {
         [self playButtonNoise:self];
+        [self removeTutorialButtons];
         
         _timedTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
         _timedTutorialButton.fontSize = 30;
@@ -183,13 +184,19 @@
         [self.view presentScene:targetTutorialScence transition:transition];
     }
     else {
-        if ([self childNodeWithName:@"timedTutorialButton"]!= nil) {
-            [_timedTutorialButton removeFromParent];
-        }
-        if ([self childNodeWithName:@"targetTutorialButton"]!= nil) {
-            [_targetTutorialButton removeFromParent];
-        }
+        [self removeTutorialButtons];
     }
+}
+
+- (void) removeTutorialButtons
+{
+    if ([self childNodeWithName:@"timedTutorialButton"] != nil) {
+        [_timedTutorialButton removeFromParent];
+    }
+    if ([self childNodeWithName:@"targetTutorialButton"]!= nil) {
+        [_targetTutorialButton removeFromParent];
+    }
+
 }
 
 // Plays noise when button is clicked
