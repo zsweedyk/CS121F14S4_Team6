@@ -9,9 +9,8 @@
 
 #import "StartScene.h"
 #import "MainScene.h"
-#import "TimedTutorialScene.h"
-#import "TargetTutorialScene.h"
 #import "HighScoreScene.h"
+#import "TutorialScene.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -79,6 +78,13 @@
     highScoreButton.name = @"highScoreButton";
     [self addChild:highScoreButton];
     
+    SKLabelNode* tutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    tutorialButton.fontSize = 45;
+    tutorialButton.fontColor = [UIColor blackColor];
+    tutorialButton.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.2);
+    tutorialButton.text = @"Tutorial";
+    tutorialButton.name = @"tutorialButton";
+    [self addChild:tutorialButton];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -124,9 +130,9 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SKScene* targetTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"startingGame"];
+            SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"startingGame"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
-            [self.view presentScene:targetTutorialScence transition:transition];
+            [self.view presentScene:targetTutorialScene transition:transition];
         }
     }
     
@@ -135,6 +141,44 @@
         SKScene* highScoreScene = [[HighScoreScene alloc] initWithSize:self.size];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:highScoreScene transition:transition];
+    }
+    
+    if ([node.name isEqual: @"timedTutorialButton"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"tutorialButton"];
+        SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:targetTutorialScene transition:transition];
+    }
+    
+    if ([node.name isEqual: @"tutorialButton"]) {
+        [self playButtonNoise:self];
+        
+        SKLabelNode* timedTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        timedTutorialButton.fontSize = 30;
+        timedTutorialButton.fontColor = [UIColor blackColor];
+        timedTutorialButton.position = CGPointMake(self.size.width * 0.42, self.size.height * 0.22);
+        timedTutorialButton.text = @"Timed Mode";
+        timedTutorialButton.name = @"timedTutorialButton";
+        [self addChild:timedTutorialButton];
+        
+        SKLabelNode* targetTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        targetTutorialButton.fontSize = 30;
+        targetTutorialButton.fontColor = [UIColor blackColor];
+        targetTutorialButton.position = CGPointMake(self.size.width * 0.42, self.size.height * 0.18);
+        targetTutorialButton.text = @"Target Mode";
+        targetTutorialButton.name = @"targetTutorialButton";
+        [self addChild:targetTutorialButton];
+    }
+    
+    if ([node.name isEqual: @"targetTutorialButton"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        SKScene* targetTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"tutorialButton"];
+        SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
+        [self.view presentScene:targetTutorialScence transition:transition];
     }
 }
 

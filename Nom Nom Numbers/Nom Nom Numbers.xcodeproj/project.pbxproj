@@ -142,12 +142,10 @@
 				CB9A2CFA1A0939E8004EF777 /* StartScene.m */,
 				CB9A2CEF1A0939E8004EF777 /* MainScene.h */,
 				CB9A2CF01A0939E8004EF777 /* MainScene.m */,
-				A3DC1B1F1A11E77000232403 /* TimedTutorialScene.h */,
-				A3DC1B201A11E77000232403 /* TimedTutorialScene.m */,
-				A3EBB44B1A1AF371001DB3F8 /* TargetTutorialScene.h */,
-				A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */,
 				F646D0E41A22F1790008C2A2 /* HighScoreScene.h */,
 				F646D0E51A22F1790008C2A2 /* HighScoreScene.m */,
+				A30806B11A355709000ADBB4 /* TutorialScene.h */,
+				A30806B21A355709000ADBB4 /* TutorialScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
