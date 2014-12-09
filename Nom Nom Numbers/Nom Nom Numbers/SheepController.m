@@ -19,17 +19,22 @@
     SheepSprite* _sheepSprite;
     Generator* _generator;
     int _targetScore;
+    int _currentScore;
     int _staggerOffset;
+    NSString* _mode;
 }
+
+
 
 // Called only first time to initialize necessary sprite nodes and scenes, and then
 // creates 5 sheep to be sent across the screen
-- (void) setupSheep:(SKScene *)mainScene
+- (void) setupSheep:(SKScene *)mainScene forMode:(NSString *)mode
 {
     _sheepSprite = [[SheepSprite alloc] init];
     _skScene = mainScene;
     _arrOfSounds = [NSMutableArray new];
-
+    _mode = mode;
+    
     for (int i = 0; i < 6; i++) {
         SKNode *newSheepNode = [[SKNode alloc] init];
         _staggerOffset = (i % 2)*80;
@@ -45,12 +50,29 @@
     [self makeSheep:node];
 }
 
+- (void) sendScore:(double)score {
+    NSLog(@"in delegate with: %f", score);
+    _currentScore = score;
+}
+
 // Given a node, this method does all the initilizations and communication necessary to create
 // a fully functional sheep node
 - (void) makeSheep:(SKNode *)node
 {
     SheepModel* newSheepModel = [[SheepModel alloc] init];
-    [newSheepModel makeSheepFrom:-100 to:100];
+    if ([_mode isEqualToString:@"timed"]) {
+        if (_currentScore < 5) {
+            [newSheepModel scoreIsLow:true];
+            [newSheepModel makeSheepFrom:0 to:100];
+        } else {
+            [newSheepModel makeSheepFrom:-100 to:100];
+        }
+    } else {
+        NSLog(@"target score: %d", _targetScore);
+        [newSheepModel makeSheepFrom:-100 to:100];
+        
+    }
+    
     NSString* value = [newSheepModel getValue];
     char oper = [newSheepModel getOperator];
     
@@ -60,7 +82,7 @@
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
     
     NSString* operAsString = [NSString stringWithFormat:@"%c",oper];
-
+    
     [dictionary setValue:value forKey:@"Value"];
     [dictionary setValue:operAsString forKey:@"Operator"];
     [newSheepNode setUserData:dictionary];
@@ -70,6 +92,8 @@
     [newSheepNode setPosition:CGPointMake(newSheepNode.position.x, -150)];
     newSheepNode.zPosition = 0;
 }
+
+
 
 // Plays noise when sheep is created
 - (IBAction) playSheepNoise:(id)sender
