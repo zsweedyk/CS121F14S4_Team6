@@ -62,7 +62,7 @@
     _title.fontColor = [UIColor whiteColor];
     _title.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     _title.position = CGPointMake(_scoreBoard.size.width*-0.45, _scoreBoard.size.height*0.38);
-    _title.text = @"Timed Mode High Scores";
+    _title.text = @"High Scores in Timed Mode";
     _title.fontSize = 40;
     [_scoreBoard addChild:_title];
     
@@ -168,7 +168,7 @@
             [self clearScores];
             [self setupScoreOn:_scoreBoard ForTimed:true];
             
-            _title.text = @"Timed Mode High Scores";
+            _title.text = @"High Scores in Timed Mode";
             
         }
     // Show Target Mode scores
@@ -182,7 +182,7 @@
             [self clearScores];
             [self setupScoreOn:_scoreBoard ForTimed:false];
             
-            _title.text = @"Target Mode High Scores";
+            _title.text = @"High Scores in Target Mode";
         }
     }
 
