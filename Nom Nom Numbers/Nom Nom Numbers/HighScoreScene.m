@@ -17,6 +17,7 @@
     SKSpriteNode* _scoreBoard;
     HighScoreModel * _model;
     SKLabelNode* _scoreText;
+    SKLabelNode* _title;
     BOOL _onTimed;
 }
 
@@ -26,7 +27,6 @@
     _arrOfSounds = [NSMutableArray new];
     _model = [[HighScoreModel alloc] init];
     _onTimed = true;
-
     self = [super initWithSize:size];
     [self setup];
     
@@ -58,13 +58,13 @@
 
 - (void) setupLayoutOn: (SKSpriteNode *)scoreBoard
 {
-    SKLabelNode* title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    title.fontColor = [UIColor whiteColor];
-    title.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-    title.position = CGPointMake(_scoreBoard.size.width*-0.45, _scoreBoard.size.height*0.38);
-    title.text = @"High Scores";
-    title.fontSize = 40;
-    [_scoreBoard addChild:title];
+    _title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+    _title.fontColor = [UIColor whiteColor];
+    _title.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+    _title.position = CGPointMake(_scoreBoard.size.width*-0.45, _scoreBoard.size.height*0.38);
+    _title.text = @"Timed Mode High Scores";
+    _title.fontSize = 40;
+    [_scoreBoard addChild:_title];
     
     SKLabelNode* timedMode = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     timedMode.fontColor = [UIColor lightTextColor];
@@ -167,17 +167,22 @@
             _onTimed = true;
             [self clearScores];
             [self setupScoreOn:_scoreBoard ForTimed:true];
+            
+            _title.text = @"Timed Mode High Scores";
+            
         }
     // Show Target Mode scores
     } else if ([node.name isEqual:@"targetMode"]) {
         [self playButtonNoise:self];
-        
+
         if (!_onTimed) {
             // Do nothing
         } else {
             _onTimed = false;
             [self clearScores];
             [self setupScoreOn:_scoreBoard ForTimed:false];
+            
+            _title.text = @"Target Mode High Scores";
         }
     }
 
