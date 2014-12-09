@@ -45,7 +45,6 @@
 - (id) initWithSize:(CGSize)size andSKView:(SKView *)skView andMode:(NSString *)mode
 
 {
-    
     _mode = mode;
     _skView = skView;
     _gameEnded = false;
@@ -208,21 +207,23 @@
     quitButton.zPosition = 2;
     [self addChild:quitButton];
     
-    // Set up 'Hit Me!' Label
-    SKSpriteNode* targetButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
-    targetButton.size = CGSizeMake(120, 60);
-    targetButton.position = CGPointMake(self.size.width*.92, self.size.height*0.05);
-    targetButton.name = @"targetbutton";
-    targetButton.zPosition = 2;
-    [self addChild:targetButton];
+    if ([_mode isEqualToString:@"target"]) {
+        // Set up 'Hit Me!' Label
+        SKSpriteNode* targetButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
+        targetButton.size = CGSizeMake(120, 60);
+        targetButton.position = CGPointMake(self.size.width*.92, self.size.height*0.05);
+        targetButton.name = @"targetbutton";
+        targetButton.zPosition = 2;
+        [self addChild:targetButton];
     
-    SKLabelNode* targetButtonLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
-    targetButtonLabel.fontColor = [UIColor whiteColor];
-    targetButtonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-    targetButtonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    targetButtonLabel.text = @"Hit Me!";
-    targetButtonLabel.name = @"targetbutton";
-    [targetButton addChild:targetButtonLabel];
+        SKLabelNode* targetButtonLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
+        targetButtonLabel.fontColor = [UIColor whiteColor];
+        targetButtonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        targetButtonLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        targetButtonLabel.text = @"Hit Me!";
+        targetButtonLabel.name = @"targetbutton";
+        [targetButton addChild:targetButtonLabel];
+    }
 }
 
 // Looks for touches to the screen, matches touch to an appropriately named node
