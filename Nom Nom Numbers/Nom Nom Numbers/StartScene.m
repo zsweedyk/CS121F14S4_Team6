@@ -103,7 +103,7 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimeModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SKScene* timedTutorialScence = [[TimedTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+            SKScene* timedTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode: @"timed" andOrigin:@"startingGame"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:timedTutorialScence transition:transition];
         }
@@ -124,7 +124,7 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SKScene* targetTutorialScence = [[TargetTutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+            SKScene* targetTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"startingGame"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:targetTutorialScence transition:transition];
         }
