@@ -145,6 +145,15 @@
 - (void) updateScore: (double)newScore
 {
     _currentScore.text = [NSString stringWithFormat:@"Score: %.2f", newScore];
+    
+    // make sure score doesn't get too long by shrinking fontsize
+    if (_currentScore.text.length > 20) {
+        _currentScore.fontSize = 45 - (int)(2*(_currentScore.text.length - 20));
+    }
+    
+    else {
+        _currentScore.fontSize = 45;
+    }
 }
 
 // Stop the timer
