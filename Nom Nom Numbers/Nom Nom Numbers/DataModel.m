@@ -78,15 +78,17 @@
     // Give scores according to proximity to target score
     if (diff == 0) {
         score = 100;
-    } else if (diff < 10) {
+    } else if (diff <= 10) {
         score = 95;
-    } else if (diff < 20) {
+    } else if (diff <= 15) {
+        score = 90;
+    } else if (diff <= 20) {
         score = 80;
-    } else if (diff < 40) {
+    } else if (diff <= 40) {
         score = 70;
-    } else if (diff < 80) {
+    } else if (diff <= 80) {
         score = 60;
-    } else if (diff < 100) {
+    } else if (diff <= 100) {
         score = 50;
     } else {
         score = 40;
