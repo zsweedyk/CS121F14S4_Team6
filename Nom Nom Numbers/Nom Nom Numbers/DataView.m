@@ -144,6 +144,9 @@
 // Updates the visual when the score is changed
 - (void) updateScore: (double)newScore
 {
+    if (newScore == -0.00){
+        newScore = 0.00;
+    }
     _currentScore.text = [NSString stringWithFormat:@"Score: %.2f", newScore];
     
     // make sure score doesn't get too long by shrinking fontsize
