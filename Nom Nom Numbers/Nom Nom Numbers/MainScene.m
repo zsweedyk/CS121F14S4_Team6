@@ -15,6 +15,7 @@
 #import "GameOverButton.h"
 #import "StartScene.h"
 #import "FireballSprite.h"
+#import "HighScoreModel.h"
 
 @implementation MainScene
 {
@@ -26,6 +27,7 @@
     BOOL _touchedSheep;
     int _countDownTillStart;
     SKLabelNode* _readyLabels;
+    SKSpriteNode* _gameOverBacklay;
     GameOverButton* _gameOverPopup;
     NSString* _mode;
     NSMutableArray* _arrOfSounds;
@@ -35,6 +37,7 @@
     NSArray* _dragonAnimationFrames;
     char _sheepOper;
     NSString* _sheepValue;
+    HighScoreModel* _highScoreModel;
 }
 
 
@@ -48,6 +51,8 @@
     
     _arrOfSounds = [NSMutableArray new];
     _touchedSheep = false;
+    _highScoreModel = [[HighScoreModel alloc] init];
+    [_highScoreModel checkExists];
    
     self = [super initWithSize:size];
     _sheepController = [[SheepController alloc] init];
@@ -84,10 +89,17 @@
     CGFloat labelX = self.frame.size.width * 0.5;
     CGFloat labelY = self.frame.size.height * 0.5;
     
+    UIColor* transparentColor = [[UIColor alloc] initWithRed:0.3 green:0.3 blue:0.3 alpha:0.45];
+    _gameOverBacklay = [[SKSpriteNode alloc] initWithColor:transparentColor size:CGSizeMake(self.size.width, self.size.height)];
+    _gameOverBacklay.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
+    _gameOverBacklay.zPosition = 3;
+    [self addChild:_gameOverBacklay];
+    
     _readyLabels = [[SKLabelNode alloc] initWithFontNamed:fontType];
     _readyLabels.fontSize = 150;
-    _readyLabels.fontColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.8 alpha:1.0];
+    _readyLabels.fontColor = [UIColor colorWithRed:0.5 green:0.5 blue:1 alpha:1.0];
     _readyLabels.position = CGPointMake(labelX, labelY);
+    _readyLabels.zPosition = 4;
     _readyLabels.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     _readyLabels.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
     _readyLabels.text = @"Ready?";
@@ -112,6 +124,7 @@
     } else if (_countDownTillStart < 1) {
         [_gameStartTimer invalidate];
         [_readyLabels removeFromParent];
+        [_gameOverBacklay removeFromParent];
 
         [_dataView initializeTimer];
         [_sheepController setupSheep:self];
@@ -258,7 +271,7 @@
     } else if ([node.name isEqual:@"targetbutton"]) {
         [self playButtonNoise:self];
         [self showGameResults:_dataView];
-    }
+    } 
 }
 
 - (void) touchedSheep:(SKNode *)node
@@ -412,13 +425,15 @@
     _gameOverPopup = [[GameOverButton alloc] init];
     double score;
     if ([_mode isEqualToString:@"target"]) {
-        //Generate score for target mode
+        // Generate score for target mode
         double time = [_dataView getCurrentTime];
         score = [_dataModel calculateTargetScoreAtTime:time];
+        [_highScoreModel saveTargetScore:score atTime:time];
         
+    // Return score for timed mode
     } else {
-        //Return score for timed mode
-        score = _currentScore;
+        score = round(100 *_currentScore)/100.00;
+        [_highScoreModel saveScore:score];
     }
     
     [_gameOverPopup setupData:self withScore:score];
@@ -440,9 +455,12 @@
     if ([_mode isEqualToString:@"target"]) {
         double time = [_dataView getCurrentTime];
         score = [_dataModel calculateTargetScoreAtTime:time];
+        [_highScoreModel saveTargetScore:score atTime:time];
+        
+    // Calculates score for Timed mode
     } else {
-        // Calculates score for Timed mode
         score = _currentScore;
+        [_highScoreModel saveScore:round(100 * score)/100.00];
     }
 
     [quitPopup setupData:self withScore:score];

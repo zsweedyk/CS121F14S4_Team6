@@ -34,6 +34,10 @@
 		CBEBD7781A0B1F2C0075D081 /* FireballSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */; };
 		CBFB884A1A0EDDC900FE2331 /* FireballParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */; };
 		CBFB884B1A0EDDCA00FE2331 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFB88491A0EDDC900FE2331 /* spark.png */; };
+		F62565CB1A25396E00DF8EC6 /* timedHighScores.txt in Resources */ = {isa = PBXBuildFile; fileRef = F62565CA1A25396E00DF8EC6 /* timedHighScores.txt */; };
+		F646D0E31A22F0F40008C2A2 /* HighScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F646D0E21A22F0F40008C2A2 /* HighScoreModel.m */; };
+		F646D0E61A22F1790008C2A2 /* HighScoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F646D0E51A22F1790008C2A2 /* HighScoreScene.m */; };
+		F646D0E81A24532A0008C2A2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F646D0E71A24532A0008C2A2 /* libsqlite3.dylib */; };
 		FB86E0E71A1B03E300ABE87A /* Click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E01A1B03E300ABE87A /* Click.wav */; };
 		FB86E0E81A1B03E300ABE87A /* ScoreDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E11A1B03E300ABE87A /* ScoreDown.wav */; };
 		FB86E0E91A1B03E300ABE87A /* ScoreUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E21A1B03E300ABE87A /* ScoreUp.wav */; };
@@ -100,6 +104,12 @@
 		CBEBD7771A0B1F2C0075D081 /* FireballSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FireballSprite.m; path = ../FireballSprite.m; sourceTree = "<group>"; };
 		CBFB88481A0EDDC900FE2331 /* FireballParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireballParticle.sks; sourceTree = "<group>"; };
 		CBFB88491A0EDDC900FE2331 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		F62565CA1A25396E00DF8EC6 /* timedHighScores.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = timedHighScores.txt; path = ../timedHighScores.txt; sourceTree = "<group>"; };
+		F646D0E11A22F0F40008C2A2 /* HighScoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoreModel.h; sourceTree = "<group>"; };
+		F646D0E21A22F0F40008C2A2 /* HighScoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreModel.m; sourceTree = "<group>"; };
+		F646D0E41A22F1790008C2A2 /* HighScoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoreScene.h; sourceTree = "<group>"; };
+		F646D0E51A22F1790008C2A2 /* HighScoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreScene.m; sourceTree = "<group>"; };
+		F646D0E71A24532A0008C2A2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		FB86E0E01A1B03E300ABE87A /* Click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click.wav; sourceTree = "<group>"; };
 		FB86E0E11A1B03E300ABE87A /* ScoreDown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreDown.wav; sourceTree = "<group>"; };
 		FB86E0E21A1B03E300ABE87A /* ScoreUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreUp.wav; sourceTree = "<group>"; };
@@ -114,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F646D0E81A24532A0008C2A2 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +149,8 @@
 				A3DC1B201A11E77000232403 /* TimedTutorialScene.m */,
 				A3EBB44B1A1AF371001DB3F8 /* TargetTutorialScene.h */,
 				A3EBB44C1A1AF371001DB3F8 /* TargetTutorialScene.m */,
+				F646D0E41A22F1790008C2A2 /* HighScoreScene.h */,
+				F646D0E51A22F1790008C2A2 /* HighScoreScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -164,6 +177,8 @@
 				CB9A2CE71A0939E8004EF777 /* DataModel.m */,
 				CB9A2CE81A0939E8004EF777 /* DataView.h */,
 				CB9A2CE91A0939E8004EF777 /* DataView.m */,
+				F646D0E11A22F0F40008C2A2 /* HighScoreModel.h */,
+				F646D0E21A22F0F40008C2A2 /* HighScoreModel.m */,
 			);
 			name = "Data and Models";
 			sourceTree = "<group>";
@@ -215,6 +230,7 @@
 		CB9A2CB51A09336E004EF777 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F62565CA1A25396E00DF8EC6 /* timedHighScores.txt */,
 				FB86E0E01A1B03E300ABE87A /* Click.wav */,
 				FB86E0E11A1B03E300ABE87A /* ScoreDown.wav */,
 				FB86E0E21A1B03E300ABE87A /* ScoreUp.wav */,
@@ -340,6 +356,7 @@
 			files = (
 				FB86E0E91A1B03E300ABE87A /* ScoreUp.wav in Resources */,
 				FB86E0EB1A1B03E300ABE87A /* Sheep2.wav in Resources */,
+				F62565CB1A25396E00DF8EC6 /* timedHighScores.txt in Resources */,
 				FB86E0EA1A1B03E300ABE87A /* Sheep.wav in Resources */,
 				FB86E0E81A1B03E300ABE87A /* ScoreDown.wav in Resources */,
 				CBDAC94B1A1335C100A46D7E /* FireParticle.sks in Resources */,
@@ -369,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F646D0E61A22F1790008C2A2 /* HighScoreScene.m in Sources */,
 				CB9A2CFC1A0939E8004EF777 /* DataView.m in Sources */,
 				CB9A2D021A0939E8004EF777 /* SheepController.m in Sources */,
 				CB9A2CC31A093370004EF777 /* GameViewController.m in Sources */,
@@ -376,6 +394,7 @@
 				CB9A2D051A0939E8004EF777 /* StartScene.m in Sources */,
 				A3EBB44D1A1AF371001DB3F8 /* TargetTutorialScene.m in Sources */,
 				CB9A2CFD1A0939E8004EF777 /* GameOverButton.m in Sources */,
+				F646D0E31A22F0F40008C2A2 /* HighScoreModel.m in Sources */,
 				CB9A2D011A0939E8004EF777 /* QuitGameButton.m in Sources */,
 				CB9A2CBB1A09336F004EF777 /* AppDelegate.m in Sources */,
 				CB9A2CFE1A0939E8004EF777 /* Generator.m in Sources */,

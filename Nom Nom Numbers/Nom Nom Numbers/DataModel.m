@@ -91,7 +91,8 @@
         score = (600-time)/600 * scoreTargetScorePortion * 100;
     }
     
-    NSAssert(!isnan(score), @"not a number returned");
+    score = round(100 * score)/100.00;
+    NSAssert(!isnan(score), @"Not a number returned");
     return score;
 }
 
