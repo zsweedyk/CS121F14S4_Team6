@@ -8,7 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "DataModel.h"
-#import "SheepController.h"
 
 @class DataView;
 @protocol gameOverDelegate
@@ -16,6 +15,7 @@
 - (void)showGameResults:(DataView *)controller;
 
 @end
+
 
 @interface DataView : SKLabelNode
 {
@@ -26,12 +26,11 @@
     NSTimer* _gameTimer;
     DataModel* _dataModel;
     NSString* _mode;
-    SheepController* _sheepController;
 }
 
 @property(nonatomic, weak) id<gameOverDelegate> customDelegate;
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andSheepController:(SheepController *)sheepController;
+- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andTargetScore:(int)targetScore;
 - (void) updateScore: (double)newScore;
 - (void) initializeTimer;
 - (void) stopTimer;

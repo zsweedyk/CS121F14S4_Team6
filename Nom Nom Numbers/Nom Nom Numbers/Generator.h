@@ -13,5 +13,6 @@
 - (int) generateIntegerfrom:(int)lower to:(int)upper;
 - (NSMutableArray *) generateFraction;
 - (char) generateOperator;
+- (void)setScoreIsLow:(bool)boolean;
 
 @end
