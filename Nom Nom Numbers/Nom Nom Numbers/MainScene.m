@@ -45,6 +45,8 @@
 - (id) initWithSize:(CGSize)size andSKView:(SKView *)skView andMode:(NSString *)mode
 
 {
+    self = [super init];
+    
     _mode = mode;
     _gameEnded = false;
     _countDownTillStart = 4;
@@ -258,8 +260,9 @@
     // Back to main screen
     } else if ([node.name isEqual:@"quitaction"]) {
         [self playButtonNoise:self];
-        SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:nil];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
+        [self removeAllChildren];
         [self.view presentScene:startScene transition:transition];
     
     // Play Again
@@ -383,7 +386,11 @@
     
     [_sheepController generateNewSheep:(SKNode*)node];
     NSMutableDictionary* sheepData = node.userData;
-    _sheepOper = *[[sheepData valueForKey:@"Operator"] UTF8String];
+    
+    const char* c = [[sheepData valueForKey:@"Operator"] UTF8String];
+    if (c != NULL)
+        _sheepOper = *c;
+    
     _sheepValue = [sheepData objectForKey:@"Value"];
     
     [_dataModel applySheepChar:_sheepOper andValue:_sheepValue];

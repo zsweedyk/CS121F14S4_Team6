@@ -11,7 +11,6 @@
 
 @implementation CreditsScene
 {
-    SKView* _skView;
     NSMutableArray* _arrOfSounds;
     double _nextLineY;
 }
@@ -20,8 +19,6 @@
 {
     _arrOfSounds = [NSMutableArray new];
     self = [super initWithSize:size];
-    _skView = [[SKView alloc] init];
-    _skView = skView;
     _nextLineY = self.size.height * 0.7;
     [self setup];
     
@@ -111,7 +108,7 @@
     
     if ([node.name isEqual: @"quitbutton"]) {
         [self playButtonNoise:self];
-        SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:nil];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:startScene transition:transition];
     }

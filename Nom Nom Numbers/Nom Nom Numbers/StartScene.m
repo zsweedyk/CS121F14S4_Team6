@@ -17,30 +17,13 @@
 
 @implementation StartScene
 {
-    SKView* _skView;
     NSMutableArray* _arrOfSounds;
 }
 
 - (id) initWithSize:(CGSize)size andSKView:(SKView *)skView
-{
-    //NSString* filePath = [[NSBundle mainBundle] pathForResource:@"timedHighScores" ofType:@"txt"];
-    //NSLog(@"filepath: %@", filePath);
-    
-    
-    NSFileManager *filemgr;
-    
-    filemgr = [NSFileManager defaultManager];
-    
-//    if ([filemgr fileExistsAtPath:filePath] == YES) {
-//        NSLog(@"File exists");
-//    } else {
-//        NSLog(@"File not found");
-//    }
-//    
+{  
     _arrOfSounds = [NSMutableArray new];
     self = [super initWithSize:size];
-    _skView = [[SKView alloc] init];
-    _skView = skView;
     [self setup];
     
     return self;
@@ -108,9 +91,10 @@
             
             // Already launched timed-mode before, so go straight into the timed-mode gameplay
             [self playButtonNoise:self];
-            SKScene* gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"timed"];
+            SKScene* gameScene = [[MainScene alloc] initWithSize:self.size andSKView:nil andMode:@"timed"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
+            [self removeFromParent];
             
         } else {
             // First time launch timed-mode, so display the tutorial
@@ -118,7 +102,7 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimeModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SKScene* timedTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode: @"timed" andOrigin:@"startingGame"];
+            SKScene* timedTutorialScence = [[TutorialScene alloc] initWithSize:self.size andSKView:nil andMode: @"timed" andOrigin:@"startingGame"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:timedTutorialScence transition:transition];
         }
@@ -129,7 +113,7 @@
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TargetModeHasLaunched"]) {
             // Already launched timed-mode before, so go straight into the target-mode gameplay
             [self playButtonNoise:self];
-            SKScene* gameScene = [[MainScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target"];
+            SKScene* gameScene = [[MainScene alloc] initWithSize:self.size andSKView:nil andMode:@"target"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:gameScene transition:transition];
             
@@ -139,7 +123,7 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"startingGame"];
+            SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:nil andMode:@"target" andOrigin:@"startingGame"];
             SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
             [self.view presentScene:targetTutorialScene transition:transition];
         }
@@ -156,7 +140,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"tutorialButton"];
+        SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:nil andMode:@"target" andOrigin:@"tutorialButton"];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:targetTutorialScene transition:transition];
     }
@@ -185,7 +169,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init] andMode:@"target" andOrigin:@"tutorialButton"];
+        SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:nil andMode:@"target" andOrigin:@"tutorialButton"];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:targetTutorialScene transition:transition];
     }
@@ -193,7 +177,7 @@
     if ([node.name isEqual: @"creditsButton"]) {
         [self playButtonNoise:self];
         
-        SKScene* creditsScene = [[CreditsScene alloc] initWithSize:self.size andSKView:[[SKView alloc] init]];
+        SKScene* creditsScene = [[CreditsScene alloc] initWithSize:self.size andSKView:nil];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:creditsScene transition:transition];
     }
