@@ -137,22 +137,16 @@
     
 }
 
-
-
 // Start timer countdown
 - (void) initializeTimer
 {
-    
     _gameStartTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(gameStartTimerAction) userInfo:nil repeats:YES];
     
 }
 
-
-
 // Displays preparation timer
 - (void) gameStartTimerAction
 {
-    
     if (_countDownTillStart == 1) {
         
         _readyLabels.text = @"Go!";
@@ -172,10 +166,7 @@
         [self changeReadyLabelText];
         
     }
-    
 }
-
-
 
 // Changes label in preparation timer to appropriate text
 - (void) changeReadyLabelText
@@ -183,8 +174,6 @@
     _readyLabels.text = [NSString stringWithFormat:@"%d", _countDownTillStart];
     
 }
-
-
 
 // Used to reset settings for a new game
 - (void) restart
@@ -207,13 +196,11 @@
     _countDownTillStart = 4;
     
     [self prepareForGame];
-    
 }
 
-
+// Set up background images
 - (void) setupBackground
 {
-    
     SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
@@ -251,11 +238,8 @@
     }
 }
 
-
-
 - (void) setupDragons
 {
-    
     SKSpriteNode* dragon = [SKSpriteNode spriteNodeWithImageNamed:@"dragon"];
     CGSize dragonSize = [UIImage imageNamed:@"dragon"].size;
     CGSize screenSize = self.size;
@@ -271,7 +255,6 @@
     
     [self addChild:dragon];
     
-    
     SKSpriteNode* dragon2 = [SKSpriteNode spriteNodeWithImageNamed:@"blueDragon"];
     dragon2.position = CGPointZero;
     dragon2.anchorPoint = CGPointZero;
@@ -279,14 +262,9 @@
     dragon2.yScale = .5;
     dragon2.zPosition = 2;
     
-    
-    
     _dragonBlue = dragon2;
     [self addChild:dragon2];
-    
 }
-
-
 
 // Sets up data for the game
 - (void) setupData
@@ -305,8 +283,6 @@
 
     [self addChild:_dataView];
     
-    
-    
     // Create Quit button
     SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"redButton"];
     quitButton.size = CGSizeMake(120, 60);
@@ -315,7 +291,6 @@
     quitButton.zPosition = 2;
     
     [self addChild:quitButton];
-    
     
     SKLabelNode* quitButtonLabel = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     quitButtonLabel.fontSize = 45;
@@ -326,15 +301,11 @@
     quitButtonLabel.name = @"quitbutton";
     
     [quitButton addChild:quitButtonLabel];
-    
 }
-
-
 
 // Looks for touches to the screen, matches touch to an appropriately named node
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
     UITouch* touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode* node = [self nodeAtPoint:location];
@@ -346,7 +317,6 @@
         if(!_touchedSheep) {
             [self touchedSheep:node];
             [self playSheepNoise:self];
-            
         }
         
     } else if ([node.name isEqual:@"quitbutton"]) {
@@ -359,7 +329,6 @@
         [self stopMusic:self];
         SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:nil];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
-        [self removeAllChildren];
         [self.view presentScene:startScene transition:transition];
         
         // Play Again
@@ -373,14 +342,12 @@
         [self playButtonNoise:self];
         [self showGameResults:_dataView];
     }
-    
 }
 
 
 
 - (void) touchedSheep:(SKNode *)node
 {
-    
     _touchedSheep = true;
     FireballSprite* fireballSprite = [[FireballSprite alloc] init];
     NSUInteger numFrames = [_dragonAnimationFrames count];
@@ -401,7 +368,6 @@
                                    selector: @selector(makeNewSheep:)
                                    userInfo: node
                                     repeats: NO];
-    
 }
 
 
@@ -409,7 +375,6 @@
 // Add score animation
 - (SKSpriteNode *) newScoreNodeAtLocation: (CGPoint)loc
 {
-    
     SKSpriteNode* mutton = [SKSpriteNode spriteNodeWithImageNamed:@"mutton"];
     SKLabelNode* scoreNode = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Thin"];
     
@@ -417,7 +382,6 @@
     mutton.name = @"scoreNode";
     mutton.xScale = .1;
     mutton.yScale = .1;
-    
     
     NSString *oper = [NSString stringWithFormat:@"%c",_sheepOper];
     NSString* myString=[NSString stringWithFormat:@"%@%@",oper,_sheepValue];
@@ -445,7 +409,6 @@
     [mutton addChild:scoreNode];
     
     return mutton;
-    
 }
 
 
@@ -453,7 +416,6 @@
 // Add animation to the score node
 - (void) animateScoreNode
 {
-    
     CGFloat Xdimensions = self.size.width;
     CGFloat Ydimensions = self.size.height;
     
@@ -461,10 +423,8 @@
     CGFloat scoreY = Ydimensions * 0.2;
     CGFloat scoreX = Xdimensions * 0.1;
     
-    
     SKNode* scoreNode = [self childNodeWithName:@"scoreNode"];
     _currentScore = [_dataModel getScore];
-    
     
     if (scoreNode != nil) {
         scoreNode.name = nil; // change name so we don't affect this node anymore
@@ -480,7 +440,6 @@
         SKAction* close = [SKAction setTexture:[SKTexture textureWithImage:[UIImage imageNamed:@"blueDragon"]]];
         SKAction* dragonSequence = [SKAction sequence:@[open, basketPause, close]];
         
-        
         [_dragonBlue runAction:dragonSequence];
         [scoreNode runAction: moveSequence completion:^{
             [_dataView updateScore:_currentScore];
@@ -493,7 +452,6 @@
 // Create new sheep with value and operator
 - (void) makeNewSheep:(NSTimer *)incomingTimer
 {
-    
     SKNode* node;
     
     if ([incomingTimer userInfo] != nil) {
@@ -518,7 +476,6 @@
     [self animateScoreNode];
     
     _touchedSheep = false;
-    
 }
 
 
@@ -527,7 +484,6 @@
 // and generates a new one if needed
 - (void) update:(NSTimeInterval)currentTime
 {
-    
     [self enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode* node, BOOL* stop) {
         if (node.position.y > self.size.height - 100) {
             [_sheepController generateNewSheep:node];
@@ -565,7 +521,6 @@
     
     [_gameOverPopup setupData:self withScore:score];
     [self addChild: _gameOverPopup];
-    
 }
 
 
@@ -596,7 +551,6 @@
     
     [quitPopup setupData:self withScore:score];
     [self addChild:quitPopup];
-    
 }
 
 - (IBAction) playBackgroundNoise:(id)sender
@@ -619,7 +573,7 @@
 }
 
 // Plays noise when a sheep is clicked
-- (IBAction) playSheepNoise:(id)sender
+- (IBAction) playSheepNoise:(id)ssender
 {
     // StrongFire is a clip taken from:
     // http://soundbible.com/1348-Large-Fireball.html
@@ -637,7 +591,6 @@
     [_arrOfSounds addObject:newPlayer];
     [newPlayer prepareToPlay];
     [newPlayer play];
-    
 }
 
 
@@ -645,7 +598,6 @@
 // Plays noise when a button is clicked
 - (IBAction) playButtonNoise:(id)sender
 {
-
     NSString* fileName = @"Click";
     NSString* soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
     NSURL* fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
@@ -655,7 +607,6 @@
     [_arrOfSounds addObject:newPlayer];
     [newPlayer prepareToPlay];
     [newPlayer play];
-    
 }
 
 
