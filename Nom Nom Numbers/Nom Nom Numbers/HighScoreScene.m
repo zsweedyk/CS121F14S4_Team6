@@ -15,12 +15,11 @@
 @implementation HighScoreScene {
     NSMutableArray* _arrOfSounds;
     SKSpriteNode* _scoreBoard;
-    HighScoreModel * _model;
+    HighScoreModel* _model;
     SKLabelNode* _scoreText;
     SKLabelNode* _title;
     BOOL _onTimed;
 }
-
 
 - (id) initWithSize:(CGSize)size
 {
@@ -37,13 +36,14 @@
 
 - (void) setup
 {
-    [self setupBackgroundWithMode];
+    [self setupBackground];
     [self setupLayoutOn:_scoreBoard];
     [self setupScoreOn:_scoreBoard ForTimed:true];
     [self setupButtons];
 }
 
-- (void) setupBackgroundWithMode
+// Set up background picture and empty scoreboard
+- (void) setupBackground
 {
     SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
     background.position = CGPointZero;
@@ -58,6 +58,7 @@
     [self addChild:_scoreBoard];
 }
 
+// Add text to the scoreboard
 - (void) setupLayoutOn: (SKSpriteNode *)scoreBoard
 {
     _title = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
@@ -68,6 +69,7 @@
     _title.fontSize = 40;
     [_scoreBoard addChild:_title];
     
+    // Create button for to view high scores in Timed Mode
     SKLabelNode* timedMode = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     timedMode.fontColor = [UIColor lightTextColor];
     timedMode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
@@ -76,6 +78,7 @@
     timedMode.name = @"timedMode";
     [scoreBoard addChild:timedMode];
     
+    // Create button to view high score in Target Mode
     SKLabelNode* targetMode = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     targetMode.fontColor = [UIColor lightTextColor];
     targetMode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
@@ -85,6 +88,7 @@
     [scoreBoard addChild:targetMode];
 }
 
+// Fill the scoreboard with actual scores
 - (void) setupScoreOn: (SKSpriteNode *)scoreBoard ForTimed:(BOOL)timed
 {
     NSMutableArray* topTenScores = [_model getTopTenForTimed];
@@ -107,6 +111,7 @@
         _scoreText.position = CGPointMake(scoreBoard.size.width*-0.35, scoreBoard.size.height*0.3 - (45*i));
         _scoreText.text = [NSString stringWithFormat:@"%@", [topTenScores objectAtIndex:i]];
         
+        // If target mode, scores display differently
         if (!timed) {
             _scoreText.text = [NSString stringWithFormat:@"%@", [[topTenScores objectAtIndex:i] objectAtIndex:1]];
             
@@ -121,12 +126,14 @@
     }
 }
 
+// Clear the scoreboard
 - (void) clearScores
 {
     [_scoreBoard removeAllChildren];
     [self setupLayoutOn:_scoreBoard];
 }
 
+// Set up button to return to main menu
 - (void) setupButtons
 {
     SKSpriteNode* backButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
@@ -143,7 +150,6 @@
     backButtonLabel.text = @"Main Menu";
     backButtonLabel.name = @"mainMenu";
     [backButton addChild:backButtonLabel];
-    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -187,7 +193,6 @@
             _title.text = @"High Scores in Target Mode";
         }
     }
-
 }
 
 // Plays noise when a button is clicked
@@ -204,7 +209,5 @@
     [newPlayer prepareToPlay];
     [newPlayer play];
 }
-
-
 
 @end

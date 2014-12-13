@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 CS 121 Team 6. All rights reserved.
 //
 
-
 #import "StartScene.h"
 #import "MainScene.h"
 #import "HighScoreScene.h"
@@ -98,6 +97,7 @@
             [self.view presentScene:gameScene transition:transition];
             
         } else {
+            
             // First time launch timed-mode, so display the tutorial
             [self playButtonNoise:self];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimeModeHasLaunched"];

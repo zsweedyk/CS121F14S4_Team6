@@ -64,13 +64,13 @@
     int chanceIndicator = arc4random_uniform(50);
     
     if (_scoreIsLow) {
+        
         if (chanceIndicator < 40) {
             chanceIndicator = 32;
         } else {
             chanceIndicator = 34;
         }
     }
-    
     
     if (chanceIndicator == 1) {
         _operator = 'A';
@@ -122,6 +122,5 @@
     _scoreIsLow = boolean;
     [_generator setScoreIsLow:boolean];
 }
-
 
 @end

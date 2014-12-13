@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 CS 121 Team 6. All rights reserved.
 //
 
-
-
 #import "MainScene.h"
 #import "SheepSprite.h"
 #import "SheepController.h"
@@ -19,12 +17,8 @@
 #import "FireballSprite.h"
 #import "HighScoreModel.h"
 
-
-
 @implementation MainScene
-
 {
-    
     SheepController* _sheepController;
     DataView* _dataView;
     DataModel* _dataModel;
@@ -48,10 +42,6 @@
     
 }
 
-
-
-
-
 // Creates an SKScene while noting which mode we have entered
 - (id) initWithSize:(CGSize)size andSKView:(SKView *)skView andMode:(NSString *)mode
 {
@@ -61,27 +51,23 @@
     _gameEnded = false;
     _countDownTillStart = 4;
     
-    
     _arrOfSounds = [NSMutableArray new];
     _touchedSheep = false;
     _highScoreModel = [[HighScoreModel alloc] init];
     [_highScoreModel checkExists];
     
-    
-    
     self = [super initWithSize:size];
     _sheepController = [[SheepController alloc] init];
     [self setup];
     [self playBackgroundNoise:self];
-    
    
     // Set up dragon animation frames
     NSMutableArray* dragonFrames = [NSMutableArray array];
     SKTextureAtlas* dragonAnimationAtlas = [SKTextureAtlas atlasNamed:@"dragon"];
     NSUInteger numImages = dragonAnimationAtlas.textureNames.count;
     
-    
     for (int i = 1; i <= numImages; i++) {
+        
         NSString* textureName = [NSString stringWithFormat:@"dragonAnimation%d",i];
         SKTexture* temp = [dragonAnimationAtlas textureNamed:textureName];
         [dragonFrames addObject:temp];
@@ -90,27 +76,19 @@
     _dragonAnimationFrames = dragonFrames;
     
     return self;
-    
 }
-
-
 
 - (void) setup
 {
-    
     [self setupBackground];
     [self setupDragons];
     [self prepareForGame];
     [self setupData];
-    
 }
-
-
 
 // 3, 2, 1, Go! Before the game starts
 - (void) prepareForGame
 {
-    
     NSString* fontType = @"AvenirNext-Heavy";
     CGFloat labelX = self.frame.size.width * 0.5;
     CGFloat labelY = self.frame.size.height * 0.5;
@@ -134,7 +112,6 @@
     [self addChild:_readyLabels];
     [self playBackgroundNoise:self];
     [self initializeTimer];
-    
 }
 
 // Start timer countdown
@@ -148,7 +125,6 @@
 - (void) gameStartTimerAction
 {
     if (_countDownTillStart == 1) {
-        
         _readyLabels.text = @"Go!";
         --_countDownTillStart;
         
@@ -157,14 +133,12 @@
         [_gameStartTimer invalidate];
         [_readyLabels removeFromParent];
         [_gameOverBacklay removeFromParent];
-        
         [_dataView initializeTimer];
         [_sheepController setupSheep:self forMode:_mode];
         
     } else {
         --_countDownTillStart;
         [self changeReadyLabelText];
-        
     }
 }
 
@@ -220,6 +194,7 @@
     [self addChild:barn];
     
     if ([_mode isEqualToString:@"target"]) {
+        
         // Set up 'Hit Me!' Label
         SKSpriteNode* targetButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
         targetButton.size = CGSizeMake(120, 60);
@@ -320,11 +295,13 @@
         }
         
     } else if ([node.name isEqual:@"quitbutton"]) {
+        
         [self playButtonNoise:self];
         [self quitGame];
         
         // Back to main screen
     } else if ([node.name isEqual:@"quitaction"]) {
+        
         [self playButtonNoise:self];
         [self stopMusic:self];
         SKScene* startScene = [[StartScene alloc] initWithSize:self.size andSKView:nil];
@@ -333,19 +310,20 @@
         
         // Play Again
     } else if ([node.name isEqual:@"playagainaction"]) {
+        
         [self playButtonNoise:self];
         [self stopMusic:self];
         [self restart];
         
         // TARGET MODE: End Game
     } else if ([node.name isEqual:@"targetbutton"]) {
+        
         [self playButtonNoise:self];
         [self showGameResults:_dataView];
     }
 }
 
-
-
+// Check if sheep was touched and add animations
 - (void) touchedSheep:(SKNode *)node
 {
     _touchedSheep = true;
@@ -370,8 +348,6 @@
                                     repeats: NO];
 }
 
-
-
 // Add score animation
 - (SKSpriteNode *) newScoreNodeAtLocation: (CGPoint)loc
 {
@@ -383,18 +359,18 @@
     mutton.xScale = .1;
     mutton.yScale = .1;
     
+    // Get operation and value of sheep for animation
     NSString *oper = [NSString stringWithFormat:@"%c",_sheepOper];
     NSString* myString=[NSString stringWithFormat:@"%@%@",oper,_sheepValue];
-    
     
     // If sheep value was a fraction, only display fraction part (not decimal part)
     NSCharacterSet* parens = [NSCharacterSet characterSetWithCharactersInString:@"()"];
     NSRange searchRange = NSMakeRange(0, myString.length);
     NSRange foundRange = [myString rangeOfCharacterFromSet:parens options:0 range:searchRange];
     
-    
     // Check if there are parentheses (the value is a fraction that contains its decimal counterpart
-    if (foundRange.location != NSNotFound){
+    if (foundRange.location != NSNotFound) {
+        
         NSRange range = [myString rangeOfString:@"("];
         NSString* shortString = [myString substringToIndex:range.location];
         scoreNode.text = shortString;
@@ -411,8 +387,6 @@
     return mutton;
 }
 
-
-
 // Add animation to the score node
 - (void) animateScoreNode
 {
@@ -427,8 +401,10 @@
     _currentScore = [_dataModel getScore];
     
     if (scoreNode != nil) {
+        
         scoreNode.name = nil; // change name so we don't affect this node anymore
         
+        // animations for the score node
         SKAction* zoom = [SKAction scaleTo: 0.5 duration: 0.1];
         SKAction* move = [SKAction moveTo:(CGPointMake(scoreX-2, scoreY-50)) duration:0.5];
         SKAction* pause = [SKAction waitForDuration: 0.1];
@@ -447,8 +423,6 @@
     }
 }
 
-
-
 // Create new sheep with value and operator
 - (void) makeNewSheep:(NSTimer *)incomingTimer
 {
@@ -462,11 +436,12 @@
     NSMutableDictionary* sheepData = node.userData;
     
     const char* c = [[sheepData valueForKey:@"Operator"] UTF8String];
-    if (c != NULL)
+    
+    if (c != NULL) {
         _sheepOper = *c;
-    
+    }
+
     _sheepValue = [sheepData objectForKey:@"Value"];
-    
     [_dataModel applySheepChar:_sheepOper andValue:_sheepValue];
 
     CGPoint sheepLocation = node.position;
@@ -478,13 +453,12 @@
     _touchedSheep = false;
 }
 
-
-
 // Update function continuously checks for sheep that exit the screen,
 // and generates a new one if needed
 - (void) update:(NSTimeInterval)currentTime
 {
     [self enumerateChildNodesWithName:@"sheep" usingBlock:^(SKNode* node, BOOL* stop) {
+        
         if (node.position.y > self.size.height - 100) {
             [_sheepController generateNewSheep:node];
         }
@@ -493,8 +467,6 @@
         }
     }];
 }
-
-
 
 // Delegate Function: Shows result when game is over
 - (void) showGameResults:(DataView *)controller
@@ -517,15 +489,9 @@
         score = round(100 *_currentScore)/100.00;
         [_highScoreModel saveScore:score];
     }
-    
-    
     [_gameOverPopup setupData:self withScore:score];
     [self addChild: _gameOverPopup];
 }
-
-
-
-
 
 // Displays the popup for when Quit Game is pressed
 - (void) quitGame
@@ -593,24 +559,17 @@
     [newPlayer play];
 }
 
-
-
 // Plays noise when a button is clicked
 - (IBAction) playButtonNoise:(id)sender
 {
     NSString* fileName = @"Click";
     NSString* soundFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType: @"wav"];
     NSURL* fileURL = [[NSURL alloc] initFileURLWithPath: soundFilePath];
-
     
     AVAudioPlayer* newPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error: nil];
     [_arrOfSounds addObject:newPlayer];
     [newPlayer prepareToPlay];
     [newPlayer play];
 }
-
-
-
-
 
 @end

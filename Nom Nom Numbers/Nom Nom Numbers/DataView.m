@@ -15,7 +15,6 @@
 
 - (id) setupData:(SKScene*)mainScene withScore:(double)currentScore andMode:(NSString*)mode andModel:(DataModel*)model andTargetScore:(int)targetScore
 {
-    
     _dataModel = model;
     _mode = mode;
     CGFloat Xdimensions = mainScene.size.width;

@@ -38,6 +38,7 @@
 		F646D0E61A22F1790008C2A2 /* HighScoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F646D0E51A22F1790008C2A2 /* HighScoreScene.m */; };
 		F646D0E81A24532A0008C2A2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F646D0E71A24532A0008C2A2 /* libsqlite3.dylib */; };
 		FB1AEDD71A36E05E00473E9B /* Thatched Villagers.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB1AEDD61A36E05E00473E9B /* Thatched Villagers.wav */; };
+		FB58AEBD1A3CDF4000AA8D19 /* HighScoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FB58AEBC1A3CDF4000AA8D19 /* HighScoreTest.m */; };
 		FB86E0E71A1B03E300ABE87A /* Click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E01A1B03E300ABE87A /* Click.wav */; };
 		FB86E0E81A1B03E300ABE87A /* ScoreDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E11A1B03E300ABE87A /* ScoreDown.wav */; };
 		FB86E0E91A1B03E300ABE87A /* ScoreUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB86E0E21A1B03E300ABE87A /* ScoreUp.wav */; };
@@ -110,6 +111,7 @@
 		F646D0E51A22F1790008C2A2 /* HighScoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreScene.m; sourceTree = "<group>"; };
 		F646D0E71A24532A0008C2A2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		FB1AEDD61A36E05E00473E9B /* Thatched Villagers.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Thatched Villagers.wav"; sourceTree = "<group>"; };
+		FB58AEBC1A3CDF4000AA8D19 /* HighScoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreTest.m; sourceTree = "<group>"; };
 		FB86E0E01A1B03E300ABE87A /* Click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Click.wav; sourceTree = "<group>"; };
 		FB86E0E11A1B03E300ABE87A /* ScoreDown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreDown.wav; sourceTree = "<group>"; };
 		FB86E0E21A1B03E300ABE87A /* ScoreUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ScoreUp.wav; sourceTree = "<group>"; };
@@ -248,10 +250,11 @@
 		CB9A2CD31A093371004EF777 /* Nom Nom NumbersTests */ = {
 			isa = PBXGroup;
 			children = (
+				CB9A2CE41A0939A8004EF777 /* DataModelTest.m */,
+				CB9A2CE21A0939A1004EF777 /* GeneratorTest.m */,
+				FB58AEBC1A3CDF4000AA8D19 /* HighScoreTest.m */,
 				CB9A2CD61A093371004EF777 /* Nom_Nom_NumbersTests.m */,
 				CB9A2CE01A093997004EF777 /* SheepModelTest.m */,
-				CB9A2CE21A0939A1004EF777 /* GeneratorTest.m */,
-				CB9A2CE41A0939A8004EF777 /* DataModelTest.m */,
 				CB9A2CD41A093371004EF777 /* Supporting Files */,
 			);
 			path = "Nom Nom NumbersTests";
@@ -417,6 +420,7 @@
 				CB9A2CE51A0939A8004EF777 /* DataModelTest.m in Sources */,
 				CB9A2CD71A093371004EF777 /* Nom_Nom_NumbersTests.m in Sources */,
 				CB9A2CE11A093997004EF777 /* SheepModelTest.m in Sources */,
+				FB58AEBD1A3CDF4000AA8D19 /* HighScoreTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

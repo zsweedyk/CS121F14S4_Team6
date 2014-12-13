@@ -18,6 +18,7 @@
     return self;
 }
 
+// Check if the database files exist
 - (void) checkExists
 {
     NSString* docsDir;
@@ -35,7 +36,7 @@
     
     NSFileManager* fileManager = [NSFileManager defaultManager];
     
-    // If the database file doesn't already exist, create it
+    // If the database file for Timed Mode doesn't already exist, create it
     if ([fileManager fileExistsAtPath:_highScoreDBPath] == NO) {
         const char* dbPath = [_highScoreDBPath UTF8String];
         
@@ -52,6 +53,8 @@
         } else {
             NSLog(@"Failed to open or create table");
         }
+    
+    // If the database file for Target Mode doesn't already exist, create it
     } if ([fileManager fileExistsAtPath:_targetScoreDBPath] == NO) {
         const char* dbPath = [_targetScoreDBPath UTF8String];
         
@@ -71,6 +74,7 @@
     }
 }
 
+// Save score for Timed Mode
 - (void) saveScore:(double)currentScore
 {
     sqlite3_stmt* statementInSQL;
@@ -96,6 +100,7 @@
     sqlite3_close(_highScoreDB);
 }
 
+// Save score for Target Mode
 - (void) saveTargetScore:(double)currentScore atTime:(double)currentTime
 {
     sqlite3_stmt* statementInSQL;
@@ -121,6 +126,7 @@
     sqlite3_close(_targetScoreDB);
 }
 
+// Get top 10 scores for Timed mode
 - (NSMutableArray *) getTopTenForTimed
 {
     NSMutableArray* arrayOfScores = [[NSMutableArray alloc] init];
@@ -151,6 +157,7 @@
     return arrayOfScores;
 }
 
+// Get top 10 scores for Target mode
 - (NSMutableArray *) getTopTenForTarget
 {
     NSMutableArray* arrayOfScores = [[NSMutableArray alloc] init];
