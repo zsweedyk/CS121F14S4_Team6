@@ -69,7 +69,7 @@
 
 - (void) setupBackground
 {
-    
+    // Set up background picture for the tutorial scene
     SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"mathGameBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
@@ -90,7 +90,7 @@
 
 - (void) setupDragon
 {
-    
+    // Set up dragon image on the tutorial scene
     SKSpriteNode* dragon = [SKSpriteNode spriteNodeWithImageNamed:@"dragon"];
     CGSize dragonSize = [UIImage imageNamed:@"dragon"].size;
     CGSize screenSize = self.size;
