@@ -21,7 +21,6 @@
     BOOL _onTimed;
 }
 
-
 - (id) initWithSize:(CGSize)size
 {
     self = [super initWithSize:size];
@@ -143,7 +142,6 @@
     backButtonLabel.text = @"Main Menu";
     backButtonLabel.name = @"mainMenu";
     [backButton addChild:backButtonLabel];
-    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -187,7 +185,6 @@
             _title.text = @"High Scores in Target Mode";
         }
     }
-
 }
 
 // Plays noise when a button is clicked
@@ -204,7 +201,5 @@
     [newPlayer prepareToPlay];
     [newPlayer play];
 }
-
-
 
 @end
