@@ -159,12 +159,12 @@
     }
     
     else if ([node.name isEqual: @"timedTutorialButton"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimedModeHasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:nil andMode:@"target" andOrigin:@"tutorialButton"];
+        SKScene* timedTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:nil andMode:@"timed" andOrigin:@"tutorialButton"];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
-        [self.view presentScene:targetTutorialScene transition:transition];
+        [self.view presentScene:timedTutorialScene transition:transition];
     }
     
     else if ([node.name isEqual: @"targetTutorialButton"]) {
