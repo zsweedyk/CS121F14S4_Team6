@@ -54,6 +54,7 @@
             return 'x';
             break;
         case 4:
+            //If score is low, increase chances of generating '+' or '*'
             if (_scoreIsLow) {
                 return '+';
             } else {
@@ -69,6 +70,7 @@
     }
 }
 
+// Function that sets boolean to indicate if score is low
 - (void)setScoreIsLow:(bool)boolean
 {
     _scoreIsLow = boolean;
