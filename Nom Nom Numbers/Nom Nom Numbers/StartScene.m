@@ -16,7 +16,7 @@
 
 @implementation StartScene
 {
-    NSMutableArray* _arrOfSounds;
+    NSMutableArray* _arrOfSounds; // a sequence of sound effects
     SKLabelNode* _timedTutorialButton;
     SKLabelNode* _targetTutorialButton;
 }
@@ -32,6 +32,7 @@
 
 - (void) setup
 {
+    // set up background image
     SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"StartPageBG"];
     background.position = CGPointZero;
     background.anchorPoint = CGPointZero;
@@ -39,6 +40,7 @@
     background.yScale = .5;
     [self addChild:background];
     
+    // Time Mode button
     SKLabelNode* timeStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     timeStartButton.fontSize = 45;
     timeStartButton.fontColor = [UIColor blackColor];
@@ -47,6 +49,7 @@
     timeStartButton.name = @"timeStartButton";
     [self addChild:timeStartButton];
     
+    // Target Mode button
     SKLabelNode* targetStartButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     targetStartButton.fontSize = 45;
     targetStartButton.fontColor = [UIColor blackColor];
@@ -55,6 +58,7 @@
     targetStartButton.name = @"targetStartButton";
     [self addChild:targetStartButton];
     
+    // High Score Mode button
     SKLabelNode* highScoreButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     highScoreButton.fontSize = 45;
     highScoreButton.fontColor = [UIColor blackColor];
@@ -63,6 +67,7 @@
     highScoreButton.name = @"highScoreButton";
     [self addChild:highScoreButton];
     
+    // Tutorial button
     SKLabelNode* tutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     tutorialButton.fontSize = 45;
     tutorialButton.fontColor = [UIColor blackColor];
@@ -71,6 +76,7 @@
     tutorialButton.name = @"tutorialButton";
     [self addChild:tutorialButton];
     
+    // Credit Page button
     SKLabelNode* creditsButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
     creditsButton.fontSize = 45;
     creditsButton.fontColor = [UIColor blackColor];
@@ -88,6 +94,7 @@
     
     if ([node.name isEqual: @"timeStartButton"]) {
         
+        // Go to timed mode
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TimeModeHasLaunched"]) {
             
             // Already launched timed-mode before, so go straight into the timed-mode gameplay
@@ -111,6 +118,7 @@
     
     else if ([node.name isEqual: @"targetStartButton"]) {
         
+        // Go to target mode
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"TargetModeHasLaunched"]) {
             // Already launched timed-mode before, so go straight into the target-mode gameplay
             [self playButtonNoise:self];
@@ -131,6 +139,8 @@
     }
     
     else if ([node.name isEqual: @"highScoreButton"]) {
+        
+        // Go to high score stats page
         [self playButtonNoise:self];
         SKScene* highScoreScene = [[HighScoreScene alloc] initWithSize:self.size];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
@@ -138,9 +148,12 @@
     }
     
     else if ([node.name isEqual: @"tutorialButton"]) {
+        
+        // User clicked on the tutorial button
         [self playButtonNoise:self];
         [self removeTutorialButtons];
         
+        // Let the user choose which tutorial mode o go to
         _timedTutorialButton = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
         _timedTutorialButton.fontSize = 30;
         _timedTutorialButton.fontColor = [UIColor blackColor];
@@ -159,6 +172,8 @@
     }
     
     else if ([node.name isEqual: @"timedTutorialButton"]) {
+        
+        // Go to timed mode tutorial page
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TimedModeHasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -168,25 +183,31 @@
     }
     
     else if ([node.name isEqual: @"targetTutorialButton"]) {
+        
+        // Go to target mode tutorial page
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"TargetModeHasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         SKScene* targetTutorialScene = [[TutorialScene alloc] initWithSize:self.size andSKView:nil andMode:@"target" andOrigin:@"tutorialButton"];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:targetTutorialScene transition:transition];
+        
     } else if ([node.name isEqual: @"creditsButton"]) {
         [self playButtonNoise:self];
         
         SKScene* creditsScene = [[CreditsScene alloc] initWithSize:self.size andSKView:nil];
         SKTransition* transition = [SKTransition crossFadeWithDuration:0.5];
         [self.view presentScene:creditsScene transition:transition];
+        
     } else {
+        
         [self removeTutorialButtons];
     }
 }
 
 - (void) removeTutorialButtons
 {
+    // Take away the tutorial mode selection
     if ([self childNodeWithName:@"timedTutorialButton"] != nil) {
         [_timedTutorialButton removeFromParent];
     }
