@@ -33,29 +33,18 @@
 - (void) testGetTopTenForTimed {
     NSMutableArray* topTen = [_highScoreDB getTopTenForTimed];
     XCTAssertTrue([topTen count] <= 10, @"Array too large");
-    XCTAssertTrue([[topTen objectAtIndex:0] doubleValue] >= [[topTen objectAtIndex:1] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[topTen objectAtIndex:1] doubleValue] >= [[topTen objectAtIndex:2] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[topTen objectAtIndex:2] doubleValue] >= [[topTen objectAtIndex:3] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[topTen objectAtIndex:3] doubleValue] >= [[topTen objectAtIndex:4] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[topTen objectAtIndex:4] doubleValue] >= [[topTen objectAtIndex:5] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[topTen objectAtIndex:5] doubleValue] >= [[topTen objectAtIndex:6] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[topTen objectAtIndex:6] doubleValue] >= [[topTen objectAtIndex:7] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[topTen objectAtIndex:7] doubleValue] >= [[topTen objectAtIndex:8] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[topTen objectAtIndex:8] doubleValue] >= [[topTen objectAtIndex:9] doubleValue], @"Incorrect order");
+    for (int i = 0; i < ([topTen count] - 1); i++) {
+        XCTAssertTrue([[topTen objectAtIndex:i] doubleValue] >= [[topTen objectAtIndex:i+1] doubleValue], @"Incorrect order");
+    }
 }
 
 - (void) testGetTopTenForTarget {
     NSMutableArray* topTen = [_highScoreDB getTopTenForTarget];
     XCTAssertTrue([topTen count] <= 10, @"Array too large");
-    XCTAssertTrue([[[topTen objectAtIndex:0] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:1] objectAtIndex:1] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[[topTen objectAtIndex:1] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:2] objectAtIndex:1] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[[topTen objectAtIndex:2] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:3] objectAtIndex:1] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[[topTen objectAtIndex:3] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:4] objectAtIndex:1] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[[topTen objectAtIndex:4] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:5] objectAtIndex:1] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[[topTen objectAtIndex:5] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:6] objectAtIndex:1] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[[topTen objectAtIndex:6] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:7] objectAtIndex:1] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[[topTen objectAtIndex:7] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:8] objectAtIndex:1] doubleValue], @"Incorrect order");
-    XCTAssertTrue([[[topTen objectAtIndex:8] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:9] objectAtIndex:1] doubleValue], @"Incorrect order");
+    
+    for (int i = 0; i < ([topTen count] - 1); i++) {
+        XCTAssertTrue([[[topTen objectAtIndex:i] objectAtIndex:1] doubleValue] >= [[[topTen objectAtIndex:i+1] objectAtIndex:1] doubleValue], @"Incorrect order");
+    }
 }
 
 @end
