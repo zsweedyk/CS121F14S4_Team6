@@ -177,7 +177,7 @@
         startPopupClick.fontSize = 25;
         startPopupClick.position = CGPointMake(0, popupY*(-0.13));
         startPopupClick.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-        startPopupClick.text = [NSString stringWithFormat:@"Please click on a sheep to learn how"];
+        startPopupClick.text = [NSString stringWithFormat:@"Please tap on a sheep to learn how"];
         [startPopup addChild:startPopupClick];
         
         SKLabelNode* startPopupClick2 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
@@ -204,7 +204,7 @@
         startPopupDragon2.fontSize = 18;
         startPopupDragon2.position = CGPointMake(0, popupY * 0.09);
         startPopupDragon2.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-        startPopupDragon2.text = [NSString stringWithFormat:@"However, you need to pick right sheep to eat."];
+        startPopupDragon2.text = [NSString stringWithFormat:@"However, you need to pick the right sheep to eat."];
         [startPopup addChild:startPopupDragon2];
         
         SKLabelNode* startPopupDragon3 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];
@@ -212,7 +212,7 @@
         startPopupDragon3.fontSize = 18;
         startPopupDragon3.position = CGPointMake(0, popupY * 3);
         startPopupDragon3.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-        startPopupDragon3.text = [NSString stringWithFormat:@"Your score will update based on the sheep you click on."];
+        startPopupDragon3.text = [NSString stringWithFormat:@"Your score will update based on the sheep you tap on."];
         [startPopup addChild:startPopupDragon3];
         
         // Ask the user to click on a sheep
@@ -221,7 +221,7 @@
         startPopupClick.fontSize = 25;
         startPopupClick.position = CGPointMake(0, popupY*(-0.05));
         startPopupClick.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-        startPopupClick.text = [NSString stringWithFormat:@"Please click on a sheep to learn how"];
+        startPopupClick.text = [NSString stringWithFormat:@"Please tap on a sheep to learn how"];
         [startPopup addChild:startPopupClick];
         
         SKLabelNode* startPopupClick2 = [[SKLabelNode alloc] initWithFontNamed:@"MarkerFelt-Thin"];

@@ -63,8 +63,8 @@
     
     int chanceIndicator = arc4random_uniform(50);
     
+    // If score is low, increase likelyhood of generating integer
     if (_scoreIsLow) {
-        
         if (chanceIndicator < 40) {
             chanceIndicator = 32;
         } else {
@@ -72,12 +72,14 @@
         }
     }
     
+    // Generate absolute value case
     if (chanceIndicator == 1) {
         _operator = 'A';
         _value= [NSString stringWithFormat:@" "];
         
     } else {
         _operator = _generator.generateOperator;
+        // If it's the first round, generate a + so you can add to a score of 0
         if (_firstRound) {
             if (chanceIndicator < 30) {
                 _operator = '+';
@@ -85,6 +87,7 @@
         }
         int value;
         
+        // Generate integer case
         if (chanceIndicator < 33) {
             if (_operator == 'x') {
                 value = [_generator generateIntegerfrom:start/20 to:end/20];
@@ -94,6 +97,7 @@
             if ((_operator == '/') && (value == 0)) {++value;}
             _value = [NSString stringWithFormat:@" %d", value];
             
+        // Generate fraction case
         } else {
             NSMutableArray* fraction = _generator.generateFraction;
             int numerator = (int)[[fraction objectAtIndex:0] integerValue];
@@ -117,6 +121,9 @@
     _firstRound = false;
 }
 
+// Function that sets a boolean to true that indicates the score is low
+// Increases the likelyhood of generating integers instead of fractions
+// Also sets corresponding boolean in generator class, which increases likelyhood of '+' and 'x' showing up
 - (void)scoreIsLow:(bool)boolean
 {
     _scoreIsLow = boolean;
