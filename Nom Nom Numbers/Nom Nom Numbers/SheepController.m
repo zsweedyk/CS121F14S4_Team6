@@ -24,8 +24,6 @@
     NSString* _mode;
 }
 
-
-
 // Called only first time to initialize necessary sprite nodes and scenes, and then
 // creates 5 sheep to be sent across the screen
 - (void) setupSheep:(SKScene *)mainScene forMode:(NSString *)mode
@@ -35,6 +33,7 @@
     _arrOfSounds = [NSMutableArray new];
     _mode = mode;
     
+    // Create 6 sheep to come onto the board, staggered
     for (int i = 0; i < 6; i++) {
         SKNode *newSheepNode = [[SKNode alloc] init];
         _staggerOffset = (i % 2)*80;
@@ -81,11 +80,11 @@
     int pickValue1 = arc4random_uniform(3)+1;
     int pickValue2 = arc4random_uniform(7)+1;
     int value = pickValue1 * pickValue2;
+    int pickOffset = arc4random_uniform(8);
+    int approxTarget;
+    
     NSString* valueString;
     
-    int pickOffset = arc4random_uniform(8);
-    
-    int approxTarget;
     if (pickOffset == 0) {
         approxTarget = _targetScore;
     } else if (pickOffset < 4) {
@@ -98,7 +97,6 @@
         pickOperator = 0;
     }
 
-    
     switch (pickOperator) {
         // addition case
         case 0:
@@ -133,6 +131,7 @@
 {
     SheepModel* newSheepModel = [[SheepModel alloc] init];
     int generateNiceSheep = arc4random_uniform(3);
+    
     if ([_mode isEqualToString:@"timed"]) {
         if (_currentScore < 5) {
             [newSheepModel scoreIsLow:true];
@@ -146,7 +145,6 @@
         } else {
             [self createTargetSheep:newSheepModel];
         }
-        
     }
     
     NSString* value = [newSheepModel getValue];
@@ -168,8 +166,6 @@
     [newSheepNode setPosition:CGPointMake(newSheepNode.position.x, -150)];
     newSheepNode.zPosition = 0;
 }
-
-
 
 // Plays noise when sheep is created
 - (IBAction) playSheepNoise:(id)sender

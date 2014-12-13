@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 CS 121 Team 6. All rights reserved.
 //
 
-
 #import "SheepSprite.h"
 
 @implementation SheepSprite
@@ -28,16 +27,16 @@
     _sheepNode = [[SKSpriteNode alloc] init];
     _sheepNode = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:_sheepImage]];
     _sheepNode.name = @"sheep";
-    
     _sheepNode.position = pos;
     _sheepNode.anchorPoint = CGPointZero;
     _sheepNode.xScale = .5;
     _sheepNode.yScale = .5;
     
+    
     double acrossScreenTime = (arc4random() % (120)) + 60;
     acrossScreenTime /= 10.0;
     
-    // SK actions to move sheep left
+    // SK actions to move sheep up
     SKAction* moveSheepUp = [SKAction moveBy:CGVectorMake(0, 1000) duration:acrossScreenTime];
     SKAction* repeatMoveUp = [SKAction repeatActionForever:moveSheepUp];
     
@@ -75,13 +74,14 @@
     UIGraphicsBeginImageContext(_sheepImage.size);
     [_sheepImage drawInRect:CGRectMake(0,0,_sheepImage.size.width,_sheepImage.size.height)];
     
+    
     UITextView* myText = [[UITextView alloc] init];
     myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:40];
     myText.textColor = [UIColor blackColor];
     myText.text = text;
     myText.backgroundColor = [UIColor clearColor];
-    
     CGPoint point;
+    
     if (input == 'O') { // put operator in correct location on sheep
         if (_oper == 'A') {
             // fit the words "Absolute Value" on the body of the sheep
@@ -108,32 +108,30 @@
 // Calls getImageForText with appropriate operator and values
 - (void) makeSheepImage
 {
-    //_sheepImage = [[UIImage alloc] init];
-    
     NSString* stringOperator = [NSString stringWithFormat:@"%c" , _oper];
     
+    // If sheep's value is greater than 75, create a gold sheep
     if ([_value doubleValue] > 75) {
         _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepGold"] CGImage]
                                           scale:1.0
                                     orientation:UIImageOrientationRight];
+    // If absolute value, create a rainbow sheep
     } else if (_oper == 'A') {
         stringOperator = @"Absolute\nValue";
         _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepRainbow"] CGImage]
                                             scale:1.0
                                             orientation:UIImageOrientationRight];
-        
+    // If division or multiplication, create a ram
     } else if (_oper == '/' || _oper == 'x') {
         _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepRam"] CGImage]
                                             scale:1.0
                                             orientation:UIImageOrientationRight];
-        
+    // For any other value or operation, create a regular white sheep
     } else {
         _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"Sheep"] CGImage]
                                             scale:1.0
                                             orientation:UIImageOrientationRight];
     }
-    
-
     
     [self getImageForText:stringOperator for:'O'];
     [self getImageForText:_value for:'V'];
