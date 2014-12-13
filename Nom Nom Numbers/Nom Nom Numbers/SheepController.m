@@ -59,16 +59,10 @@
 // Picks some operation and random value that, when touched, gets player closer to target score
 - (void) createTargetSheep:(SheepModel *)sheepModel
 {
-    
-    int pickOperator = arc4random_uniform(3);
+    int pickOperator = arc4random_uniform(4);
     int randomValue1 = arc4random_uniform(3)+1;
     int randomValue2 = arc4random_uniform(7)+1;
-    // Random value generated from two random integers
     int distFromTarget = randomValue1 * randomValue2;
-    NSString* valueString;
-    
-    // Uniform distribution to determine whether the the value will get
-    // the user directly to target score, undershoot, or overshoot, respectively
     int pickOffset = arc4random_uniform(8);
     
     // This variable represents a number that is approximately close the target score;
