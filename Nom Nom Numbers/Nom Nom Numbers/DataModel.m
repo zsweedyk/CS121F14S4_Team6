@@ -113,6 +113,7 @@
     
     score = round(100 * score)/100.00;
     NSAssert(!isnan(score), @"not a number returned");
+    NSAssert(score <= 100, @"Score is out of bounds");
     return score;
 }
 
