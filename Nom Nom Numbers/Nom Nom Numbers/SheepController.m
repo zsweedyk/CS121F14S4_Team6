@@ -84,7 +84,7 @@
     }
     
     // If value is 0, pick the addition case (so we don't divide by 0 in the default case)
-    if (distFromTarget == 0) {
+    if (_currentScore == 0) {
         pickOperator = 0;
     }
 
