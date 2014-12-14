@@ -10,7 +10,7 @@
 
 @implementation GameOverButton
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore
+- (id) setupData:(SKScene *)mainScene withScore:(double)currentScore
 {
     CGFloat sceneX = mainScene.size.width;
     CGFloat sceneY = mainScene.size.height;
@@ -46,7 +46,20 @@
     gameOverPopupTitle.fontSize = 35;
     gameOverPopupTitle.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     gameOverPopupTitle.position = CGPointMake(0, popupY * 0.35);
-    gameOverPopupTitle.text = @"Game Over!";
+    if (currentScore < 0)
+        gameOverPopupTitle.text = @"Try again...";
+    else if (currentScore > 2500)
+        gameOverPopupTitle.text = @"AMAZING!!";
+    else if (currentScore > 1000)
+        gameOverPopupTitle.text = @"Fantastic!!";
+    else if (currentScore > 600)
+        gameOverPopupTitle.text = @"Great!";
+    else if (currentScore > 200)
+        gameOverPopupTitle.text = @"Good job!";
+    else if (currentScore > 50)
+        gameOverPopupTitle.text = @"Wow!";
+    else
+        gameOverPopupTitle.text = @"Nice!";
     [gameOverPopup addChild:gameOverPopupTitle];
     
     // Create score content text on the popup
@@ -80,6 +93,7 @@
     SKSpriteNode* restartButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     restartButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     restartButton.position = CGPointMake(popupX * -0.3, popupY * -0.35);
+    restartButton.name = @"playagainaction";
     [gameOverPopup addChild:restartButton];
     
     // Create the label on the confirmation button
@@ -95,6 +109,7 @@
     SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"redButton"];
     quitButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     quitButton.position = CGPointMake(popupX * 0.3, popupY * -0.35);
+    quitButton.name = @"quitaction";
     [gameOverPopup addChild:quitButton];
     
     // Create the label on the confirmation button

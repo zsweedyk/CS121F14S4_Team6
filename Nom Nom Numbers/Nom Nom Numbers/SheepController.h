@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "SheepSprite.h"
 #import "SheepModel.h"
+#import "DataModel.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
-@interface SheepController : UIViewController
+@interface SheepController : UIViewController <sendScoreDelegate>
+{
+    NSMutableArray* _arrOfSounds;
+}
 
-
-- (void) setupSheep:(SKScene*)mainScene;
-- (void) generateNewSheep:(SKNode*)node;
+- (void) setupSheep:(SKScene *)mainScene forMode:(NSString *)mode;
+- (void) generateNewSheep:(SKNode *)node;
+- (int) getTargetScore;
 
 @end

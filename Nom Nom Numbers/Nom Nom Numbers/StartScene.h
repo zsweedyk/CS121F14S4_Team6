@@ -7,9 +7,11 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface StartScene : SKScene
 
--(id)initWithSize:(CGSize)size andSKView:(SKView*)skView;
+- (id) initWithSize:(CGSize)size andSKView:(SKView *)skView;
 
 @end

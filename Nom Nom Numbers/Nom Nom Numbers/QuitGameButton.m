@@ -10,7 +10,7 @@
 
 @implementation QuitGameButton
 
-- (id) setupData:(SKScene*)mainScene withScore:(double)currentScore
+- (id) setupData:(SKScene *)mainScene withScore:(double)currentScore
 {
     CGFloat sceneX = mainScene.size.width;
     CGFloat sceneY = mainScene.size.height;
@@ -32,8 +32,9 @@
     shadow.position = CGPointMake(quitPopup.position.x, quitPopup.position.y - 5);
     shadow.alpha = 0.5;
     
-    [self addChild:shadow];
     quitPopup.zPosition = 2;
+    
+    [self addChild:shadow];
     [self addChild:quitPopup];
     
     
@@ -71,6 +72,7 @@
     SKSpriteNode* quitButton = [[SKSpriteNode alloc] initWithImageNamed:@"greenButton"];
     quitButton.size = CGSizeMake(popupX * 0.3, popupY * 0.2);
     quitButton.position = CGPointMake(0, popupY * -0.35);
+    quitButton.name = @"quitaction";
     [quitPopup addChild:quitButton];
     
     // Create the label on the confirmation button

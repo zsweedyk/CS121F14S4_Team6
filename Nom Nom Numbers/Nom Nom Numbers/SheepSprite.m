@@ -7,7 +7,6 @@
 //
 
 #import "SheepSprite.h"
-//#import "SheepModel.h"
 
 @implementation SheepSprite
 {
@@ -17,9 +16,9 @@
     char _oper;
 }
 
-- (SKSpriteNode*) createSheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos
+// Generate individual sheep and set SKActions to move sheep across screen
+- (SKSpriteNode *) createSheepWithValue:(NSString *)value andOper:(char)oper atPos:(CGPoint)pos
 {
-    
     _value = value;
     _oper = oper;
     
@@ -27,18 +26,19 @@
     
     _sheepNode = [[SKSpriteNode alloc] init];
     _sheepNode = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:_sheepImage]];
-    
+    _sheepNode.name = @"sheep";
     _sheepNode.position = pos;
     _sheepNode.anchorPoint = CGPointZero;
     _sheepNode.xScale = .5;
     _sheepNode.yScale = .5;
     
+    
     double acrossScreenTime = (arc4random() % (120)) + 60;
     acrossScreenTime /= 10.0;
     
-    // SK actions to move sheep left
-    SKAction *moveSheepLeft = [SKAction moveBy:CGVectorMake(-1000, 0) duration:acrossScreenTime];
-    SKAction *repeatMoveLeft = [SKAction repeatActionForever:moveSheepLeft];
+    // SK actions to move sheep up
+    SKAction* moveSheepUp = [SKAction moveBy:CGVectorMake(0, 1000) duration:acrossScreenTime];
+    SKAction* repeatMoveUp = [SKAction repeatActionForever:moveSheepUp];
     
     double wobbleTime = acrossScreenTime / 40.0;
     
@@ -46,17 +46,17 @@
     SKAction* wobbleForward = [SKAction rotateToAngle:M_PI/60.0 duration:wobbleTime];
     SKAction* wobbleBackward = [SKAction rotateToAngle:-M_PI/60.0 duration:wobbleTime];
     SKAction* sequence = [SKAction sequence:@[wobbleForward,wobbleBackward]];
-    SKAction *repeatWobble = [SKAction repeatActionForever:sequence];
+    SKAction* repeatWobble = [SKAction repeatActionForever:sequence];
     
     [_sheepNode runAction:repeatWobble];
-    [_sheepNode runAction:repeatMoveLeft];
+    [_sheepNode runAction:repeatMoveUp];
     
     return [self displayASheepWithValue:value andOper:oper atPos:pos];
 }
 
-- (SKSpriteNode*) displayASheepWithValue:(NSString*)value andOper:(char)oper atPos:(CGPoint)pos
+// Calls auxillary functions to place image onto sheep node
+- (SKSpriteNode *) displayASheepWithValue:(NSString *)value andOper:(char)oper atPos:(CGPoint)pos
 {
-    
     _value = value;
     _oper = oper;
     
@@ -66,48 +66,75 @@
     return _sheepNode;
 }
 
+// Creates UIImage given operators or values and places it on top of sheep in appropriate location
 - (void) getImageForText:(NSString *)text for:(char)input
 {
+    NSAssert(input == 'O' || input == 'V', @"Invalid: input was neither 'V' for value nor 'O' for operator");
+    
     UIGraphicsBeginImageContext(_sheepImage.size);
     [_sheepImage drawInRect:CGRectMake(0,0,_sheepImage.size.width,_sheepImage.size.height)];
-    UITextView *myText = [[UITextView alloc] init];
     
+    
+    UITextView* myText = [[UITextView alloc] init];
     myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:40];
     myText.textColor = [UIColor blackColor];
     myText.text = text;
     myText.backgroundColor = [UIColor clearColor];
-    
     CGPoint point;
-    if (input == 'O') {
-        point = CGPointMake(_sheepImage.size.width/4, _sheepImage.size.height/3.25);
-    } else {
-        point = CGPointMake(_sheepImage.size.width/2.15, _sheepImage.size.height/3.5);
+    
+    if (input == 'O') { // put operator in correct location on sheep
+        if (_oper == 'A') {
+            // fit the words "Absolute Value" on the body of the sheep
+            point = CGPointMake(_sheepImage.size.width/3.5, _sheepImage.size.height/2);
+            myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:35];
+        }
+        else {
+            myText.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:50];
+            point = CGPointMake(_sheepImage.size.width/2.25, _sheepImage.size.height/5.25);
+        }
+    } else { // put value in correct location on sheep
+        point = CGPointMake(_sheepImage.size.width/3.5, _sheepImage.size.height/2);
     }
     
     myText.frame = CGRectMake(point.x, point.y, _sheepImage.size.width, _sheepImage.size.height);
     [[UIColor clearColor] set];
-    NSDictionary *att = @{NSFontAttributeName:myText.font};
+    NSDictionary* att = @{NSFontAttributeName:myText.font};
     [myText.text drawInRect:myText.frame withAttributes:att];
     
     _sheepImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 }
 
-
-
-- (void)makeSheepImage
+// Calls getImageForText with appropriate operator and values
+- (void) makeSheepImage
 {
-    _sheepImage = [[UIImage alloc] init];
-    _sheepImage = [UIImage imageNamed:@"Sheep"];
-    
     NSString* stringOperator = [NSString stringWithFormat:@"%c" , _oper];
+    
+    // If sheep's value is greater than 75, create a gold sheep
+    if ([_value doubleValue] > 75) {
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepGold"] CGImage]
+                                          scale:1.0
+                                    orientation:UIImageOrientationRight];
+    // If absolute value, create a rainbow sheep
+    } else if (_oper == 'A') {
+        stringOperator = @"Absolute\nValue";
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepRainbow"] CGImage]
+                                            scale:1.0
+                                            orientation:UIImageOrientationRight];
+    // If division or multiplication, create a ram
+    } else if (_oper == '/' || _oper == 'x') {
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"SheepRam"] CGImage]
+                                            scale:1.0
+                                            orientation:UIImageOrientationRight];
+    // For any other value or operation, create a regular white sheep
+    } else {
+        _sheepImage = [UIImage imageWithCGImage:[[UIImage imageNamed:@"Sheep"] CGImage]
+                                            scale:1.0
+                                            orientation:UIImageOrientationRight];
+    }
     
     [self getImageForText:stringOperator for:'O'];
     [self getImageForText:_value for:'V'];
-
-    
 }
-
-
 
 @end

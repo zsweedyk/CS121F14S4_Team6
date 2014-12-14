@@ -10,8 +10,11 @@
 
 @interface SheepModel : NSObject
 
-- (NSString*) getValue;
+- (NSString *) getValue;
 - (char) getOperator;
-- (void) makeSheep;
+- (void) setValue:(NSString *)value;
+- (void) setOper:(char)operator;
+- (void) makeSheepFrom:(int)start to:(int)end;
+- (void)scoreIsLow:(bool)boolean;
 
 @end

@@ -8,7 +8,15 @@
 
 #import "Generator.h"
 
-@implementation Generator
+@implementation Generator {
+    bool _scoreIsLow;
+}
+
+- (id) init {
+    _scoreIsLow = false;
+    
+    return self;
+}
 
 // Randomly generate an integer between the given range
 - (int) generateIntegerfrom:(int)lower to:(int)upper
@@ -17,13 +25,11 @@
 }
 
 // Randomly generate a fraction
-- (NSMutableArray*) generateFraction
+- (NSMutableArray *) generateFraction
 {
-    //NSMutableArray *values = [NSMutableArray array];
-    //values = [[NSMutableArray alloc] init];
-    NSMutableArray *values = [[NSMutableArray alloc] init];
+    NSMutableArray* values = [[NSMutableArray alloc] init];
     
-    NSInteger denomenator = arc4random_uniform(10) + 1;
+    NSInteger denomenator = arc4random_uniform(5) + 1;
     NSInteger numerator = arc4random_uniform((int)denomenator);
     [values addObject:[NSNumber numberWithInteger:numerator]];
     [values addObject:[NSNumber numberWithInteger:denomenator]];
@@ -33,7 +39,7 @@
 // Randomly generate one of the four operators
 - (char) generateOperator
 {
-    int value = arc4random_uniform(4);
+    int value = arc4random_uniform(6);
     switch (value) {
         case 0:
             return '+';
@@ -44,11 +50,30 @@
         case 2:
             return '/';
             break;
-        default:
+        case 3:
             return 'x';
             break;
+        case 4:
+            //If score is low, increase chances of generating '+' or '*'
+            if (_scoreIsLow) {
+                return '+';
+            } else {
+                return '-';
+            }
+        default:
+            if (_scoreIsLow) {
+                return 'x';
+            } else {
+                return '/';
+            }
+            
     }
 }
 
-@end
+// Function that sets boolean to indicate if score is low
+- (void)setScoreIsLow:(bool)boolean
+{
+    _scoreIsLow = boolean;
+}
 
+@end

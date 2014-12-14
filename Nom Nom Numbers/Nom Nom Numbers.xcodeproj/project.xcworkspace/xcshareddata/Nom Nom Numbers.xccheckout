@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B1AE2694-B3B8-4056-8FEA-D87670BD9136</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Nom Nom Numbers</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1705A5FDED4FA2FA008B2532FFD6E5462268E33E</key>
+		<string>https://github.com/zsweedyk/CS121F14S4_Team6.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Nom Nom Numbers/Nom Nom Numbers.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1705A5FDED4FA2FA008B2532FFD6E5462268E33E</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/zsweedyk/CS121F14S4_Team6.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1705A5FDED4FA2FA008B2532FFD6E5462268E33E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1705A5FDED4FA2FA008B2532FFD6E5462268E33E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CS121F14S4_Team6</string>
+		</dict>
+	</array>
+</dict>
+</plist>

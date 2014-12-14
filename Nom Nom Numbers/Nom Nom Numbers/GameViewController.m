@@ -10,6 +10,7 @@
 #import "MainScene.h"
 #import "StartScene.h"
 
+
 @implementation SKScene (Unarchive)
 
 + (instancetype) unarchiveFromFile:(NSString *)file
@@ -48,7 +49,6 @@
         StartPage.scaleMode = SKSceneScaleModeAspectFit;
         
         [_skView presentScene:StartPage];
-
     }
     
 }
